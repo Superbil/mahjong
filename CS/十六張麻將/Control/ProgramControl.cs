@@ -52,6 +52,7 @@ namespace Mahjong.Control
         {
 
             BrandPlayer a = new BrandPlayer();
+            BrandPlayer[] player = new BrandPlayer[4];
 
             BrandFactory x = new BrandFactory(a);
             x.createBrands();
@@ -78,7 +79,6 @@ namespace Mahjong.Control
         void test()
         {
             //ArrayList a = new ArrayList();
-            
             
             
             

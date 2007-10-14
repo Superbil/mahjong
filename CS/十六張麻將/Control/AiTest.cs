@@ -27,12 +27,16 @@ namespace Mahjong.Control
             {
                 player[i] = deal.getPlayer(i);
             }
+            //printplayer(player);
+            //SimpleAI sa = new SimpleAI();
+            //sa.setPlayer(player[0]);
+            PlayerSort bs = new PlayerSort(player[0]);
+            player[0] = bs.getPlayer();
+
             printplayer(player);
-            SimpleAI sa = new SimpleAI(player[0]);
-            
-            sa.getReadyBrand();
+            //sa.getReadyBrand();
             //Console.WriteLine();
-            Console.WriteLine("Ready Brand is {0},{1}", sa.getReadyBrand().getClass(), sa.getReadyBrand().getNumber());
+            //Console.WriteLine("Ready Brand is {0},{1}", sa.getReadyBrand().getClass(), sa.getReadyBrand().getNumber());
         }
         void printplayer(BrandPlayer[] player)
         {

@@ -23,12 +23,15 @@ namespace Mahjong.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public int image_w {
             get {
                 return ((int)(this["image_w"]));
+            }
+            set {
+                this["image_w"] = value;
             }
         }
         
@@ -38,6 +41,18 @@ namespace Mahjong.Properties {
         public int image_h {
             get {
                 return ((int)(this["image_h"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Autosize_User {
+            get {
+                return ((bool)(this["Autosize_User"]));
+            }
+            set {
+                this["Autosize_User"] = value;
             }
         }
     }

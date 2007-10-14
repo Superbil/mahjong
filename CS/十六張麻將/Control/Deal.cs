@@ -28,33 +28,6 @@ namespace Mahjong.Control
         /// </summary>
         BrandPlayer table;
         /// <summary>
-        /// 產は滦竟
-        /// </summary>
-        //Iterator iterator;
-        /// <summary>
-        /// 篶膀セ產计秖㎝だ皌计
-        /// </summary>
-        /// <param name="countbrands">–產だ皌计</param>
-        public Deal(int countbrands)
-        {
-            this.countbrands = countbrands;
-            this.countplayer = 4;
-            this.player=new BrandPlayer[countplayer];
-            createPlayer();
-        }
-        /// <summary>
-        /// 篶膀セ產计秖㎝だ皌计
-        /// </summary>
-        /// <param name="countbrands">–產だ皌计</param>
-        /// <param name="countplayer">Τぶ產</param>
-        public Deal(int countbrands,int countplayer)
-        {
-            this.countbrands = countbrands;
-            this.countplayer = countplayer;
-            this.player = new BrandPlayer[countplayer];
-            createPlayer();
-        }
-        /// <summary>
         /// 篶膀セ產计秖㎝だ皌计
         /// </summary>
         /// <param name="countbrands">–產だ皌计</param>

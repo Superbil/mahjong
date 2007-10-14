@@ -63,5 +63,20 @@ namespace Mahjong.Brands
                 photo = value;
             }
         }
+        private int teamNumber;
+        /// <summary>
+        /// µPªº²Õ§O
+        /// </summary>
+        public int team
+        {
+            get
+            {
+                return teamNumber;
+            }
+            set
+            {
+                teamNumber = value;
+            }
+        }
     }
 }

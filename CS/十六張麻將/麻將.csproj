@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mahjong</RootNamespace>
-    <AssemblyName>Mahjong</AssemblyName>
+    <AssemblyName>十六張麻將</AssemblyName>
     <StartupObject>Mahjong.Control.Mahjon</StartupObject>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ManifestCertificateThumbprint>1E6B8A1FCEFA06EDEB97BA6ABD8D947D4978DBBC</ManifestCertificateThumbprint>
@@ -76,9 +76,8 @@
     <Compile Include="Brands\BrandFactory.cs" />
     <Compile Include="Brands\FlowerBrand.cs" />
     <Compile Include="Brands\RopeBrand.cs" />
-    <Compile Include="Brands\TeamBrands.cs" />
     <Compile Include="Brands\TenThousandBrand.cs" />
-    <Compile Include="Brands\TobeBrand.cs" />
+    <Compile Include="Brands\TubeBrand.cs" />
     <Compile Include="Brands\WordBrand.cs" />
     <Compile Include="Forms\Config.cs">
       <SubType>Form</SubType>
@@ -92,10 +91,10 @@
     <Compile Include="Forms\Table.Designer.cs">
       <DependentUpon>Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Players\PlayerSort.cs" />
     <Compile Include="Players\PlayerInterator.cs" />
     <Compile Include="Players\Iterator.cs" />
     <Compile Include="Players\BrandPlayer.cs" />
-    <Compile Include="Players\TeamBrandsInterator.cs" />
     <Compile Include="Players\PlayerInteratorLimit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AboutBox.resx">
@@ -283,6 +282,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Control\App.config" />
+    <None Include="Properties\DataSources\Mahjong.Control.ProgramControl.datasource" />
     <None Include="Resources\word8.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
