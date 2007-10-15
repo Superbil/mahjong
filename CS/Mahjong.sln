@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual C# Express 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "麻將", "十六張麻將\麻將.csproj", "{6CC05815-FA24-4F5F-BA6B-B4CBE0878D63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mahjong", "Mahjong\Mahjong.csproj", "{6CC05815-FA24-4F5F-BA6B-B4CBE0878D63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
