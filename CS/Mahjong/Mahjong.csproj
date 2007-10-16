@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mahjong</RootNamespace>
     <AssemblyName>十六張麻將</AssemblyName>
-    <StartupObject>Mahjong.Control.Mahjon</StartupObject>
+    <StartupObject>Mahjong.Control.Mahjong_Main</StartupObject>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ManifestCertificateThumbprint>1E6B8A1FCEFA06EDEB97BA6ABD8D947D4978DBBC</ManifestCertificateThumbprint>
     <ManifestKeyFile>麻將_TemporaryKey.pfx</ManifestKeyFile>
@@ -64,7 +64,7 @@
     <Compile Include="AIs\SimpleAI.cs" />
     <Compile Include="Control\AiTest.cs" />
     <Compile Include="Control\Deal.cs" />
-    <Compile Include="Control\Mahjon.cs" />
+    <Compile Include="Control\Mahjong_Main.cs" />
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,9 +196,6 @@
   </ItemGroup>
   <ItemGroup>
     <BaseApplicationManifest Include="Properties\app.manifest" />
-    <None Include="麻將_TemporaryKey.pfx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

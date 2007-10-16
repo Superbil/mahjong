@@ -144,7 +144,7 @@ namespace Mahjong.Players
                 for (int i=0; i < tempPlayers.Length ; i++ )
                     if (brandtemp.getClass()==BrandClass[i].getClass())
                         tempPlayers[i].add(brandtemp);
-                if (brandtemp.team != null)
+                if (brandtemp.team >= 0)
                     teamBrands.add(brandtemp);
             }
         }

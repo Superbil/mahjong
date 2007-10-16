@@ -6,7 +6,7 @@ using Mahjong.Forms;
 
 namespace Mahjong.Control
 {
-    class Mahjon
+    class Mahjong_Main
     {
         /// <summary>
         /// 應用程式的主要進入點。

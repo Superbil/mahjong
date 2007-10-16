@@ -37,16 +37,10 @@
             this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.說明ToolStripMenuItem_Click = new System.Windows.Forms.ToolStripMenuItem();
             this.關於ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.BrandTip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.programControlBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.programControlBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -67,27 +61,27 @@
             this.設定ToolStripMenuItem,
             this.結束ToolStripMenuItem});
             this.遊戲ToolStripMenuItem.Name = "遊戲ToolStripMenuItem";
-            this.遊戲ToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.遊戲ToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.遊戲ToolStripMenuItem.Text = "遊戲(&G)";
             // 
             // 開新局ToolStripMenuItem
             // 
             this.開新局ToolStripMenuItem.Name = "開新局ToolStripMenuItem";
-            this.開新局ToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.開新局ToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.開新局ToolStripMenuItem.Text = "開新局(&N)";
             this.開新局ToolStripMenuItem.Click += new System.EventHandler(this.開新局ToolStripMenuItem_Click);
             // 
             // 設定ToolStripMenuItem
             // 
             this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
-            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.設定ToolStripMenuItem.Text = "設定選項...(&S)";
             this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
             // 
             // 結束ToolStripMenuItem
             // 
             this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
-            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.結束ToolStripMenuItem.Text = "結束(&Q)";
             this.結束ToolStripMenuItem.Click += new System.EventHandler(this.結束ToolStripMenuItem_Click);
             // 
@@ -97,47 +91,22 @@
             this.說明ToolStripMenuItem_Click,
             this.關於ToolStripMenuItem});
             this.說明ToolStripMenuItem.Name = "說明ToolStripMenuItem";
-            this.說明ToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.說明ToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.說明ToolStripMenuItem.Text = "說明(&H)";
             // 
             // 說明ToolStripMenuItem_Click
             // 
             this.說明ToolStripMenuItem_Click.Name = "說明ToolStripMenuItem_Click";
-            this.說明ToolStripMenuItem_Click.Size = new System.Drawing.Size(119, 22);
+            this.說明ToolStripMenuItem_Click.Size = new System.Drawing.Size(125, 22);
             this.說明ToolStripMenuItem_Click.Text = "說明(&H)";
             this.說明ToolStripMenuItem_Click.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // 關於ToolStripMenuItem
             // 
             this.關於ToolStripMenuItem.Name = "關於ToolStripMenuItem";
-            this.關於ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.關於ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.關於ToolStripMenuItem.Text = "關於...(&A)";
             this.關於ToolStripMenuItem.Click += new System.EventHandler(this.關於ToolStripMenuItem_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 266);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(523, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripProgressBar1.CausesValidation = false;
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
-            this.toolStripProgressBar1.Visible = false;
             // 
             // flowLayoutPanel1
             // 
@@ -150,32 +119,23 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // programControlBindingSource
-            // 
-            this.programControlBindingSource.DataSource = typeof(Mahjong.Control.ProgramControl);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 26);
             // 
             // Table
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = global::Mahjong.Properties.Settings.Default.Autosize_User;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(523, 288);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("AutoSize", global::Mahjong.Properties.Settings.Default, "Autosize_User", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Table";
             this.Text = "十六張麻將遊戲";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.programControlBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,15 +150,11 @@
         private System.Windows.Forms.ToolStripMenuItem 結束ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 說明ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 關於ToolStripMenuItem;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem 說明ToolStripMenuItem_Click;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 
         private System.Windows.Forms.ToolTip BrandTip;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.BindingSource programControlBindingSource;
 
         
     }
