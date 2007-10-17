@@ -16,11 +16,11 @@ namespace Mahjong.Control
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Table());
+            Application.Run(new Table());
             //測試牌和產生牌
             //new BrandsTest();
             //測試AI
-            new AiTest();
+            //new AiTest();
             //測試台數計算
             //new TallyTest();
         }

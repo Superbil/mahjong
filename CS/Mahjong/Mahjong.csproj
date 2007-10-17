@@ -12,11 +12,10 @@
     <StartupObject>Mahjong.Control.Mahjong_Main</StartupObject>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ManifestCertificateThumbprint>1E6B8A1FCEFA06EDEB97BA6ABD8D947D4978DBBC</ManifestCertificateThumbprint>
-    <ManifestKeyFile>麻將_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <TargetZone>LocalIntranet</TargetZone>
     <SignManifests>true</SignManifests>
-    <PublishUrl>C:\Documents and Settings\Superbil\桌面\</PublishUrl>
+    <PublishUrl>C:\Documents and Settings\Superbil\桌面\test\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -30,7 +29,6 @@
     <ProductName>網路麻將</ProductName>
     <PublisherName>CWS</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <AutorunEnabled>true</AutorunEnabled>
     <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
