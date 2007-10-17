@@ -29,7 +29,7 @@ namespace Mahjong.Brands
         }
         public string getClass()
         {
-            return "Word Brand";
+            return Mahjong.Properties.Settings.Default.Wordtiles;
         }
         public bool IsCanSee
         {

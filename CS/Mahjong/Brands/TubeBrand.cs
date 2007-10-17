@@ -35,7 +35,7 @@ namespace Mahjong.Brands
         /// </summary>   
         public string getClass()
         {
-            return "Tube Brand";
+            return Mahjong.Properties.Settings.Default.Dots;
         }
         public bool IsCanSee
         {

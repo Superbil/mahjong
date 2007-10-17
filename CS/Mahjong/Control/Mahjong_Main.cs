@@ -21,6 +21,8 @@ namespace Mahjong.Control
             //new BrandsTest();
             //測試AI
             new AiTest();
+            //測試台數計算
+            //new TallyTest();
         }
     }
 }

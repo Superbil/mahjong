@@ -8,5 +8,32 @@
     <Setting Name="image_h" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">40</Value>
     </Setting>
+    <Setting Name="East" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">東</Value>
+    </Setting>
+    <Setting Name="Nouth" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">北</Value>
+    </Setting>
+    <Setting Name="West" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">西</Value>
+    </Setting>
+    <Setting Name="South" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">南</Value>
+    </Setting>
+    <Setting Name="Dots" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">筒</Value>
+    </Setting>
+    <Setting Name="Bamboos" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">索</Value>
+    </Setting>
+    <Setting Name="Characters" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">萬</Value>
+    </Setting>
+    <Setting Name="Wordtiles" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">字</Value>
+    </Setting>
+    <Setting Name="Flower" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">花</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -53,7 +53,7 @@ namespace Mahjong.Control
             while (iterator.hasNext())
             {
                 Brand brand = (Brand)iterator.next();
-                Console.Write("{0},{1}\t", brand.getClass(), brand.getNumber());
+                Console.Write("{0}{1}\t", brand.getNumber(), brand.getClass() );
             }
         }
     }

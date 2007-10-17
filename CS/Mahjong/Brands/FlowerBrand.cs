@@ -37,7 +37,7 @@ namespace Mahjong.Brands
         /// </summary>
         public string getClass()
         {
-            return "Flower Brand";
+            return Mahjong.Properties.Settings.Default.Flower;
         }
         public bool IsCanSee
         {

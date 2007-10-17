@@ -35,7 +35,7 @@ namespace Mahjong.Brands
         /// </summary>   
         public string getClass()
         {
-            return "Rope Brand";
+            return Mahjong.Properties.Settings.Default.Bamboos;
         }
         public bool IsCanSee
         {

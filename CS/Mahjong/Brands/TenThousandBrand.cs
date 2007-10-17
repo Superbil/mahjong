@@ -35,7 +35,7 @@ namespace Mahjong.Brands
         /// </summary>   
         public string getClass()
         {
-            return "Ten Thousand Brand";
+            return Mahjong.Properties.Settings.Default.Characters;
         }
         public bool IsCanSee
         {

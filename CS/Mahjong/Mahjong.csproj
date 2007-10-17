@@ -65,6 +65,9 @@
     <Compile Include="Control\AiTest.cs" />
     <Compile Include="Control\Deal.cs" />
     <Compile Include="Control\Mahjong_Main.cs" />
+    <Compile Include="Control\TallyTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +88,12 @@
     <Compile Include="Forms\Config.Designer.cs">
       <DependentUpon>Config.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Tally.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tally.Designer.cs">
+      <DependentUpon>Tally.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Table.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +113,10 @@
     <EmbeddedResource Include="Forms\Config.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tally.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Tally.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Table.resx">
       <SubType>Designer</SubType>
