@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Mahjong.Control
 {
-    class TallyTest : Form
+    class TallyTest
     {
         Tally f;
         public TallyTest()
