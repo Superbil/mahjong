@@ -90,13 +90,10 @@ namespace Mahjong.Players
             return ans;
         }
         /// <summary>
-        /// 結合陣列
+        /// 結果輸出
         /// </summary>
         private void compose()
         {
-            for (int i = 0; i < teamBrands.getCount(); i++)
-                ans.add(teamBrands.getBrand(i));
-
             for (int i = 0; i < tempPlayers.Length; i++)
                 for (int j = 0; j < tempPlayers[i].getCount(); j++)
                     ans.add(tempPlayers[i].getBrand(j));
