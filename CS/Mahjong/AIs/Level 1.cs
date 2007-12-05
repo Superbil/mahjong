@@ -12,24 +12,13 @@ namespace Mahjong.AIs
     /// </summary>
     class Level_1 : MahjongAI
     {
-        private BrandPlayer p0;
-                Brand[] array1;
-                ArrayList flower;
-                ArrayList rope;
-                ArrayList ten;
-                ArrayList tube;
-                ArrayList word;
+        private BrandPlayer player;
                 Brand ans;
                 FlowerBrand f = new FlowerBrand(0);
                 RopeBrand r = new RopeBrand(0);
                 TenThousandBrand t = new TenThousandBrand(0);
                 TubeBrand tu = new TubeBrand(0);
                 WordBrand w = new WordBrand(0);
-                int iflower=0;
-                int irope=0;
-                int iten=0;
-                int itube=0;
-                int iword=0;
 
         /// <summary>
         /// 設定牌組
@@ -37,110 +26,120 @@ namespace Mahjong.AIs
         /// <param name="player"></param>
         public void setPlayer(BrandPlayer player)
         {
-            this.p0 = player;
-            array1 = new Brand[p0.getCount()];
-            flower = new ArrayList();
-            rope = new ArrayList();
-            ten = new ArrayList();
-            tube = new ArrayList();
-            word = new ArrayList();
+            PlayerSort ps = new PlayerSort(player,
+                new FlowerBrand(0),
+                new TenThousandBrand(0),
+                new TubeBrand(0),
+                new RopeBrand(0),
+                new WordBrand(0));
+            this.player = ps.getPlayer();
 
-            for (int i = 0; i < p0.getCount(); i++)
-                array1[i] = p0.getBrand(i);
-
-            sort();
-            printtest(flower);
-            printtest(rope);
-            printtest(ten);
-            printtest(tube);
-            printtest(word);
+            print();
         }
 
         /// <summary>
-        /// 摸牌
+        /// 丟牌
         /// </summary>
         /// <returns></returns>
         public Brand getReadyBrand()
         {
+            //判斷單張字牌
+            BrandPlayer[] tp = new BrandPlayer[7];
+            for (int j = 0; j < tp.Length; j++)
+                tp[j] = new BrandPlayer();
+
+            for (int i = 0; i < player.getCount(); i++)
+            {
+                if (player.getBrand(i).getClass() == w.getClass())
+                {                    
+                    for (int j = 0; j < tp.Length; j++)
+                        if (player.getBrand(i).getNumber() == j+1)
+                            tp[j].add(player.getBrand(i));
+                }
+            }
+            for (int j = 0; j < tp.Length; j++)
+                if (tp[j].getCount() == 1)
+                    return tp[j].getBrand(0);
+         
+
+            //判斷單張萬牌
+            BrandPlayer[] alone_TenThousandBrand = new BrandPlayer[9];
+            for (int j = 0; j < alone_TenThousandBrand.Length; j++)
+                alone_TenThousandBrand[j] = new BrandPlayer();
+
+            for (int i = 0; i < player.getCount(); i++)
+            {
+                if (player.getBrand(i).getClass() == w.getClass())
+                {
+                    for (int j = 0; j < alone_TenThousandBrand.Length; j++)
+                        if (player.getBrand(i).getNumber() == j + 1)
+                            alone_TenThousandBrand[j].add(player.getBrand(i));
+                }
+            }
+            for (int j = 0; j < tp.Length; j++)
+                if (alone_TenThousandBrand[j].getCount() == 1)
+                    return alone_TenThousandBrand[j].getBrand(0);
+
+
+            //判斷單張筒牌
+            BrandPlayer[] alone_TubeBrand = new BrandPlayer[9];
+            for (int j = 0; j < alone_TubeBrand.Length; j++)
+                alone_TubeBrand[j] = new BrandPlayer();
+
+            for (int i = 0; i < player.getCount(); i++)
+            {
+                if (player.getBrand(i).getClass() == w.getClass())
+                {
+                    for (int j = 0; j < alone_TenThousandBrand.Length; j++)
+                        if (player.getBrand(i).getNumber() == j + 1)
+                            alone_TubeBrand[j].add(player.getBrand(i));
+                }
+            }
+            for (int j = 0; j < tp.Length; j++)
+                if (alone_TubeBrand[j].getCount() == 1)
+                    return alone_TubeBrand[j].getBrand(0);
+
+
+            //判斷單張索牌
+            BrandPlayer[] alone_RopeBrand = new BrandPlayer[9];
+            for (int j = 0; j < alone_RopeBrand.Length; j++)
+                alone_RopeBrand[j] = new BrandPlayer();
+
+            for (int i = 0; i < player.getCount(); i++)
+            {
+                if (player.getBrand(i).getClass() == w.getClass())
+                {
+                    for (int j = 0; j < alone_RopeBrand.Length; j++)
+                        if (player.getBrand(i).getNumber() == j + 1)
+                            alone_RopeBrand[j].add(player.getBrand(i));
+                }
+            }
+            for (int j = 0; j < tp.Length; j++)
+                if (alone_RopeBrand[j].getCount() == 1)
+                    return alone_RopeBrand[j].getBrand(0);
+
+
+
             return ans;
         }
 
-        /// <summary>
-        /// 手牌分類
-        /// </summary>
-        private void sort()
+
+        void print()
         {
-            for (int i = 0; i < p0.getCount(); i++)
-            {
-                if (array1[i].getClass() == f.getClass())
-                {
-                    flower.Add(array1[i]);
-                }
-
-                else if (array1[i].getClass() == r.getClass())
-                {
-                    rope.Add(array1[i]);
-                }
-
-                else if (array1[i].getClass() == t.getClass())
-                {
-                    ten.Add(array1[i]);
-                }
-
-                else if (array1[i].getClass() == tu.getClass())
-                {
-                    tube.Add(array1[i]);
-                }
-
-                else if (array1[i].getClass() == w.getClass())
-                {
-                    word.Add(array1[i]);
-                }
-
-                sortArray(flower);
-                sortArray(rope);
-                sortArray(ten);
-                sortArray(tube);
-                sortArray(word);
-            }
+            Iterator it;
+            it = player.creatIterator();
+            printplayer(it);
+            //Console.WriteLine("==>{0}{1}",ans.getNumber(),ans.getClass());
         }
-
-        /// <summary>
-        /// 手牌排序
-        /// </summary>
-        /// <param name="BrandTemp"></param>
-        void sortArray(ArrayList BrandTemp)
+        private void printplayer(Iterator iterator)
         {
-            int i;
-            int j;
-            Object temp;
-            if (BrandTemp.Count > 1)
+            Console.WriteLine();
+            while (iterator.hasNext())
             {
-                for (i = (BrandTemp.Count - 1); i >= 0; i--)
-                {
-                    for (j = 1; j <= i; j++)
-                    {
-                        Brand first=(Brand)BrandTemp[j-1];
-                        Brand secend=(Brand)BrandTemp[j];
-                        if (first.getNumber() > secend.getNumber())
-                        {
-                            temp = BrandTemp[j - 1];
-                            BrandTemp[j - 1] = BrandTemp[j];
-                            BrandTemp[j] = temp;
-                        }
-                    }
-                }
+                Brand brand = (Brand)iterator.next();
+                Console.Write("{0}{1}\t", brand.getNumber(), brand.getClass());
             }
-        }
-
-        void printtest(ArrayList test)
-        {
-            if (test.Count > 0)
-                for (int i = 0; i < test.Count; i++)
-                {
-                    Brand temp=(Brand)test[i];
-                    Console.WriteLine("print : {0},{1}", temp.getClass(), temp.getNumber());
-                }
+            Console.WriteLine();
         }
     }
 }
