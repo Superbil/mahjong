@@ -40,7 +40,7 @@ namespace Mahjong.Forms
         }
         void go()
         {
-            brands[0].team=1;
+            brands[0].Team=1;
             if (brands[0].getClass()==Mahjong.Properties.Settings.Default.Flower);
 
             //if (brands[0] == brands[1]);i
@@ -76,8 +76,8 @@ namespace Mahjong.Forms
 
         void green()
         {
-            WordBrand w = new WordBrand();
-            int i;
+            WordBrand w = new WordBrand(0);
+            int i=0;
             if (brands[i].getClass() == w.getClass() && brands[i].getNumber() == 7)
             {
                 labeltally.Text = "+1"; 
