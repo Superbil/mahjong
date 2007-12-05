@@ -24,7 +24,6 @@ namespace Mahjong.Control
         {
             InitializeComponent();
             table = new Table();
-            
         }
         public void run()
         {

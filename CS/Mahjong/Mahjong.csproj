@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AIs\Level 1.cs" />
     <Compile Include="AIs\MahjongAI.cs" />
     <Compile Include="AIs\SimpleAI.cs" />
     <Compile Include="Control\AiTest.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Forms\Table.Designer.cs">
       <DependentUpon>Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Players\AllPlayers.cs" />
     <Compile Include="Players\PlayerSort.cs" />
     <Compile Include="Players\PlayerInterator.cs" />
     <Compile Include="Players\Iterator.cs" />
@@ -302,7 +304,6 @@
     <None Include="ClassDiagram2.cd" />
     <None Include="Control\App.config" />
     <None Include="Properties\DataSources\Mahjong.Control.ProgramControl.datasource" />
-    <None Include="Resources\word8.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

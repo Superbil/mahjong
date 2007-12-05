@@ -39,7 +39,7 @@ namespace Mahjong.Brands
         /// <summary>
         /// µPªº²Õ§O
         /// </summary>
-        int team
+        int Team
         {
             get;
             set;

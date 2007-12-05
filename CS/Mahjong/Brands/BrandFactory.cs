@@ -79,21 +79,6 @@ namespace Mahjong.Brands
         ArrayList TenthousandbrandArray;
         ArrayList TobebrandArray;
         ArrayList WordbrandArray;
-        public BrandFactory(BrandPlayer player)
-        {
-            this.player = player;
-            countFlowerBrand = 8;
-            pieceFlowerBrand = 1;
-            countRopeBrand = 9;
-            pieceRopeBrand = 4;
-            countTubeBrand = 9;
-            pieceTubeBrand = 4;
-            countTenThousandBrand = 9;
-            pieceTenThousandBrand = 4;
-            countWordBrand = 7;
-            pieceWordBrand = 4;
-            creatImageArray();         
-        }
         public BrandFactory()
         {
             player = new BrandPlayer();

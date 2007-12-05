@@ -14,9 +14,11 @@ namespace Mahjong.Control
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Table());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Table());
+            ProgramControl p =  new ProgramControl();
+            p.run();
             //測試牌和產生牌
             //new BrandsTest();
             //測試AI

@@ -61,7 +61,7 @@ namespace Mahjong.Brands
         /// <summary>
         /// µPªº²Õ§O
         /// </summary>
-        public int team
+        public int Team
         {
             get
             {

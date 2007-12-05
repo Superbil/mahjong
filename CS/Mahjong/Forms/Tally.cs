@@ -35,7 +35,7 @@ namespace Mahjong.Forms
         }
         void go()
         {
-            brands[0].team=1;
+            brands[0].Team=1;
             if (brands[0].getClass()==f.getClass())
                 ;
         }
