@@ -19,7 +19,7 @@ namespace Mahjong.Forms
         public Table()
         {
             InitializeComponent();
-            pc = new ProgramControl();
+            //pc = new ProgramControl();
             this.flowLayoutBrands = new FlowLayoutPanel[5];
             //this.flowLayoutPanel1.Location = new System.Drawing.Point(83, 498);
             //this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -46,7 +46,8 @@ namespace Mahjong.Forms
 
         private void 設定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pc.config();
+            Config conf = new Config();
+
         }
 
         private void 開新局ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,6 +58,11 @@ namespace Mahjong.Forms
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             pc.help();
+        }
+
+        private void 開新伺服器ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pc.onlineGame();
         }
     }
 }

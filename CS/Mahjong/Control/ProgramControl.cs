@@ -15,30 +15,25 @@ namespace Mahjong.Control
     public partial class ProgramControl : UserControl
     {
         BrandFactory brandfactory;
-        Config conf;
         AboutBox ab;
-        Table mainform;
+        Table table;
+        ChatServerForm chat;
         Timer rotateTimer = null;
         System.Windows.Forms.Control control;
         public ProgramControl()
         {
             InitializeComponent();
-            test();
-        }
-        public ProgramControl(System.Windows.Forms.Control con)
-        {
-            InitializeComponent();
+            table = new Table();
             
-            //this.control = con;
+        }
+        public void run()
+        {
+            table.ShowDialog();
             test();
         }
         public void exit()
         {
             Application.Exit();
-        }
-        public void config()
-        {
-            conf = new Config();
         }
         public void about()
         {
@@ -48,9 +43,8 @@ namespace Mahjong.Control
         {
 
         }
-        public void newgame()
+        public void newgame()                                                                                                                                                                       
         {
-
             BrandPlayer a = new BrandPlayer();
             BrandPlayer[] player = new BrandPlayer[4];
 
@@ -85,6 +79,11 @@ namespace Mahjong.Control
             //new BrandsTest();
             //imageList1.Draw
 
+        }
+        public void onlineGame()
+        {
+            chat= new ChatServerForm();
+            chat.Show();
         }
     }
 }

@@ -64,7 +64,6 @@
     <Compile Include="Control\Deal.cs" />
     <Compile Include="Control\Mahjong_Main.cs" />
     <Compile Include="Control\TallyTest.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
@@ -80,6 +79,12 @@
     <Compile Include="Brands\TenThousandBrand.cs" />
     <Compile Include="Brands\TubeBrand.cs" />
     <Compile Include="Brands\WordBrand.cs" />
+    <Compile Include="Forms\ChatServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChatServer.designer.cs">
+      <DependentUpon>ChatServer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Config.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +112,10 @@
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChatServer.resx">
+      <DependentUpon>ChatServer.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Config.resx">
       <SubType>Designer</SubType>
@@ -289,6 +298,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Control\App.config" />
     <None Include="Properties\DataSources\Mahjong.Control.ProgramControl.datasource" />
     <None Include="Resources\word8.gif" />
