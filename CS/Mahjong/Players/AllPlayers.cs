@@ -56,7 +56,7 @@ namespace Mahjong.Players
 
             for (int i = 0; i < 4; i++)
             {
-                player[i] = deal.getPlayer(i);
+                players[i] = deal.getPlayer(i);
             }
         }
     }

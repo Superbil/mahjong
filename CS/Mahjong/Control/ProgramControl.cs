@@ -47,7 +47,7 @@ namespace Mahjong.Control
             BrandPlayer a = new BrandPlayer();
             BrandPlayer[] player = new BrandPlayer[4];
 
-            BrandFactory x = new BrandFactory(a);
+            BrandFactory x = new BrandFactory();
             x.createBrands();
             x.randomBrands();
 

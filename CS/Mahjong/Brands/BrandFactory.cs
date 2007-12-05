@@ -305,7 +305,6 @@ namespace Mahjong.Brands
             WordbrandArray.Add(Mahjong.Properties.Resources.word5);
             WordbrandArray.Add(Mahjong.Properties.Resources.word6);
             WordbrandArray.Add(Mahjong.Properties.Resources.word7);
-            WordbrandArray.Add(Mahjong.Properties.Resources.word8);
         }
         void creatImage(ArrayList array, string str)
         {
