@@ -353,12 +353,5 @@ namespace Mahjong.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap word8 {
-            get {
-                object obj = ResourceManager.GetObject("word8", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
