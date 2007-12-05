@@ -14,16 +14,13 @@ namespace Mahjong.Control
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Table());
-            ProgramControl p =  new ProgramControl();
-            p.run();
-            //代刚礟㎝玻ネ礟
+            // 祘Α北
+            new ProgramControl();
+            // 代刚礟㎝玻ネ礟
             //new BrandsTest();
-            //代刚AI
+            // 代刚AI
             //new AiTest();
-            //代刚计璸衡
+            // 代刚计璸衡
             //new TallyTest();
         }
     }

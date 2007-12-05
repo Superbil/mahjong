@@ -34,14 +34,13 @@
             this.開新局ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.結束ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.網路ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.開新伺服器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.說明ToolStripMenuItem_Click = new System.Windows.Forms.ToolStripMenuItem();
             this.關於ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.BrandTip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.網路ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.開新伺服器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +52,7 @@
             this.說明ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(637, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(692, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -88,6 +87,21 @@
             this.結束ToolStripMenuItem.Text = "結束(&Q)";
             this.結束ToolStripMenuItem.Click += new System.EventHandler(this.結束ToolStripMenuItem_Click);
             // 
+            // 網路ToolStripMenuItem
+            // 
+            this.網路ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.開新伺服器ToolStripMenuItem});
+            this.網路ToolStripMenuItem.Name = "網路ToolStripMenuItem";
+            this.網路ToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.網路ToolStripMenuItem.Text = "網路";
+            // 
+            // 開新伺服器ToolStripMenuItem
+            // 
+            this.開新伺服器ToolStripMenuItem.Name = "開新伺服器ToolStripMenuItem";
+            this.開新伺服器ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.開新伺服器ToolStripMenuItem.Text = "開新伺服器...";
+            this.開新伺服器ToolStripMenuItem.Click += new System.EventHandler(this.開新伺服器ToolStripMenuItem_Click);
+            // 
             // 說明ToolStripMenuItem
             // 
             this.說明ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -111,33 +125,10 @@
             this.關於ToolStripMenuItem.Text = "關於...(&A)";
             this.關於ToolStripMenuItem.Click += new System.EventHandler(this.關於ToolStripMenuItem_Click);
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(101, 552);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(0, 0);
-            this.flowLayoutPanel1.TabIndex = 2;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // 網路ToolStripMenuItem
-            // 
-            this.網路ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.開新伺服器ToolStripMenuItem});
-            this.網路ToolStripMenuItem.Name = "網路ToolStripMenuItem";
-            this.網路ToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.網路ToolStripMenuItem.Text = "網路";
-            // 
-            // 開新伺服器ToolStripMenuItem
-            // 
-            this.開新伺服器ToolStripMenuItem.Name = "開新伺服器ToolStripMenuItem";
-            this.開新伺服器ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.開新伺服器ToolStripMenuItem.Text = "開新伺服器...";
-            this.開新伺服器ToolStripMenuItem.Click += new System.EventHandler(this.開新伺服器ToolStripMenuItem_Click);
             // 
             // Table
             // 
@@ -145,9 +136,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(637, 468);
+            this.ClientSize = new System.Drawing.Size(692, 670);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Table";

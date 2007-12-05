@@ -20,15 +20,19 @@ namespace Mahjong.Control
         ChatServerForm chat;
         Timer rotateTimer = null;
         System.Windows.Forms.Control control;
+        AllPlayers all;
         public ProgramControl()
         {
             InitializeComponent();
-            table = new Table();
+            run();
         }
-        public void run()
-        {
+        private void run()
+        {            
+            //設定4個玩家,每個人16張
+            all = new AllPlayers(4, 16);
+            //顯示Table 介面
+            table = new Table(this,all);
             table.ShowDialog();
-            test();
         }
         public void exit()
         {
@@ -42,23 +46,16 @@ namespace Mahjong.Control
         {
 
         }
+        public void config()
+        {
+            Config con = new Config();
+        }
         public void newgame()                                                                                                                                                                       
         {
-            BrandPlayer a = new BrandPlayer();
-            BrandPlayer[] player = new BrandPlayer[4];
-
-            BrandFactory x = new BrandFactory();
-            x.createBrands();
-            x.randomBrands();
-
-            a = x.getBrands();
-
-            Iterator ai = a.creatIterator();
-            print(ai);
-
-            Console.WriteLine("Over");
-            Console.ReadLine();
-
+            
+            all.creatBrands();
+            table.updateImage();
+            
         }
         private void print(Iterator iterator)
         {
@@ -69,20 +66,10 @@ namespace Mahjong.Control
                 Console.Write("{0},{1}\n", brand.getClass(), brand.getNumber());
             }
         }
-        void test()
-        {
-            //ArrayList a = new ArrayList();
-            
-            
-            
-            //new BrandsTest();
-            //imageList1.Draw
-
-        }
         public void onlineGame()
         {
             chat= new ChatServerForm();
-            chat.Show();
+            chat.ShowDialog();
         }
     }
 }

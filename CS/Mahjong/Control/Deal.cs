@@ -64,13 +64,14 @@ namespace Mahjong.Control
         /// <summary>
         /// 分配牌
         /// </summary>
-        /// <returns>是否分配成功</returns>
         public void DealBrands()
         {
             Iterator iterator_temp;
             iterator_temp = table.creatIterator(countbrands * countplayer);
+            // 移除牌
             table = removefromtable(iterator_temp, table);
             iterator_temp = table.creatIterator(countbrands * countplayer);
+            // 分配牌
             dealtoplayer(iterator_temp);                       
         }
         /// <summary>
@@ -103,6 +104,14 @@ namespace Mahjong.Control
                 return this.player[number];
         }
         /// <summary>
+        /// 傳回桌面
+        /// </summary>
+        /// <returns>玩家</returns>
+        public BrandPlayer getTable()
+        {
+            return table;
+        }
+        /// <summary>
         /// 從桌面把牌新增到玩家
         /// </summary>
         /// <param name="iterator">桌面反覆器</param>
@@ -111,7 +120,7 @@ namespace Mahjong.Control
         {
             while (iterator.hasNext())
                 for (int i = 0; i < countbrands * countplayer; i++)
-                    player[i % countplayer].add((Brand)iterator.next());
+                    player[i % countplayer].add( (Brand)iterator.next() );
         }
     }
 }

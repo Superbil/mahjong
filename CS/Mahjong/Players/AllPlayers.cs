@@ -7,7 +7,7 @@ using Mahjong.Control;
 
 namespace Mahjong.Players
 {
-    class AllPlayers
+    public class AllPlayers
     {
         /// <summary>
         /// 玩家存放
@@ -17,14 +17,34 @@ namespace Mahjong.Players
         /// 桌面牌存放
         /// </summary>
         BrandPlayer table;
+        /// <summary>
+        /// 牌工廠
+        /// </summary>
         BrandFactory factory;
-
-        public AllPlayers(int playernumber)
+        /// <summary>
+        /// 每個玩家分多少張
+        /// </summary>
+        int dealnumber;
+        /// <summary>
+        /// 計算多少個玩家
+        /// </summary>
+        private int countplayers;
+        /// <summary>
+        /// 全部玩家集合
+        /// </summary>
+        /// <param name="playernumber">設定有多少個玩家</param>
+        /// <param name="deal">一個玩家有多少張</param>
+        public AllPlayers(int playernumber,int deal)
         {
             players = new BrandPlayer[playernumber];
             table = new BrandPlayer();
             factory = new BrandFactory();
+            this.dealnumber = deal;
+            countplayers = playernumber;
         }
+        /// <summary>
+        /// 玩家陣列
+        /// </summary>
         public BrandPlayer[] Players
         {
             get
@@ -36,6 +56,9 @@ namespace Mahjong.Players
                 players = value;
             }
         }
+        /// <summary>
+        /// 桌面
+        /// </summary>
         public BrandPlayer Table
         {
             get
@@ -43,21 +66,40 @@ namespace Mahjong.Players
                 return table;
             }
         }
+        /// <summary>
+        /// 建立牌,並分配牌
+        /// </summary>
         public void creatBrands()
         {
             factory.createBrands();
             factory.randomBrands();
             table = factory.getBrands();
+            dealbrands();
         }
+        /// <summary>
+        /// 傳回一個玩家設定多少張
+        /// </summary>
+        public int Dealnumber
+        {
+            get
+            {
+                return dealnumber;
+            }
+        }
+        /// <summary>
+        /// 分配牌
+        /// </summary>
         void dealbrands()
         {
-            Deal deal = new Deal(16, table);
+            Deal deal = new Deal(dealnumber, countplayers, table);
             deal.DealBrands();
-
-            for (int i = 0; i < 4; i++)
+            // get Players
+            for (int i = 0; i < players.Length; i++)
             {
                 players[i] = deal.getPlayer(i);
             }
+            // get Table
+            table = deal.getTable();
         }
     }
 }

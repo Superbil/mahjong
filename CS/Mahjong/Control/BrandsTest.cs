@@ -23,13 +23,13 @@ namespace Mahjong.Control
             a = x.getBrands();
 
             Iterator ai;
-            ai = a.creatIterator(5);
+            ai = a.creatIterator(10);
             print(ai);
 
             ai = a.creatIterator(3);
             a=removefromplayer(ai,a);
 
-            ai = a.creatIterator(5);
+            ai = a.creatIterator(10);
             print(ai);
 
             
@@ -67,7 +67,7 @@ namespace Mahjong.Control
                 Brand brand = (Brand)iterator.next();
                 //if (brand.getClass==t.getClass)
                 //    Console.WriteLine("==Get a TeamBrands==");
-                Console.WriteLine("{0},{1}", brand.getClass(), brand.getNumber());
+                Console.Write("{0},{1}\t", brand.getNumber(),brand.getClass());
             }
         }
         private void chackBrands()

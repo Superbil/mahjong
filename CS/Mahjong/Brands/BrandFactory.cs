@@ -10,15 +10,6 @@ namespace Mahjong.Brands
     /// <summary>
     /// 牌工廠 
     /// </summary>
-
-    //public abstract class AbstractBrandFactory
-    //{
-    //    public abstract Brand createFlowerBrand;
-    //    public abstract Brand createRopeBrand;
-    //    public abstract Brand createTenThousandBrand;
-    //    public abstract Brand createTubeBrand;
-    //    public abstract Brand createWordBrand;
-    //}
     public class BrandFactory
     {
         /// <summary>
@@ -126,7 +117,6 @@ namespace Mahjong.Brands
             for (int j = 0; j < pieceFlowerBrand; j++)
                 for (int i = 0; i < countFlowerBrand; i++)
                     this.player.add(new FlowerBrand(i + 1,(Image)FlowerbrandArray[i]));
-            //Mahjong.BrandsPicture.a1;
         }
         /// <summary>
         /// 建立索牌
@@ -232,26 +222,7 @@ namespace Mahjong.Brands
         }
         void creatImageArray_Flower()
         {
-            //try
-            //{
-            //    //FlowerbrandArray.Add(new Image());
-            //    //Image i = new Image();
-            //    //Bitmap imagetemp = new Bitmap(@"D:\Files\專題\MAHJONG_CS\十六張麻將\Resources\"+@"flower1.gif");
-            //    Bitmap imagetemp = new Bitmap(@"Resources\"+@"flower1.gif");
-                
-            //    //FlowerbrandArray.Add(new Bitmap(@"D:\Files\專題\MAHJONG_CS\十六張麻將\Resources\flower1.gif"));
-            //    //FlowerbrandArray.Add(new Bitmap(@"Resources\flower1.gif"));
-            //    FlowerbrandArracy.Add(imagetemp);
-            //    //FlowerbrandArray.Add(new Image("Resources/flower1.gif"));
-            //    //creatImage(FlowerbrandArray,"Resources/flower1.gif");
-            //}
-            //catch (ArgumentException)
-            //{
-            //    Console.WriteLine("There was an error." +
-            //        "Check the path to the image file.");
-            //}
-            //Image[] flower_image_array= new Image[countFlowerBrand];
-            FlowerbrandArray.Add(Mahjong.Properties.Resources.flower1);
+            FlowerbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.flower1));
             FlowerbrandArray.Add(Mahjong.Properties.Resources.flower2);
             FlowerbrandArray.Add(Mahjong.Properties.Resources.flower3);
             FlowerbrandArray.Add(Mahjong.Properties.Resources.flower4);
@@ -262,8 +233,8 @@ namespace Mahjong.Brands
         }
         void creatImageArray_Rope()
         {
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope1);
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope2);
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope1));
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope2));
             RopebrandArray.Add(Mahjong.Properties.Resources.rope3);
             RopebrandArray.Add(Mahjong.Properties.Resources.rope4);
             RopebrandArray.Add(Mahjong.Properties.Resources.rope5);

@@ -121,5 +121,14 @@ namespace Mahjong.Properties {
                 return ((string)(this["Flower"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("桌面")]
+        public string Table {
+            get {
+                return ((string)(this["Table"]));
+            }
+        }
     }
 }
