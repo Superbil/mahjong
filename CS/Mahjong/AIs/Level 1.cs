@@ -7,6 +7,9 @@ using System.Collections;
 
 namespace Mahjong.AIs
 {
+    /// <summary>
+    /// 定義變數
+    /// </summary>
     class Level_1 : MahjongAI
     {
         private BrandPlayer p0;
@@ -27,6 +30,11 @@ namespace Mahjong.AIs
                 int iten=0;
                 int itube=0;
                 int iword=0;
+
+        /// <summary>
+        /// 設定牌組
+        /// </summary>
+        /// <param name="player"></param>
         public void setPlayer(BrandPlayer player)
         {
             this.p0 = player;
@@ -48,11 +56,18 @@ namespace Mahjong.AIs
             printtest(word);
         }
 
+        /// <summary>
+        /// 摸牌
+        /// </summary>
+        /// <returns></returns>
         public Brand getReadyBrand()
         {
             return ans;
         }
 
+        /// <summary>
+        /// 手牌分類
+        /// </summary>
         private void sort()
         {
             for (int i = 0; i < p0.getCount(); i++)
@@ -90,6 +105,10 @@ namespace Mahjong.AIs
             }
         }
 
+        /// <summary>
+        /// 手牌排序
+        /// </summary>
+        /// <param name="BrandTemp"></param>
         void sortArray(ArrayList BrandTemp)
         {
             int i;
