@@ -16,8 +16,22 @@ namespace Mahjong.Control
         {
             BrandPlayer a = new BrandPlayer();
             a.add(new TenThousandBrand(1));
+            a.add(new TenThousandBrand(1));
+            a.add(new TenThousandBrand(1));
+            a.add(new TenThousandBrand(2));
+            a.add(new TenThousandBrand(2));
             a.add(new TenThousandBrand(2));
             a.add(new TenThousandBrand(3));
+            a.add(new TenThousandBrand(3));
+            a.add(new TenThousandBrand(3));
+            a.add(new TenThousandBrand(4));
+            a.add(new TenThousandBrand(4));
+            a.add(new TenThousandBrand(4));
+            a.add(new WordBrand(7));
+            a.add(new WordBrand(7));
+            a.add(new WordBrand(7));
+            a.add(new TenThousandBrand(6));
+            a.add(new TenThousandBrand(6));
 
             f = new Tally();
             
@@ -29,6 +43,7 @@ namespace Mahjong.Control
                 0);
             
             f.ShowDialog();
+
         }
 
     }
