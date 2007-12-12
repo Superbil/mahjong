@@ -94,7 +94,7 @@ namespace Mahjong.Brands
             }
         }
 
-        private int source = 0;
+        private int source = 1;
         /// <summary>
         /// µPªº¤À¼Æ
         /// </summary>
