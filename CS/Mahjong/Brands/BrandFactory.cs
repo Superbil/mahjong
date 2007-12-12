@@ -64,7 +64,6 @@ namespace Mahjong.Brands
         /// 亂數表格
         /// </summary>
         ArrayList randomTable;
-        //ArrayList FlowerbrandArray;
         ArrayList FlowerbrandArray;
         ArrayList RopebrandArray;
         ArrayList TenthousandbrandArray;
@@ -143,7 +142,7 @@ namespace Mahjong.Brands
         {
             for (int j = 0; j < pieceTenThousandBrand; j++)
                 for (int i = 0; i < countTenThousandBrand; i++)
-                    this.player.add(new TenThousandBrand(i + 1, (Image)TobebrandArray[i]));
+                    this.player.add(new TenThousandBrand(i + 1, (Image)TenthousandbrandArray[i]));
         }
         /// <summary>
         /// 建立字牌
@@ -233,8 +232,8 @@ namespace Mahjong.Brands
         }
         void creatImageArray_Rope()
         {
-            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope1));
-            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope2));
+            RopebrandArray.Add(Mahjong.Properties.Resources.rope1);
+            RopebrandArray.Add(Mahjong.Properties.Resources.rope2);
             RopebrandArray.Add(Mahjong.Properties.Resources.rope3);
             RopebrandArray.Add(Mahjong.Properties.Resources.rope4);
             RopebrandArray.Add(Mahjong.Properties.Resources.rope5);

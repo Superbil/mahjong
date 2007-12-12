@@ -12,15 +12,24 @@ namespace Mahjong.Brands
     {
         private int Number;
         private bool See;
+        /// <summary>
+        /// 索牌
+        /// </summary>
+        /// <param name="number">牌面大小</param>
         public RopeBrand(int number)
         {
             this.Number = number;
-            See = true;
+            See = false;
         }
+        /// <summary>
+        /// 索牌
+        /// </summary>
+        /// <param name="number">牌面大小</param>
+        /// <param name="image">圖片位置</param>
         public RopeBrand(int number, Image image)
         {
             this.Number = number;
-            See = true;
+            See = false;
             photo = image;
         }
         /// <summary>
@@ -31,12 +40,15 @@ namespace Mahjong.Brands
             return Number;
         }
         /// <summary>
-        /// 索牌的類別
+        /// 牌的類別
         /// </summary>   
         public string getClass()
         {
             return Mahjong.Properties.Settings.Default.Bamboos;
         }
+        /// <summary>
+        /// 是否可見
+        /// </summary>
         public bool IsCanSee
         {
             get
@@ -76,6 +88,21 @@ namespace Mahjong.Brands
             set
             {
                 teamNumber = value;
+            }
+        }
+        /// <summary>
+        /// 牌的分數
+        /// </summary>
+        private int source = 0;
+        public int Source
+        {
+            get
+            {
+                return source;
+            }
+            set
+            {
+                source = value;
             }
         }
     }
