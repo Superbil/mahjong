@@ -222,59 +222,59 @@ namespace Mahjong.Brands
         void creatImageArray_Flower()
         {
             FlowerbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.flower1));
-            FlowerbrandArray.Add(Mahjong.Properties.Resources.flower2);
-            FlowerbrandArray.Add(Mahjong.Properties.Resources.flower3);
-            FlowerbrandArray.Add(Mahjong.Properties.Resources.flower4);
-            FlowerbrandArray.Add(Mahjong.Properties.Resources.flower5);
-            FlowerbrandArray.Add(Mahjong.Properties.Resources.flower6);
-            FlowerbrandArray.Add(Mahjong.Properties.Resources.flower7);
-            FlowerbrandArray.Add(Mahjong.Properties.Resources.flower8);
+            FlowerbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.flower2));
+            FlowerbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.flower3));
+            FlowerbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.flower4));
+            FlowerbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.flower5));
+            FlowerbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.flower6));
+            FlowerbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.flower7));
+            FlowerbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.flower8));
         }
         void creatImageArray_Rope()
         {
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope1);
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope2);
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope3);
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope4);
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope5);
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope6);
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope7);
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope8);
-            RopebrandArray.Add(Mahjong.Properties.Resources.rope9);
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope1));
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope2));
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope3));
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope4));
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope5));
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope6));
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope7));
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope8));
+            RopebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.rope9));
         }
         void creatImageArray_TenThousand()
         {
-            TenthousandbrandArray.Add(Mahjong.Properties.Resources.ten1);
-            TenthousandbrandArray.Add(Mahjong.Properties.Resources.ten2);
-            TenthousandbrandArray.Add(Mahjong.Properties.Resources.ten3);
-            TenthousandbrandArray.Add(Mahjong.Properties.Resources.ten4);
-            TenthousandbrandArray.Add(Mahjong.Properties.Resources.ten5);
-            TenthousandbrandArray.Add(Mahjong.Properties.Resources.ten6);
-            TenthousandbrandArray.Add(Mahjong.Properties.Resources.ten7);
-            TenthousandbrandArray.Add(Mahjong.Properties.Resources.ten8);
-            TenthousandbrandArray.Add(Mahjong.Properties.Resources.ten9);
+            TenthousandbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.ten1));
+            TenthousandbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.ten2));
+            TenthousandbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.ten3));
+            TenthousandbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.ten4));
+            TenthousandbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.ten5));
+            TenthousandbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.ten6));
+            TenthousandbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.ten7));
+            TenthousandbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.ten8));
+            TenthousandbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.ten9));
         }
         void creatImageArray_Tobe()
         {
-            TobebrandArray.Add(Mahjong.Properties.Resources.tobe1);
-            TobebrandArray.Add(Mahjong.Properties.Resources.tobe2);
-            TobebrandArray.Add(Mahjong.Properties.Resources.tobe3);
-            TobebrandArray.Add(Mahjong.Properties.Resources.tobe4);
-            TobebrandArray.Add(Mahjong.Properties.Resources.tobe5);
-            TobebrandArray.Add(Mahjong.Properties.Resources.tobe6);
-            TobebrandArray.Add(Mahjong.Properties.Resources.tobe7);
-            TobebrandArray.Add(Mahjong.Properties.Resources.tobe8);
-            TobebrandArray.Add(Mahjong.Properties.Resources.tobe9);
+            TobebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.tobe1));
+            TobebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.tobe2));
+            TobebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.tobe3));
+            TobebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.tobe4));
+            TobebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.tobe5));
+            TobebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.tobe6));
+            TobebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.tobe7));
+            TobebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.tobe8));
+            TobebrandArray.Add(new Bitmap(Mahjong.Properties.Resources.tobe9));
         }
         void creatImageArray_Word()
         {
-            WordbrandArray.Add(Mahjong.Properties.Resources.word1);
-            WordbrandArray.Add(Mahjong.Properties.Resources.word2);
-            WordbrandArray.Add(Mahjong.Properties.Resources.word3);
-            WordbrandArray.Add(Mahjong.Properties.Resources.word4);
-            WordbrandArray.Add(Mahjong.Properties.Resources.word5);
-            WordbrandArray.Add(Mahjong.Properties.Resources.word6);
-            WordbrandArray.Add(Mahjong.Properties.Resources.word7);
+            WordbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.word1));
+            WordbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.word2));
+            WordbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.word3));
+            WordbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.word4));
+            WordbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.word5));
+            WordbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.word6));
+            WordbrandArray.Add(new Bitmap(Mahjong.Properties.Resources.word7));
         }
         void creatImage(ArrayList array, string str)
         {

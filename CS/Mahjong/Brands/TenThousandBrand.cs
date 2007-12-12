@@ -8,102 +8,29 @@ namespace Mahjong.Brands
     /// <summary>
     /// 萬字牌
     /// </summary>
-    public class TenThousandBrand : Brand
+    public class TenThousandBrand : BaseBrand
     {
-        private int Number;
-        private bool See;
         /// <summary>
         /// 萬牌
         /// </summary>
         /// <param name="number">牌面大小</param>
-        public TenThousandBrand(int number)
+        public TenThousandBrand(int number) : base(number)
         {
-            this.Number = number;
-            See = false;
         }
         /// <summary>
         /// 萬牌
         /// </summary>
         /// <param name="number">牌面大小</param>
         /// <param name="image">圖片</param>
-        public TenThousandBrand(int number,Image image)
+        public TenThousandBrand(int number,Image image) : base(number,image)
         {
-            this.Number = number;
-            See = false;
-            photo = image;
-        }
-        /// <summary>
-        /// 萬字牌的值的大小
-        /// </summary>   
-        public int getNumber()
-        {
-            return Number;
         }
         /// <summary>
         /// 牌的類別
         /// </summary>   
-        public string getClass()
+        public new string getClass()
         {
             return Mahjong.Properties.Settings.Default.Characters;
-        }
-        /// <summary>
-        /// 是否可見
-        /// </summary>
-        public bool IsCanSee
-        {
-            get
-            {
-                return See;
-            }
-            set
-            {
-                See = value;
-            }
-        }
-        private Image photo;
-        /// <summary>
-        /// 牌的圖片位置
-        /// </summary>
-        public Image image
-        {
-            get
-            {
-                return photo;
-            }
-            set
-            {
-                photo = value;
-            }
-        }
-        private int teamNumber;
-        /// <summary>
-        /// 牌的組別
-        /// </summary>
-        public int Team
-        {
-            get
-            {
-                return teamNumber;
-            }
-            set
-            {
-                teamNumber = value;
-            }
-        }
-        /// <summary>
-        /// 牌的分數
-        /// </summary>
-        private int source = 0;
-        public int Source
-        {
-            get
-            {
-                return source;
-            }
-            set
-            {
-                source = value;
-            }
         }
     }
 }
