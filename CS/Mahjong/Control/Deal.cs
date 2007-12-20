@@ -115,7 +115,6 @@ namespace Mahjong.Control
         /// 從桌面把牌新增到玩家
         /// </summary>
         /// <param name="iterator">桌面反覆器</param>
-        /// <returns>是否成功</returns>
         void dealtoplayer(Iterator iterator)
         {
             while (iterator.hasNext())
