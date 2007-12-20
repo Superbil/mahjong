@@ -53,26 +53,10 @@ namespace Mahjong.AIs
             step3();
             step4();
             step5();
+            step6();
 
 
 
-
-            //=====
-            //Step6 以花色為群組，一組花色有9張，各別加上0,5,10,15,20,15,10,5,0
-            //=====
-            int[] const_value = new int [9];
-            const_value[0] = 0;
-            const_value[1] = 5;
-            const_value[2] = 10;
-            const_value[3] = 15;
-            const_value[4] = 20;
-            const_value[5] = 15;
-            const_value[6] = 10;
-            const_value[7] = 5;
-            const_value[8] = 0;
-
-
-            
 
 
 
@@ -365,6 +349,96 @@ namespace Mahjong.AIs
                     {
                         use_2Bamboos[i].getBrand(j).Source += 30;
                     }
+            }
+        }
+
+        void step6()
+        {
+
+            //=====
+            //Step6 以圖案為群組，一組花色有9張，各別加上0,5,10,15,20,15,10,5,0
+            //=====
+            int[] const_value = new int[9];
+            const_value[0] = 0;
+            const_value[1] = 5;
+            const_value[2] = 10;
+            const_value[3] = 15;
+            const_value[4] = 20;
+            const_value[5] = 15;
+            const_value[6] = 10;
+            const_value[7] = 5;
+            const_value[8] = 0;
+
+            //
+            //萬
+            //
+            BrandPlayer[] step6_characters = new BrandPlayer[9];
+            for (int j = 0; j < step6_characters.Length; j++)
+                step6_characters[j] = new BrandPlayer();
+            //將brands陣列每個數的值，丟到use_characters分類
+            for (int i = 0; i < brands[1].getCount(); i++)
+            {
+                for (int j = 1; j <= step6_characters.Length; j++)
+                {
+                    if (brands[1].getBrand(i).getNumber() == j)
+                        step6_characters[j - 1].add(brands[1].getBrand(i));
+
+                }
+            }
+
+            for (int i = 0; i < step6_characters.Length; i++)
+            {
+                if (step6_characters[i].getCount() >= 1)
+                    for (int j = 0; j < step6_characters[i].getCount(); j++)
+                        step6_characters[i].getBrand(j).Source += const_value[i];
+            }
+
+            //
+            //筒
+            //
+            BrandPlayer[] step6_Dots = new BrandPlayer[9];
+            for (int j = 0; j < step6_Dots.Length; j++)
+                step6_Dots[j] = new BrandPlayer();
+            //將brands陣列每個數的值，丟到use_characters分類
+            for (int i = 0; i < brands[2].getCount(); i++)
+            {
+                for (int j = 1; j <= step6_Dots.Length; j++)
+                {
+                    if (brands[2].getBrand(i).getNumber() == j)
+                        step6_Dots[j - 1].add(brands[2].getBrand(i));
+
+                }
+            }
+
+            for (int i = 0; i < step6_Dots.Length; i++)
+            {
+                if (step6_Dots[i].getCount() >= 1)
+                    for (int j = 0; j < step6_Dots[i].getCount(); j++)
+                        step6_Dots[i].getBrand(j).Source += const_value[i];
+            }
+
+            //
+            //條
+            //
+            BrandPlayer[] step6_Bamboos = new BrandPlayer[9];
+            for (int j = 0; j < step6_Bamboos.Length; j++)
+                step6_Bamboos[j] = new BrandPlayer();
+            //將brands陣列每個數的值，丟到use_characters分類
+            for (int i = 0; i < brands[3].getCount(); i++)
+            {
+                for (int j = 1; j <= step6_Bamboos.Length; j++)
+                {
+                    if (brands[3].getBrand(i).getNumber() == j)
+                        step6_Bamboos[j - 1].add(brands[3].getBrand(i));
+
+                }
+            }
+
+            for (int i = 0; i < step6_Bamboos.Length; i++)
+            {
+                if (step6_Bamboos[i].getCount() >= 1)
+                    for (int j = 0; j < step6_Bamboos[i].getCount(); j++)
+                        step6_Bamboos[i].getBrand(j).Source += const_value[i];
             }
         }
 
