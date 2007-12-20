@@ -71,7 +71,7 @@ namespace Mahjong.Brands
         ArrayList WordbrandArray;
         public BrandFactory()
         {
-            player = new BrandPlayer();
+            this.player = new BrandPlayer();
             countFlowerBrand = 8;
             pieceFlowerBrand = 1;
             countRopeBrand = 9;
@@ -278,7 +278,7 @@ namespace Mahjong.Brands
         }
         void creatImage(ArrayList array, Image image)
         {
-            array.Add(new Bitmap(image));
+            array.Add(image);
         }
     }
 }
