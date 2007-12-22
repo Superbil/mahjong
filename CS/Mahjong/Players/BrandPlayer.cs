@@ -87,21 +87,5 @@ namespace Mahjong.Players
         {
             return new PlayerIteratorLimit(brandarray,limitnumber);
         }
-        ////加入三張牌
-        //public void add(Brand b1,Brand b2,Brand b3)
-        //{
-        //    brandarray.Add(new TeamBrands(b1, b2, b3));
-        //    //ArrayList temparraylist = new ArrayList(3);
-        //    //temparraylist.Add(b1);
-        //    //temparraylist.Add(b2);
-        //    //temparraylist.Add(b3);
-        //    //brandarray.Add(temparraylist);
-        //}
-        ////加入四張牌
-        //public void add(Brand b1, Brand b2, Brand b3,Brand b4)
-        //{
-        //    brandarray.Add(new TeamBrands(b1, b2, b3, b4));
-        //}
-
     }
 }

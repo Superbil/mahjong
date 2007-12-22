@@ -14,12 +14,10 @@ namespace Mahjong.Control
 {
     public partial class ProgramControl : UserControl
     {
-        BrandFactory brandfactory;
         AboutBox ab;
         Table table;
         ChatServerForm chat;
         Timer rotateTimer = null;
-        System.Windows.Forms.Control control;
         AllPlayers all;
         public ProgramControl()
         {
@@ -27,11 +25,13 @@ namespace Mahjong.Control
             run();
         }
         private void run()
-        {            
+        {
             //設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
+            
             //顯示Table 介面
-            table = new Table(this,all);
+            table = new Table(this, all);
+            //table.Setup(this, all);
             table.ShowDialog();
         }
         public void exit()
@@ -42,20 +42,14 @@ namespace Mahjong.Control
         {
             ab = new AboutBox();
         }
-        public void help()
-        {
-
-        }
         public void config()
         {
             Config con = new Config();
         }
         public void newgame()                                                                                                                                                                       
-        {
-            
+        {           
             all.creatBrands();
             table.updateImage();
-            
         }
         private void print(Iterator iterator)
         {

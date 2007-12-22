@@ -69,6 +69,10 @@ namespace Mahjong.Brands
         ArrayList TenthousandbrandArray;
         ArrayList TobebrandArray;
         ArrayList WordbrandArray;
+        /// <summary>
+        /// 總牌數
+        /// </summary>
+        int sumBrands;
         public BrandFactory()
         {
             this.player = new BrandPlayer();
@@ -83,6 +87,11 @@ namespace Mahjong.Brands
             countWordBrand = 7;
             pieceWordBrand = 4;
             creatImageArray();
+            sumBrands = countFlowerBrand * pieceFlowerBrand +
+                        countRopeBrand * pieceRopeBrand +
+                        countTenThousandBrand * pieceTenThousandBrand +
+                        countTubeBrand * pieceTubeBrand +
+                        countWordBrand * pieceWordBrand;
         }
         /// <summary>
         /// 建立牌組
@@ -174,11 +183,7 @@ namespace Mahjong.Brands
         {
             randomNumber = new Random(System.DateTime.Now.Millisecond);
             randomTable = new ArrayList();
-            randomTable.Capacity = countFlowerBrand * pieceFlowerBrand +
-                                  countRopeBrand * pieceRopeBrand +
-                                  countTenThousandBrand * pieceTenThousandBrand +
-                                  countTubeBrand * pieceTubeBrand +
-                                  countWordBrand * pieceWordBrand;         
+            randomTable.Capacity = sumBrands;         
 
             for (int i = 0; i < randomTable.Capacity; i++)
                 randomTable.Add(makeRandomNumber(randomNumber.Next(randomTable.Capacity))) ;
@@ -218,6 +223,13 @@ namespace Mahjong.Brands
             creatImageArray_Tobe();
             WordbrandArray = new ArrayList();
             creatImageArray_Word();
+        }
+        public int SumBrands
+        {
+            get
+            {
+                return sumBrands;
+            }
         }
         void creatImageArray_Flower()
         {

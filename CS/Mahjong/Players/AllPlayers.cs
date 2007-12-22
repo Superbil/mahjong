@@ -30,17 +30,22 @@ namespace Mahjong.Players
         /// </summary>
         private int countplayers;
         /// <summary>
+        /// 總牌數
+        /// </summary>
+        public int sumBrands;
+        /// <summary>
         /// 全部玩家集合
         /// </summary>
         /// <param name="playernumber">設定有多少個玩家</param>
         /// <param name="deal">一個玩家有多少張</param>
         public AllPlayers(int playernumber,int deal)
         {
-            players = new BrandPlayer[playernumber];
-            table = new BrandPlayer();
-            factory = new BrandFactory();
+            this.players = new BrandPlayer[playernumber];
+            this.table = new BrandPlayer();
+            this.factory = new BrandFactory();
             this.dealnumber = deal;
             countplayers = playernumber;
+            this.sumBrands = factory.SumBrands;
         }
         /// <summary>
         /// 玩家陣列

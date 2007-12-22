@@ -11,6 +11,29 @@ using Mahjong.Players;
 
 namespace Mahjong.Forms
 {
+    enum State
+    {
+        /// <summary>
+        /// 北
+        /// </summary>
+        North = 0,
+        /// <summary>
+        /// 東
+        /// </summary>
+        East = 1,
+        /// <summary>
+        /// 南
+        /// </summary>
+        South = 2,
+        /// <summary>
+        /// 西
+        /// </summary>
+        West = 3,
+        /// <summary>
+        /// 桌面
+        /// </summary>
+        Table = 4
+    }
     public partial class Table : Form
     {
         ProgramControl pc;
@@ -18,25 +41,28 @@ namespace Mahjong.Forms
         AllPlayers all;
         int width = Mahjong.Properties.Settings.Default.image_w;
         int height = Mahjong.Properties.Settings.Default.image_h;
+        int padding = 2;
+        Graphics graphics;
+
         public Table(ProgramControl pc,AllPlayers all)
         {
             InitializeComponent();
             this.flowLayoutBrands = new FlowLayoutPanel[5];
             this.pc = pc;
             this.all = all;
-            for (int i=0; i < 5; i++)
-            {
-                flowLayoutBrands[i] = new FlowLayoutPanel();                
-                this.Controls.Add(flowLayoutBrands[i]);
-                //flowLayoutBrands[i].BackColor = System.Drawing.Color.Yellow;
-            }
-
-            setFlowLayout_location(10);
+            setFlowLayout();
+            graphics = this.CreateGraphics();            
+        }
+        private void setFlowLayout()
+        {
+            for (int i = 0; i < flowLayoutBrands.Length; i++)
+                flowLayoutBrands[i] = new FlowLayoutPanel();
+            this.Controls.AddRange(flowLayoutBrands);
+            setFlowLayout_location(5);
             setFlowLayout_name();
             setFlowLayout_size();
-            //flowLayoutBrands[4].BackColor = Color.Blue;
-            width = width + 15;
-            height = height + 15;
+            //setFlowLayout_Margin(10);
+            //setFlowLayout_Dock();
         }
         private void setFlowLayout_name()
         {
@@ -48,112 +74,131 @@ namespace Mahjong.Forms
         }
         private void setFlowLayout_size()
         {
-            this.flowLayoutBrands[0].Size = new Size(width * all.Dealnumber, height);
-            this.flowLayoutBrands[1].Size = new Size(width+10, height * all.Dealnumber);
-            this.flowLayoutBrands[2].Size = new Size(width * all.Dealnumber, height);
-            this.flowLayoutBrands[3].Size = new Size(width+10, height * all.Dealnumber);
-            this.flowLayoutBrands[4].Size = new Size(width * all.Dealnumber, height * all.Dealnumber);
+            this.flowLayoutBrands[0].Size = new Size((width + padding * 2) * all.Dealnumber, height + padding * 2);
+            this.flowLayoutBrands[1].Size = new Size(height + padding * 2, (width + padding * 2) * all.Dealnumber);
+            this.flowLayoutBrands[2].Size = new Size((width + padding * 2) * all.Dealnumber, height + padding * 2);
+            this.flowLayoutBrands[3].Size = new Size(height + padding * 2, (width + padding * 2) * all.Dealnumber);
+            this.flowLayoutBrands[4].Size = new Size((width + padding * 2) * all.Dealnumber, (height + padding * 2) * all.sumBrands /all.Dealnumber);
         }
         private void setFlowLayout_location(int keepsize)
         {
-            int w=0, h=20;
-            this.flowLayoutBrands[0].Location = new Point(keepsize * 2 + width+w, keepsize+h);
-            this.flowLayoutBrands[1].Location = new Point(keepsize * 3 + width * (all.Dealnumber + 1)+w, keepsize * 2 + height+h);
-            this.flowLayoutBrands[2].Location = new Point(keepsize * 2 + width+w, keepsize * 3 + height * (all.Dealnumber+1) +h);
-            this.flowLayoutBrands[3].Location = new Point(keepsize+w, keepsize * 2 + height+h);
-            this.flowLayoutBrands[4].Location = new Point(keepsize * 2+w + width, keepsize * 2 + height+h);
+            this.flowLayoutBrands[0].Location = new Point(keepsize * 2 + (height + padding * 2), keepsize);
+            this.flowLayoutBrands[1].Location = new Point(keepsize * 3 + height + padding * 2 + (width + padding * 2) * all.Dealnumber, keepsize * 2 + height + padding * 2);
+            this.flowLayoutBrands[2].Location = new Point(keepsize * 2 + (height + padding * 2), keepsize * 3 + (height + padding * 2) * (all.Dealnumber + 1));
+            this.flowLayoutBrands[3].Location = new Point(keepsize, keepsize * 2 + height + padding * 2);
+            this.flowLayoutBrands[4].Location = new Point(keepsize * 2 + (height + padding * 2), keepsize * 2 + (height + padding * 2));
+        }
+        void setFlowLayout_Dock()
+        {
+            this.flowLayoutBrands[0].Dock = DockStyle.Top;
+            this.flowLayoutBrands[1].Dock = DockStyle.Right;
+            this.flowLayoutBrands[2].Dock = DockStyle.Bottom;
+            this.flowLayoutBrands[3].Dock = DockStyle.Left;
+            this.flowLayoutBrands[4].Dock = DockStyle.None;            
+        }
+        private void setFlowLayout_Margin(int size)
+        {
+            for (int i = 0; i < flowLayoutBrands.Length;i++ )
+                this.flowLayoutBrands[i].Margin = new Padding(size);
         }
         void addNouth(Image image)
         {
             //圖片旋轉180度
-            image.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            PictureBox tempPicturebox = new PictureBox();
-            tempPicturebox.Size = new Size(image.Width,image.Height);
-            tempPicturebox.Image = image;
-            tempPicturebox.BackColor = Color.Blue;
-            this.flowLayoutBrands[0].Controls.Add(tempPicturebox);
+            addimage(State.North, image, RotateFlipType.Rotate180FlipNone);
         }
         void addEast(Image image)
         {
             //圖片旋轉270度
-            image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            PictureBox tempPicturebox = new PictureBox();
-            tempPicturebox.Size = new Size(image.Height,image.Width);
-            tempPicturebox.Image = image;
-            tempPicturebox.BackColor = Color.Blue;
-            this.flowLayoutBrands[1].Controls.Add(tempPicturebox);
+            addimage(State.East, image, RotateFlipType.Rotate270FlipNone);
         }
         void addSouth(Image image)
         {
-            PictureBox tempPicturebox = new PictureBox();
-            tempPicturebox.Size = new Size(image.Width, image.Height);
-            tempPicturebox.Image = image;
-            this.flowLayoutBrands[2].Controls.Add(tempPicturebox);
+            addimage(State.South, image, RotateFlipType.RotateNoneFlipNone);
         }
         void addWest(Image image)
         {
             //圖片旋轉90度
-            image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            PictureBox tempPicturebox = new PictureBox();
-            tempPicturebox.Size = new Size(image.Height,image.Width);
-            
-            tempPicturebox.Image = image;
-            this.flowLayoutBrands[3].Controls.Add(tempPicturebox);
+            addimage(State.West, image, RotateFlipType.Rotate90FlipNone);
         }
-        private void addTable(Image image)
+        void addTable(Image image)
         {
-            image.RotateFlip(RotateFlipType.RotateNoneFlipNone);
+            addimage(State.Table, image, RotateFlipType.RotateNoneFlipNone);
+        }
+        private void addimage(State state,Image image,RotateFlipType rotate)
+        {
+            Bitmap bitmap = new Bitmap(image);
             PictureBox tempPicturebox = new PictureBox();
-            tempPicturebox.Size = new Size(image.Width, image.Height);
-            tempPicturebox.Image = image;
-            this.flowLayoutBrands[4].Controls.Add(tempPicturebox);
+            // 設定自動縮放
+            tempPicturebox.SizeMode = PictureBoxSizeMode.AutoSize;            
+
+            // 設定邊距
+            tempPicturebox.Margin = new Padding(padding);
+
+            // 要轉的角度
+            bitmap.RotateFlip(rotate);            
+            tempPicturebox.Image = bitmap;
+            if (state == State.South)
+            {
+                tempPicturebox.MouseHover += new EventHandler(pictureBox_MouseHover);
+                tempPicturebox.MouseLeave += new EventHandler(pictureBox_MouseLeave);
+            }
+
+            this.flowLayoutBrands[(int)state].Controls.Add(tempPicturebox);
+            this.Update();
+        }
+        void pictureBox_MouseHover(object sender, EventArgs e)
+        {
+            //MessageBox.Show("The method or operation is not implemented.");
+            //PictureBox p = (PictureBox)sender;
+            //int x = p.Location.X;
+            //int y = p.Location.Y;
+            //y += 20;
+            //p.Location = new Point(x,y);
+        }
+        void pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+
         }
         public void updateImage()
         {
-            for (int i = 0; i < all.Players[0].getCount(); i++)
+            for (int i = 0; i < all.Players[(int)State.North].getCount(); i++)
                 addNouth(all.Players[0].getBrand(i).image);
 
-            for (int i = 0; i < all.Players[1].getCount(); i++)
+            for (int i = 0; i < all.Players[(int)State.East].getCount(); i++)
                 addEast(all.Players[1].getBrand(i).image);
 
-            for (int i = 0; i < all.Players[2].getCount(); i++)
+            for (int i = 0; i < all.Players[(int)State.South].getCount(); i++)
                 addSouth(all.Players[2].getBrand(i).image);
 
-            for (int i = 0; i < all.Players[3].getCount(); i++)
-                addWest(all.Players[3].getBrand(i).image);
+            for (int i = 0; i < all.Players[(int)State.West].getCount(); i++)
+                addWest(all.Players[3].getBrand(i).image);            
 
             for (int i = 0; i < all.Table.getCount(); i++)
-                addTable(all.Table.getBrand(i).image);            
+                addTable(all.Table.getBrand(i).image);
         }
-        
-        private void 關於ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pc.about();            
-        }
-
-        private void 結束ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pc.exit();
-        }
-
-        private void 設定ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pc.config();
-        }
-
-        private void 開新局ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 新遊戲ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pc.newgame();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            pc.help();
-        }
-
-        private void 開新伺服器ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 開新遊戲ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pc.onlineGame();
+        }
+
+        private void 設定ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            pc.config();
+        }
+
+        private void 關於ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            pc.about();  
+        }
+
+        private void 結束ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            pc.exit();
         }
     }
 }
