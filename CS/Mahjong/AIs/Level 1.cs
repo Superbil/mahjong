@@ -54,9 +54,7 @@ namespace Mahjong.AIs
             step4();
             step5();
             step6();
-
-
-
+            step7();
 
 
 
@@ -441,6 +439,243 @@ namespace Mahjong.AIs
                         step6_Bamboos[i].getBrand(j).Source += const_value[i];
             }
         }
+
+
+        void step7()
+        {
+            //=====
+            //Step7
+            //=====
+
+            //
+            //萬
+            //
+            BrandPlayer[] step7_characters = new BrandPlayer[9];
+            for (int j = 0; j < step7_characters.Length; j++)
+                step7_characters[j] = new BrandPlayer();
+            //將brands陣列每個數的值，丟到step7_characters分類
+            for (int i = 0; i < brands[1].getCount(); i++)
+            {
+                for (int j = 1; j <= step7_characters.Length; j++)
+                {
+                    if (brands[1].getBrand(i).getNumber() == j)
+                        step7_characters[j - 1].add(brands[1].getBrand(i));
+                }
+            }
+            //聽二張為順牌+40，並減掉二張牌差異數(*5)
+            for (int i = 1; i < step7_characters.Length - 2; i++)
+            {
+                if (step7_characters[i - 1].getCount() == 0)
+                    if (step7_characters[i].getCount() >= 1)
+                        if (step7_characters[i + 1].getCount() >= 1)
+                            if (step7_characters[i + 2].getCount() == 0)
+                                for (int j = 0; j < step7_characters[i].getCount(); j++)
+                                {
+                                    step7_characters[i].getBrand(j).Source += 40;
+                                    step7_characters[i].getBrand(j).Source -= 5;
+                                    step7_characters[i + 1].getBrand(j).Source += 40;
+                                    step7_characters[i + 1].getBrand(j).Source -= 5;
+                                }
+            }
+            //聽一張為順牌+20，並減掉二張牌差異數(*5)
+            for (int i = 0; i < step7_characters.Length - 2; i++)
+            {
+                if (step7_characters[i].getCount() >= 1)
+                    if (step7_characters[i + 1].getCount() == 0)
+                        if (step7_characters[i + 2].getCount() == 1)
+                            for (int j = 0; j < step7_characters[i].getCount(); j++)
+                            {
+                                step7_characters[i].getBrand(j).Source += 20;
+                                step7_characters[i].getBrand(j).Source -= 10;
+                                step7_characters[i + 2].getBrand(j).Source += 20;
+                                step7_characters[i + 2].getBrand(j).Source -= 10;
+                            }
+            }
+            //聽一張為順牌的例外情況：(1、2)和(8、9)
+            for (int i = 0; i < step7_characters.Length - 1; i = i + 7)
+            {
+                if (i <= 1)
+                {
+                    if (step7_characters[i].getCount() >= 1)
+                        if (step7_characters[i + 1].getCount() >= 1)
+                            if (step7_characters[i + 2].getCount() == 0)
+                                for (int j = 0; j < step7_characters[i].getCount(); j++)
+                                {
+                                    step7_characters[i].getBrand(j).Source += 20;
+                                    step7_characters[i].getBrand(j).Source -= 10;
+                                    step7_characters[i + 1].getBrand(j).Source += 20;
+                                    step7_characters[i + 1].getBrand(j).Source -= 10;
+                                }
+                }
+                if (i >= 1)
+                {
+                    if (step7_characters[i - 1].getCount() == 0)
+                        if (step7_characters[i].getCount() >= 1)
+                            if (step7_characters[i + 1].getCount() >= 1)
+                                for (int j = 0; j < step7_characters[i].getCount(); j++)
+                                {
+                                    step7_characters[i].getBrand(j).Source += 20;
+                                    step7_characters[i].getBrand(j).Source -= 10;
+                                    step7_characters[i + 1].getBrand(j).Source += 20;
+                                    step7_characters[i + 1].getBrand(j).Source -= 10;
+                                }
+                }
+            }
+
+
+            //
+            //筒
+            //
+            BrandPlayer[] step7_Dots = new BrandPlayer[9];
+            for (int j = 0; j < step7_Dots.Length; j++)
+                step7_Dots[j] = new BrandPlayer();
+            //將brands陣列每個數的值，丟到step7_Dots分類
+            for (int i = 0; i < brands[2].getCount(); i++)
+            {
+                for (int j = 1; j <= step7_Dots.Length; j++)
+                {
+                    if (brands[2].getBrand(i).getNumber() == j)
+                        step7_Dots[j - 1].add(brands[2].getBrand(i));
+                }
+            }
+            //順牌聽二張+40，並減掉二張牌差異數(*5)
+            for (int i = 1; i < step7_Dots.Length - 2; i++)
+            {
+                if (step7_Dots[i - 1].getCount() == 0)
+                    if (step7_Dots[i].getCount() >= 1)
+                        if (step7_Dots[i + 1].getCount() >= 1)
+                            if (step7_Dots[i + 2].getCount() == 0)
+                                for (int j = 0; j < step7_characters[i].getCount(); j++)
+                                {
+                                    step7_Dots[i].getBrand(j).Source += 40;
+                                    step7_Dots[i].getBrand(j).Source -= 5;
+                                    step7_Dots[i + 1].getBrand(j).Source += 40;
+                                    step7_Dots[i + 1].getBrand(j).Source -= 5;
+                                }
+            }
+            //聽一張為順牌+20，並減掉二張牌差異數(*5)
+            for (int i = 0; i < step7_Dots.Length - 2; i++)
+            {
+                if (step7_Dots[i].getCount() >= 1)
+                    if (step7_Dots[i + 1].getCount() == 0)
+                        if (step7_Dots[i + 2].getCount() == 1)
+                            for (int j = 0; j < step7_Dots[i].getCount(); j++)
+                            {
+                                step7_Dots[i].getBrand(j).Source += 20;
+                                step7_Dots[i].getBrand(j).Source -= 10;
+                                step7_Dots[i + 2].getBrand(j).Source += 20;
+                                step7_Dots[i + 2].getBrand(j).Source -= 10;
+                            }
+            }
+            //聽一張為順牌的例外情況：(1、2)和(8、9)
+            for (int i = 0; i < step7_Dots.Length - 1; i = i + 7)
+            {
+                if (i <= 1)
+                {
+                    if (step7_Dots[i].getCount() >= 1)
+                        if (step7_Dots[i + 1].getCount() >= 1)
+                            if (step7_Dots[i + 2].getCount() == 0)
+                                for (int j = 0; j < step7_Dots[i].getCount(); j++)
+                                {
+                                    step7_Dots[i].getBrand(j).Source += 20;
+                                    step7_Dots[i].getBrand(j).Source -= 10;
+                                    step7_Dots[i + 1].getBrand(j).Source += 20;
+                                    step7_Dots[i + 1].getBrand(j).Source -= 10;
+                                }
+                }
+                if (i >= 1)
+                {
+                    if (step7_Dots[i - 1].getCount() == 0)
+                        if (step7_Dots[i].getCount() >= 1)
+                            if (step7_Dots[i + 1].getCount() >= 1)
+                                for (int j = 0; j < step7_Dots[i].getCount(); j++)
+                                {
+                                    step7_Dots[i].getBrand(j).Source += 20;
+                                    step7_Dots[i].getBrand(j).Source -= 10;
+                                    step7_Dots[i + 1].getBrand(j).Source += 20;
+                                    step7_Dots[i + 1].getBrand(j).Source -= 10;
+                                }
+                }
+            }
+
+
+            //
+            //條
+            //
+            BrandPlayer[] step7_Bamboos = new BrandPlayer[9];
+            for (int j = 0; j < step7_Bamboos.Length; j++)
+                step7_Bamboos[j] = new BrandPlayer();
+            //將brands陣列每個數的值，丟到step7_Bamboos分類
+            for (int i = 0; i < brands[3].getCount(); i++)
+            {
+                for (int j = 1; j <= step7_Bamboos.Length; j++)
+                {
+                    if (brands[3].getBrand(i).getNumber() == j)
+                        step7_Bamboos[j - 1].add(brands[3].getBrand(i));
+                }
+            }
+            //順牌聽二張+40，並減掉二張牌差異數(*5)
+            for (int i = 1; i < step7_Bamboos.Length - 2; i++)
+            {
+                if (step7_Bamboos[i - 1].getCount() == 0)
+                    if (step7_Bamboos[i].getCount() >= 1)
+                        if (step7_Bamboos[i + 1].getCount() >= 1)
+                            if (step7_Bamboos[i + 2].getCount() == 0)
+                                for (int j = 0; j < step7_Bamboos[i].getCount(); j++)
+                                {
+                                    step7_Bamboos[i].getBrand(j).Source += 40;
+                                    step7_Bamboos[i].getBrand(j).Source -= 5;
+                                    step7_Bamboos[i + 1].getBrand(j).Source += 40;
+                                    step7_Bamboos[i + 1].getBrand(j).Source -= 5;
+                                }
+            }
+            //聽一張為順牌+20，並減掉二張牌差異數(*5)
+            for (int i = 0; i < step7_Bamboos.Length - 2; i++)
+            {
+                if (step7_Bamboos[i].getCount() >= 1)
+                    if (step7_Bamboos[i + 1].getCount() == 0)
+                        if (step7_Bamboos[i + 2].getCount() == 1)
+                            for (int j = 0; j < step7_Bamboos[i].getCount(); j++)
+                            {
+                                step7_Bamboos[i].getBrand(j).Source += 20;
+                                step7_Bamboos[i].getBrand(j).Source -= 10;
+                                step7_Bamboos[i + 2].getBrand(j).Source += 20;
+                                step7_Bamboos[i + 2].getBrand(j).Source -= 10;
+                            }
+            }
+            //聽一張為順牌的例外情況：(1、2)和(8、9)
+            for (int i = 0; i < step7_Bamboos.Length - 1; i = i + 7)
+            {
+                if (i <= 1)
+                {
+                    if (step7_Bamboos[i].getCount() >= 1)
+                        if (step7_Bamboos[i + 1].getCount() >= 1)
+                            if (step7_Bamboos[i + 2].getCount() == 0)
+                                for (int j = 0; j < step7_Bamboos[i].getCount(); j++)
+                                {
+                                    step7_Bamboos[i].getBrand(j).Source += 20;
+                                    step7_Bamboos[i].getBrand(j).Source -= 10;
+                                    step7_Bamboos[i + 1].getBrand(j).Source += 20;
+                                    step7_Bamboos[i + 1].getBrand(j).Source -= 10;
+                                }
+                }
+                if (i >= 1)
+                {
+                    if (step7_Bamboos[i - 1].getCount() == 0)
+                        if (step7_Bamboos[i].getCount() >= 1)
+                            if (step7_Bamboos[i + 1].getCount() >= 1)
+                                for (int j = 0; j < step7_Bamboos[i].getCount(); j++)
+                                {
+                                    step7_Bamboos[i].getBrand(j).Source += 20;
+                                    step7_Bamboos[i].getBrand(j).Source -= 10;
+                                    step7_Bamboos[i + 1].getBrand(j).Source += 20;
+                                    step7_Bamboos[i + 1].getBrand(j).Source -= 10;
+                                }
+                }
+            }
+
+        }
+
 
         void print()
         {
