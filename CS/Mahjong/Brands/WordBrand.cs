@@ -46,6 +46,23 @@ namespace Mahjong.Brands
         /// <returns></returns>
         public string getClass()
         {
+            switch (Number)
+            {
+                case 1:
+                    return Mahjong.Properties.Settings.Default.East;
+                case 2:
+                    return Mahjong.Properties.Settings.Default.South;
+                case 3:
+                    return Mahjong.Properties.Settings.Default.West;
+                case 4:
+                    return Mahjong.Properties.Settings.Default.Nouth;
+                case 5:
+                    return Mahjong.Properties.Settings.Default.WhiteTile;
+                case 6:
+                    return Mahjong.Properties.Settings.Default.Rich;
+                case 7:
+                    return Mahjong.Properties.Settings.Default.RedCenter;
+            }   
             return Mahjong.Properties.Settings.Default.Wordtiles;
         }
         /// <summary>

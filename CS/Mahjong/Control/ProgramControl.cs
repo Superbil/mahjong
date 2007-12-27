@@ -26,12 +26,12 @@ namespace Mahjong.Control
         }
         private void run()
         {
-            //設定4個玩家,每個人16張
-            all = new AllPlayers(4, 16);
+            
             
             //顯示Table 介面
-            table = new Table(this, all);
+            table = new Table(this);
             //table.Setup(this, all);
+            
             table.ShowDialog();
         }
         public void exit()
@@ -45,9 +45,13 @@ namespace Mahjong.Control
         public void config()
         {
             Config con = new Config();
+            this.Show();
         }
         public void newgame()                                                                                                                                                                       
-        {           
+        {
+            //設定4個玩家,每個人16張
+            all = new AllPlayers(4, 16);
+            table.Setup(all);
             all.creatBrands();
             table.updateImage();
         }
@@ -64,6 +68,14 @@ namespace Mahjong.Control
         {
             chat= new ChatServerForm();
             chat.ShowDialog();
+        }
+        public void makeBrand(Brand brand)
+        {
+            StringBuilder str = new StringBuilder();
+            str.Append(brand.getNumber());
+            str.Append(brand.getClass());
+            Console.WriteLine(str.ToString());
+            MessageBox.Show(str.ToString());
         }
     }
 }

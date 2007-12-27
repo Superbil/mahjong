@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using Mahjong.Forms;
 using Mahjong.Control;
 using Mahjong.Players;
+using Mahjong.Brands;
+
 
 namespace Mahjong.Forms
 {
@@ -34,6 +36,7 @@ namespace Mahjong.Forms
         /// </summary>
         Table = 4
     }
+
     public partial class Table : Form
     {
         ProgramControl pc;
@@ -41,17 +44,20 @@ namespace Mahjong.Forms
         AllPlayers all;
         int width = Mahjong.Properties.Settings.Default.image_w;
         int height = Mahjong.Properties.Settings.Default.image_h;
-        int padding = 2;
-        Graphics graphics;
-
-        public Table(ProgramControl pc,AllPlayers all)
+        int padding = 1;
+        const bool DebugMode = true;
+        
+        public Table(ProgramControl pc)
         {
             InitializeComponent();
             this.flowLayoutBrands = new FlowLayoutPanel[5];
             this.pc = pc;
+                       
+        }
+        public void Setup(AllPlayers all)
+        {
             this.all = all;
             setFlowLayout();
-            graphics = this.CreateGraphics();            
         }
         private void setFlowLayout()
         {
@@ -101,80 +107,104 @@ namespace Mahjong.Forms
             for (int i = 0; i < flowLayoutBrands.Length;i++ )
                 this.flowLayoutBrands[i].Margin = new Padding(size);
         }
-        void addNouth(Image image)
+        void addNouth()
         {
             //圖片旋轉180度
-            addimage(State.North, image, RotateFlipType.Rotate180FlipNone);
+            for (int i = 0; i < all.Players[(int)State.North].getCount(); i++)
+                if ( all.Players[(int)State.North].getBrand(i).IsCanSee || DebugMode)
+                    addimage(State.North, all.Players[(int)State.North].getBrand(i), RotateFlipType.Rotate180FlipNone);
         }
-        void addEast(Image image)
+        void addEast()
         {
             //圖片旋轉270度
-            addimage(State.East, image, RotateFlipType.Rotate270FlipNone);
+            for (int i = 0; i < all.Players[(int)State.East].getCount(); i++)
+                if (all.Players[(int)State.East].getBrand(i).IsCanSee || DebugMode)
+                    addimage(State.East, all.Players[(int)State.East].getBrand(i), RotateFlipType.Rotate270FlipNone);
         }
-        void addSouth(Image image)
+        void addSouth()
         {
-            addimage(State.South, image, RotateFlipType.RotateNoneFlipNone);
+            for (int i = 0; i < all.Players[(int)State.South].getCount(); i++)
+                if (all.Players[(int)State.South].getBrand(i).IsCanSee || DebugMode)
+                    addimage(State.South, all.Players[(int)State.East].getBrand(i), RotateFlipType.RotateNoneFlipNone);
         }
-        void addWest(Image image)
+        void addWest()
         {
             //圖片旋轉90度
-            addimage(State.West, image, RotateFlipType.Rotate90FlipNone);
+            for (int i = 0; i < all.Players[(int)State.West].getCount(); i++)
+                if (all.Players[(int)State.West].getBrand(i).IsCanSee || DebugMode)
+                    addimage(State.West, all.Players[(int)State.West].getBrand(i), RotateFlipType.Rotate90FlipNone);
         }
-        void addTable(Image image)
+        void addTable()
         {
-            addimage(State.Table, image, RotateFlipType.RotateNoneFlipNone);
+            for (int i = 0; i < all.Table.getCount(); i++)
+                if (all.Table.getBrand(i).IsCanSee || DebugMode)
+                    addimage(State.Table, all.Table.getBrand(i), RotateFlipType.RotateNoneFlipNone);
         }
-        private void addimage(State state,Image image,RotateFlipType rotate)
+        private void addimage(State state,Brand brand,RotateFlipType rotate)
         {
-            Bitmap bitmap = new Bitmap(image);
-            PictureBox tempPicturebox = new PictureBox();
-            // 設定自動縮放
-            tempPicturebox.SizeMode = PictureBoxSizeMode.AutoSize;            
+            Bitmap bitmap = new Bitmap(brand.image);
+            //PictureBox tempPicturebox = new PictureBox();
+            BrandBox tempBrandbox = new BrandBox();
+            // 設定牌
+            tempBrandbox.brand = brand;
 
-            // 設定邊距
-            tempPicturebox.Margin = new Padding(padding);
+            // 設定自動縮放
+            tempBrandbox.SizeMode = PictureBoxSizeMode.AutoSize;            
+
+            // 設定邊距            
+            if (state == State.South)
+                tempBrandbox.Margin = new Padding(padding);
+            else
+                tempBrandbox.Margin = new Padding(padding);
 
             // 要轉的角度
-            bitmap.RotateFlip(rotate);            
-            tempPicturebox.Image = bitmap;
+            bitmap.RotateFlip(rotate);
+
+            // 滑鼠事件
             if (state == State.South)
             {
-                tempPicturebox.MouseHover += new EventHandler(pictureBox_MouseHover);
-                tempPicturebox.MouseLeave += new EventHandler(pictureBox_MouseLeave);
+                tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
+                tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
+                tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
             }
-
-            this.flowLayoutBrands[(int)state].Controls.Add(tempPicturebox);
+            else
+                bitmap = ResizeBitmap(bitmap,0.8);
+                        
+            tempBrandbox.Image = bitmap;
+            
+            this.flowLayoutBrands[(int)state].Controls.Add(tempBrandbox);
             this.Update();
         }
-        void pictureBox_MouseHover(object sender, EventArgs e)
+        private Bitmap ResizeBitmap(Bitmap b, double resize)
         {
-            //MessageBox.Show("The method or operation is not implemented.");
-            //PictureBox p = (PictureBox)sender;
-            //int x = p.Location.X;
-            //int y = p.Location.Y;
-            //y += 20;
-            //p.Location = new Point(x,y);
+            int nWidth = Convert.ToInt16(b.Width * resize);
+            int nHeight = Convert.ToInt16(b.Height * resize);
+            Bitmap result = new Bitmap(nWidth, nHeight);
+            using (Graphics g = Graphics.FromImage((Image)result))
+                g.DrawImage(b, 0, 0, nWidth, nHeight);
+            return result;
         }
-        void pictureBox_MouseLeave(object sender, EventArgs e)
+        void brandBox_MouseHover(object sender, EventArgs e)
         {
-
+            
         }
+        void brandBox_MouseLeave(object sender, EventArgs e)
+        {
+            
+        }
+        void brandBox_MouseClick(object sender, EventArgs e)
+        {
+            BrandBox b = (BrandBox)sender;
+            pc.makeBrand(b.brand);
+        }
+        // 更新圖片
         public void updateImage()
         {
-            for (int i = 0; i < all.Players[(int)State.North].getCount(); i++)
-                addNouth(all.Players[0].getBrand(i).image);
-
-            for (int i = 0; i < all.Players[(int)State.East].getCount(); i++)
-                addEast(all.Players[1].getBrand(i).image);
-
-            for (int i = 0; i < all.Players[(int)State.South].getCount(); i++)
-                addSouth(all.Players[2].getBrand(i).image);
-
-            for (int i = 0; i < all.Players[(int)State.West].getCount(); i++)
-                addWest(all.Players[3].getBrand(i).image);            
-
-            for (int i = 0; i < all.Table.getCount(); i++)
-                addTable(all.Table.getBrand(i).image);
+            addNouth();
+            addEast();
+            addSouth();
+            addWest();
+            addTable();
         }
         private void 新遊戲ToolStripMenuItem_Click(object sender, EventArgs e)
         {

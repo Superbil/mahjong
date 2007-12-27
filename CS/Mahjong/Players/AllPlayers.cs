@@ -7,6 +7,29 @@ using Mahjong.Control;
 
 namespace Mahjong.Players
 {
+    enum State
+    {
+        /// <summary>
+        /// 北
+        /// </summary>
+        North = 0,
+        /// <summary>
+        /// 東
+        /// </summary>
+        East = 1,
+        /// <summary>
+        /// 南
+        /// </summary>
+        South = 2,
+        /// <summary>
+        /// 西
+        /// </summary>
+        West = 3,
+        /// <summary>
+        /// 桌面
+        /// </summary>
+        Table = 4
+    }
     public class AllPlayers
     {
         /// <summary>
@@ -34,6 +57,10 @@ namespace Mahjong.Players
         /// </summary>
         public int sumBrands;
         /// <summary>
+        /// 目前玩家
+        /// </summary>
+        int state;
+        /// <summary>
         /// 全部玩家集合
         /// </summary>
         /// <param name="playernumber">設定有多少個玩家</param>
@@ -46,6 +73,7 @@ namespace Mahjong.Players
             this.dealnumber = deal;
             countplayers = playernumber;
             this.sumBrands = factory.SumBrands;
+            this.state = 0;
         }
         /// <summary>
         /// 玩家陣列
@@ -55,10 +83,6 @@ namespace Mahjong.Players
             get
             {
                 return players;
-            }
-            set
-            {
-                players = value;
             }
         }
         /// <summary>
@@ -70,6 +94,10 @@ namespace Mahjong.Players
             {
                 return table;
             }
+        }
+        public BrandPlayer NowPlalyer()
+        {
+            return players[state];
         }
         /// <summary>
         /// 建立牌,並分配牌
@@ -100,11 +128,37 @@ namespace Mahjong.Players
             deal.DealBrands();
             // get Players
             for (int i = 0; i < players.Length; i++)
-            {
                 players[i] = deal.getPlayer(i);
-            }
             // get Table
             table = deal.getTable();
+        }
+        public void next()
+        {
+            if (state % countplayers == 0)
+                state = 0;
+            else
+                state += 1;
+        }
+        /// <summary>
+        /// 吃
+        /// </summary>
+        public void chow(Brand brand,BrandPlayer chowplayer)
+        {
+
+        }
+        /// <summary>
+        /// 碰
+        /// </summary>
+        public void pong(Brand brand,BrandPlayer pongplayer)
+        {
+
+        }
+        /// <summary>
+        /// 槓
+        /// </summary>
+        public void kong(Brand brand,BrandPlayer kongplayer)
+        {
+
         }
     }
 }

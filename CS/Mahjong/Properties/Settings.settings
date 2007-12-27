@@ -38,5 +38,29 @@
     <Setting Name="Table" Type="System.String" Scope="Application">
       <Value Profile="(Default)">桌面</Value>
     </Setting>
+    <Setting Name="RedCenter" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">紅中</Value>
+    </Setting>
+    <Setting Name="Rich" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">青發</Value>
+    </Setting>
+    <Setting Name="WhiteTile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">白版</Value>
+    </Setting>
+    <Setting Name="Pong" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">碰</Value>
+    </Setting>
+    <Setting Name="Kong" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">槓</Value>
+    </Setting>
+    <Setting Name="Chow" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">吃</Value>
+    </Setting>
+    <Setting Name="Win" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">胡</Value>
+    </Setting>
+    <Setting Name="ReadytoWin" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">聽牌</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
