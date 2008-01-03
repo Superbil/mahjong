@@ -30,11 +30,33 @@ namespace Mahjong.Control
             //printplayer(player);
             //SimpleAI sa = new SimpleAI();
             //sa.setPlayer(player[0]);
+<<<<<<< .mine
+            //PlayerSort bs = new PlayerSort(player[0]);
+            //player[0] = bs.getPlayer();
+
+=======
             //PlayerSort bs = new PlayerSort(player[0]);
             PlayerSort bs = new PlayerSort(player[0],new FlowerBrand(0),new TenThousandBrand(0),new RopeBrand(0),new  TubeBrand(0),new WordBrand(0));
             player[0] = bs.getPlayer();
+>>>>>>> .theirs
 
-            printplayer(player);
+            Level_1 l = new Level_1();
+            //BrandPlayer test = new BrandPlayer();
+            //test.add(new WordBrand(1));
+            //test.add(new WordBrand(1));
+            //test.add(new WordBrand(1));
+            //test.add(new WordBrand(2));
+            //test.add(new WordBrand(3));
+            //test.add(new WordBrand(3));
+            //test.add(new WordBrand(3));
+            //test.add(new WordBrand(5));
+            //l.setPlayer(test);
+
+            l.setPlayer(player[0]);
+            
+            Brand t = l.getReadyBrand();
+            Console.WriteLine("==>{0}{1}", t.getNumber(), t.getClass());
+            //printplayer(player);
             //sa.getReadyBrand();
             //Console.WriteLine();
             //Console.WriteLine("Ready Brand is {0},{1}", sa.getReadyBrand().getClass(), sa.getReadyBrand().getNumber());
