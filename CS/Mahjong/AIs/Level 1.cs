@@ -13,14 +13,15 @@ namespace Mahjong.AIs
     class Level_1 : MahjongAI
     {
         private BrandPlayer player;
-                Brand ans;
-                FlowerBrand f = new FlowerBrand(0);
-                RopeBrand r = new RopeBrand(0);
-                TenThousandBrand t = new TenThousandBrand(0);
-                TubeBrand tu = new TubeBrand(0);
-                WordBrand w = new WordBrand(0);
-                //牌的群組
-                BrandPlayer[] brands = new BrandPlayer[5];
+        Brand ans;
+        //FlowerBrand f = new FlowerBrand(0);
+        //RopeBrand r = new RopeBrand(0);
+        //TenThousandBrand t = new TenThousandBrand(0);
+        //TubeBrand tu = new TubeBrand(0);
+        //WordBrand w = new WordBrand(0);
+        //牌的群組
+        BrandPlayer[] brands = new BrandPlayer[5];
+        bool firsttime = true;
         /// <summary>
         /// 設定牌組
         /// </summary>
@@ -35,7 +36,17 @@ namespace Mahjong.AIs
                 new WordBrand(0));
             this.player = ps.getPlayer();
 
-            //print();
+            for (int j = 0; j < brands.Length; j++)
+                brands[j] = new BrandPlayer();
+            
+            step0();
+            step1();
+            step2();
+            step3();
+            step4();
+            step5();
+            step6();
+            step7();
         }
 
         /// <summary>
@@ -44,38 +55,17 @@ namespace Mahjong.AIs
         /// <returns></returns>
         public Brand getReadyBrand()
         {
-            
-            for (int j = 0; j < brands.Length; j++)
-                brands[j] = new BrandPlayer();
-
-            step1();
-            step2();
-            step3();
-            step4();
-            step5();
-            step6();
-            step7();
-
             ans = player.getBrand(0);
             for (int i = 1; i < player.getCount(); i++)
             {
                 if (player.getBrand(i).Source < ans.Source)
                     ans = player.getBrand(i);
             }
-
-
-
             print();
-
             return ans;
         }
-
-        void step1()
-        { 
-            //=====
-            //Step1 以花色為群組，每張同花色[+(1*同組花色數)]
-            //=====
-
+        void step0()
+        {
             for (int i = 0; i < player.getCount(); i++)
             {
                 //計算各種花色個數
@@ -89,8 +79,14 @@ namespace Mahjong.AIs
                     brands[3].add(player.getBrand(i));
                 else if (player.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Wordtiles)
                     brands[4].add(player.getBrand(i));
+                player.getBrand(i).Source = 0;
             }
-
+        }
+        void step1()
+        {
+            //=====
+            //Step1 以花色為群組，每張同花色[+(1*同組花色數)]
+            //=====
             //以花色為群組，每張同花色[+(1*同組花色數)]
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < brands[i].getCount(); j++)
@@ -119,7 +115,7 @@ namespace Mahjong.AIs
             //Step3 兩張同字牌+80
             //=====
             //宣告陣列處理[東、南、西、北、白板、青發、紅中]
-            addscore(brands[4],80,2);
+            addscore(brands[4], 80, 2);
         }
 
         void step4()
@@ -128,11 +124,11 @@ namespace Mahjong.AIs
             //Step4 刻子或順子之牌，每張+80，並隔離
             //=====
             addscore_順子(brands[1], 80);
-            addscore(brands[1], 80,3);
+            addscore(brands[1], 80, 3);
             addscore_順子(brands[2], 80);
-            addscore(brands[2], 80,3);
+            addscore(brands[2], 80, 3);
             addscore_順子(brands[3], 80);
-            addscore(brands[3], 80,3);
+            addscore(brands[3], 80, 3);
 
         }
 
@@ -247,7 +243,7 @@ namespace Mahjong.AIs
             addscore_for_step7(brands[3]);
         }
 
-        void addscore_順子(BrandPlayer brandclass,int score)
+        void addscore_順子(BrandPlayer brandclass, int score)
         {
             BrandPlayer[] temp = new BrandPlayer[9];
             for (int j = 0; j < temp.Length; j++)
@@ -268,11 +264,11 @@ namespace Mahjong.AIs
                             {
                                 temp[i].getBrand(j).Source += score;
                             }
-                            for (int j = 0; j < temp[i+1].getCount(); j++)
+                            for (int j = 0; j < temp[i + 1].getCount(); j++)
                             {
                                 temp[i + 1].getBrand(j).Source += score;
                             }
-                            for (int j = 0; j < temp[i+2].getCount(); j++)
+                            for (int j = 0; j < temp[i + 2].getCount(); j++)
                             {
                                 temp[i + 2].getBrand(j).Source += score;
                             }
