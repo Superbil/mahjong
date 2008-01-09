@@ -12,6 +12,10 @@ namespace Mahjong.Forms
     class BrandBox : PictureBox
     {
         Brand savebrand;
+        public BrandBox(Brand val)
+        {
+            savebrand = val;
+        }
         /// <summary>
         /// µP
         /// </summary>

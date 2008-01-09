@@ -51,8 +51,7 @@ namespace Mahjong.Forms
         {
             InitializeComponent();
             this.flowLayoutBrands = new FlowLayoutPanel[5];
-            this.pc = pc;
-                       
+            this.pc = pc;                       
         }
         public void Setup(AllPlayers all)
         {
@@ -143,10 +142,9 @@ namespace Mahjong.Forms
         private void addimage(State state,Brand brand,RotateFlipType rotate)
         {
             Bitmap bitmap = new Bitmap(brand.image);
-            //PictureBox tempPicturebox = new PictureBox();
-            BrandBox tempBrandbox = new BrandBox();
             // 設定牌
-            tempBrandbox.brand = brand;
+            BrandBox tempBrandbox = new BrandBox(brand);            
+            //tempBrandbox.brand = brand;
 
             // 設定自動縮放
             tempBrandbox.SizeMode = PictureBoxSizeMode.AutoSize;            
@@ -205,6 +203,11 @@ namespace Mahjong.Forms
             addSouth();
             addWest();
             addTable();
+        }
+        public void cleanImage()
+        {
+            foreach (FlowLayoutPanel f in flowLayoutBrands)
+                f.Controls.Clear();
         }
         private void 新遊戲ToolStripMenuItem_Click(object sender, EventArgs e)
         {

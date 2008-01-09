@@ -64,6 +64,10 @@ namespace Mahjong.AIs
             print();
             return ans;
         }
+        public BrandPlayer getReadyBrandPlayer()
+        {
+            return null;
+        }
         void step0()
         {
             for (int i = 0; i < player.getCount(); i++)

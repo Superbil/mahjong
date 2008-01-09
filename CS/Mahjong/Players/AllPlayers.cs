@@ -7,29 +7,6 @@ using Mahjong.Control;
 
 namespace Mahjong.Players
 {
-    enum State
-    {
-        /// <summary>
-        /// 北
-        /// </summary>
-        North = 0,
-        /// <summary>
-        /// 東
-        /// </summary>
-        East = 1,
-        /// <summary>
-        /// 南
-        /// </summary>
-        South = 2,
-        /// <summary>
-        /// 西
-        /// </summary>
-        West = 3,
-        /// <summary>
-        /// 桌面
-        /// </summary>
-        Table = 4
-    }
     public class AllPlayers
     {
         /// <summary>
@@ -61,6 +38,10 @@ namespace Mahjong.Players
         /// </summary>
         int state;
         /// <summary>
+        /// 玩家組別計算
+        /// </summary>
+        int[] teamCount;
+        /// <summary>
         /// 全部玩家集合
         /// </summary>
         /// <param name="playernumber">設定有多少個玩家</param>
@@ -74,6 +55,9 @@ namespace Mahjong.Players
             countplayers = playernumber;
             this.sumBrands = factory.SumBrands;
             this.state = 0;
+            this.teamCount = new int[playernumber];
+            for (int i = 0; i < playernumber;i++ )
+                teamCount[i]=0;
         }
         /// <summary>
         /// 玩家陣列
@@ -132,6 +116,9 @@ namespace Mahjong.Players
             // get Table
             table = deal.getTable();
         }
+        /// <summary>
+        /// 換下一家
+        /// </summary>
         public void next()
         {
             if (state % countplayers == 0)
@@ -139,26 +126,53 @@ namespace Mahjong.Players
             else
                 state += 1;
         }
-        /// <summary>
-        /// 吃
-        /// </summary>
-        public void chow(Brand brand,BrandPlayer chowplayer)
+        ///
+        public BrandPlayer nowPlayer
         {
-
+            get
+            {
+                return players[state];
+            }
         }
         /// <summary>
-        /// 碰
+        /// 吃碰事件
         /// </summary>
-        public void pong(Brand brand,BrandPlayer pongplayer)
+        public event EventHandler<BrandPlayerEvent> Chow_Pong_Event;
+        /// <summary>
+        /// 吃、碰
+        /// </summary>
+        public void chow_pong(Brand brand,BrandPlayer player)
         {
-
+            set_TeamCount(player);
+            
         }
+        /// <summary>
+        /// 槓事件
+        /// </summary>
+        public event EventHandler<BrandPlayerEvent> Kong_Event;
         /// <summary>
         /// 槓
         /// </summary>
-        public void kong(Brand brand,BrandPlayer kongplayer)
+        public void kong(Brand brand,BrandPlayer player)
         {
-
+            set_TeamCount(player);
+            
+        }
+        /// <summary>
+        /// 設定群組號碼
+        /// </summary>
+        /// <param name="player"></param>
+        private void set_TeamCount(BrandPlayer player)
+        {
+            teamCount[state] += 1;
+            for (int i = 0; i < player.getCount(); i++)
+                players[state].remove(player.getBrand(i));
+            for (int i = 0; i < player.getCount(); i++)
+            {
+                player.getBrand(i).IsCanSee = true;
+                player.getBrand(i).Team = teamCount[state];
+                players[state].add(player.getBrand(i));
+            }
         }
     }
 }

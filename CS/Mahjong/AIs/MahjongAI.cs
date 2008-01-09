@@ -17,5 +17,10 @@ namespace Mahjong.AIs
         /// </summary>
         /// <returns>牌</returns>
         Brand getReadyBrand();
+        /// <summary>
+        /// 取得準備好的牌組
+        /// </summary>
+        /// <returns></returns>
+        BrandPlayer getReadyBrandPlayer();
     }
 }

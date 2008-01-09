@@ -31,5 +31,9 @@ namespace Mahjong.AIs
         {
             return brandplayer.getBrand(0);
         }
+        public BrandPlayer getReadyBrandPlayer()
+        {
+            return null;
+        }
     }
 }

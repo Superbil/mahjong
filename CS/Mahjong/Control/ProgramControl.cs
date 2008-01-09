@@ -25,9 +25,7 @@ namespace Mahjong.Control
             run();
         }
         private void run()
-        {
-            
-            
+        { 
             //顯示Table 介面
             table = new Table(this);
             //table.Setup(this, all);
@@ -49,9 +47,11 @@ namespace Mahjong.Control
         }
         public void newgame()                                                                                                                                                                       
         {
+            
             //設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
             table.Setup(all);
+            //table.cleanImage();
             all.creatBrands();
             table.updateImage();
         }
