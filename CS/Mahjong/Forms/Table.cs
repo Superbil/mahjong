@@ -75,7 +75,7 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[1].Name = Mahjong.Properties.Settings.Default.East;
             this.flowLayoutBrands[2].Name = Mahjong.Properties.Settings.Default.South;
             this.flowLayoutBrands[3].Name = Mahjong.Properties.Settings.Default.West;
-            this.flowLayoutBrands[4].Name = Mahjong.Properties.Settings.Default.Table;
+          //this.flowLayoutBrands[4].Name = Mahjong.Properties.Settings.Default.Table;
         }
         private void setFlowLayout_size()
         {

@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AIs\Level 1.cs" />
-    <Compile Include="AIs\MahjongAI.cs" />
+    <Compile Include="Brands\MahjongAI.cs" />
     <Compile Include="AIs\SimpleAI.cs" />
     <Compile Include="Control\AiTest.cs" />
     <Compile Include="Control\Deal.cs" />
