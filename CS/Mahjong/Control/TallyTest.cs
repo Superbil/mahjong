@@ -15,31 +15,42 @@ namespace Mahjong.Control
         public TallyTest()
         {
             BrandPlayer a = new BrandPlayer();
-            a.add(new TubeBrand(2));
-            a.add(new TubeBrand(2));
-            a.add(new TubeBrand(2));
-            a.add(new TubeBrand(2));
-            a.add(new TubeBrand(3));
-            a.add(new TubeBrand(3));
-            a.add(new TubeBrand(3));
-            a.add(new TubeBrand(6));
-            a.add(new TubeBrand(6));
-            a.add(new WordBrand(5));
-            a.add(new WordBrand(5));
-            a.add(new WordBrand(5));
-            a.add(new WordBrand(5));
-            a.add(new WordBrand(6));
-            a.add(new WordBrand(6));
-            a.add(new WordBrand(6));
-            a.add(new WordBrand(7));
-            a.add(new WordBrand(7));
-            a.add(new WordBrand(7));
-           
-            
-            
+            a.add(new TubeBrand(1));
+            a.add(new TubeBrand(1));
+            a.add(new TubeBrand(1));
+            //a.add(new TubeBrand(1));
 
+            a.add(new RopeBrand(1));
+            a.add(new RopeBrand(1));
+            a.add(new RopeBrand(1));
+            //a.add(new RopeBrand(1));
 
+            a.add(new TenThousandBrand(1));
+            a.add(new TenThousandBrand(1));
+            a.add(new TenThousandBrand(1));
+            //a.add(new TenThousandBrand(1));
 
+            a.add(new TubeBrand(9));
+            a.add(new TubeBrand(9));
+            a.add(new TubeBrand(9));
+            //a.add(new TubeBrand(9));
+
+            a.add(new RopeBrand(9));
+            a.add(new RopeBrand(9));
+            a.add(new RopeBrand(9));
+            //a.add(new WordBrand(9));
+            //a.add(new TenThousandBrand(9));
+            //a.add(new TenThousandBrand(9));
+            //a.add(new WordBrand(2));
+            //a.add(new WordBrand(2));
+            //a.add(new WordBrand(3));
+            //a.add(new WordBrand(3));
+            //a.add(new WordBrand(3));
+            //a.add(new WordBrand(3));
+            //a.add(new WordBrand(4));
+            //a.add(new WordBrand(4));
+            a.add(new WordBrand(5));
+            a.add(new WordBrand(5));
 
 
 
