@@ -25,23 +25,13 @@ namespace Mahjong.Control
     }
     public class Location
     {
-        location countWind;
+        location position;
         location round;
 
         public Location()
         {
-            countWind = location.East;
+            position = location.East;
             round = location.East;
-        }
-        /// <summary>
-        /// 風
-        /// </summary>
-        public location Wind
-        {
-            get
-            {
-                return countWind;
-            }
         }
         /// <summary>
         /// 局
@@ -53,15 +43,28 @@ namespace Mahjong.Control
                 return round;
             }
         }
+        /// <summary>
+        /// 位
+        /// </summary>
+        public location Position
+        {
+            get
+            {
+                return position;
+            }
+        }
+        /// <summary>
+        /// 下一莊
+        /// </summary>
         public void next()
         {
-            if (round == location.West)
+            if (position == location.West)
             {
                 add(round);
-                add(countWind);
+                add(position);
             }
             else
-                add(round);
+                add(position);
         }
         void add(location lo)
         {
