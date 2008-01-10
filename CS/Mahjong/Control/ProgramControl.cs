@@ -67,6 +67,7 @@ namespace Mahjong.Control
             all.setFlower();            
             table.updateNowPlayer();
             table.updateTable();
+            
             // 摸牌給現在的玩家
             all.NowPlayer.add(all.nextBrand());
             if (all.state == 2)
