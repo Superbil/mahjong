@@ -7,11 +7,19 @@ namespace Mahjong.Control
 {
     class Check
     {
-        BrandPlayer x = new BrandPlayer();
+        BrandPlayer x;
+        /// <summary>
+        /// 牌的狀態檢查
+        /// </summary>
+        /// <param name="player">牌玩家</param>
         public Check(BrandPlayer player)
         {
             this.x = player;
         }
+        /// <summary>
+        /// 胡牌成立
+        /// </summary>
+        /// <returns>是/否</returns>
         public bool Win()
         {
             Players.BrandPlayer a = new BrandPlayer();

@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Mahjong.Players;
 using Mahjong.Brands;
+using Mahjong.Control;
 
 namespace Mahjong.Forms
 {
@@ -19,6 +20,9 @@ namespace Mahjong.Forms
         int tally = 0;
         int temp = 0;
         bool index = false;
+        // 局、莊、方位
+        location l1,l2,l3;
+        int win_count;
 
         public Tally()
         {
@@ -26,11 +30,6 @@ namespace Mahjong.Forms
         }
         public void setPlayer(BrandPlayer player)
         {
-
-            //brands = new Brand[player.getCount()];
-            //outbrands = new Brand[player.getCount()];
-            //for (int i = 0; i < player.getCount(); i++)
-            //  textBox1.Text+= player.getBrand(i).getNumber()+player.getBrand(i).getClass();
             x = player;
         }
         /// <summary>
@@ -40,9 +39,12 @@ namespace Mahjong.Forms
         /// <param name="s2">莊</param>
         /// <param name="s3">方位</param>
         /// <param name="number">連莊次數</param>
-        public void setLocation(string s1, string s2, string s3, int number)
+        public void setLocation(location l1, location l2,location l3, int number)
         {
-            if (s1 == Mahjong.Properties.Settings.Default.East) ;
+            this.l1 = l1;
+            this.l2 = l2;
+            this.l3 = l3;
+            this.win_count = number;
         }
         void go()
         {
