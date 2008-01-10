@@ -43,8 +43,16 @@ namespace Mahjong.Brands
         /// <summary>
         /// 牌的類別
         /// </summary>
-        /// <returns></returns>
+        /// <returns>字串</returns>
         public string getClass()
+        {           
+            return Mahjong.Properties.Settings.Default.Wordtiles;
+        }
+        /// <summary>
+        /// 字牌的類別
+        /// </summary>
+        /// <returns>字串</returns>
+        public string getWordClass()
         {
             switch (Number)
             {
@@ -62,7 +70,7 @@ namespace Mahjong.Brands
                     return Mahjong.Properties.Settings.Default.Rich;
                 case 7:
                     return Mahjong.Properties.Settings.Default.RedCenter;
-            }   
+            }
             return Mahjong.Properties.Settings.Default.Wordtiles;
         }
         /// <summary>

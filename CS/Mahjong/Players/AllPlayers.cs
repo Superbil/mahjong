@@ -37,7 +37,7 @@ namespace Mahjong.Players
         /// <summary>
         /// 目前玩家
         /// </summary>
-        int state;
+        public int state;
         /// <summary>
         /// 玩家組別計算
         /// </summary>
@@ -50,6 +50,10 @@ namespace Mahjong.Players
         /// 方位
         /// </summary>
         Location lo;
+        /// <summary>
+        /// 玩家所有的錢
+        /// </summary>
+        double[] Money;
 
         /// <summary>
         /// 全部玩家集合
@@ -65,10 +69,11 @@ namespace Mahjong.Players
             this.dealnumber = deal;
             this.countplayers = playernumber;
             this.sumBrands = factory.SumBrands;
-            this.state = 0;
+            this.state = 1;
             this.teamCount = new int[playernumber];
             for (int i = 0; i < playernumber;i++ )
                 teamCount[i]=0;            
+            
         }
         /// <summary>
         /// 玩家陣列
@@ -163,13 +168,17 @@ namespace Mahjong.Players
         /// 傳回方位
         /// </summary>
         /// <returns>方位</returns>
-        public Location location()
+        public Location direction()
         {
             return lo;
         }
-        public void nextRound()
+        /// <summary>
+        /// 下一莊
+        /// </summary>
+        public void nextRound(bool aby)
         {
-            lo.next();
+            if (aby)
+                lo.next();
             this.table = new BrandPlayer();
             this.factory = new BrandFactory();
             this.state = 0;

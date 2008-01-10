@@ -62,6 +62,8 @@
     <Compile Include="Brands\MahjongAI.cs" />
     <Compile Include="AIs\SimpleAI.cs" />
     <Compile Include="Control\AiTest.cs" />
+    <Compile Include="Control\Chack.cs" />
+    <Compile Include="Control\ChackTest.cs" />
     <Compile Include="Control\Deal.cs" />
     <Compile Include="Control\Mahjong_Main.cs" />
     <Compile Include="Control\TallyTest.cs">

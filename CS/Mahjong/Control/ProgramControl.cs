@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Mahjong.Forms;
 using Mahjong.Brands;
 using Mahjong.Players;
+using Mahjong.AIs;
 
 namespace Mahjong.Control
 {
@@ -17,20 +18,24 @@ namespace Mahjong.Control
         AboutBox ab;
         Table table;
         ChatServerForm chat;
-        Timer rotateTimer = null;
+        Timer rotateTimer;
         AllPlayers all;
+        MahjongAI Ai;
+
         public ProgramControl()
         {
             InitializeComponent();
-            run();
-        }
-        private void run()
-        { 
+            rotateTimer = new Timer();
+            rotateTimer.Interval = 500;
             //顯示Table 介面
             table = new Table(this);
-            //table.Setup(this, all);
-            
             table.ShowDialog();
+            rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
+            Ai = new Level_1();
+        }
+        void rotateTimer_Tick(object sender, EventArgs e)
+        {
+            playgame();
         }
         public void exit()
         {
@@ -42,17 +47,40 @@ namespace Mahjong.Control
         }
         public void config()
         {
-            Config con = new Config();
-            this.Show();
+            Config con = new Config(table);
+            con.Show();
         }
         public void newgame()                                                                                                                                                                       
-        {            
-            //設定4個玩家,每個人16張
-            all = new AllPlayers(4, 16);
-            table.Setup(all);
-            //table.cleanImage();
+        {
+            table.cleanAll();
+            // 設定4個玩家,每個人16張
+            all = new AllPlayers(4, 16);            
+            table.Setup(all);   
             all.creatBrands();
-            table.updateImage();
+            table.addImage();
+            rotateTimer.Start();
+            //playgame();
+        }
+        void playgame()
+        {
+            // 補花
+            all.setFlower();            
+            table.updateNowPlayer();
+            table.updateTable();
+            // 摸牌給現在的玩家
+            all.NowPlayer.add(all.nextBrand());
+            if (all.state == 2)
+               ;
+            else
+            {
+                //Ai.setPlayer(all.NowPlayer);
+                pushToTable(Ai.getReadyBrand());
+            }
+        }
+        void pushToTable(Brand brand)
+        {
+            Ai.setPlayer(all.NowPlayer);
+
         }
         private void print(Iterator iterator)
         {

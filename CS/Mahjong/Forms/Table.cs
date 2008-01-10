@@ -67,7 +67,7 @@ namespace Mahjong.Forms
             setFlowLayout_name();
             setFlowLayout_size();
             //setFlowLayout_Margin(10);
-            //setFlowLayout_Dock();
+            setFlowLayout_Dock();
         }
         private void setFlowLayout_name()
         {
@@ -144,7 +144,6 @@ namespace Mahjong.Forms
             Bitmap bitmap = new Bitmap(brand.image);
             // 設定牌
             BrandBox tempBrandbox = new BrandBox(brand);            
-            //tempBrandbox.brand = brand;
 
             // 設定自動縮放
             tempBrandbox.SizeMode = PictureBoxSizeMode.AutoSize;            
@@ -166,7 +165,7 @@ namespace Mahjong.Forms
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
             }
             else
-                bitmap = ResizeBitmap(bitmap,0.8);
+                bitmap = ResizeBitmap(bitmap,1);
                         
             tempBrandbox.Image = bitmap;
             
@@ -188,7 +187,7 @@ namespace Mahjong.Forms
         }
         void brandBox_MouseLeave(object sender, EventArgs e)
         {
-            
+            ;
         }
         void brandBox_MouseClick(object sender, EventArgs e)
         {
@@ -196,7 +195,7 @@ namespace Mahjong.Forms
             pc.makeBrand(b.brand);
         }
         // 更新圖片
-        public void updateImage()
+        public void addImage()
         {
             addNouth();
             addEast();
@@ -208,6 +207,37 @@ namespace Mahjong.Forms
         {
             foreach (FlowLayoutPanel f in flowLayoutBrands)
                 f.Controls.Clear();
+        }
+        public void cleanAll()
+        {
+            this.Controls.Clear();
+        }
+        public void updateNowPlayer()
+        {
+            switch (all.state)
+            {
+                case 1:
+                    flowLayoutBrands[all.state].Controls.Clear();
+                    addEast();
+                    break;
+                case 0:
+                    flowLayoutBrands[all.state].Controls.Clear();
+                    addNouth();
+                    break;
+                case 3:
+                    flowLayoutBrands[all.state].Controls.Clear();
+                    addWest();
+                    break;
+                case 2:
+                    flowLayoutBrands[all.state].Controls.Clear();
+                    addSouth();
+                    break;                
+            }
+        }
+        public void updateTable()
+        {
+            flowLayoutBrands[(int)State.Table].Controls.Clear();
+            addTable();
         }
         private void 新遊戲ToolStripMenuItem_Click(object sender, EventArgs e)
         {

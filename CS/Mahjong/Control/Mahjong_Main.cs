@@ -22,6 +22,8 @@ namespace Mahjong.Control
             //new AiTest();
             // 測試台數計算
             //new TallyTest();
+            // 測試是否胡牌
+            //new CheckTest();
         }
     }
 }

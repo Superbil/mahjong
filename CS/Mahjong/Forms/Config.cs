@@ -10,10 +10,20 @@ namespace Mahjong.Forms
 {
     public partial class Config : Form
     {
-        public Config()
+        public Config(Table table)
         {
             InitializeComponent();
-            this.Show();
+            this.panel_color.BackColor = table.BackColor;
+        }
+
+        private void button_setup_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void panel_color_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

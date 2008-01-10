@@ -30,9 +30,9 @@
         {
             this.BackgroundColor = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_setup = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel_color = new System.Windows.Forms.Panel();
             this.trackBarSpeed = new System.Windows.Forms.TrackBar();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
@@ -47,19 +47,20 @@
             this.BackgroundColor.TabIndex = 0;
             this.BackgroundColor.Text = "設定速度";
             // 
-            // button1
+            // button_setup
             // 
-            this.button1.Location = new System.Drawing.Point(70, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "設定";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_setup.Location = new System.Drawing.Point(70, 23);
+            this.button_setup.Name = "button_setup";
+            this.button_setup.Size = new System.Drawing.Size(75, 23);
+            this.button_setup.TabIndex = 2;
+            this.button_setup.Text = "設定";
+            this.button_setup.UseVisualStyleBackColor = true;
+            this.button_setup.Click += new System.EventHandler(this.button_setup_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.panel1);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.panel_color);
+            this.groupBox1.Controls.Add(this.button_setup);
             this.groupBox1.Location = new System.Drawing.Point(14, 56);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(169, 60);
@@ -67,13 +68,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "設定背景";
             // 
-            // panel1
+            // panel_color
             // 
-            this.panel1.BackColor = System.Drawing.Color.LimeGreen;
-            this.panel1.Location = new System.Drawing.Point(18, 21);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(33, 25);
-            this.panel1.TabIndex = 3;
+            this.panel_color.BackColor = System.Drawing.Color.LimeGreen;
+            this.panel_color.Location = new System.Drawing.Point(18, 21);
+            this.panel_color.Name = "panel_color";
+            this.panel_color.Size = new System.Drawing.Size(33, 25);
+            this.panel_color.TabIndex = 3;
+            this.panel_color.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_color_Paint);
             // 
             // trackBarSpeed
             // 
@@ -107,9 +109,9 @@
 
         private System.Windows.Forms.Label BackgroundColor;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_setup;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel_color;
         private System.Windows.Forms.TrackBar trackBarSpeed;
     }
 }
