@@ -46,8 +46,7 @@ namespace Mahjong.Control
             this.Show();
         }
         public void newgame()                                                                                                                                                                       
-        {
-            
+        {            
             //設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
             table.Setup(all);

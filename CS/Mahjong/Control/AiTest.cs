@@ -30,11 +30,11 @@ namespace Mahjong.Control
             //printplayer(player);
             //SimpleAI sa = new SimpleAI();
             //sa.setPlayer(player[0]);
-
             //PlayerSort bs = new PlayerSort(player[0]);
             //player[0] = bs.getPlayer();
 
             //PlayerSort bs = new PlayerSort(player[0]);
+
             PlayerSort bs = new PlayerSort(player[0],new FlowerBrand(0),new TenThousandBrand(0),new RopeBrand(0),new  TubeBrand(0),new WordBrand(0));
             player[0] = bs.getPlayer();
             Level_1 l = new Level_1();
@@ -42,7 +42,6 @@ namespace Mahjong.Control
             l.getReadyBrand();
             
             //printplayer(player);
-
             //Level_1 l = new Level_1();
             //BrandPlayer test = new BrandPlayer();
             //test.add(new WordBrand(1));

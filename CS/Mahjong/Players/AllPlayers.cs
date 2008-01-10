@@ -7,6 +7,7 @@ using Mahjong.Control;
 
 namespace Mahjong.Players
 {
+    [Serializable]
     public class AllPlayers
     {
         /// <summary>
@@ -42,6 +43,15 @@ namespace Mahjong.Players
         /// </summary>
         int[] teamCount;
         /// <summary>
+        /// 眎礟
+        /// </summary>
+        Brand lastBrand;
+        /// <summary>
+        /// よ
+        /// </summary>
+        Location lo;
+
+        /// <summary>
         /// 场產栋
         /// </summary>
         /// <param name="playernumber">砞﹚Τぶ產</param>
@@ -49,15 +59,16 @@ namespace Mahjong.Players
         public AllPlayers(int playernumber,int deal)
         {
             this.players = new BrandPlayer[playernumber];
+            this.lo = new Location();
             this.table = new BrandPlayer();
             this.factory = new BrandFactory();
             this.dealnumber = deal;
-            countplayers = playernumber;
+            this.countplayers = playernumber;
             this.sumBrands = factory.SumBrands;
             this.state = 0;
             this.teamCount = new int[playernumber];
             for (int i = 0; i < playernumber;i++ )
-                teamCount[i]=0;
+                teamCount[i]=0;            
         }
         /// <summary>
         /// 產皚
@@ -79,9 +90,15 @@ namespace Mahjong.Players
                 return table;
             }
         }
-        public BrandPlayer NowPlalyer()
+        /// <summary>
+        /// 瞷產
+        /// </summary>
+        public BrandPlayer NowPlayer
         {
-            return players[state];
+            get
+            {
+                return players[state];
+            }
         }
         /// <summary>
         /// ミ礟,だ皌礟
@@ -126,53 +143,93 @@ namespace Mahjong.Players
             else
                 state += 1;
         }
-        ///
-        public BrandPlayer nowPlayer
+        /// <summary>
+        /// 篘礟
+        /// </summary>
+        /// <returns>礟</returns>
+        public Brand nextBrand()
         {
-            get
+            if (table.getCount() == 0)
+                return null;
+            else
             {
-                return players[state];
-            }
+                Brand b = table.getBrand(0);
+                table.remove(b);
+                lastBrand = b;
+                return b;
+            }            
         }
         /// <summary>
-        /// 窱ㄆン
+        /// 肚よ
         /// </summary>
-        public event EventHandler<BrandPlayerEvent> Chow_Pong_Event;
+        /// <returns>よ</returns>
+        public Location location()
+        {
+            return lo;
+        }
+        public void nextRound()
+        {
+            lo.next();
+            this.table = new BrandPlayer();
+            this.factory = new BrandFactory();
+            this.state = 0;
+            for (int i = 0; i < countplayers; i++)
+                teamCount[i] = 0;   
+        }
         /// <summary>
         /// 窱
         /// </summary>
         public void chow_pong(Brand brand,BrandPlayer player)
         {
-            set_TeamCount(player);
-            
+            set_Team(player,true);
+            lastBrand = brand;            
         }
-        /// <summary>
-        /// 篵ㄆン
-        /// </summary>
-        public event EventHandler<BrandPlayerEvent> Kong_Event;
         /// <summary>
         /// 篵
         /// </summary>
-        public void kong(Brand brand,BrandPlayer player)
-        {
-            set_TeamCount(player);
-            
+        public void kong(BrandPlayer player)
+        {            
+            // 篵,程眎礟单肚ㄓ礟杠穞篵
+            if (lastBrand==player.getBrand(0))
+                set_Team(player, true);
+            else // 穞篵
+                set_Team(player, false);
+            // 篵璶干眎
+            NowPlayer.add(nextBrand());
         }
         /// <summary>
         /// 砞﹚竤舱腹絏
         /// </summary>
-        /// <param name="player"></param>
-        private void set_TeamCount(BrandPlayer player)
+        /// <param name="player">產</param>
+        private void set_Team(BrandPlayer player,bool isCanSee)
         {
             teamCount[state] += 1;
             for (int i = 0; i < player.getCount(); i++)
-                players[state].remove(player.getBrand(i));
+                NowPlayer.remove(player.getBrand(i));
             for (int i = 0; i < player.getCount(); i++)
             {
-                player.getBrand(i).IsCanSee = true;
+                player.getBrand(i).IsCanSee = isCanSee;
                 player.getBrand(i).Team = teamCount[state];
-                players[state].add(player.getBrand(i));
+                NowPlayer.add(player.getBrand(i));
             }
+        }
+        /// <summary>
+        /// 干
+        /// </summary>
+        /// <param name="player">產</param>
+        public void setFlower()
+        {
+            int t_count = 0;
+            for (int i = 0; i < NowPlayer.getCount(); i++)
+                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower)
+                {
+                    NowPlayer.getBrand(i).IsCanSee = true;
+                    NowPlayer.getBrand(i).Team = 0;
+                    t_count++;
+                }
+            // 干ぶ礟计
+            for (int i = 0; i < t_count; i++)
+                NowPlayer.add( nextBrand() );
         }
     }
 }
