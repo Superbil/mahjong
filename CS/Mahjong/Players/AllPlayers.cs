@@ -54,6 +54,10 @@ namespace Mahjong.Players
         /// 產┮Τ窥
         /// </summary>
         double[] Money;
+        /// <summary>
+        /// 硈缠Ω计
+        /// </summary>
+        int win_Times;
 
         /// <summary>
         /// 场產栋
@@ -73,7 +77,10 @@ namespace Mahjong.Players
             this.teamCount = new int[playernumber];
             for (int i = 0; i < playernumber;i++ )
                 teamCount[i]=0;            
-            
+            Money = new double[playernumber];
+            for (int i = 0; i < Money.Length; i++)
+                Money[i] = 5000.0;
+            win_Times = 0;
         }
         /// <summary>
         /// 產皚
@@ -106,6 +113,20 @@ namespace Mahjong.Players
             }
         }
         /// <summary>
+        /// 硈缠Ω计
+        /// </summary>
+        public int Win_Times
+        {
+            set
+            {
+                win_Times = value;
+            }
+            get
+            {
+                return win_Times;
+            }
+        }
+        /// <summary>
         /// ミ礟,だ皌礟
         /// </summary>
         public void creatBrands()
@@ -133,20 +154,18 @@ namespace Mahjong.Players
             Deal deal = new Deal(dealnumber, countplayers, table);
             deal.DealBrands();
             // get Players
-            for (int i = 0; i < players.Length; i++)
-                players[i] = deal.getPlayer(i);
+            players = deal.Player;
             // get Table
-            table = deal.getTable();
+            table = deal.Table;
         }
         /// <summary>
         /// 传產
         /// </summary>
         public void next()
         {
+            state++;
             if (state % countplayers == 0)
                 state = 0;
-            else
-                state += 1;
         }
         /// <summary>
         /// 篘礟
@@ -168,7 +187,7 @@ namespace Mahjong.Players
         /// 肚よ
         /// </summary>
         /// <returns>よ</returns>
-        public Location direction()
+        public Location getLocation()
         {
             return lo;
         }
@@ -223,22 +242,29 @@ namespace Mahjong.Players
             }
         }
         /// <summary>
-        /// 干
+        /// 瞷產干
         /// </summary>
-        /// <param name="player">產</param>
         public void setFlower()
         {
-            int t_count = 0;
+            int f_count = 0;
             for (int i = 0; i < NowPlayer.getCount(); i++)
                 if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower)
                 {
                     NowPlayer.getBrand(i).IsCanSee = true;
                     NowPlayer.getBrand(i).Team = 0;
-                    t_count++;
+                    f_count++;
                 }
             // 干ぶ礟计
-            for (int i = 0; i < t_count; i++)
+            for (int i = 0; i < f_count; i++)
                 NowPlayer.add( nextBrand() );
+        }
+        /// <summary>
+        /// 瞷產逼
+        /// </summary>
+        public void sortNowPlayer()
+        {
+            PlayerSort bs = new PlayerSort(players[state]);
+            players[state] = bs.getPlayer();
         }
     }
 }

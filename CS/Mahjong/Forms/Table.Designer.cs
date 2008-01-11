@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.BrandTip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.新遊戲ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.網路ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,8 +120,6 @@
 
         #endregion
 
-
-        private System.Windows.Forms.ToolTip BrandTip;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 新遊戲ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 網路ToolStripMenuItem1;

@@ -45,17 +45,20 @@ namespace Mahjong.Forms
         int width = Mahjong.Properties.Settings.Default.image_w;
         int height = Mahjong.Properties.Settings.Default.image_h;
         int padding = 1;
-        const bool DebugMode = true;
+        public bool ShowAll;
+        Bitmap arrow;
         
         public Table(ProgramControl pc)
         {
             InitializeComponent();
             this.flowLayoutBrands = new FlowLayoutPanel[5];
-            this.pc = pc;                       
+            this.pc = pc;
+            ShowAll = false;
         }
         public void Setup(AllPlayers all)
         {
             this.all = all;
+            arrow = Mahjong.Properties.Resources.a;
             setFlowLayout();
         }
         private void setFlowLayout()
@@ -109,39 +112,52 @@ namespace Mahjong.Forms
         void addNouth()
         {
             //圖片旋轉180度
-            for (int i = 0; i < all.Players[(int)State.North].getCount(); i++)
-                if ( all.Players[(int)State.North].getBrand(i).IsCanSee || DebugMode)
-                    addimage(State.North, all.Players[(int)State.North].getBrand(i), RotateFlipType.Rotate180FlipNone);
+            addimage_player(all.Players[(int)State.North], State.North, RotateFlipType.Rotate180FlipNone);
         }
         void addEast()
         {
             //圖片旋轉270度
-            for (int i = 0; i < all.Players[(int)State.East].getCount(); i++)
-                if (all.Players[(int)State.East].getBrand(i).IsCanSee || DebugMode)
-                    addimage(State.East, all.Players[(int)State.East].getBrand(i), RotateFlipType.Rotate270FlipNone);
+            addimage_player(all.Players[(int)State.East], State.East, RotateFlipType.Rotate270FlipNone);
         }
         void addSouth()
         {
-            for (int i = 0; i < all.Players[(int)State.South].getCount(); i++)
-                if (all.Players[(int)State.South].getBrand(i).IsCanSee || DebugMode)
-                    addimage(State.South, all.Players[(int)State.East].getBrand(i), RotateFlipType.RotateNoneFlipNone);
+            addimage_player(all.Players[(int)State.South], State.South, RotateFlipType.RotateNoneFlipNone);
         }
         void addWest()
         {
             //圖片旋轉90度
-            for (int i = 0; i < all.Players[(int)State.West].getCount(); i++)
-                if (all.Players[(int)State.West].getBrand(i).IsCanSee || DebugMode)
-                    addimage(State.West, all.Players[(int)State.West].getBrand(i), RotateFlipType.Rotate90FlipNone);
+            addimage_player(all.Players[(int)State.West], State.West, RotateFlipType.Rotate90FlipNone);
         }
         void addTable()
         {
-            for (int i = 0; i < all.Table.getCount(); i++)
-                if (all.Table.getBrand(i).IsCanSee || DebugMode)
-                    addimage(State.Table, all.Table.getBrand(i), RotateFlipType.RotateNoneFlipNone);
+            addimage_player(all.Table, State.Table, RotateFlipType.RotateNoneFlipNone);
         }
-        private void addimage(State state,Brand brand,RotateFlipType rotate)
+        void addimage_player(BrandPlayer player, State state, RotateFlipType rotate)
+        {   
+                Iterator temp = player.creatIterator();
+                addimage_iterator(temp,state,rotate);
+        }
+        private void addimage_iterator(Iterator iterator, State state, RotateFlipType rotate)
         {
-            Bitmap bitmap = new Bitmap(brand.image);
+            while (iterator.hasNext())
+            {
+                Brand brand = (Brand)iterator.next();
+                if (state == State.Table)
+                {
+                    if (brand.IsCanSee || ShowAll)
+                        addimage(state, brand, rotate);
+                }
+                else
+                    addimage(state, brand, rotate);
+            }
+        }
+        private void addimage(State state,Brand brand,RotateFlipType rotate) 
+        {
+            Bitmap bitmap;
+            if (brand.IsCanSee || state == State.South || ShowAll)
+                bitmap = new Bitmap(brand.image);
+            else
+                bitmap = new Bitmap(Mahjong.Properties.Resources.upbarnd);
             // 設定牌
             BrandBox tempBrandbox = new BrandBox(brand);            
 
@@ -157,8 +173,13 @@ namespace Mahjong.Forms
             // 要轉的角度
             bitmap.RotateFlip(rotate);
 
+            // 提示
+            if (ShowAll)
+                tempBrandbox.Click += new EventHandler(tempBrandbox_Click);
+
             // 滑鼠事件
-            if (state == State.South)
+            if (state == State.South &&
+                brand.getClass()!=Mahjong.Properties.Settings.Default.Flower)
             {
                 tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
                 tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
@@ -172,6 +193,26 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[(int)state].Controls.Add(tempBrandbox);
             this.Update();
         }
+
+        void tempBrandbox_Click(object sender, EventArgs e)
+        {
+            BrandBox b = (BrandBox)sender;
+            StringBuilder s = new StringBuilder();
+            s.Append(b.brand.getNumber() + "," + b.brand.getClass() + "\n");
+            s.Append("值: " + b.brand.getNumber() + "\n");
+            s.Append("類別: " + b.brand.getClass() + "\n");
+            s.Append("分數: " + b.brand.Source + "\n");
+            s.Append("組別: " + b.brand.Team + "\n");
+            s.Append("圖片盒:\nX:" + b.Location.X + " Y: " + b.Location.Y + "\n");
+            s.Append("長: "+b.Size.Width+" 高: "+b.Size.Height+"\n");
+            MessageBox.Show(s.ToString());
+        }
+        /// <summary>
+        /// 重繪Bitmap(縮放)
+        /// </summary>
+        /// <param name="b">圖型</param>
+        /// <param name="resize">比率</param>
+        /// <returns>圖型</returns>
         private Bitmap ResizeBitmap(Bitmap b, double resize)
         {
             int nWidth = Convert.ToInt16(b.Width * resize);
@@ -183,7 +224,13 @@ namespace Mahjong.Forms
         }
         void brandBox_MouseHover(object sender, EventArgs e)
         {
-            
+            BrandBox b = (BrandBox)sender;
+            PictureBox temp = new PictureBox();
+            temp.Location = new Point(b.Location.X, b.Location.Y - arrow.Height);
+            //temp.l = b.Location.X;
+            //temp.Location.Y = b.Location.Y - arrow.Height;
+            temp.Image = arrow;
+            this.Controls.Add(temp);
         }
         void brandBox_MouseLeave(object sender, EventArgs e)
         {

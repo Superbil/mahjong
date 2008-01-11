@@ -19,7 +19,7 @@ namespace Mahjong.Control
             x.createBrands();
             x.randomBrands();
 
-            //x.PrintRadomTable();
+            //x.PrintRadomTable(); //¦C¥X¶Ã¼Æªí
             a = x.getBrands();
 
             Iterator ai;
@@ -32,21 +32,13 @@ namespace Mahjong.Control
             ai = a.creatIterator(10);
             print(ai);
 
-            
-            //SimpleAI sa = new SimpleAI(a);
-            //sa.getReadyBrand();
             //Console.WriteLine();
             //Console.Write("{0},{1}\n", sa.getReadyBrand().getClass(),sa.getReadyBrand().getNumber());
 
             //chackBrands();
             //chackArrayList();
 
-            Console.WriteLine("Over");
-            x.creatImageArray();
-
-            //Console.ReadLine();
-            //Image aa = Mahjong.BrandsPicture.a1;
-            
+            x.creatImageArray();            
         }
         BrandPlayer removefromplayer(Iterator iterator,BrandPlayer re)
         {

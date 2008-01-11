@@ -58,10 +58,10 @@ namespace Mahjong.AIs
             ans = player.getBrand(0);
             for (int i = 1; i < player.getCount(); i++)
             {
-                if (player.getBrand(i).Source < ans.Source)
+                if (player.getBrand(i).Source < ans.Source ||player.getBrand(i).getClass()!=Mahjong.Properties.Settings.Default.Flower)
                     ans = player.getBrand(i);
             }
-            print();
+            //print();
             return ans;
         }
         public BrandPlayer getReadyBrandPlayer()
@@ -366,12 +366,12 @@ namespace Mahjong.AIs
                                 for (int j = 0; j < temp[i].getCount(); j++)
                                 {
                                     temp[i].getBrand(j).Source += 20;
-                                    temp[i].getBrand(j).Source -= 10;
+                                    temp[i].getBrand(j).Source -= 5;
                                 }
                                 for (int j = 0; j < temp[i + 1].getCount(); j++)
                                 {
                                     temp[i + 1].getBrand(j).Source += 20;
-                                    temp[i + 1].getBrand(j).Source -= 10;
+                                    temp[i + 1].getBrand(j).Source -= 5;
                                 }
                             }
                 }
@@ -384,12 +384,12 @@ namespace Mahjong.AIs
                                 for (int j = 0; j < temp[i].getCount(); j++)
                                 {
                                     temp[i].getBrand(j).Source += 20;
-                                    temp[i].getBrand(j).Source -= 10;
+                                    temp[i].getBrand(j).Source -= 5;
                                 }
-                                for (int j = 0; j < temp[i].getCount(); j++)
+                                for (int j = 0; j < temp[i+1].getCount(); j++)
                                 {
                                     temp[i + 1].getBrand(j).Source += 20;
-                                    temp[i + 1].getBrand(j).Source -= 10;
+                                    temp[i + 1].getBrand(j).Source -= 5;
                                 }
                             }
                 }

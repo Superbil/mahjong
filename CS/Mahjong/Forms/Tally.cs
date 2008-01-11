@@ -21,7 +21,7 @@ namespace Mahjong.Forms
         int temp = 0;
         bool index = false;
         // 局、莊、方位
-        location l1,l2,l3;
+        Location l;
         int win_count;
 
         public Tally()
@@ -35,15 +35,11 @@ namespace Mahjong.Forms
         /// <summary>
         /// 設定方位
         /// </summary>
-        /// <param name="s1">局</param>
-        /// <param name="s2">莊</param>
-        /// <param name="s3">方位</param>
+        /// <param name="l">方位</param>
         /// <param name="number">連莊次數</param>
-        public void setLocation(location l1, location l2,location l3, int number)
+        public void setLocation(Location l, int number)
         {
-            this.l1 = l1;
-            this.l2 = l2;
-            this.l3 = l3;
+            this.l = l;
             this.win_count = number;
         }
         void go()

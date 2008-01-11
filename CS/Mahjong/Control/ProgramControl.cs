@@ -25,13 +25,11 @@ namespace Mahjong.Control
         public ProgramControl()
         {
             InitializeComponent();
-            rotateTimer = new Timer();
-            rotateTimer.Interval = 500;
+            rotateTimer = new Timer();            
             //顯示Table 介面
             table = new Table(this);
             table.ShowDialog();
-            rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
-            Ai = new Level_1();
+            //Ai = new Level_1();
         }
         void rotateTimer_Tick(object sender, EventArgs e)
         {
@@ -52,36 +50,88 @@ namespace Mahjong.Control
         }
         public void newgame()                                                                                                                                                                       
         {
+            //table.ShowAll = true; //顯示所有的牌
             table.cleanAll();
             // 設定4個玩家,每個人16張
-            all = new AllPlayers(4, 16);            
+            all = new AllPlayers(4, 16);
+            rotateTimer.Interval = 3000;
+            rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             table.Setup(all);   
             all.creatBrands();
             table.addImage();
             rotateTimer.Start();
-            //playgame();
+            // 補花
+            for (int i = 0; i < 4; i++)
+            {
+                all.setFlower();
+                all.sortNowPlayer();
+                all.next();
+            }
+            updatePlayer_Table();            
         }
         void playgame()
-        {
-            // 補花
-            all.setFlower();            
-            table.updateNowPlayer();
-            table.updateTable();
-            
+        {            
             // 摸牌給現在的玩家
-            all.NowPlayer.add(all.nextBrand());
-            if (all.state == 2)
-               ;
+            Brand nextbrand = all.nextBrand();
+            if (nextbrand == null)
+                overgame();
             else
             {
-                //Ai.setPlayer(all.NowPlayer);
-                pushToTable(Ai.getReadyBrand());
+                all.NowPlayer.add(nextbrand);
+                all.sortNowPlayer();
+                updatePlayer_Table();
+                // 補花
+                all.setFlower();
+                updatePlayer_Table();
+                // 是否胡牌
+                Check c = new Check(all.NowPlayer);
+                if (c.Win())
+                    overgame();
+                else if (c.Kong()) // 暗槓
+                    ;
+                else
+                {
+                    if (all.state == 2) // 人
+                        rotateTimer.Stop();
+                    else if (c.Kong()) // 被槓
+                        ;
+                    else if (c.Pong()) // 被碰
+                        ;
+                    else if (c.Chow()) // 被吃
+                        ;
+                    else
+                    {
+                        Ai = new Level_1();
+                        Ai.setPlayer(all.NowPlayer);
+                        Brand b = Ai.getReadyBrand();
+                        pushToTable(b);
+                        all.next();
+                    }
+                }
             }
         }
-        void pushToTable(Brand brand)
-        {
-            Ai.setPlayer(all.NowPlayer);
 
+        private void overgame()
+        {
+            rotateTimer.Stop();
+            table.ShowAll = true;
+            table.addImage();
+            Tally t = new Tally();
+            t.setLocation(all.getLocation(), all.Win_Times);
+            t.setPlayer(all.NowPlayer);
+            t.ShowDialog();
+        }
+        void pushToTable (Brand b)
+        {            
+            b.IsCanSee = true;
+            all.NowPlayer.remove(b);
+            all.Table.add(b);
+            updatePlayer_Table();
+        }
+        void updatePlayer_Table()
+        {
+            table.updateNowPlayer();
+            table.updateTable();
         }
         private void print(Iterator iterator)
         {
@@ -99,11 +149,9 @@ namespace Mahjong.Control
         }
         public void makeBrand(Brand brand)
         {
-            StringBuilder str = new StringBuilder();
-            str.Append(brand.getNumber());
-            str.Append(brand.getClass());
-            Console.WriteLine(str.ToString());
-            MessageBox.Show(str.ToString());
+            pushToTable(brand);
+            rotateTimer.Start();
+            all.next();
         }
     }
 }

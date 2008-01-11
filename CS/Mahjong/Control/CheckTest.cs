@@ -17,15 +17,15 @@ namespace Mahjong.Control
             a.add(new TubeBrand(1));
             a.add(new TubeBrand(1));
             a.add(new TubeBrand(1));
+            a.add(new TubeBrand(1));
+            a.add(new TubeBrand(2));
+            a.add(new TubeBrand(2));
+            a.add(new TubeBrand(2));
             a.add(new TubeBrand(2));
             a.add(new TubeBrand(3));
             a.add(new TubeBrand(3));
-            a.add(new TubeBrand(4));
-            a.add(new TubeBrand(5));
-            a.add(new TubeBrand(6));
-            a.add(new TubeBrand(7));
-            a.add(new TubeBrand(8));
-            a.add(new TubeBrand(9));
+            a.add(new TubeBrand(3));
+            a.add(new TubeBrand(3));
             a.add(new TubeBrand(9));
             a.add(new TubeBrand(9));
             a.add(new WordBrand(6));
@@ -33,7 +33,7 @@ namespace Mahjong.Control
             a.add(new WordBrand(6));
             Check c = new Check(a);
             if (c.Win())
-                Console.WriteLine("¦³Å¥µP¡I¡I");
+                Console.WriteLine("¦³­J¡I¡I");
         }
     }
 }

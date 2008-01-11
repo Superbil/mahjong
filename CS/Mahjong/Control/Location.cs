@@ -27,11 +27,13 @@ namespace Mahjong.Control
     {
         location position;
         location round;
+        location winer;
 
         public Location()
         {
             position = location.East;
             round = location.East;
+            winer = location.East;
         }
         /// <summary>
         /// 局
@@ -54,7 +56,24 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
+        /// 莊家
+        /// </summary>
+        public location Winer
+        {
+            get
+            {
+                return winer;
+            }
+        }
+        /// <summary>
         /// 下一莊
+        /// </summary>
+        public void next_Winer()
+        {
+            add(winer);
+        }
+        /// <summary>
+        /// 下一個方位
         /// </summary>
         public void next()
         {

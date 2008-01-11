@@ -62,8 +62,8 @@
     <Compile Include="AIs\MahjongAI.cs" />
     <Compile Include="AIs\SimpleAI.cs" />
     <Compile Include="Control\AiTest.cs" />
-    <Compile Include="Control\Chack.cs" />
-    <Compile Include="Control\ChackTest.cs" />
+    <Compile Include="Control\Check.cs" />
+    <Compile Include="Control\CheckTest.cs" />
     <Compile Include="Control\Deal.cs" />
     <Compile Include="Control\Mahjong_Main.cs" />
     <Compile Include="Control\TallyTest.cs">
@@ -307,6 +307,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\DataSources\Mahjong.Control.ProgramControl.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\upbarnd.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

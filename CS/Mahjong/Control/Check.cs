@@ -5,31 +5,77 @@ using Mahjong.Players;
 
 namespace Mahjong.Control
 {
+    /// <summary>
+    /// 牌的狀態檢查
+    /// </summary>
     class Check
     {
         BrandPlayer x;
+        BrandPlayer a;
+        BrandPlayer b;
+        BrandPlayer c;
         /// <summary>
-        /// 牌的狀態檢查
+        /// 牌的狀態檢查建構子
         /// </summary>
         /// <param name="player">牌玩家</param>
         public Check(BrandPlayer player)
         {
             this.x = player;
+            a = new BrandPlayer();
+            b = new BrandPlayer();
+            c = new BrandPlayer();
+            brand_2();
+            bradn_3();
         }
         /// <summary>
-        /// 胡牌成立
+        /// 吃 成立
         /// </summary>
         /// <returns>是/否</returns>
-        public bool Win()
+        public bool Chow()
         {
-            Players.BrandPlayer a = new BrandPlayer();
-            Players.BrandPlayer b = new BrandPlayer();
-            Players.BrandPlayer c = new BrandPlayer();
-            int count = 0;
+            return false;
+        }
+        /// <summary>
+        /// 碰 成立
+        /// </summary>
+        /// <returns>是/否</returns>
+        public bool Pong()
+        {
+            return false;
+        }
+        /// <summary>
+        /// 槓 成立
+        /// </summary>
+        /// <returns>是/否</returns>
+        public bool Kong()
+        {
+            return false;
+        }
+        private void brand_2()
+        {
+            // 對子的牌組
+            for (int i = 0; i < x.getCount() - 1; i++)
+                if (x.getBrand(i).getClass() == x.getBrand(i + 1).getClass() && x.getBrand(i).getNumber() == x.getBrand(i + 1).getNumber())
+                {
+                    if (b.getCount() == 0)
+                    {
+                        b.add(x.getBrand(i));
+                        b.add(x.getBrand(i));
+                    }
+                    else if (x.getBrand(i + 1).getClass() != b.getBrand(b.getCount() - 1).getClass() ||
+                        x.getBrand(i + 1).getNumber() != b.getBrand(b.getCount() - 1).getNumber())
+                    {
+                        b.add(x.getBrand(i));
+                        b.add(x.getBrand(i));
+                    }
+                } 
+        }
+        private void bradn_3()
+        {
             for (int i = 0; i < x.getCount() - 2; i++)
                 for (int j = i + 1; j < x.getCount() - 1; j++)
                     for (int k = j + 1; k < x.getCount(); k++)
-                        if (x.getBrand(k).getClass() != Mahjong.Properties.Settings.Default.Wordtiles &&
+                        if (x.getBrand(k).getClass() != Mahjong.Properties.Settings.Default.Wordtiles && //順子的牌組
                             x.getBrand(i).getClass() == x.getBrand(j).getClass() &&
                             x.getBrand(i).getNumber() == x.getBrand(j).getNumber() - 1 &&
                             x.getBrand(j).getClass() == x.getBrand(k).getClass() &&
@@ -37,63 +83,52 @@ namespace Mahjong.Control
                         {
                             if (a.getCount() == 0)
                             {
-
                                 a.add(x.getBrand(i));
                                 a.add(x.getBrand(j));
                                 a.add(x.getBrand(k));
-
                             }
                             else if (x.getBrand(i) != a.getBrand(a.getCount() - 3) &&
                                 x.getBrand(j) != a.getBrand(a.getCount() - 2) &&
-                                x.getBrand(k) != a.getBrand(a.getCount() - 1) )
+                                x.getBrand(k) != a.getBrand(a.getCount() - 1))
                             {
                                 a.add(x.getBrand(i));
                                 a.add(x.getBrand(j));
                                 a.add(x.getBrand(k));
                             }
-
-
-                        }
+                        } // 順子的牌組結束
                         else if (x.getBrand(i).getClass() == x.getBrand(j).getClass() &&
                             x.getBrand(i).getNumber() == x.getBrand(j).getNumber() &&
                             x.getBrand(j).getClass() == x.getBrand(k).getClass() &&
-                            x.getBrand(j).getNumber() == x.getBrand(k).getNumber() )
-                        {
+                            x.getBrand(j).getNumber() == x.getBrand(k).getNumber())
+                        { // 碰的牌組
                             if (a.getCount() == 0)
                             {
-
                                 a.add(x.getBrand(i));
                                 a.add(x.getBrand(j));
                                 a.add(x.getBrand(k));
-
                             }
                             else if (x.getBrand(i) != a.getBrand(a.getCount() - 3) &&
                                 x.getBrand(j) != a.getBrand(a.getCount() - 2) &&
-                                x.getBrand(k) != a.getBrand(a.getCount() - 1) )
+                                x.getBrand(k) != a.getBrand(a.getCount() - 1))
                             {
                                 a.add(x.getBrand(i));
                                 a.add(x.getBrand(j));
                                 a.add(x.getBrand(k));
                             }
-                        }
-            for (int i = 0; i < x.getCount() - 1; i++)
-                if (x.getBrand(i).getClass() == x.getBrand(i + 1).getClass() && x.getBrand(i).getNumber() == x.getBrand(i + 1).getNumber())
-                {
-                    if (b.getCount() == 0)
-                    {
+                        } // 碰的牌組
+        }
 
-                        b.add(x.getBrand(i));
-                        b.add(x.getBrand(i));
-
-                    }
-                    else if (x.getBrand(i + 1).getClass() != b.getBrand(b.getCount() - 1).getClass() ||
-                        x.getBrand(i + 1).getNumber() != b.getBrand(b.getCount() - 1).getNumber())
-                    {
-                        b.add(x.getBrand(i));
-                        b.add(x.getBrand(i));
-
-                    }
-                }
+        /// <summary>
+        /// 胡牌 成立
+        /// </summary>
+        /// <returns>是/否</returns>
+        public bool Win()
+        {            
+            // 組合測試
+            // a 三支
+            // b 兩隻
+            // c 組合
+            int count = 0;
             for (int i = 0; i < a.getCount(); i += 3)
             {
                 for (int j = i + 3; j < a.getCount(); j += 3)
@@ -125,12 +160,10 @@ namespace Mahjong.Control
                                     c.add(b.getBrand(n));
                                     c.add(b.getBrand(n + 1));
 
-
-
                                     PlayerSort d = new PlayerSort(c);
                                     c = d.getPlayer();
-
-
+                                    //牌的比對
+                                    //完全成立代表胡牌
                                     for (int o = 0; o < x.getCount(); o++)
                                     {
                                         if (c.getBrand(o).getClass() == x.getBrand(o).getClass() &&
@@ -141,27 +174,14 @@ namespace Mahjong.Control
                                         }
                                         else
                                             break;
-
                                     }
                                     if (count == x.getCount() - 1)
-                                    {
-                                        return true;
-                                    }
+                                        return true; // 成立
                                 }
-                                if (count == x.getCount() - 1)
-                                    break;
                             }
-                            if (count == x.getCount() - 1)
-                                break;
                         }
-                        if (count == x.getCount() - 1)
-                            break;
                     }
-                    if (count == x.getCount() - 1)
-                        break;
                 }
-                if (count == x.getCount() - 1)
-                    break;
             }
             return false;
         }

@@ -60,6 +60,13 @@ namespace Mahjong.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap a {
+            get {
+                object obj = ResourceManager.GetObject("a", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap flower1 {
             get {
                 object obj = ResourceManager.GetObject("flower1", resourceCulture);
@@ -301,6 +308,13 @@ namespace Mahjong.Properties {
         internal static System.Drawing.Bitmap tobe9 {
             get {
                 object obj = ResourceManager.GetObject("tobe9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap upbarnd {
+            get {
+                object obj = ResourceManager.GetObject("upbarnd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

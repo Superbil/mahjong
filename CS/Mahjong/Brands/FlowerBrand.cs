@@ -96,7 +96,7 @@ namespace Mahjong.Brands
         /// <summary>
         /// µPªº¤À¼Æ
         /// </summary>
-        private int source=0;
+        private int source = 0;
         public int Source
         {
             get

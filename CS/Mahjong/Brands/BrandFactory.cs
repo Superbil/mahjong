@@ -45,11 +45,11 @@ namespace Mahjong.Brands
         /// </summary>
         int pieceTubeBrand;
         /// <summary>
-        /// 礟舱眎计
+        /// 窾礟眎计
         /// </summary>
         int countTenThousandBrand;
         /// <summary>
-        /// 礟舱计
+        /// 窾礟计
         /// </summary>
         int pieceTenThousandBrand;
         /// <summary>

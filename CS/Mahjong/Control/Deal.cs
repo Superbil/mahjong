@@ -94,22 +94,16 @@ namespace Mahjong.Control
         /// <summary>
         /// 傳回玩家
         /// </summary>
-        /// <param name="number">第幾個玩家</param>
-        /// <returns>玩家</returns>
-        public BrandPlayer getPlayer(int number)
+        public BrandPlayer[] Player
         {
-            if (number > countplayer)
-                return null;
-            else
-                return this.player[number];
+            get { return player; }
         }
         /// <summary>
         /// 傳回桌面
         /// </summary>
-        /// <returns>玩家</returns>
-        public BrandPlayer getTable()
+        public BrandPlayer Table
         {
-            return table;
+            get { return table; }
         }
         /// <summary>
         /// 從桌面把牌新增到玩家

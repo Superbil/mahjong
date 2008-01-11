@@ -52,17 +52,11 @@ namespace Mahjong.Control
             a.add(new WordBrand(5));
             a.add(new WordBrand(5));
 
-
-
-
             f = new Tally();
-            
+
+            Location l = new Location();
             f.setPlayer(a);
-            f.setLocation(
-                Mahjong.Properties.Settings.Default.East,
-                Mahjong.Properties.Settings.Default.East,
-                Mahjong.Properties.Settings.Default.East,
-                0);
+            f.setLocation(l,0);
             
             f.ShowDialog();
 

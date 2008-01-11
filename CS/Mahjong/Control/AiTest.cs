@@ -23,10 +23,8 @@ namespace Mahjong.Control
             Deal deal = new Deal(16,table);
             deal.DealBrands();
 
-            for (int i = 0; i < 4; i++)
-            {
-                player[i] = deal.getPlayer(i);
-            }
+            player = deal.Player;
+
             //printplayer(player);
             //SimpleAI sa = new SimpleAI();
             //sa.setPlayer(player[0]);
