@@ -73,6 +73,9 @@ namespace Mahjong.Forms
             //samecarve();
             ponpon();
             //sky();
+            allplayer();
+            score();
+            sum();
             labeltally.Text = tally.ToString();
         }
 
@@ -439,6 +442,30 @@ namespace Mahjong.Forms
             for (int i = 0; i < z.getCount(); i++)
                 textBox1.Text += z.getBrand(i).getNumber() + z.getBrand(i).getClass() + " ";
 
+        }
+
+        void allplayer()
+        {
+            player1.Text = all.Name[(int)location.East];
+            player2.Text = all.Name[(int)location.South];
+            player3.Text = all.Name[(int)location.West];
+            player4.Text = all.Name[(int)location.North];
+        }
+
+       void sum()
+       {
+           sum1.Text += score1.Text;
+           sum2.Text += score2.Text;
+           sum3.Text += score3.Text;
+           sum4.Text += score4.Text;
+       }
+
+        void score()
+        {
+            score1.Text = all.basic_tai + labeltally.Text;
+            score2.Text = all.basic_tai + labeltally.Text;
+            score3.Text = all.basic_tai + labeltally.Text;
+            score4.Text = all.basic_tai + labeltally.Text;
         }
     }
 }
