@@ -54,23 +54,26 @@ namespace Mahjong.Control
             table.cleanAll();
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
-            rotateTimer.Interval = 3000;
+            rotateTimer.Interval = 1000;
             rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             table.Setup(all);   
             all.creatBrands();
-            table.addImage();
-            rotateTimer.Start();
+            table.addImage();            
             // 補花
             for (int i = 0; i < 4; i++)
             {
+                //MessageBox.Show(all.state.ToString());
                 all.setFlower();
                 all.sortNowPlayer();
                 all.next();
+                updatePlayer_Table();                
             }
-            updatePlayer_Table();            
+            updatePlayer_Table();
+            playgame();
         }
         void playgame()
-        {            
+        {
+            rotateTimer.Start();
             // 摸牌給現在的玩家
             Brand nextbrand = all.nextBrand();
             if (nextbrand == null)
@@ -113,19 +116,21 @@ namespace Mahjong.Control
 
         private void overgame()
         {
+            table.cleanImage();
             rotateTimer.Stop();
             table.ShowAll = true;
             table.addImage();
             Tally t = new Tally();
             t.setLocation(all.getLocation(), all.Win_Times);
-            t.setPlayer(all.NowPlayer);
+            t.setPlayer(all);
             t.ShowDialog();
         }
         void pushToTable (Brand b)
         {            
-            b.IsCanSee = true;
-            all.NowPlayer.remove(b);
-            all.Table.add(b);
+            //b.IsCanSee = true;
+            //all.NowPlayer.remove(b);
+            //all.Table.add(b);
+            all.PushToTable(b);
             updatePlayer_Table();
         }
         void updatePlayer_Table()

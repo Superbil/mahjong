@@ -15,18 +15,23 @@ namespace Mahjong.Forms
     {
         Players.BrandPlayer x = new BrandPlayer();
         Players.BrandPlayer z = new BrandPlayer();
-        string y;
-        Brand[] brands, outbrands, inbrands;
         int tally = 0;
         int temp = 0;
         bool index = false;
         // 局、莊、方位
         Location l;
+        // 連莊次數
         int win_count;
+        AllPlayers all;
 
         public Tally()
         {
             InitializeComponent();
+        }
+        public void setPlayer(AllPlayers all)
+        {
+            this.all = all;
+            x = all.NowPlayer;
         }
         public void setPlayer(BrandPlayer player)
         {
@@ -383,7 +388,6 @@ namespace Mahjong.Forms
 
         private void Tally_Load(object sender, EventArgs e)
         {
-
             go();
         }
 

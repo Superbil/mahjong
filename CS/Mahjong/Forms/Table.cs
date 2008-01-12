@@ -54,6 +54,13 @@ namespace Mahjong.Forms
             this.flowLayoutBrands = new FlowLayoutPanel[5];
             this.pc = pc;
             ShowAll = false;
+            this.KeyUp += new KeyEventHandler(Table_KeyUp);
+        }
+
+        void Table_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F8")
+                ;
         }
         public void Setup(AllPlayers all)
         {
@@ -71,6 +78,7 @@ namespace Mahjong.Forms
             setFlowLayout_size();
             //setFlowLayout_Margin(10);
             setFlowLayout_Dock();
+            //this.flowLayoutBrands[4].BackColor=;
         }
         private void setFlowLayout_name()
         {
@@ -78,21 +86,20 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[1].Name = Mahjong.Properties.Settings.Default.East;
             this.flowLayoutBrands[2].Name = Mahjong.Properties.Settings.Default.South;
             this.flowLayoutBrands[3].Name = Mahjong.Properties.Settings.Default.West;
-          //this.flowLayoutBrands[4].Name = Mahjong.Properties.Settings.Default.Table;
         }
         private void setFlowLayout_size()
         {
             this.flowLayoutBrands[0].Size = new Size((width + padding * 2) * all.Dealnumber, height + padding * 2);
             this.flowLayoutBrands[1].Size = new Size(height + padding * 2, (width + padding * 2) * all.Dealnumber);
             this.flowLayoutBrands[2].Size = new Size((width + padding * 2) * all.Dealnumber, height + padding * 2);
-            this.flowLayoutBrands[3].Size = new Size(height + padding * 2, (width + padding * 2) * all.Dealnumber);
-            this.flowLayoutBrands[4].Size = new Size((width + padding * 2) * all.Dealnumber, (height + padding * 2) * all.sumBrands /all.Dealnumber);
+            this.flowLayoutBrands[3].Size = new Size(height + padding * 2, (width * 2 + padding * 2) * all.Dealnumber);
+            this.flowLayoutBrands[4].Size = new Size(width * all.Dealnumber + padding * 2, height * (all.sumBrands / all.Dealnumber) + padding * 2);
         }
         private void setFlowLayout_location(int keepsize)
         {
             this.flowLayoutBrands[0].Location = new Point(keepsize * 2 + (height + padding * 2), keepsize);
             this.flowLayoutBrands[1].Location = new Point(keepsize * 3 + height + padding * 2 + (width + padding * 2) * all.Dealnumber, keepsize * 2 + height + padding * 2);
-            this.flowLayoutBrands[2].Location = new Point(keepsize * 2 + (height + padding * 2), keepsize * 3 + (height + padding * 2) * (all.Dealnumber + 1));
+            this.flowLayoutBrands[2].Location = new Point(keepsize * 2 + height + padding * 2, keepsize * 3 + height * (all.Dealnumber + 1) + padding * 2);
             this.flowLayoutBrands[3].Location = new Point(keepsize, keepsize * 2 + height + padding * 2);
             this.flowLayoutBrands[4].Location = new Point(keepsize * 2 + (height + padding * 2), keepsize * 2 + (height + padding * 2));
         }
@@ -130,7 +137,7 @@ namespace Mahjong.Forms
         }
         void addTable()
         {
-            addimage_player(all.Table, State.Table, RotateFlipType.RotateNoneFlipNone);
+            addimage_player(all.Show_Table, State.Table, RotateFlipType.RotateNoneFlipNone);
         }
         void addimage_player(BrandPlayer player, State state, RotateFlipType rotate)
         {   
@@ -142,18 +149,13 @@ namespace Mahjong.Forms
             while (iterator.hasNext())
             {
                 Brand brand = (Brand)iterator.next();
-                if (state == State.Table)
-                {
-                    if (brand.IsCanSee || ShowAll)
-                        addimage(state, brand, rotate);
-                }
-                else
-                    addimage(state, brand, rotate);
+                addimage(state, brand, rotate);
             }
         }
         private void addimage(State state,Brand brand,RotateFlipType rotate) 
         {
             Bitmap bitmap;
+            // 如果是可視的牌就設定顯示牌的圖型，否則就顯示直立的牌 Mahjong.Properties.Resources.upbarnd
             if (brand.IsCanSee || state == State.South || ShowAll)
                 bitmap = new Bitmap(brand.image);
             else
@@ -165,9 +167,9 @@ namespace Mahjong.Forms
             tempBrandbox.SizeMode = PictureBoxSizeMode.AutoSize;            
 
             // 設定邊距            
-            if (state == State.South)
-                tempBrandbox.Margin = new Padding(padding);
-            else
+            //if (state == State.South)
+            //    tempBrandbox.Margin = new Padding(padding);
+            //else
                 tempBrandbox.Margin = new Padding(padding);
 
             // 要轉的角度
@@ -181,7 +183,7 @@ namespace Mahjong.Forms
             if (state == State.South &&
                 brand.getClass()!=Mahjong.Properties.Settings.Default.Flower)
             {
-                tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
+                //tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
                 tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
             }
@@ -231,6 +233,7 @@ namespace Mahjong.Forms
             //temp.Location.Y = b.Location.Y - arrow.Height;
             temp.Image = arrow;
             this.Controls.Add(temp);
+            this.Update();
         }
         void brandBox_MouseLeave(object sender, EventArgs e)
         {
@@ -241,7 +244,9 @@ namespace Mahjong.Forms
             BrandBox b = (BrandBox)sender;
             pc.makeBrand(b.brand);
         }
-        // 更新圖片
+        /// <summary>
+        /// 新增玩家、桌面圖片
+        /// </summary> 
         public void addImage()
         {
             addNouth();
@@ -250,11 +255,17 @@ namespace Mahjong.Forms
             addWest();
             addTable();
         }
+        /// <summary>
+        /// 清除所有顯示的圖片
+        /// </summary>
         public void cleanImage()
         {
             foreach (FlowLayoutPanel f in flowLayoutBrands)
                 f.Controls.Clear();
         }
+        /// <summary>
+        /// 清除所有控制項
+        /// </summary>
         public void cleanAll()
         {
             this.Controls.Clear();

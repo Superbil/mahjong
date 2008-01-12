@@ -19,6 +19,10 @@ namespace Mahjong.Players
         /// </summary>
         BrandPlayer table;
         /// <summary>
+        /// 準備要顯示的桌面牌
+        /// </summary>
+        BrandPlayer show_table;
+        /// <summary>
         /// 牌工廠
         /// </summary>
         BrandFactory factory;
@@ -69,7 +73,8 @@ namespace Mahjong.Players
             this.players = new BrandPlayer[playernumber];
             this.lo = new Location();
             this.table = new BrandPlayer();
-            this.factory = new BrandFactory();
+            this.show_table = new BrandPlayer();
+            this.factory = new BrandFactory();            
             this.dealnumber = deal;
             this.countplayers = playernumber;
             this.sumBrands = factory.SumBrands;
@@ -100,6 +105,13 @@ namespace Mahjong.Players
             get
             {
                 return table;
+            }
+        }
+        public BrandPlayer Show_Table
+        {
+            get
+            {
+                return show_table;
             }
         }
         /// <summary>
@@ -265,6 +277,16 @@ namespace Mahjong.Players
         {
             PlayerSort bs = new PlayerSort(players[state]);
             players[state] = bs.getPlayer();
+        }
+        /// <summary>
+        /// 把牌打到桌面上
+        /// </summary>
+        /// <param name="brand"></param>
+        public void PushToTable(Brand brand)
+        {
+            brand.IsCanSee = true;
+            NowPlayer.remove(brand);
+            show_table.add(brand);
         }
     }
 }
