@@ -57,6 +57,7 @@ namespace Mahjong.Control
             Location l = new Location();
             f.setPlayer(new AllPlayers(4,16));
             f.setPlayer(a);
+            //l.next_Winer();
             f.setLocation(l,0);
             
             f.ShowDialog();

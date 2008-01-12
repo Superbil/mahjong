@@ -4,6 +4,7 @@ using System.Text;
 using Mahjong.Players;
 using Mahjong.Brands;
 using Mahjong.Control;
+using System.Windows.Forms;
 
 namespace Mahjong.Players
 {
@@ -70,6 +71,10 @@ namespace Mahjong.Players
         /// 底台
         /// </summary>
         public int basic_tai;
+        /// <summary>
+        /// 第幾次摸牌
+        /// </summary>
+        int barnd_count;
 
         /// <summary>
         /// 全部玩家集合
@@ -88,6 +93,7 @@ namespace Mahjong.Players
             this.sumBrands = factory.SumBrands;
             this.state = 1;
             this.basic_tai = 50; // 底台設定
+            this.barnd_count = 0;
             this.teamCount = new int[playernumber];
             this.names = new string[playernumber];
             for (int i = 0; i < playernumber;i++ )
@@ -119,6 +125,16 @@ namespace Mahjong.Players
             get
             {
                 return table;
+            }
+        }
+        /// <summary>
+        /// 第幾次摸牌
+        /// </summary>
+        public int Brand_Count
+        {
+            get
+            {
+                return barnd_count;
             }
         }
         /// <summary>
@@ -216,7 +232,7 @@ namespace Mahjong.Players
         /// <returns>牌</returns>
         public Brand nextBrand()
         {
-            if (table.getCount() == 0)
+            if (table.getCount() == 8)
                 return new WordBrand(99);
             else
             {
@@ -224,7 +240,8 @@ namespace Mahjong.Players
                 table.remove(b);
                 lastBrand = b;
                 return b;
-            }            
+            }
+            barnd_count++;
         }
         /// <summary>
         /// 傳回方位
@@ -319,7 +336,6 @@ namespace Mahjong.Players
             brand.IsCanSee = true;
             NowPlayer.remove(brand);
             show_table.add(brand);
-            
         }
     }
 }

@@ -61,12 +61,13 @@
     <Compile Include="AIs\Level 1.cs" />
     <Compile Include="AIs\MahjongAI.cs" />
     <Compile Include="AIs\SimpleAI.cs" />
-    <Compile Include="Control\AiTest.cs" />
+    <Compile Include="Control\Test\AiTest.cs" />
     <Compile Include="Control\Check.cs" />
-    <Compile Include="Control\CheckTest.cs" />
+    <Compile Include="Control\Test\CheckTest.cs" />
     <Compile Include="Control\Deal.cs" />
-    <Compile Include="Control\Mahjong_Main.cs" />
-    <Compile Include="Control\TallyTest.cs">
+    <Compile Include="Control\Test\DealTest.cs" />
+    <Compile Include="Mahjong_Main.cs" />
+    <Compile Include="Control\Test\TallyTest.cs">
     </Compile>
     <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
@@ -75,7 +76,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Brands\Brand.cs" />
-    <Compile Include="Control\BrandsTest.cs" />
+    <Compile Include="Control\Test\BrandsTest.cs" />
     <Compile Include="Brands\BrandFactory.cs" />
     <Compile Include="Brands\FlowerBrand.cs" />
     <Compile Include="Brands\RopeBrand.cs" />

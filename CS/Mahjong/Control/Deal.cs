@@ -28,6 +28,11 @@ namespace Mahjong.Control
         /// </summary>
         BrandPlayer table;
         /// <summary>
+        /// 目前的玩家
+        /// </summary>
+        int state;
+
+        /// <summary>
         /// 建構基本玩家數量和分配數
         /// </summary>
         /// <param name="countbrands">每一個玩家分配數</param>
@@ -39,14 +44,9 @@ namespace Mahjong.Control
             this.countplayer = countplayer;
             this.player = new BrandPlayer[countplayer];
             this.table = table;
-            createPlayer();
-        }
-        private void createPlayer()
-        {
-            for(int i = 0 ; i < countplayer ; i++ )
-            {
+            this.state = 0;
+            for (int i = 0; i < countplayer; i++)
                 this.player[i] = new BrandPlayer();
-            }
         }
         /// <summary>
         /// 建構基本玩家數量和分配數
@@ -59,20 +59,26 @@ namespace Mahjong.Control
             this.countplayer = 4;
             this.player = new BrandPlayer[countplayer];
             this.table = table;
-            createPlayer();
+            this.state = 0;
+            for (int i = 0; i < countplayer; i++)
+                this.player[i] = new BrandPlayer();
         }
         /// <summary>
         /// 分配牌
         /// </summary>
         public void DealBrands()
         {
-            Iterator iterator_temp;
-            iterator_temp = table.creatIterator(countbrands * countplayer);
-            // 移除牌
-            table = removefromtable(iterator_temp, table);
-            iterator_temp = table.creatIterator(countbrands * countplayer);
-            // 分配牌
-            dealtoplayer(iterator_temp);                       
+            BrandPlayer temp = new BrandPlayer();
+            // 讀出數量的牌，並移除
+            for (int i = 0; i < countplayer * countbrands; i++)
+            {
+                Brand brand = table.getBrand(i);
+                temp.add(brand);
+                table.remove(brand);
+            }
+            // 把牌加入玩家
+            for (int i = 0; i < temp.getCount(); i++)
+                player[i % countplayer].add(temp.getBrand(i));
         }
         /// <summary>
         /// 從桌面上移除
@@ -104,16 +110,6 @@ namespace Mahjong.Control
         public BrandPlayer Table
         {
             get { return table; }
-        }
-        /// <summary>
-        /// 從桌面把牌新增到玩家
-        /// </summary>
-        /// <param name="iterator">桌面反覆器</param>
-        void dealtoplayer(Iterator iterator)
-        {
-            while (iterator.hasNext())
-                for (int i = 0; i < countbrands * countplayer; i++)
-                    player[i % countplayer].add( (Brand)iterator.next() );
         }
     }
 }

@@ -50,7 +50,7 @@
             this.toolStripSeparator1,
             this.結束ToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 120);
             // 
             // 新遊戲ToolStripMenuItem
             // 
@@ -106,7 +106,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(692, 670);
+            this.ClientSize = new System.Drawing.Size(692, 570);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Name = "Table";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

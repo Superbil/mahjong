@@ -25,7 +25,8 @@ namespace Mahjong.Control
 
             player = deal.Player;
 
-            //printplayer(player);
+            printplayer(player);
+
             //SimpleAI sa = new SimpleAI();
             //sa.setPlayer(player[0]);
             //PlayerSort bs = new PlayerSort(player[0]);

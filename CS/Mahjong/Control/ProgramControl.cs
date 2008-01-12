@@ -54,7 +54,7 @@ namespace Mahjong.Control
             table.cleanAll();
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
-            rotateTimer.Interval = 500;
+            rotateTimer.Interval = 1000;
             rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             table.Setup(all);   
             all.creatBrands();
@@ -129,13 +129,16 @@ namespace Mahjong.Control
             t.setPlayer(all);
             t.ShowDialog();
         }
-        void pushToTable (Brand b)
+        void pushToTable (Brand brand)
         {            
             //b.IsCanSee = true;
             //all.NowPlayer.remove(b);
             //all.Table.add(b);
-            all.PushToTable(b);
+            rotateTimer.Stop();
+            //MessageBox.Show(brand.getNumber() + brand.getClass());
+            all.PushToTable(brand);
             updatePlayer_Table();
+            rotateTimer.Start();
         }
         void updatePlayer_Table()
         {
@@ -157,7 +160,7 @@ namespace Mahjong.Control
             chat.ShowDialog();
         }
         public void makeBrand(Brand brand)
-        {
+        {            
             pushToTable(brand);
             rotateTimer.Start();
             all.next();
