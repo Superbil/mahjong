@@ -69,11 +69,12 @@ namespace Mahjong.Control
                 updatePlayer_Table();                
             }
             updatePlayer_Table();
-            playgame();
+            //playgame();
+            rotateTimer.Start();
         }
         void playgame()
         {
-            rotateTimer.Start();
+            //rotateTimer.Start();
             // 摸牌給現在的玩家
             Brand nextbrand = all.nextBrand();
             if (nextbrand == null)

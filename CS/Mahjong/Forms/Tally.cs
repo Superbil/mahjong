@@ -473,7 +473,7 @@ namespace Mahjong.Forms
 
         void banker()
         {
-            if ()
+            //if ()
         }
 
         void winagain()

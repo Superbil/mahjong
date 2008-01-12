@@ -47,6 +47,7 @@ namespace Mahjong.Forms
         int height = Mahjong.Properties.Settings.Default.image_h;
         int padding = 1;
         public bool ShowAll;
+        bool ShowBrandInfo;
         Bitmap arrow;
         CPK cpk;
         
@@ -57,21 +58,31 @@ namespace Mahjong.Forms
             this.flowLayoutTable = new FlowLayoutPanel();
             this.pc = pc;
             ShowAll = false;
+            ShowBrandInfo = false;
             this.KeyUp += new KeyEventHandler(Table_KeyUp);            
         }
 
         void Table_KeyUp(object sender, KeyEventArgs e)
         {
             cpk = new CPK();
+            // 按下F8開啟 Debug
             if (e.KeyCode.ToString() == "F8")
             {
                 if (ShowAll)
                     ShowAll = false;
                 else
                     ShowAll = true;
+                cleanImage();
+                addImage();
             }
+            // 按下F7開啟牌的資訊顯示
             if (e.KeyCode.ToString() == "F7")
-                ;
+            {
+                if (ShowBrandInfo)
+                    ShowBrandInfo = false;
+                else
+                    ShowBrandInfo = true;
+            }            
         }
         public void Setup(AllPlayers all)
         {
@@ -89,7 +100,7 @@ namespace Mahjong.Forms
             setFlowLayout_size();
             //setFlowLayout_Margin(10);
             setFlowLayout_Dock();
-            //this.flowLayoutBrands[2].BackColor = Color.Yellow;
+            //this.flowLayoutBrands[4].BackColor = Color.Yellow;
             setFlowLayout_FlowDirection();
         }
 
@@ -199,7 +210,7 @@ namespace Mahjong.Forms
             bitmap.RotateFlip(rotate);
 
             // 提示
-            if (ShowAll)
+            if (ShowAll && ShowBrandInfo)
                 tempBrandbox.Click += new EventHandler(tempBrandbox_Click);
 
             // 滑鼠事件
