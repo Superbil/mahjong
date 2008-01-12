@@ -239,9 +239,9 @@ namespace Mahjong.Players
                 Brand b = table.getBrand(0);
                 table.remove(b);
                 lastBrand = b;
+                barnd_count++;
                 return b;
-            }
-            barnd_count++;
+            }            
         }
         /// <summary>
         /// 傳回方位
