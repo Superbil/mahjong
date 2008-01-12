@@ -22,5 +22,25 @@ namespace Mahjong.Forms
             Kong.Text = Mahjong.Properties.Settings.Default.Kong;
             Win.Text = Mahjong.Properties.Settings.Default.Win;
         }
+
+        private void Chow_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pong_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Kong_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Win_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

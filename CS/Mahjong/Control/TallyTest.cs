@@ -55,6 +55,7 @@ namespace Mahjong.Control
             f = new Tally();
 
             Location l = new Location();
+            f.setPlayer(new AllPlayers(4,16));
             f.setPlayer(a);
             f.setLocation(l,0);
             

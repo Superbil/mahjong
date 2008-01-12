@@ -87,7 +87,6 @@ namespace Mahjong.Forms
             setFlowLayout_size();
             //setFlowLayout_Margin(10);
             setFlowLayout_Dock();
-            //this.flowLayoutBrands[4].BackColor=;
         }
         private void setFlowLayout_name()
         {

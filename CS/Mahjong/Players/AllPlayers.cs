@@ -96,10 +96,10 @@ namespace Mahjong.Players
             for (int i = 0; i < Money.Length; i++)
                 Money[i] = 5000.0;
             win_Times = 0;
-            names[0] = "玩家1";
-            names[1] = "玩家2";
-            names[2] = "玩家3";
-            names[3] = "玩家4";
+            names[0] = "玩家1_北";
+            names[1] = "玩家2_東";
+            names[2] = "玩家3_南";
+            names[3] = "玩家4_西";
         }
         /// <summary>
         /// 玩家陣列
@@ -136,6 +136,10 @@ namespace Mahjong.Players
         /// </summary>
         public string[] Name
         {
+            set
+            {
+                names = value;
+            }
             get
             {
                 return names;
@@ -213,7 +217,7 @@ namespace Mahjong.Players
         public Brand nextBrand()
         {
             if (table.getCount() == 0)
-                return null;
+                return new WordBrand(99);
             else
             {
                 Brand b = table.getBrand(0);
@@ -287,8 +291,8 @@ namespace Mahjong.Players
         {
             int f_count = 0;
             for (int i = 0; i < NowPlayer.getCount(); i++)
-                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower&&
-                    !NowPlayer.getBrand(i).IsCanSee)
+                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower &&
+                    !NowPlayer.getBrand(i).IsCanSee) // 花牌而且不可見
                 {
                     NowPlayer.getBrand(i).IsCanSee = true;
                     NowPlayer.getBrand(i).Team = 0;
@@ -315,6 +319,7 @@ namespace Mahjong.Players
             brand.IsCanSee = true;
             NowPlayer.remove(brand);
             show_table.add(brand);
+            
         }
     }
 }
