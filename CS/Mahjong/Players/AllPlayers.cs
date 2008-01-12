@@ -66,6 +66,10 @@ namespace Mahjong.Players
         /// 玩家姓名
         /// </summary>
         string[] names;
+        /// <summary>
+        /// 底台
+        /// </summary>
+        public int basic_tai;
 
         /// <summary>
         /// 全部玩家集合
@@ -83,6 +87,7 @@ namespace Mahjong.Players
             this.countplayers = playernumber;
             this.sumBrands = factory.SumBrands;
             this.state = 1;
+            this.basic_tai = 50; // 底台設定
             this.teamCount = new int[playernumber];
             this.names = new string[playernumber];
             for (int i = 0; i < playernumber;i++ )
