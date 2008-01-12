@@ -61,6 +61,7 @@ namespace Mahjong.Forms
             green();
             red();
             test();
+            winagain();
             bigthree();
             east();
             south();
@@ -73,9 +74,9 @@ namespace Mahjong.Forms
             //samecarve();
             ponpon();
             //sky();
-            allplayer();
+            //allplayer();
             score();
-            sum();
+            //sum();
             labeltally.Text = tally.ToString();
         }
 
@@ -95,7 +96,6 @@ namespace Mahjong.Forms
                         i++;
                     count++;
                 }
-                labeltally.Text = tally.ToString();
                 if (count == 5)
                 {
                     textBox1.Text += "¸I¸I­J\r\n";
@@ -223,6 +223,7 @@ namespace Mahjong.Forms
                         i++;
                     temp += 1;
                 }
+                
             //tally += 1;
 
 
@@ -462,10 +463,29 @@ namespace Mahjong.Forms
 
         void score()
         {
-            score1.Text = all.basic_tai + labeltally.Text;
-            score2.Text = all.basic_tai + labeltally.Text;
-            score3.Text = all.basic_tai + labeltally.Text;
-            score4.Text = all.basic_tai + labeltally.Text;
+            int t = all.basic_tai + Convert.ToInt16(tally);
+            //textBox1.Text += labeltally.ToString();
+            score1.Text = t.ToString();
+            score2.Text = t.ToString();
+            score3.Text = t.ToString();
+            score4.Text = t.ToString();
+        }
+
+        void banker()
+        {
+            if ()
+        }
+
+        void winagain()
+        {
+            string s="";
+            if (l.Position == l.Winer)
+                s = "²ø®a³s"+ win_count.ToString() +"©Ô"+ win_count.ToString()+"\r\n";
+                textBox1.Text += s;
+                tally += win_count *2; 
+                
+            //else if (l.Position == location.South)
+                
         }
     }
 }

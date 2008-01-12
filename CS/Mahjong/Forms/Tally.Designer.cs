@@ -141,35 +141,35 @@
             // 
             // player1
             // 
+            this.player1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.player1.Location = new System.Drawing.Point(116, 9);
             this.player1.Name = "player1";
             this.player1.Size = new System.Drawing.Size(89, 23);
             this.player1.TabIndex = 9;
-            this.player1.Text = "1";
             // 
             // player2
             // 
+            this.player2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.player2.Location = new System.Drawing.Point(211, 9);
             this.player2.Name = "player2";
             this.player2.Size = new System.Drawing.Size(100, 23);
             this.player2.TabIndex = 10;
-            this.player2.Text = "2";
             // 
             // player3
             // 
+            this.player3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.player3.Location = new System.Drawing.Point(317, 9);
             this.player3.Name = "player3";
             this.player3.Size = new System.Drawing.Size(100, 23);
             this.player3.TabIndex = 11;
-            this.player3.Text = "3";
             // 
             // player4
             // 
+            this.player4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.player4.Location = new System.Drawing.Point(424, 9);
             this.player4.Name = "player4";
             this.player4.Size = new System.Drawing.Size(100, 23);
             this.player4.TabIndex = 12;
-            this.player4.Text = "4";
             // 
             // sum1
             // 
@@ -177,7 +177,6 @@
             this.sum1.Name = "sum1";
             this.sum1.Size = new System.Drawing.Size(69, 23);
             this.sum1.TabIndex = 13;
-            this.sum1.Text = "1";
             // 
             // sum2
             // 
@@ -185,7 +184,6 @@
             this.sum2.Name = "sum2";
             this.sum2.Size = new System.Drawing.Size(69, 23);
             this.sum2.TabIndex = 14;
-            this.sum2.Text = "2";
             // 
             // sum3
             // 
@@ -193,7 +191,6 @@
             this.sum3.Name = "sum3";
             this.sum3.Size = new System.Drawing.Size(69, 23);
             this.sum3.TabIndex = 15;
-            this.sum3.Text = "3";
             // 
             // sum4
             // 
@@ -201,39 +198,38 @@
             this.sum4.Name = "sum4";
             this.sum4.Size = new System.Drawing.Size(69, 23);
             this.sum4.TabIndex = 16;
-            this.sum4.Text = "4";
             // 
             // score1
             // 
+            this.score1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.score1.Location = new System.Drawing.Point(122, 75);
             this.score1.Name = "score1";
             this.score1.Size = new System.Drawing.Size(69, 23);
             this.score1.TabIndex = 17;
-            this.score1.Text = "1";
             // 
             // score2
             // 
+            this.score2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.score2.Location = new System.Drawing.Point(211, 75);
             this.score2.Name = "score2";
             this.score2.Size = new System.Drawing.Size(69, 23);
             this.score2.TabIndex = 18;
-            this.score2.Text = "2";
             // 
             // score3
             // 
+            this.score3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.score3.Location = new System.Drawing.Point(317, 75);
             this.score3.Name = "score3";
             this.score3.Size = new System.Drawing.Size(69, 23);
             this.score3.TabIndex = 19;
-            this.score3.Text = "3";
             // 
             // score4
             // 
+            this.score4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.score4.Location = new System.Drawing.Point(424, 75);
             this.score4.Name = "score4";
             this.score4.Size = new System.Drawing.Size(69, 23);
             this.score4.TabIndex = 20;
-            this.score4.Text = "4";
             // 
             // Tally
             // 
