@@ -96,5 +96,32 @@ namespace Mahjong.Control
             else
                 lo = location.East;
         }
+        /// <summary>
+        /// 位置轉換成字串
+        /// </summary>
+        /// <param name="lo">位置</param>
+        /// <returns>字串</returns>
+        string location_to_string(location lo)
+        {
+            if (lo == location.East)
+                return Mahjong.Properties.Settings.Default.East;
+            else if (lo == location.South)
+                return Mahjong.Properties.Settings.Default.South;
+            else if (lo == location.West)
+                return Mahjong.Properties.Settings.Default.West;
+            else if (lo == location.North)
+                return Mahjong.Properties.Settings.Default.Nouth;
+            else
+                return "";
+        }
+        public override string ToString()
+        {
+            string temp="";
+            temp += location_to_string(round);
+            temp += Mahjong.Properties.Settings.Default.Round;
+            temp += location_to_string(position);
+            temp += Mahjong.Properties.Settings.Default.Position;
+            return temp;
+        }
     }
 }

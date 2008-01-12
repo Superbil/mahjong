@@ -27,10 +27,6 @@ namespace Mahjong.Control
         /// 桌面,牌的來源
         /// </summary>
         BrandPlayer table;
-        /// <summary>
-        /// 目前的玩家
-        /// </summary>
-        int state;
 
         /// <summary>
         /// 建構基本玩家數量和分配數
@@ -44,7 +40,6 @@ namespace Mahjong.Control
             this.countplayer = countplayer;
             this.player = new BrandPlayer[countplayer];
             this.table = table;
-            this.state = 0;
             for (int i = 0; i < countplayer; i++)
                 this.player[i] = new BrandPlayer();
         }
@@ -59,7 +54,6 @@ namespace Mahjong.Control
             this.countplayer = 4;
             this.player = new BrandPlayer[countplayer];
             this.table = table;
-            this.state = 0;
             for (int i = 0; i < countplayer; i++)
                 this.player[i] = new BrandPlayer();
         }

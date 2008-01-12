@@ -99,8 +99,7 @@ namespace Mahjong.Players
             for (int i = 0; i < playernumber;i++ )
                 teamCount[i]=0;            
             Money = new double[playernumber];
-            for (int i = 0; i < Money.Length; i++)
-                Money[i] = 5000.0;
+            setBasicMoney(5000.0);
             win_Times = 0;
             names[0] = "玩家1_北";
             names[1] = "玩家2_東";
@@ -232,16 +231,21 @@ namespace Mahjong.Players
         /// <returns>牌</returns>
         public Brand nextBrand()
         {
-            if (table.getCount() == 8)
-                return new WordBrand(99);
+            if (table.getCount() == 8) // 保留8張不摸
+                throw new Exception();
             else
             {
-                Brand b = table.getBrand(0);
-                table.remove(b);
-                lastBrand = b;
+                Brand b = nextTableBrand();
                 barnd_count++;
                 return b;
             }            
+        }
+        Brand nextTableBrand()
+        {
+            Brand b = table.getBrand(0);
+            table.remove(b);
+            lastBrand = b;
+            return b;
         }
         /// <summary>
         /// 傳回方位
@@ -263,6 +267,15 @@ namespace Mahjong.Players
             this.state = 0;
             for (int i = 0; i < countplayers; i++)
                 teamCount[i] = 0;   
+        }
+        /// <summary>
+        /// 設定玩家的基本金錢
+        /// </summary>
+        /// <param name="number"></param>
+        public void setBasicMoney(double number)
+        {
+            for (int i = 0; i < Money.Length; i++)
+                Money[i] = number;
         }
         /// <summary>
         /// 吃、碰
@@ -317,7 +330,7 @@ namespace Mahjong.Players
                 }
             // 補上少的牌數
             for (int i = 0; i < f_count; i++)
-                NowPlayer.add( nextBrand() );
+                NowPlayer.add( nextTableBrand() );
         }
         /// <summary>
         /// 現在的玩家排序

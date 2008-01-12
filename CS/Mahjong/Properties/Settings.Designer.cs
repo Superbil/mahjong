@@ -202,5 +202,32 @@ namespace Mahjong.Properties {
                 return ((string)(this["ReadytoWin"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("風")]
+        public string Round {
+            get {
+                return ((string)(this["Round"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("局")]
+        public string Position {
+            get {
+                return ((string)(this["Position"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("十六張麻將遊戲")]
+        public string Title {
+            get {
+                return ((string)(this["Title"]));
+            }
+        }
     }
 }

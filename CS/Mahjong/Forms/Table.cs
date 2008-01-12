@@ -41,7 +41,7 @@ namespace Mahjong.Forms
     {
         ProgramControl pc;
         private FlowLayoutPanel[] flowLayoutBrands;
-        FlowLayoutPanel flowLayoutTable;
+        FlowLayoutPanel flowLayoutInfoTable;
         AllPlayers all;
         int width = Mahjong.Properties.Settings.Default.image_w;
         int height = Mahjong.Properties.Settings.Default.image_h;
@@ -55,7 +55,7 @@ namespace Mahjong.Forms
         {
             InitializeComponent();
             this.flowLayoutBrands = new FlowLayoutPanel[5];
-            this.flowLayoutTable = new FlowLayoutPanel();
+            this.flowLayoutInfoTable = new FlowLayoutPanel();
             this.pc = pc;
             ShowAll = false;
             ShowBrandInfo = false;
@@ -89,6 +89,23 @@ namespace Mahjong.Forms
             this.all = all;
             arrow = Mahjong.Properties.Resources.a;
             setFlowLayout();
+            setLocationInfo();
+            setTitle();
+        }
+
+        private void setTitle()
+        {
+            this.Text = Mahjong.Properties.Settings.Default.Title;
+            this.Text += " - ";
+            this.Text += all.getLocation().ToString();
+            this.Text += " (";
+            this.Text += all.Brand_Count.ToString();
+            this.Text += ")";
+        }     
+
+        private void setLocationInfo()
+        {
+            //throw new Exception("The method or operation is not implemented.");
         }
         private void setFlowLayout()
         {
@@ -100,8 +117,9 @@ namespace Mahjong.Forms
             setFlowLayout_size();
             //setFlowLayout_Margin(10);
             setFlowLayout_Dock();
-            //this.flowLayoutBrands[4].BackColor = Color.Yellow;
+            //this.flowLayoutBrands[4].BackColor = Color.Blue;
             setFlowLayout_FlowDirection();
+            //this.flowLayoutInfoTable.BackColor = Color.Yellow;
         }
 
         private void setFlowLayout_FlowDirection()
@@ -125,7 +143,7 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[2].Size = new Size((width + padding * 2) * all.Dealnumber, height * 2 + padding * 2);
             this.flowLayoutBrands[3].Size = new Size(height * 2 + padding * 2, (width * 2 + padding * 2) * all.Dealnumber);
             this.flowLayoutBrands[4].Size = new Size(width * all.Dealnumber + padding * 2, height * (all.sumBrands / all.Dealnumber) + padding * 2);
-            this.flowLayoutTable.Size = new Size(width * all.Dealnumber + padding * 2, height * (all.sumBrands / all.Dealnumber) + padding * 2);
+            this.flowLayoutInfoTable.Size = new Size(width * all.Dealnumber + padding * 2, height * (all.sumBrands / all.Dealnumber) + padding * 2);
         }
         private void setFlowLayout_location(int keepsize)
         {
@@ -134,7 +152,8 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[2].Location = new Point(keepsize * 2 + height + padding * 2, keepsize * 3 + width * (all.Dealnumber + 1) + padding * 2 + height);
             this.flowLayoutBrands[3].Location = new Point(keepsize, keepsize * 2 + height + padding * 2);
             this.flowLayoutBrands[4].Location = new Point(keepsize * 2 + (height * 2 + padding * 2), keepsize * 2 + (height * 2 + padding * 2));
-            this.flowLayoutTable.Location = new Point(keepsize * 2 + (height * 2 + padding * 2), (keepsize * 2 + (height * 2 + padding * 2)) * 2);
+            this.flowLayoutInfoTable.Location = new Point(keepsize * 2 + (height * 2 + padding * 2), 
+                keepsize * 2 + (height * 2 + padding * 2) + (all.sumBrands / all.Dealnumber) * height);
         }
         void setFlowLayout_Dock()
         {
@@ -142,7 +161,8 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[1].Dock = DockStyle.Right;
             this.flowLayoutBrands[2].Dock = DockStyle.Bottom;
             this.flowLayoutBrands[3].Dock = DockStyle.Left;
-            this.flowLayoutBrands[4].Dock = DockStyle.None;            
+            this.flowLayoutBrands[4].Dock = DockStyle.None;
+            this.flowLayoutInfoTable.Dock = DockStyle.None;
         }
         private void setFlowLayout_Margin(int size)
         {
@@ -332,7 +352,7 @@ namespace Mahjong.Forms
         {
             flowLayoutBrands[(int)State.Table].Controls.Clear();
             addShowTable();
-
+            setTitle();
         }
         private void ·s¹CÀ¸ToolStripMenuItem_Click(object sender, EventArgs e)
         {
