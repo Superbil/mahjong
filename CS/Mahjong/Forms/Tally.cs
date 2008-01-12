@@ -36,6 +36,7 @@ namespace Mahjong.Forms
         public void setPlayer(BrandPlayer player)
         {
             x = player;
+            all.Players[location.North];
         }
         /// <summary>
         /// 設定方位

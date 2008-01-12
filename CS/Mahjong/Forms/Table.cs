@@ -62,11 +62,14 @@ namespace Mahjong.Forms
         {
             cpk = new CPK();
             if (e.KeyCode.ToString() == "F8")
-            {   
-                cpk.Show();
+            {
+                if (ShowAll)
+                    ShowAll = false;
+                else
+                    ShowAll = true;
             }
-            if (e.KeyCode.ToString() == "F7")
-                ;
+            //if (e.KeyCode.ToString() == "F7")
+            //    ;
         }
         public void Setup(AllPlayers all)
         {
@@ -295,13 +298,13 @@ namespace Mahjong.Forms
                 case 2:
                     flowLayoutBrands[all.state].Controls.Clear();
                     addSouth();
-                    break;                
+                    break;
             }
         }
         public void updateTable()
         {
             flowLayoutBrands[(int)State.Table].Controls.Clear();
-            addTable();
+            addTable();            
         }
         private void ·s¹CÀ¸ToolStripMenuItem_Click(object sender, EventArgs e)
         {

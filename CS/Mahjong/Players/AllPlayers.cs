@@ -62,6 +62,10 @@ namespace Mahjong.Players
         /// 連莊次數
         /// </summary>
         int win_Times;
+        /// <summary>
+        /// 玩家姓名
+        /// </summary>
+        string[] names;
 
         /// <summary>
         /// 全部玩家集合
@@ -80,12 +84,17 @@ namespace Mahjong.Players
             this.sumBrands = factory.SumBrands;
             this.state = 1;
             this.teamCount = new int[playernumber];
+            this.names = new string[playernumber];
             for (int i = 0; i < playernumber;i++ )
                 teamCount[i]=0;            
             Money = new double[playernumber];
             for (int i = 0; i < Money.Length; i++)
                 Money[i] = 5000.0;
             win_Times = 0;
+            names[0] = "玩家1";
+            names[1] = "玩家2";
+            names[2] = "玩家3";
+            names[3] = "玩家4";
         }
         /// <summary>
         /// 玩家陣列
@@ -107,11 +116,24 @@ namespace Mahjong.Players
                 return table;
             }
         }
+        /// <summary>
+        /// 顯示的桌面
+        /// </summary>
         public BrandPlayer Show_Table
         {
             get
             {
                 return show_table;
+            }
+        }
+        /// <summary>
+        /// 玩家姓名
+        /// </summary>
+        public string[] Name
+        {
+            get
+            {
+                return names;
             }
         }
         /// <summary>

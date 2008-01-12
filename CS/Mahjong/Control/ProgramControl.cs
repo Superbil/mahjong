@@ -110,6 +110,7 @@ namespace Mahjong.Control
                             Ai.setPlayer(all.NowPlayer);
                             Brand b = Ai.getReadyBrand();
                             pushToTable(b);
+                            
                             all.next();
                         }
                     }
