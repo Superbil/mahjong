@@ -66,6 +66,12 @@
     <Compile Include="Control\Test\CheckTest.cs" />
     <Compile Include="Control\Deal.cs" />
     <Compile Include="Control\Test\DealTest.cs" />
+    <Compile Include="Forms\Information.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Information.Designer.cs">
+      <DependentUpon>Information.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mahjong_Main.cs" />
     <Compile Include="Control\Test\TallyTest.cs">
     </Compile>
@@ -139,6 +145,10 @@
     <EmbeddedResource Include="Forms\CPK.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CPK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Information.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Information.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Tally.resx">
       <SubType>Designer</SubType>

@@ -49,6 +49,7 @@ namespace Mahjong.Forms
         public bool ShowAll;
         bool ShowBrandInfo;
         Bitmap arrow;
+        
         CPK cpk;
         
         public Table(ProgramControl pc)
@@ -64,16 +65,16 @@ namespace Mahjong.Forms
 
         void Table_KeyUp(object sender, KeyEventArgs e)
         {
-            cpk = new CPK();
             // 按下F8開啟 Debug
             if (e.KeyCode.ToString() == "F8")
             {
                 if (ShowAll)
-                    ShowAll = false;
+                    ShowAll = false;                    
                 else
                     ShowAll = true;
                 cleanImage();
                 addImage();
+                setTitle();
             }
             // 按下F7開啟牌的資訊顯示
             if (e.KeyCode.ToString() == "F7")
@@ -82,31 +83,34 @@ namespace Mahjong.Forms
                     ShowBrandInfo = false;
                 else
                     ShowBrandInfo = true;
-            }            
+            }
+            if (e.KeyCode.ToString() == "F6")
+            {
+              
+            }
         }
         public void Setup(AllPlayers all)
         {
             this.all = all;
             arrow = Mahjong.Properties.Resources.a;
             setFlowLayout();
-            setLocationInfo();
             setTitle();
         }
 
         private void setTitle()
         {
-            this.Text = Mahjong.Properties.Settings.Default.Title;
-            this.Text += " - ";
-            this.Text += all.getLocation().ToString();
-            this.Text += " (";
-            this.Text += all.Brand_Count.ToString();
-            this.Text += ")";
+            string s;
+            s = Mahjong.Properties.Settings.Default.Title;
+            if (ShowAll)
+                s += " - Debug";
+            this.Text = s;
         }     
 
-        private void setLocationInfo()
+        private void setInforamtion()
         {
-            //throw new Exception("The method or operation is not implemented.");
+            pc.setInforamtion();
         }
+
         private void setFlowLayout()
         {
             for (int i = 0; i < flowLayoutBrands.Length; i++)
@@ -118,8 +122,7 @@ namespace Mahjong.Forms
             //setFlowLayout_Margin(10);
             setFlowLayout_Dock();
             //this.flowLayoutBrands[4].BackColor = Color.Blue;
-            setFlowLayout_FlowDirection();
-            //this.flowLayoutInfoTable.BackColor = Color.Yellow;
+            setFlowLayout_FlowDirection();            
         }
 
         private void setFlowLayout_FlowDirection()
@@ -148,12 +151,14 @@ namespace Mahjong.Forms
         private void setFlowLayout_location(int keepsize)
         {
             this.flowLayoutBrands[0].Location = new Point(keepsize * 2 + (height + padding * 2), keepsize);
-            this.flowLayoutBrands[1].Location = new Point(keepsize * 3 + height + padding * 2 + (width + padding * 2) * all.Dealnumber, keepsize * 2 + height + padding * 2);
-            this.flowLayoutBrands[2].Location = new Point(keepsize * 2 + height + padding * 2, keepsize * 3 + width * (all.Dealnumber + 1) + padding * 2 + height);
+            this.flowLayoutBrands[1].Location = new Point(
+                keepsize * 3 + height + padding * 2 + (width + padding * 2) * all.Dealnumber, keepsize * 2 + height + padding * 2);
+            this.flowLayoutBrands[2].Location = new Point(
+                keepsize * 2 + height + padding * 2, keepsize * 3 + width * (all.Dealnumber + 1) + padding * 2 + height);
             this.flowLayoutBrands[3].Location = new Point(keepsize, keepsize * 2 + height + padding * 2);
             this.flowLayoutBrands[4].Location = new Point(keepsize * 2 + (height * 2 + padding * 2), keepsize * 2 + (height * 2 + padding * 2));
-            this.flowLayoutInfoTable.Location = new Point(keepsize * 2 + (height * 2 + padding * 2), 
-                keepsize * 2 + (height * 2 + padding * 2) + (all.sumBrands / all.Dealnumber) * height);
+            this.flowLayoutInfoTable.Location = new Point(
+                keepsize * 2 + (height * 2 + padding * 2),keepsize * 2 + (height * 2 + padding * 2) + (all.sumBrands / all.Dealnumber) * height);
         }
         void setFlowLayout_Dock()
         {
@@ -162,7 +167,7 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[2].Dock = DockStyle.Bottom;
             this.flowLayoutBrands[3].Dock = DockStyle.Left;
             this.flowLayoutBrands[4].Dock = DockStyle.None;
-            this.flowLayoutInfoTable.Dock = DockStyle.None;
+            this.flowLayoutInfoTable.Dock = DockStyle.Fill;
         }
         private void setFlowLayout_Margin(int size)
         {
@@ -353,6 +358,7 @@ namespace Mahjong.Forms
             flowLayoutBrands[(int)State.Table].Controls.Clear();
             addShowTable();
             setTitle();
+            setInforamtion();
         }
         private void 新遊戲ToolStripMenuItem_Click(object sender, EventArgs e)
         {

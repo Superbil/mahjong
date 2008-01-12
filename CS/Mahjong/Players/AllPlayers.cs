@@ -58,7 +58,7 @@ namespace Mahjong.Players
         /// <summary>
         /// 玩家所有的錢
         /// </summary>
-        double[] Money;
+        double[] money;
         /// <summary>
         /// 連莊次數
         /// </summary>
@@ -98,7 +98,7 @@ namespace Mahjong.Players
             this.names = new string[playernumber];
             for (int i = 0; i < playernumber;i++ )
                 teamCount[i]=0;            
-            Money = new double[playernumber];
+            money = new double[playernumber];
             setBasicMoney(5000.0);
             win_Times = 0;
             names[0] = "玩家1_北";
@@ -182,6 +182,16 @@ namespace Mahjong.Players
             get
             {
                 return win_Times;
+            }
+        }
+        /// <summary>
+        /// 傳回玩家的金錢
+        /// </summary>
+        public double[] Money
+        {
+            get
+            {
+                return money;
             }
         }
         /// <summary>
@@ -274,8 +284,8 @@ namespace Mahjong.Players
         /// <param name="number"></param>
         public void setBasicMoney(double number)
         {
-            for (int i = 0; i < Money.Length; i++)
-                Money[i] = number;
+            for (int i = 0; i < money.Length; i++)
+                money[i] = number;
         }
         /// <summary>
         /// 吃、碰
@@ -304,7 +314,7 @@ namespace Mahjong.Players
         /// <param name="player">玩家</param>
         private void set_Team(BrandPlayer player,bool isCanSee)
         {
-            teamCount[state] += 1;
+            teamCount[state]++;
             for (int i = 0; i < player.getCount(); i++)
                 NowPlayer.remove(player.getBrand(i));
             for (int i = 0; i < player.getCount(); i++)
@@ -325,7 +335,7 @@ namespace Mahjong.Players
                     !NowPlayer.getBrand(i).IsCanSee) // 花牌而且不可見
                 {
                     NowPlayer.getBrand(i).IsCanSee = true;
-                    NowPlayer.getBrand(i).Team = 0;
+                    NowPlayer.getBrand(i).Team = 1;
                     f_count++;
                 }
             // 補上少的牌數
