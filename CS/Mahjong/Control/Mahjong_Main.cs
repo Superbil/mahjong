@@ -15,13 +15,13 @@ namespace Mahjong.Control
         static void Main()
         {
             // 祘Α北
-            //new ProgramControl();
+            new ProgramControl();
             // 代刚礟㎝玻ネ礟
             //new BrandsTest();
             // 代刚AI
             //new AiTest();
             // 代刚计璸衡
-            new TallyTest();
+            //new TallyTest();
             // 代刚琌璊礟
             //new CheckTest();
         }
