@@ -50,7 +50,7 @@
             this.toolStripSeparator1,
             this.結束ToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 142);
             // 
             // 新遊戲ToolStripMenuItem
             // 

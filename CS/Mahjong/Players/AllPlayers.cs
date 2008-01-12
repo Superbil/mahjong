@@ -260,7 +260,8 @@ namespace Mahjong.Players
         {
             int f_count = 0;
             for (int i = 0; i < NowPlayer.getCount(); i++)
-                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower)
+                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower&&
+                    !NowPlayer.getBrand(i).IsCanSee)
                 {
                     NowPlayer.getBrand(i).IsCanSee = true;
                     NowPlayer.getBrand(i).Team = 0;

@@ -47,6 +47,7 @@ namespace Mahjong.Forms
         int padding = 1;
         public bool ShowAll;
         Bitmap arrow;
+        CPK cpk;
         
         public Table(ProgramControl pc)
         {
@@ -54,12 +55,17 @@ namespace Mahjong.Forms
             this.flowLayoutBrands = new FlowLayoutPanel[5];
             this.pc = pc;
             ShowAll = false;
-            this.KeyUp += new KeyEventHandler(Table_KeyUp);
+            this.KeyUp += new KeyEventHandler(Table_KeyUp);            
         }
 
         void Table_KeyUp(object sender, KeyEventArgs e)
         {
+            cpk = new CPK();
             if (e.KeyCode.ToString() == "F8")
+            {   
+                cpk.Show();
+            }
+            if (e.KeyCode.ToString() == "F7")
                 ;
         }
         public void Setup(AllPlayers all)

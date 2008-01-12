@@ -54,7 +54,7 @@ namespace Mahjong.Control
             table.cleanAll();
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
-            rotateTimer.Interval = 1000;
+            rotateTimer.Interval = 500;
             rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             table.Setup(all);   
             all.creatBrands();
@@ -96,19 +96,22 @@ namespace Mahjong.Control
                 {
                     if (all.state == 2) // 人
                         rotateTimer.Stop();
-                    else if (c.Kong()) // 被槓
-                        ;
-                    else if (c.Pong()) // 被碰
-                        ;
-                    else if (c.Chow()) // 被吃
-                        ;
                     else
                     {
-                        Ai = new Level_1();
-                        Ai.setPlayer(all.NowPlayer);
-                        Brand b = Ai.getReadyBrand();
-                        pushToTable(b);
-                        all.next();
+                        if (c.Kong()) // 被槓
+                            ;
+                        else if (c.Pong()) // 被碰
+                            ;
+                        else if (c.Chow()) // 被吃
+                            ;
+                        else
+                        {
+                            Ai = new Level_1();
+                            Ai.setPlayer(all.NowPlayer);
+                            Brand b = Ai.getReadyBrand();
+                            pushToTable(b);
+                            all.next();
+                        }
                     }
                 }
             }
