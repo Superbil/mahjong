@@ -37,6 +37,18 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.labeltally = new System.Windows.Forms.Label();
+            this.player1 = new System.Windows.Forms.Label();
+            this.player2 = new System.Windows.Forms.Label();
+            this.player3 = new System.Windows.Forms.Label();
+            this.player4 = new System.Windows.Forms.Label();
+            this.sum1 = new System.Windows.Forms.Label();
+            this.sum2 = new System.Windows.Forms.Label();
+            this.sum3 = new System.Windows.Forms.Label();
+            this.sum4 = new System.Windows.Forms.Label();
+            this.score1 = new System.Windows.Forms.Label();
+            this.score2 = new System.Windows.Forms.Label();
+            this.score3 = new System.Windows.Forms.Label();
+            this.score4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Textlable
@@ -111,7 +123,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(393, 292);
+            this.button1.Location = new System.Drawing.Point(397, 292);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 39);
             this.button1.TabIndex = 7;
@@ -121,18 +133,125 @@
             // 
             // labeltally
             // 
-            this.labeltally.AutoSize = true;
             this.labeltally.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.labeltally.Location = new System.Drawing.Point(307, 198);
+            this.labeltally.Location = new System.Drawing.Point(299, 198);
             this.labeltally.Name = "labeltally";
-            this.labeltally.Size = new System.Drawing.Size(0, 19);
+            this.labeltally.Size = new System.Drawing.Size(39, 19);
             this.labeltally.TabIndex = 8;
+            // 
+            // player1
+            // 
+            this.player1.Location = new System.Drawing.Point(116, 9);
+            this.player1.Name = "player1";
+            this.player1.Size = new System.Drawing.Size(89, 23);
+            this.player1.TabIndex = 9;
+            this.player1.Text = "1";
+            // 
+            // player2
+            // 
+            this.player2.Location = new System.Drawing.Point(211, 9);
+            this.player2.Name = "player2";
+            this.player2.Size = new System.Drawing.Size(100, 23);
+            this.player2.TabIndex = 10;
+            this.player2.Text = "2";
+            // 
+            // player3
+            // 
+            this.player3.Location = new System.Drawing.Point(317, 9);
+            this.player3.Name = "player3";
+            this.player3.Size = new System.Drawing.Size(100, 23);
+            this.player3.TabIndex = 11;
+            this.player3.Text = "3";
+            // 
+            // player4
+            // 
+            this.player4.Location = new System.Drawing.Point(424, 9);
+            this.player4.Name = "player4";
+            this.player4.Size = new System.Drawing.Size(100, 23);
+            this.player4.TabIndex = 12;
+            this.player4.Text = "4";
+            // 
+            // sum1
+            // 
+            this.sum1.Location = new System.Drawing.Point(122, 45);
+            this.sum1.Name = "sum1";
+            this.sum1.Size = new System.Drawing.Size(69, 23);
+            this.sum1.TabIndex = 13;
+            this.sum1.Text = "1";
+            // 
+            // sum2
+            // 
+            this.sum2.Location = new System.Drawing.Point(211, 45);
+            this.sum2.Name = "sum2";
+            this.sum2.Size = new System.Drawing.Size(69, 23);
+            this.sum2.TabIndex = 14;
+            this.sum2.Text = "2";
+            // 
+            // sum3
+            // 
+            this.sum3.Location = new System.Drawing.Point(317, 45);
+            this.sum3.Name = "sum3";
+            this.sum3.Size = new System.Drawing.Size(69, 23);
+            this.sum3.TabIndex = 15;
+            this.sum3.Text = "3";
+            // 
+            // sum4
+            // 
+            this.sum4.Location = new System.Drawing.Point(424, 45);
+            this.sum4.Name = "sum4";
+            this.sum4.Size = new System.Drawing.Size(69, 23);
+            this.sum4.TabIndex = 16;
+            this.sum4.Text = "4";
+            // 
+            // score1
+            // 
+            this.score1.Location = new System.Drawing.Point(122, 75);
+            this.score1.Name = "score1";
+            this.score1.Size = new System.Drawing.Size(69, 23);
+            this.score1.TabIndex = 17;
+            this.score1.Text = "1";
+            // 
+            // score2
+            // 
+            this.score2.Location = new System.Drawing.Point(211, 75);
+            this.score2.Name = "score2";
+            this.score2.Size = new System.Drawing.Size(69, 23);
+            this.score2.TabIndex = 18;
+            this.score2.Text = "2";
+            // 
+            // score3
+            // 
+            this.score3.Location = new System.Drawing.Point(317, 75);
+            this.score3.Name = "score3";
+            this.score3.Size = new System.Drawing.Size(69, 23);
+            this.score3.TabIndex = 19;
+            this.score3.Text = "3";
+            // 
+            // score4
+            // 
+            this.score4.Location = new System.Drawing.Point(424, 75);
+            this.score4.Name = "score4";
+            this.score4.Size = new System.Drawing.Size(69, 23);
+            this.score4.TabIndex = 20;
+            this.score4.Text = "4";
             // 
             // Tally
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(517, 350);
+            this.ClientSize = new System.Drawing.Size(524, 350);
+            this.Controls.Add(this.score4);
+            this.Controls.Add(this.score3);
+            this.Controls.Add(this.score2);
+            this.Controls.Add(this.score1);
+            this.Controls.Add(this.sum4);
+            this.Controls.Add(this.sum3);
+            this.Controls.Add(this.sum2);
+            this.Controls.Add(this.sum1);
+            this.Controls.Add(this.player4);
+            this.Controls.Add(this.player3);
+            this.Controls.Add(this.player2);
+            this.Controls.Add(this.player1);
             this.Controls.Add(this.labeltally);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
@@ -161,5 +280,17 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label labeltally;
+        private System.Windows.Forms.Label player1;
+        private System.Windows.Forms.Label player2;
+        private System.Windows.Forms.Label player3;
+        private System.Windows.Forms.Label player4;
+        private System.Windows.Forms.Label sum1;
+        private System.Windows.Forms.Label sum2;
+        private System.Windows.Forms.Label sum3;
+        private System.Windows.Forms.Label sum4;
+        private System.Windows.Forms.Label score1;
+        private System.Windows.Forms.Label score2;
+        private System.Windows.Forms.Label score3;
+        private System.Windows.Forms.Label score4;
     }
 }
