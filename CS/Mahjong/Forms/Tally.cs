@@ -60,7 +60,7 @@ namespace Mahjong.Forms
             white();
             green();
             red();
-            test();
+            //test();
             winagain();
             bigthree();
             east();
@@ -74,9 +74,9 @@ namespace Mahjong.Forms
             //samecarve();
             ponpon();
             //sky();
-            //allplayer();
+            allplayer();
             score();
-            //sum();
+            sum();
             labeltally.Text = tally.ToString();
         }
 
@@ -471,19 +471,24 @@ namespace Mahjong.Forms
             score4.Text = t.ToString();
         }
 
-        void banker()
+        /*void banker()
         {
             //if ()
-        }
+        }*/
 
         void winagain()
         {
             string s="";
-            if (l.Position == l.Winer)
+            if (l.Position == l.Winer && all.Win_Times >0)
                 s = "莊家連"+ win_count.ToString() +"拉"+ win_count.ToString()+"\r\n";
                 textBox1.Text += s;
-                tally += win_count *2; 
-                
+                tally += win_count *2;
+                if (all.state == (int)l.Winer)
+                {
+                    textBox1.Text += "莊家放槍\r\n";
+                    tally -= 1;
+                }
+               
             //else if (l.Position == location.South)
                 
         }
