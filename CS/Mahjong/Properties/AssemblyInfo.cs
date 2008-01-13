@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("單人或多人(連線)的簡易十六張麻將遊戲")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MaHjong")]
+[assembly: AssemblyProduct("Mahjong")]
 [assembly: AssemblyCopyright("Copyright (C) Fantasy 2006")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

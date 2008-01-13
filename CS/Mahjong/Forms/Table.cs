@@ -64,7 +64,7 @@ namespace Mahjong.Forms
         void Table_KeyUp(object sender, KeyEventArgs e)
         {
             // 按下F8開啟 Debug
-            if (e.KeyCode.ToString() == "F8")
+            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.DebugKey)
             {
                 if (ShowAll)
                     ShowAll = false;                    
@@ -75,17 +75,17 @@ namespace Mahjong.Forms
                 setTitle();
             }
             // 按下F7開啟牌的資訊顯示
-            if (e.KeyCode.ToString() == "F7")
+            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.DebugInformationKey)
             {
                 if (ShowBrandInfo)
                     ShowBrandInfo = false;
                 else
                     ShowBrandInfo = true;
             }
-            if (e.KeyCode.ToString() == "F6")
-            {
+            //if (e.KeyCode.ToString() == "F6")
+            //{
               
-            }
+            //}
         }
         public void Setup(AllPlayers all)
         {
@@ -100,7 +100,10 @@ namespace Mahjong.Forms
             string s;
             s = Mahjong.Properties.Settings.Default.Title;
             if (ShowAll)
-                s += " - Debug";
+            {
+                s += " - ";
+                s += Mahjong.Properties.Settings.Default.Debug;
+            }
             this.Text = s;
         }     
 
@@ -245,7 +248,7 @@ namespace Mahjong.Forms
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
             }
             else
-                bitmap = ResizeBitmap(bitmap,1);
+                bitmap = ResizeBitmap(bitmap,Mahjong.Properties.Settings.Default.ResizePercentage);
                         
             tempBrandbox.Image = bitmap;
             
@@ -258,13 +261,21 @@ namespace Mahjong.Forms
             BrandBox b = (BrandBox)sender;
             StringBuilder s = new StringBuilder();
             s.Append(b.brand.getNumber() + "," + b.brand.getClass() + "\n");
-            s.Append("值: " + b.brand.getNumber() + "\n");
-            s.Append("類別: " + b.brand.getClass() + "\n");
-            s.Append("分數: " + b.brand.Source + "\n");
-            s.Append("組別: " + b.brand.Team + "\n");
-            s.Append("圖片盒:\nX:" + b.Location.X + " Y: " + b.Location.Y + "\n");
-            s.Append("長: "+b.Size.Width+" 高: "+b.Size.Height+"\n");
-            MessageBox.Show(s.ToString());
+            s.Append(Mahjong.Properties.Settings.Default.Debug_Number);
+            s.Append(": " + b.brand.getNumber() + "\n");
+            s.Append(Mahjong.Properties.Settings.Default.Debug_Class);
+            s.Append(": " + b.brand.getClass() + "\n");
+            s.Append(Mahjong.Properties.Settings.Default.Debug_Source);
+            s.Append(": " + b.brand.Source + "\n");
+            s.Append(Mahjong.Properties.Settings.Default.Debug_Team);
+            s.Append(": " + b.brand.Team + "\n");
+            s.Append(Mahjong.Properties.Settings.Default.Debug_Picture);
+            s.Append(":\nX:" + b.Location.X + " Y: " + b.Location.Y + "\n");
+            s.Append(Mahjong.Properties.Settings.Default.Debug_Picture_Width);
+            s.Append(": "+b.Size.Width+"\n");
+            s.Append(Mahjong.Properties.Settings.Default.Debug_Picture_Height);
+            s.Append(": " + b.Size.Height + "\n");
+            MessageBox.Show(s.ToString(),Mahjong.Properties.Settings.Default.Debug);
         }
         /// <summary>
         /// 重繪Bitmap(縮放)
@@ -357,6 +368,7 @@ namespace Mahjong.Forms
             addShowTable();
             setTitle();
             setInforamtion();
+            //新遊戲ToolStripMenuItem.Text;
         }
         private void 新遊戲ToolStripMenuItem_Click(object sender, EventArgs e)
         {

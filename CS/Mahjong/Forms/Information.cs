@@ -54,7 +54,7 @@ namespace Mahjong.Forms
         private void updateTitle()
         {
             string s = all.getLocation().ToString();
-            s += "- (";
+            s += " - (";
             s += all.Brand_Count.ToString();
             s += ")";
             this.Text = s;

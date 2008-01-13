@@ -56,7 +56,7 @@
             // 
             this.新遊戲ToolStripMenuItem.Name = "新遊戲ToolStripMenuItem";
             this.新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.新遊戲ToolStripMenuItem.Text = "新遊戲";
+            this.新遊戲ToolStripMenuItem.Text = global::Mahjong.Properties.Settings.Default.NewGame;
             this.新遊戲ToolStripMenuItem.Click += new System.EventHandler(this.新遊戲ToolStripMenuItem_Click);
             // 
             // 網路ToolStripMenuItem1
@@ -65,27 +65,27 @@
             this.開新遊戲ToolStripMenuItem});
             this.網路ToolStripMenuItem1.Name = "網路ToolStripMenuItem1";
             this.網路ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
-            this.網路ToolStripMenuItem1.Text = "網路遊戲";
+            this.網路ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.OnlineGame;
             // 
             // 開新遊戲ToolStripMenuItem
             // 
             this.開新遊戲ToolStripMenuItem.Name = "開新遊戲ToolStripMenuItem";
-            this.開新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.開新遊戲ToolStripMenuItem.Text = "開新遊戲...";
+            this.開新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.開新遊戲ToolStripMenuItem.Text = global::Mahjong.Properties.Settings.Default.NewOnlineGame;
             this.開新遊戲ToolStripMenuItem.Click += new System.EventHandler(this.開新遊戲ToolStripMenuItem_Click);
             // 
             // 設定ToolStripMenuItem1
             // 
             this.設定ToolStripMenuItem1.Name = "設定ToolStripMenuItem1";
             this.設定ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
-            this.設定ToolStripMenuItem1.Text = "設定";
+            this.設定ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.Config;
             this.設定ToolStripMenuItem1.Click += new System.EventHandler(this.設定ToolStripMenuItem1_Click);
             // 
             // 關於ToolStripMenuItem1
             // 
             this.關於ToolStripMenuItem1.Name = "關於ToolStripMenuItem1";
             this.關於ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
-            this.關於ToolStripMenuItem1.Text = "關於";
+            this.關於ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.About;
             this.關於ToolStripMenuItem1.Click += new System.EventHandler(this.關於ToolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
@@ -97,7 +97,7 @@
             // 
             this.結束ToolStripMenuItem1.Name = "結束ToolStripMenuItem1";
             this.結束ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
-            this.結束ToolStripMenuItem1.Text = "結束";
+            this.結束ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.Exit;
             this.結束ToolStripMenuItem1.Click += new System.EventHandler(this.結束ToolStripMenuItem1_Click);
             // 
             // Table
@@ -110,7 +110,7 @@
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Name = "Table";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "十六張麻將遊戲";
+            this.Text = global::Mahjong.Properties.Settings.Default.Title;
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
