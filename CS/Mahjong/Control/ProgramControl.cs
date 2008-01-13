@@ -158,8 +158,8 @@ namespace Mahjong.Control
         /// </summary>
         public void onlineGame()
         {
-            chat = new ChatServerForm();
-            chat.ShowDialog();
+            chat = new ChatServerForm();            
+            chat.Show();
         }
         /// <summary>
         /// 人按下一張牌

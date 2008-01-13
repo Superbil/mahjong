@@ -6,7 +6,7 @@ using Mahjong.Brands;
 using Mahjong.Control;
 using System.Windows.Forms;
 
-namespace Mahjong.Players
+namespace Mahjong.Control
 {
     [Serializable]
     public class AllPlayers
@@ -34,11 +34,11 @@ namespace Mahjong.Players
         /// <summary>
         /// 計算多少個玩家
         /// </summary>
-        private int countplayers;
+        int countplayers;
         /// <summary>
         /// 總牌數
         /// </summary>
-        public int sumBrands;
+        internal int sumBrands;
         /// <summary>
         /// 目前玩家
         /// </summary>

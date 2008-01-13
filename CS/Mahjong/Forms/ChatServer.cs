@@ -173,7 +173,6 @@ namespace Mahjong.Forms
                     // if the user at the server signaled termination
                     // sever the connection to the client
 
-
                     inputTextBox.Clear(); // clear the userŠö input
                 } // end if
                 else if (e.KeyCode == Keys.Enter && inputTextBox.ReadOnly == false)
@@ -255,15 +254,12 @@ namespace Mahjong.Forms
             if (myMark == "Server")
             {
                 DisableInput(false);
-
-
             }
             else
             {
                 nametextBox.ReadOnly = true;
                 IPtextBox.ReadOnly = true;
                 ChatClient();
-
             }
         } // end method SetUp
         public void Run()
@@ -305,28 +301,19 @@ namespace Mahjong.Forms
             outputThread.Abort();
             getPlayers.Abort();
 
-
-
             if (myMark == "0player")
             {
                 ChatServer();
-
-
             }
             else
             {
                 IPtextBox.Text = "127.0.0.1";
                 ChatClient();
-
             }
-
-            // Application.Exit();
-
         }
 
         private void cancelbutton_Click(object sender, EventArgs e)
         {
-            //Application.Exit();
             this.Close();
         }
 
@@ -380,21 +367,16 @@ namespace Mahjong.Forms
 
         internal void Run()
         {
-
-
             while (true)
             {
                 server.DisplayMessage("Waiting for connection");
                 // accept an incoming connection     
 
-
-
-
                 server.DisplayMessage(number + " Connection " + " received.");
 
                 // inform client that connection was successfull
                 writer.Write(number);
-                writer.Write("SERVER>>> Connection successful");
+                writer.Write("SERVER>>> Connection successful");                
 
                 //server.DisableInput(false); // enable inputTextBox
 
@@ -403,7 +385,6 @@ namespace Mahjong.Forms
                 // Step 4: read string data sent from client
                 do
                 {
-
                     try
                     {
                         // read the string sent to the server
@@ -429,7 +410,6 @@ namespace Mahjong.Forms
                 reader.Close();
                 socketStream.Close();
                 connection.Close();
-
 
                 server.DisableInput(true); // disable InputTextBox
 
