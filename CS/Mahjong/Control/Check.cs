@@ -44,6 +44,7 @@ namespace Mahjong.Control
         /// <returns>¬O/§_</returns>
         public bool Chow()
         {
+            ans_player.clear();
             if (brand != null && brand.getClass() !=Mahjong.Properties.Settings.Default.Wordtiles )
                 for (int i = 0; i < x.getCount() - 1; i++)
                     for (int j = i + 1; j < x.getCount() - 1; j++)
@@ -169,6 +170,8 @@ namespace Mahjong.Control
         {
             get
             {
+                PlayerSort p = new PlayerSort(ans_player);
+                ans_player = p.getPlayer();
                 return ans_player;
             }
         }

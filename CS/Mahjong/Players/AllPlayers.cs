@@ -241,7 +241,7 @@ namespace Mahjong.Control
         /// <returns>牌</returns>
         public Brand nextBrand()
         {
-            if (table.getCount() == 8) // 保留8張不摸
+            if (table.getCount() < 8) // 保留8張不摸
                 throw new GameOverException();
             else
             {
@@ -292,22 +292,25 @@ namespace Mahjong.Control
         /// </summary>
         public void chow_pong(Brand brand,BrandPlayer player)
         {
-            set_Team(player,true);
-            //lastBrand = brand;
             NowPlayer.add(brand);
+            set_Team(player,true);
+            //lastBrand = brand;            
         }
         /// <summary>
         /// 槓
         /// </summary>
-        public void kong(BrandPlayer player)
-        {            
-            // 明槓,最後一張牌等於傳出來的牌的話為暗槓
-            if (lastBrand==player.getBrand(0))
-                set_Team(player, true);
-            else // 暗槓
-                set_Team(player, false);
+        public void kong(Brand brand,BrandPlayer player)
+        {
+            NowPlayer.add(brand);
+            set_Team(player, true);
             // 槓要補一張
-            NowPlayer.add(nextBrand());
+            //NowPlayer.add(nextBrand());
+        }
+        public void BlackKong(Brand brand,BrandPlayer player)
+        {
+            NowPlayer.add(brand);
+            set_Team(player, false);
+            //NowPlayer.add(nextBrand());
         }
         /// <summary>
         /// 設定群組號碼

@@ -35,5 +35,11 @@ namespace Mahjong.AIs
         {
             return null;
         }
+
+        public void setPlayer(Brand brand, BrandPlayer player)
+        {
+            this.brandplayer = player;
+        }
+
     }
 }

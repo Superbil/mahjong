@@ -13,6 +13,7 @@ namespace Mahjong.AIs
     class Level_1 : MahjongAI
     {
         private BrandPlayer player;
+        Brand input_brand;
         Brand ans;
         //FlowerBrand f = new FlowerBrand(0);
         //RopeBrand r = new RopeBrand(0);
@@ -39,6 +40,29 @@ namespace Mahjong.AIs
             for (int j = 0; j < brands.Length; j++)
                 brands[j] = new BrandPlayer();
             
+            step0();
+            step1();
+            step2();
+            step3();
+            step4();
+            step5();
+            step6();
+            step7();
+        }
+        public void setPlayer(Brand brand, BrandPlayer player)
+        {
+            PlayerSort ps = new PlayerSort(player,
+                new FlowerBrand(0),
+                new TenThousandBrand(0),
+                new TubeBrand(0),
+                new RopeBrand(0),
+                new WordBrand(0));
+            this.player = ps.getPlayer();
+            this.input_brand = brand;
+
+            for (int j = 0; j < brands.Length; j++)
+                brands[j] = new BrandPlayer();
+
             step0();
             step1();
             step2();

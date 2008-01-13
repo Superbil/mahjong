@@ -11,7 +11,14 @@ namespace Mahjong.AIs
         /// <summary>
         /// 設定玩家
         /// </summary>
+        /// <param name="player">玩家</param>
         void setPlayer(BrandPlayer player);
+        /// <summary>
+        /// 設定和牌
+        /// </summary>
+        /// <param name="brand">牌</param>
+        /// <param name="player">玩家</param>
+        void setPlayer(Brand brand,BrandPlayer player);
         /// <summary>
         /// 取得準備要出手的牌
         /// </summary>

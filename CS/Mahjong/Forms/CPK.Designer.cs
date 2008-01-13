@@ -32,6 +32,7 @@
             this.Pong = new System.Windows.Forms.Button();
             this.Kong = new System.Windows.Forms.Button();
             this.Win = new System.Windows.Forms.Button();
+            this.Pass = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Chow
@@ -74,11 +75,21 @@
             this.Win.UseVisualStyleBackColor = true;
             this.Win.Click += new System.EventHandler(this.Win_Click);
             // 
+            // Pass
+            // 
+            this.Pass.Location = new System.Drawing.Point(208, 7);
+            this.Pass.Name = "Pass";
+            this.Pass.Size = new System.Drawing.Size(43, 23);
+            this.Pass.TabIndex = 2;
+            this.Pass.UseVisualStyleBackColor = true;
+            this.Pass.Click += new System.EventHandler(this.Pass_Click);
+            // 
             // CPK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(208, 38);
+            this.ClientSize = new System.Drawing.Size(264, 38);
+            this.Controls.Add(this.Pass);
             this.Controls.Add(this.Win);
             this.Controls.Add(this.Kong);
             this.Controls.Add(this.Pong);
@@ -99,5 +110,6 @@
         private System.Windows.Forms.Button Pong;
         private System.Windows.Forms.Button Kong;
         private System.Windows.Forms.Button Win;
+        private System.Windows.Forms.Button Pass;
     }
 }

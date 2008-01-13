@@ -66,14 +66,21 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
-        /// 下一莊
+        /// 下一莊 E->N->W->S
         /// </summary>
         public void next_Winer()
         {
-            add(winer);
+            if (winer == location.East)
+                winer = location.North;
+            else if (winer == location.North)
+                winer = location.West;
+            else if (winer == location.West)
+                winer = location.South;
+            else
+                winer = location.East;
         }
         /// <summary>
-        /// 下一個方位
+        /// 下一個方位 E->S->W->N
         /// </summary>
         public void next()
         {
@@ -88,19 +95,14 @@ namespace Mahjong.Control
         void add(location lo)
         {
             if (lo == location.East)
-                lo = location.North;
-            else if (lo == location.North)
                 lo = location.South;
             else if (lo == location.South)
                 lo = location.West;
+            else if (lo == location.West)
+                lo = location.North;
             else
                 lo = location.East;
         }
-        /// <summary>
-        /// 位置轉換成字串
-        /// </summary>
-        /// <param name="lo">位置</param>
-        /// <returns>字串</returns>
         string location_to_string(location lo)
         {
             if (lo == location.East)
@@ -114,6 +116,10 @@ namespace Mahjong.Control
             else
                 return "";
         }
+        /// <summary>
+        /// 把方位轉換成字串傳回
+        /// </summary>
+        /// <returns>字串</returns>
         public override string ToString()
         {
             string temp="";

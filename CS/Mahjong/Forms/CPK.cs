@@ -6,16 +6,19 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Mahjong.Control;
+using Mahjong.Brands;
 
 namespace Mahjong.Forms
 {
     public partial class CPK : Form
     {
         ProgramControl pc;
-        public CPK(ProgramControl pc)
+        Brand brand;
+        public CPK(ProgramControl pc,Brand brand)
         {
             InitializeComponent();
             this.pc = pc;
+            this.brand = brand;
         }
 
         private void CPK_Load(object sender, EventArgs e)
@@ -24,6 +27,14 @@ namespace Mahjong.Forms
             Pong.Text = Mahjong.Properties.Settings.Default.Pong;
             Kong.Text = Mahjong.Properties.Settings.Default.Kong;
             Win.Text = Mahjong.Properties.Settings.Default.Win;
+            Pass.Text = Mahjong.Properties.Settings.Default.Pass;
+            if (brand.getClass() == Mahjong.Properties.Settings.Default.WhiteTile)
+            {
+                WordBrand w = (WordBrand)brand;
+                this.Text = w.getWordClass();
+            }
+            else
+                this.Text = brand.getNumber() + brand.getClass();
         }
         /// <summary>
         /// ³]©w«ö¶sª¬ºA
@@ -63,5 +74,11 @@ namespace Mahjong.Forms
             pc.win();
             this.Close();
         }
+
+        private void Pass_Click(object sender, EventArgs e)
+        {
+            pc.pass(brand);
+            this.Close();
+        }        
     }
 }
