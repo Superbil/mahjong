@@ -101,10 +101,10 @@ namespace Mahjong.Players
             money = new double[playernumber];
             setBasicMoney(5000.0);
             win_Times = 0;
-            names[0] = "玩家1_北";
-            names[1] = "玩家2_東";
-            names[2] = "玩家3_南";
-            names[3] = "玩家4_西";
+            names[0] = "冠元";
+            names[1] = "雅光";
+            names[2] = "玩家";
+            names[3] = "玉鳳";
         }
         /// <summary>
         /// 玩家陣列
@@ -242,7 +242,7 @@ namespace Mahjong.Players
         public Brand nextBrand()
         {
             if (table.getCount() == 8) // 保留8張不摸
-                throw new Exception();
+                throw new ArrayTypeMismatchException();
             else
             {
                 Brand b = nextTableBrand();

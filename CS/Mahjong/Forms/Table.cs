@@ -50,8 +50,6 @@ namespace Mahjong.Forms
         bool ShowBrandInfo;
         Bitmap arrow;
         
-        CPK cpk;
-        
         public Table(ProgramControl pc)
         {
             InitializeComponent();

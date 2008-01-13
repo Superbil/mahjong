@@ -15,22 +15,26 @@ namespace Mahjong.Control
 {
     public partial class ProgramControl : UserControl
     {
-        AboutBox ab;
         Table table;
         ChatServerForm chat;
         Timer rotateTimer;
         AllPlayers all;
         MahjongAI Ai;
-        Information inforamtion;
+        Information inforamtion;        
 
         public ProgramControl()
         {
             InitializeComponent();
+            setup();
+            table.ShowDialog();        
+        }
+        void setup()
+        {
             rotateTimer = new Timer();
-            //顯示Table 介面
+            // 顯示Table 介面
             table = new Table(this);
-            table.ShowDialog();            
-            //Ai = new Level_1();            
+            inforamtion = new Information();
+            Ai = new Level_1();
         }
         void rotateTimer_Tick(object sender, EventArgs e)
         {
@@ -38,7 +42,7 @@ namespace Mahjong.Control
             {
                 playgame();
             }
-            catch (Exception)
+            catch (ArrayTypeMismatchException)
             {
                 overgame();
             }
@@ -49,7 +53,7 @@ namespace Mahjong.Control
         }
         public void about()
         {
-            ab = new AboutBox();
+            new AboutBox();
         }
         public void config()
         {
@@ -62,9 +66,8 @@ namespace Mahjong.Control
             table.cleanAll();
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
-            inforamtion = new Information();
             table.ShowAll = false;
-            rotateTimer.Interval = 1000;
+            rotateTimer.Interval = 5000;
             rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             table.Setup(all);
             all.creatBrands();
@@ -72,12 +75,12 @@ namespace Mahjong.Control
             // 補花
             for (int i = 0; i < 4; i++)
             {
-                //MessageBox.Show(all.state.ToString());
                 all.setFlower();
                 all.sortNowPlayer();
                 all.next();
                 updatePlayer_Table();
             }
+            
             updatePlayer_Table();
             rotateTimer.Start();
         }
@@ -100,18 +103,24 @@ namespace Mahjong.Control
             else
             {
                 if (all.state == 2) // 人
+                {
                     rotateTimer.Stop();
+                    // 顯示吃碰槓胡的按鈕
+                    CPK cpk = new CPK(this);
+                    cpk.Enabled_Button(c.Chow(),c.Pong(),c.Kong(),c.Win());
+                    if (c.Chow() || c.Pong() || c.Kong() || c.Win())
+                        cpk.Show();
+                }
                 else
                 {
-                    Ai = new Level_1();
                     if (c.Kong()) // 被槓
-                        kong();
+                        ;
                     else if (c.Pong()) // 被碰
-                        pong();
+                        ;
                     else if (c.Chow()) // 被吃
-                        chow();
+                        ;
                     else
-                    {                        
+                    {
                         Ai.setPlayer(all.NowPlayer);
                         pushToTable(Ai.getReadyBrand());
                     }
@@ -143,15 +152,6 @@ namespace Mahjong.Control
         {
             table.updateNowPlayer();
             table.updateTable();
-        }
-        private void print(Iterator iterator)
-        {
-            Console.WriteLine();
-            while (iterator.hasNext())
-            {
-                Brand brand = (Brand)iterator.next();
-                Console.Write("{0},{1}\n", brand.getClass(), brand.getNumber());
-            }
         }
         /// <summary>
         /// 連線設定
@@ -190,14 +190,14 @@ namespace Mahjong.Control
         /// </summary>
         public void pong()
         {
-
+            //all.chow_pong();
         }
         /// <summary>
         /// 槓
         /// </summary>
         public void kong()
         {
-
+            //all.kong();
         }
         /// <summary>
         /// 胡

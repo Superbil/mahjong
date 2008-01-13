@@ -128,7 +128,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(198, 118);
+            this.ClientSize = new System.Drawing.Size(198, 124);
             this.ControlBox = false;
             this.Controls.Add(this.Down_label);
             this.Controls.Add(this.Up_label);

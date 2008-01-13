@@ -16,7 +16,6 @@ namespace Mahjong.Forms
         public Information()
         {
             InitializeComponent();
-            //setAllPlayers(all);
         }
         public void setAllPlayers(AllPlayers all)
         {
