@@ -23,6 +23,7 @@ namespace Mahjong.Control
         MahjongAI Ai;
         Information inforamtion;
         Brand brand_temp;
+        bool Player_Push_Brand;
 
         public ProgramControl()
         {
@@ -37,6 +38,7 @@ namespace Mahjong.Control
             table = new Table(this);
             inforamtion = new Information();
             Ai = new Level_1();
+            Player_Push_Brand = false;
             //cpk = new CPK(this);
         }
         void rotateTimer_Tick(object sender, EventArgs e)
@@ -91,12 +93,15 @@ namespace Mahjong.Control
         }
         void playgame()
         {            
-            all.sortNowPlayer();
-            table.updateTable();
+            
             //updatePlayer_Table();
+            table.updateNowPlayer();
             // 摸牌給現在的玩家
             Brand nextbrand = all.nextBrand();
-            all.NowPlayer.add(nextbrand);            
+            all.NowPlayer.add(nextbrand);
+
+            all.sortNowPlayer();
+            table.updateTable();
             // 補花並更新
             if (all.setFlower())
             {
@@ -146,15 +151,14 @@ namespace Mahjong.Control
             table.updateNowPlayer();
 
             rotateTimer.Stop();
-            
-            check_chow_pong_kong_win(brand);            
 
-            all.PushToTable(brand);
-            
-            updatePlayer_Table();
-            all.next();
-            rotateTimer.Start();
-            
+            if (check_chow_pong_kong_win(brand)||Player_Push_Brand)
+            {
+                all.PushToTable(brand);
+                updatePlayer_Table();
+                all.next();
+                rotateTimer.Start();
+            }            
             
         }
         bool check_chow_pong_kong_win(Brand brand)
@@ -171,29 +175,24 @@ namespace Mahjong.Control
                     {
                         MessageBox.Show(c.Chow().ToString()+c.Pong().ToString()+c.Kong().ToString()+brand.getNumber()+brand.getClass());
                         CPK_Check(brand, all.NowPlayer);
-                        return true;
+                        return false;
                     }
                     else
                     {
-                        //Ai.setPlayer(all.NowPlayer);
-                        //all.kong(c.SuccessPlayer);
-                        //all.next();
-                        //break;     
-
                         //if (c.Win())
                         //    overgame();
                         //break;
-                        return false;
+                        //return false;
                     }
                 }
             }
-            return false;
+            return true;
             //all.next();
         }
         void CPK_Check(Brand brand,BrandPlayer player) // 玩家的按鈕
         {
             rotateTimer.Stop();
-            MessageBox.Show(brand.getNumber() + brand.getClass());
+            //MessageBox.Show(brand.getNumber() + brand.getClass());
             brand_temp = brand;
             CPK cpk = new CPK(this);            
             Check c = new Check(brand,player);            
@@ -222,6 +221,7 @@ namespace Mahjong.Control
         {
             pushToTable(brand);
             rotateTimer.Start();
+            Player_Push_Brand = false;
         }
         /// <summary>
         /// 設定顯示資訊
@@ -238,9 +238,11 @@ namespace Mahjong.Control
         {
             Check c = new Check(brand_temp, all.NowPlayer);
             if (c.Chow())
-                all.chow_pong(c.SuccessPlayer);
-            all.next();
-            rotateTimer.Start();
+                all.chow_pong(brand_temp,c.SuccessPlayer);
+            //all.next();
+            Player_Push_Brand = true;
+            //rotateTimer.Start();
+            table.updateNowPlayer();
         }
         /// <summary>
         /// 碰
@@ -249,9 +251,11 @@ namespace Mahjong.Control
         {
             Check c = new Check(brand_temp,all.NowPlayer);
             if (c.Pong())
-                all.chow_pong(c.SuccessPlayer);
-            all.next();
-            rotateTimer.Start();
+                all.chow_pong(brand_temp,c.SuccessPlayer);
+            //all.next();
+            Player_Push_Brand = true;
+            //rotateTimer.Start();
+            table.updateNowPlayer();
 
         }
         /// <summary>
@@ -262,15 +266,17 @@ namespace Mahjong.Control
             Check c = new Check(brand_temp,all.NowPlayer);
             if (c.Kong())
                 all.kong(c.SuccessPlayer);
-            all.next();
-            rotateTimer.Start();
+            //all.next();
+            table.updateNowPlayer();
+            Player_Push_Brand = true;
+            //rotateTimer.Start();
         }
         /// <summary>
         /// 胡
         /// </summary>
         public void win()
         {
-            overgame();          
+            overgame();      
         }
     }
     class GameOverException : Exception

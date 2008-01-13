@@ -52,19 +52,34 @@ namespace Mahjong.Control
                             brand.getNumber() + 1 == x.getBrand(i).getNumber() &&
                             brand.getClass() == x.getBrand(j).getClass() &&
                             brand.getNumber() + 2 == x.getBrand(j).getNumber())
+                        {
+                            ans_player.add(brand);
+                            ans_player.add(x.getBrand(i));
+                            ans_player.add(x.getBrand(j));
                             return true;
+                        }
                         else if ( // 234
                             brand.getClass() == x.getBrand(i).getClass() &&
                             brand.getNumber() - 1 == x.getBrand(i).getNumber() &&
                             brand.getClass() == x.getBrand(j).getClass() &&
                             brand.getNumber() + 1 == x.getBrand(j).getNumber())
+                        {
+                            ans_player.add(brand);
+                            ans_player.add(x.getBrand(i));
+                            ans_player.add(x.getBrand(j));
                             return true;
+                        }
                         else if ( // 123
-                            brand.getClass() == x.getBrand(i).getClass() &&
-                            brand.getNumber() - 2 == x.getBrand(i).getNumber() &&
-                            brand.getClass() == x.getBrand(j).getClass() &&
-                            brand.getNumber() - 1 == x.getBrand(j).getNumber())
+                       brand.getClass() == x.getBrand(i).getClass() &&
+                       brand.getNumber() - 2 == x.getBrand(i).getNumber() &&
+                       brand.getClass() == x.getBrand(j).getClass() &&
+                       brand.getNumber() - 1 == x.getBrand(j).getNumber())
+                        {
+                            ans_player.add(brand);
+                            ans_player.add(x.getBrand(i));
+                            ans_player.add(x.getBrand(j));
                             return true;
+                        }
             return false;
         }
         /// <summary>

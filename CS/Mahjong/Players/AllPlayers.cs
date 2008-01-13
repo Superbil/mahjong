@@ -290,10 +290,11 @@ namespace Mahjong.Control
         /// <summary>
         /// ¦Y¡B¸I
         /// </summary>
-        public void chow_pong(BrandPlayer player)
+        public void chow_pong(Brand brand,BrandPlayer player)
         {
             set_Team(player,true);
-            //lastBrand = brand;            
+            //lastBrand = brand;
+            NowPlayer.add(brand);
         }
         /// <summary>
         /// ºb
