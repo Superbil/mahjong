@@ -92,19 +92,19 @@ namespace Mahjong.Players
             this.countplayers = playernumber;
             this.sumBrands = factory.SumBrands;
             this.state = 1;
-            this.basic_tai = 50; // 底台設定
             this.barnd_count = 0;
+            this.basic_tai = Mahjong.Properties.Settings.Default.BasicTai;            
             this.teamCount = new int[playernumber];
             this.names = new string[playernumber];
             for (int i = 0; i < playernumber;i++ )
                 teamCount[i]=0;            
             money = new double[playernumber];
-            setBasicMoney(5000.0);
+            setBasicMoney(Mahjong.Properties.Settings.Default.Money);
             win_Times = 0;
-            names[0] = "冠元";
-            names[1] = "雅光";
-            names[2] = "玩家";
-            names[3] = "玉鳳";
+            names[0] = Mahjong.Properties.Settings.Default.Player1;
+            names[1] = Mahjong.Properties.Settings.Default.Player2;
+            names[2] = Mahjong.Properties.Settings.Default.Player3;
+            names[3] = Mahjong.Properties.Settings.Default.Player4;
         }
         /// <summary>
         /// 玩家陣列

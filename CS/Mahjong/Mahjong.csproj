@@ -326,13 +326,13 @@
     <None Include="Resources\word7.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Properties\DataSources\Mahjong.Control.ProgramControl.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\upbarnd.gif" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Mahjong.config" />
     <None Include="Resources\a.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

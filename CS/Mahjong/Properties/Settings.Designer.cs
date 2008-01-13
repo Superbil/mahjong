@@ -229,5 +229,77 @@ namespace Mahjong.Properties {
                 return ((string)(this["Title"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("王廷亨")]
+        public string Player1 {
+            get {
+                return ((string)(this["Player1"]));
+            }
+            set {
+                this["Player1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("林宗水")]
+        public string Player2 {
+            get {
+                return ((string)(this["Player2"]));
+            }
+            set {
+                this["Player2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("周歡弘")]
+        public string Player3 {
+            get {
+                return ((string)(this["Player3"]));
+            }
+            set {
+                this["Player3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("林雅光")]
+        public string Player4 {
+            get {
+                return ((string)(this["Player4"]));
+            }
+            set {
+                this["Player4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public double Money {
+            get {
+                return ((double)(this["Money"]));
+            }
+            set {
+                this["Money"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int BasicTai {
+            get {
+                return ((int)(this["BasicTai"]));
+            }
+            set {
+                this["BasicTai"] = value;
+            }
+        }
     }
 }

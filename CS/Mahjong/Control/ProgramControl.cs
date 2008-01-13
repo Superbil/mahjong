@@ -67,7 +67,7 @@ namespace Mahjong.Control
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
             table.ShowAll = false;
-            rotateTimer.Interval = 5000;
+            rotateTimer.Interval = 1000;
             rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             table.Setup(all);
             all.creatBrands();
