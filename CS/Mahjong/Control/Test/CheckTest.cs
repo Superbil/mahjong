@@ -31,9 +31,22 @@ namespace Mahjong.Control
             a.add(new WordBrand(6));
             a.add(new WordBrand(6));
             a.add(new WordBrand(6));
-            Check c = new Check(a);
+            //Brand b = new TubeBrand(2);
+            //Check c = new Check(b,a);
+            Check c = new Check (a);
             if (c.Win())
                 Console.WriteLine("有胡！！");
+            if (c.Chow())
+                Console.WriteLine("有吃");
+            if (c.Pong())
+                Console.WriteLine("有碰");
+            if (c.Kong())
+                Console.WriteLine("有槓");
+            if (c.BlackKong())
+                Console.WriteLine("有暗槓");
+
+            if (!c.Win() && !c.Chow() && !c.Pong() && !c.Kong())
+                Console.WriteLine("都沒");
         }
     }
 }

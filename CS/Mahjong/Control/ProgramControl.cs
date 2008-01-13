@@ -10,6 +10,7 @@ using Mahjong.Forms;
 using Mahjong.Brands;
 using Mahjong.Players;
 using Mahjong.AIs;
+using System.Diagnostics;
 
 namespace Mahjong.Control
 {
@@ -20,7 +21,8 @@ namespace Mahjong.Control
         Timer rotateTimer;
         AllPlayers all;
         MahjongAI Ai;
-        Information inforamtion;        
+        Information inforamtion;
+        Brand brand_temp;
 
         public ProgramControl()
         {
@@ -35,6 +37,7 @@ namespace Mahjong.Control
             table = new Table(this);
             inforamtion = new Information();
             Ai = new Level_1();
+            //cpk = new CPK(this);
         }
         void rotateTimer_Tick(object sender, EventArgs e)
         {
@@ -42,7 +45,7 @@ namespace Mahjong.Control
             {
                 playgame();
             }
-            catch (ArrayTypeMismatchException)
+            catch (GameOverException)
             {
                 overgame();
             }
@@ -67,7 +70,7 @@ namespace Mahjong.Control
             // 砞﹚4產,–16眎
             all = new AllPlayers(4, 16);
             table.ShowAll = false;
-            rotateTimer.Interval = 1000;
+            rotateTimer.Interval = 50;
             rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             table.Setup(all);
             all.creatBrands();
@@ -75,61 +78,57 @@ namespace Mahjong.Control
             // 干
             for (int i = 0; i < 4; i++)
             {
-                all.setFlower();
-                all.sortNowPlayer();
+                if (all.setFlower())
+                {
+                    all.sortNowPlayer();
+                    table.updateNowPlayer();
+                }
                 all.next();
-                updatePlayer_Table();
             }
             
             updatePlayer_Table();
             rotateTimer.Start();
         }
         void playgame()
-        {
+        {            
+            all.sortNowPlayer();
+            table.updateTable();
+            //updatePlayer_Table();
             // 篘礟倒瞷產
             Brand nextbrand = all.nextBrand();
-            all.NowPlayer.add(nextbrand);
-            all.sortNowPlayer();
-            updatePlayer_Table();
-            // 干
-            all.setFlower();
-            updatePlayer_Table();
+            all.NowPlayer.add(nextbrand);            
+            // 干穝
+            if (all.setFlower())
+            {
+                all.sortNowPlayer();
+                table.updateNowPlayer();
+            }
             // 琌璊礟
             Check c = new Check(all.NowPlayer);
-            if (c.Win())
-                overgame();
-            else if (c.Kong()) // 穞篵
-                kong();
+            //else if (c.BlackKong()) // 穞篵
+            //    blackkong();
+
+            if (all.state == 2) // 
+            {
+                rotateTimer.Stop();
+            }
             else
             {
-                if (all.state == 2) // 
-                {
-                    rotateTimer.Stop();
-                    // 陪ボ窱篵璊秙
-                    CPK cpk = new CPK(this);
-                    cpk.Enabled_Button(c.Chow(),c.Pong(),c.Kong(),c.Win());
-                    if (c.Chow() || c.Pong() || c.Kong() || c.Win())
-                        cpk.Show();
-                }
-                else
-                {
-                    if (c.Kong()) // 砆篵
-                        ;
-                    else if (c.Pong()) // 砆窱
-                        ;
-                    else if (c.Chow()) // 砆
-                        ;
-                    else
-                    {
-                        Ai.setPlayer(all.NowPlayer);
-                        pushToTable(Ai.getReadyBrand());
-                    }
-                }
+                Ai.setPlayer(all.NowPlayer);
+                pushToTable(Ai.getReadyBrand());
             }
+            
 
         }
 
-        private void overgame()
+        private void blackkong()
+        {
+            Check c = new Check(all.NowPlayer);
+            if (c.Kong())
+                all.kong(c.SuccessPlayer);
+        }
+
+        void overgame()
         {
             table.cleanImage();
             rotateTimer.Stop();
@@ -142,11 +141,65 @@ namespace Mahjong.Control
         }
         void pushToTable(Brand brand)
         {
+            all.NowPlayer.remove(brand);
+            all.sortNowPlayer();
+            table.updateNowPlayer();
+
             rotateTimer.Stop();
+            
+            check_chow_pong_kong_win(brand);            
+
             all.PushToTable(brand);
+            
             updatePlayer_Table();
-            rotateTimer.Start();
             all.next();
+            rotateTimer.Start();
+            
+            
+        }
+        bool check_chow_pong_kong_win(Brand brand)
+        {            
+            Check c;
+            for (int i = 0; i < 4; i++)
+            {
+                all.next();
+                c = new Check(brand, all.NowPlayer);
+                // 代刚琌  窱 篵
+                if (c.Win() || c.Kong() || c.Pong() || c.Chow())
+                {
+                    if (all.state == 2)
+                    {
+                        MessageBox.Show(c.Chow().ToString()+c.Pong().ToString()+c.Kong().ToString()+brand.getNumber()+brand.getClass());
+                        CPK_Check(brand, all.NowPlayer);
+                        return true;
+                    }
+                    else
+                    {
+                        //Ai.setPlayer(all.NowPlayer);
+                        //all.kong(c.SuccessPlayer);
+                        //all.next();
+                        //break;     
+
+                        //if (c.Win())
+                        //    overgame();
+                        //break;
+                        return false;
+                    }
+                }
+            }
+            return false;
+            //all.next();
+        }
+        void CPK_Check(Brand brand,BrandPlayer player) // 產秙
+        {
+            rotateTimer.Stop();
+            MessageBox.Show(brand.getNumber() + brand.getClass());
+            brand_temp = brand;
+            CPK cpk = new CPK(this);            
+            Check c = new Check(brand,player);            
+            cpk.Enabled_Button(c.Chow(), c.Pong(), c.Kong(), c.Win());
+            if (c.Chow() || c.Pong() || c.Kong() || c.Win())
+                cpk.Show();
         }
         void updatePlayer_Table()
         {
@@ -183,28 +236,48 @@ namespace Mahjong.Control
         /// </summary>
         public void chow()
         {
-            //all.chow_pong();
+            Check c = new Check(brand_temp, all.NowPlayer);
+            if (c.Chow())
+                all.chow_pong(c.SuccessPlayer);
+            all.next();
+            rotateTimer.Start();
         }
         /// <summary>
         /// 窱
         /// </summary>
         public void pong()
         {
-            //all.chow_pong();
+            Check c = new Check(brand_temp,all.NowPlayer);
+            if (c.Pong())
+                all.chow_pong(c.SuccessPlayer);
+            all.next();
+            rotateTimer.Start();
+
         }
         /// <summary>
         /// 篵
         /// </summary>
         public void kong()
         {
-            //all.kong();
+            Check c = new Check(brand_temp,all.NowPlayer);
+            if (c.Kong())
+                all.kong(c.SuccessPlayer);
+            all.next();
+            rotateTimer.Start();
         }
         /// <summary>
         /// 璊
         /// </summary>
         public void win()
         {
-            overgame();
+            overgame();          
         }
     }
+    class GameOverException : Exception
+    {
+    }
+    class NowPlayerException : Exception
+    {
+    }
+
 }

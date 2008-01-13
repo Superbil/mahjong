@@ -67,11 +67,13 @@ namespace Mahjong.Forms
             if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.DebugKey)
             {
                 if (ShowAll)
-                    ShowAll = false;                    
+                {
+                    ShowAll = false;                   
+                }
                 else
                     ShowAll = true;
                 cleanImage();
-                addImage();
+                addImage();     
                 setTitle();
             }
             // 按下F7開啟牌的資訊顯示
@@ -241,7 +243,9 @@ namespace Mahjong.Forms
 
             // 滑鼠事件
             if (state == State.South &&
-                brand.getClass()!=Mahjong.Properties.Settings.Default.Flower)
+                brand.getClass()!=Mahjong.Properties.Settings.Default.Flower 
+                && !brand.IsCanSee
+                )
             {
                 //tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
                 tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);

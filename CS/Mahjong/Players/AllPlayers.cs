@@ -50,7 +50,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 上一張牌
         /// </summary>
-        Brand lastBrand;
+        internal Brand lastBrand;
         /// <summary>
         /// 方位
         /// </summary>
@@ -242,7 +242,7 @@ namespace Mahjong.Control
         public Brand nextBrand()
         {
             if (table.getCount() == 8) // 保留8張不摸
-                throw new ArrayTypeMismatchException();
+                throw new GameOverException();
             else
             {
                 Brand b = nextTableBrand();
@@ -290,10 +290,10 @@ namespace Mahjong.Control
         /// <summary>
         /// 吃、碰
         /// </summary>
-        public void chow_pong(Brand brand,BrandPlayer player)
+        public void chow_pong(BrandPlayer player)
         {
             set_Team(player,true);
-            lastBrand = brand;            
+            //lastBrand = brand;            
         }
         /// <summary>
         /// 槓
@@ -327,8 +327,9 @@ namespace Mahjong.Control
         /// <summary>
         /// 現在的玩家補花
         /// </summary>
-        public void setFlower()
+        public bool setFlower()
         {
+            bool ans = false;
             int f_count = 0;
             for (int i = 0; i < NowPlayer.getCount(); i++)
                 if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower &&
@@ -337,10 +338,12 @@ namespace Mahjong.Control
                     NowPlayer.getBrand(i).IsCanSee = true;
                     NowPlayer.getBrand(i).Team = 1;
                     f_count++;
+                    ans = true;
                 }
             // 補上少的牌數
             for (int i = 0; i < f_count; i++)
                 NowPlayer.add( nextTableBrand() );
+            return ans;
         }
         /// <summary>
         /// 現在的玩家排序
@@ -357,7 +360,7 @@ namespace Mahjong.Control
         public void PushToTable(Brand brand)
         {
             brand.IsCanSee = true;
-            NowPlayer.remove(brand);
+            //NowPlayer.remove(brand);
             show_table.add(brand);
         }
     }
