@@ -31,6 +31,7 @@
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
     <BootstrapperEnabled>false</BootstrapperEnabled>
+    <ApplicationIcon>mahjong.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -335,8 +336,11 @@
     <None Include="Resources\upbarnd.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mahjong.config" />
+    <EmbeddedResource Include="Mahjong.config" />
     <None Include="Resources\a.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="mahjong.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
