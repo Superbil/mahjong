@@ -231,6 +231,21 @@ namespace Mahjong.Control
         /// </summary>
         public void next()
         {
+            //switch (state)
+            //{
+            //    case 0:
+            //        state = 3;
+            //        break;
+            //    case 1:
+            //        state = 0;
+            //        break;
+            //    case 2:
+            //        state = 1;
+            //        break;
+            //    case 3:
+            //        state = 2;
+            //        break;                     
+            //}
             state++;
             if (state % countplayers == 0)
                 state = 0;

@@ -36,6 +36,8 @@ namespace Mahjong.Players
         /// 排序結果
         /// </summary>
         BrandPlayer ans = new BrandPlayer();
+        BrandPlayer show = new BrandPlayer();
+        BrandPlayer team = new BrandPlayer();
         /// <summary>
         /// 排序牌的建構子
         /// </summary>
@@ -52,10 +54,13 @@ namespace Mahjong.Players
             BrandClass[3] = new TubeBrand(0);
             BrandClass[4] = new WordBrand(0);
 
+            creak();
             getBrands( inputPlayer.creatIterator() );
             sort();
             compose();
         }
+
+
         /// <summary>
         /// 排序牌的建構子
         /// </summary>
@@ -77,9 +82,20 @@ namespace Mahjong.Players
             BrandClass[3] = b4;
             BrandClass[4] = b5;
 
+            creak();
             getBrands(inputPlayer.creatIterator());
             sort();
             compose();
+        }
+        private void creak()
+        {
+            for (int i = 0; i < inputPlayer.getCount(); i++)
+            {
+                if (inputPlayer.getBrand(i).IsCanSee)
+                    show.add(inputPlayer.getBrand(i));
+                if (inputPlayer.getBrand(i).Team > 0)
+                    team.add(inputPlayer.getBrand(i));
+            }
         }
         /// <summary>
         /// 得到排序完的玩家

@@ -78,7 +78,7 @@
       <Value Profile="(Default)">林宗水</Value>
     </Setting>
     <Setting Name="Player3" Type="System.String" Scope="User">
-      <Value Profile="(Default)">周歡弘</Value>
+      <Value Profile="(Default)">王小民</Value>
     </Setting>
     <Setting Name="Player4" Type="System.String" Scope="User">
       <Value Profile="(Default)">林雅光</Value>

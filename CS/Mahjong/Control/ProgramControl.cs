@@ -88,13 +88,14 @@ namespace Mahjong.Control
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
             table.Setup(all);
-            rotateTimer.Interval = 1000;
+            rotateTimer.Interval = 50;
             rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             newgame2();
         }
         void newgame2()
         {
             all.creatBrands();
+            //table.cleanImage();
             table.addImage();
             // 補花
             for (int i = 0; i < 4; i++)
@@ -120,7 +121,8 @@ namespace Mahjong.Control
             Brand nextbrand = all.nextBrand();
             all.NowPlayer.add(nextbrand);
             all.sortNowPlayer();
-            table.updateNowPlayer();
+            //table.updateNowPlayer();
+            updatePlayer_Table();
             // 補花並更新
             if (all.setFlower())
             {
@@ -155,7 +157,8 @@ namespace Mahjong.Control
             all.NowPlayer.remove(brand);
             // 排序現在的玩家
             all.sortNowPlayer();
-            table.updateNowPlayer();
+            //table.updateNowPlayer();
+            updatePlayer_Table();
 
             if (check_chow_pong_kong_win(brand)||Player_Push_Brand)
             {
@@ -182,6 +185,7 @@ namespace Mahjong.Control
                 if (all.state == (int)location.South)
                 {
                     toUser(brand, all.NowPlayer);
+                    all.sortNowPlayer();
                     table.updateInforamation();
                     table.updateNowPlayer();
                     return false;
@@ -196,7 +200,6 @@ namespace Mahjong.Control
                     else if (c.Kong())
                     {
                         all.kong(brand, c.SuccessPlayer);
-                        //rotateTimer.Start();
                         touchBrand();
                         return false;
                     }
@@ -206,7 +209,7 @@ namespace Mahjong.Control
                         pushToTable(getfromAI());
                         return false;
                     }
-                    else if (c.Chow())
+                    else if (c.Chow() && i == 0)
                     {
                         all.chow_pong(brand, c.SuccessPlayer);
                         pushToTable(getfromAI());
@@ -233,17 +236,25 @@ namespace Mahjong.Control
 
         private bool black_kong_to_AI(Brand brand, BrandPlayer player)
         {
+            Check c = new Check(player);
             Ai.setPlayer(brand,player);
-            if (Ai.getReadyBrandPlayer().getCount() != 0)
-                all.BlackKong(brand, player);
-            //Ai.getReadyBrand();
+            //if (Ai.getReadyBrandPlayer().getCount() != null && c.Kong())
+            c.Kong();
+                all.BlackKong(brand,c.SuccessPlayer);
             return true;
         }
 
         private void toUser(Brand brand,BrandPlayer player)
         {
-            CPK_Check(brand,player);
             // Lister user to Make Brand
+            rotateTimer.Stop();
+            //MessageBox.Show(brand.getNumber() + brand.getClass());
+            brand_temp = brand;
+            CPK cpk = new CPK(this, brand);
+            Check c = new Check(brand, player);
+            cpk.Enabled_Button(c.Chow(), c.Pong(), c.Kong(), c.Win());
+            if (c.Chow() || c.Pong() || c.Kong() || c.Win())
+                cpk.Show();
         }        
 
         void overgame()
@@ -259,20 +270,10 @@ namespace Mahjong.Control
             RoundEnd();
         }
 
-        void CPK_Check(Brand brand,BrandPlayer player) // 玩家的按鈕
-        {
-            rotateTimer.Stop();
-            //MessageBox.Show(brand.getNumber() + brand.getClass());
-            brand_temp = brand;
-            CPK cpk = new CPK(this,brand);            
-            Check c = new Check(brand,player);            
-            cpk.Enabled_Button(c.Chow(), c.Pong(), c.Kong(), c.Win());
-            if (c.Chow() || c.Pong() || c.Kong() || c.Win())
-                cpk.Show();
-        }
         void updatePlayer_Table()
         {
             table.updateNowPlayer();
+            
             table.updateTable();
         }
         /// <summary>

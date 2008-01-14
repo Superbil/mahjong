@@ -50,7 +50,7 @@ namespace Mahjong.Forms
         bool ShowBrandInfo;
         Bitmap arrow;
         bool lockuser;
-        
+
         public Table(ProgramControl pc)
         {
             InitializeComponent();
@@ -60,7 +60,7 @@ namespace Mahjong.Forms
             ShowAll = false;
             ShowBrandInfo = false;
             lockuser = false;
-            this.KeyUp += new KeyEventHandler(Table_KeyUp);            
+            this.KeyUp += new KeyEventHandler(Table_KeyUp);
         }
         internal bool LockUser
         {
@@ -80,12 +80,12 @@ namespace Mahjong.Forms
             {
                 if (ShowAll)
                 {
-                    ShowAll = false;                   
+                    ShowAll = false;
                 }
                 else
                     ShowAll = true;
                 cleanImage();
-                addImage();     
+                addImage();
                 setTitle();
                 setInforamtion();
             }
@@ -97,10 +97,11 @@ namespace Mahjong.Forms
                 else
                     ShowBrandInfo = true;
             }
-            //if (e.KeyCode.ToString() == "F6")
-            //{
-              
-            //}
+            if (e.KeyCode.ToString() == "F5")
+            {
+                cleanImage();
+                addImage();
+            }
         }
         public void Setup(AllPlayers all)
         {
@@ -120,7 +121,7 @@ namespace Mahjong.Forms
                 s += Mahjong.Properties.Settings.Default.Debug;
             }
             this.Text = s;
-        }     
+        }
 
         private void setInforamtion()
         {
@@ -138,7 +139,7 @@ namespace Mahjong.Forms
             //setFlowLayout_Margin(10);
             setFlowLayout_Dock();
             //this.flowLayoutBrands[4].BackColor = Color.Blue;
-            setFlowLayout_FlowDirection();            
+            setFlowLayout_FlowDirection();
         }
 
         private void setFlowLayout_FlowDirection()
@@ -174,7 +175,7 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[3].Location = new Point(keepsize, keepsize * 2 + height + padding * 2);
             this.flowLayoutBrands[4].Location = new Point(keepsize * 2 + (height * 2 + padding * 2), keepsize * 2 + (height * 2 + padding * 2));
             this.flowLayoutInfoTable.Location = new Point(
-                keepsize * 2 + (height * 2 + padding * 2),keepsize * 2 + (height * 2 + padding * 2) + (all.sumBrands / all.Dealnumber) * height);
+                keepsize * 2 + (height * 2 + padding * 2), keepsize * 2 + (height * 2 + padding * 2) + (all.sumBrands / all.Dealnumber) * height);
         }
         void setFlowLayout_Dock()
         {
@@ -187,7 +188,7 @@ namespace Mahjong.Forms
         }
         private void setFlowLayout_Margin(int size)
         {
-            for (int i = 0; i < flowLayoutBrands.Length;i++ )
+            for (int i = 0; i < flowLayoutBrands.Length; i++)
                 this.flowLayoutBrands[i].Margin = new Padding(size);
         }
         void addNouth()
@@ -231,7 +232,7 @@ namespace Mahjong.Forms
                 addimage(state, brand, rotate);
             }
         }
-        private void addimage(State state,Brand brand,RotateFlipType rotate) 
+        private void addimage(State state, Brand brand, RotateFlipType rotate)
         {
             Bitmap bitmap;
             // 如果是可視的牌就設定顯示牌的圖型，否則就顯示直立的牌 Mahjong.Properties.Resources.upbarnd
@@ -240,10 +241,10 @@ namespace Mahjong.Forms
             else
                 bitmap = new Bitmap(Mahjong.Properties.Resources.upbarnd);
             // 設定牌
-            BrandBox tempBrandbox = new BrandBox(brand);            
+            BrandBox tempBrandbox = new BrandBox(brand);
 
             // 設定自動縮放
-            tempBrandbox.SizeMode = PictureBoxSizeMode.AutoSize;            
+            tempBrandbox.SizeMode = PictureBoxSizeMode.AutoSize;
 
             // 設定邊距            
             tempBrandbox.Margin = new Padding(padding);
@@ -258,7 +259,7 @@ namespace Mahjong.Forms
             // 滑鼠事件
             if (
                 state == State.South
-                && brand.getClass() != Mahjong.Properties.Settings.Default.Flower 
+                && brand.getClass() != Mahjong.Properties.Settings.Default.Flower
                 && !brand.IsCanSee
                 && all.state == (int)location.South
                 )
@@ -268,13 +269,14 @@ namespace Mahjong.Forms
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
             }
             else
-                bitmap = ResizeBitmap(bitmap,Mahjong.Properties.Settings.Default.ResizePercentage);
+                bitmap = ResizeBitmap(bitmap, Mahjong.Properties.Settings.Default.ResizePercentage);
 
             // 設定圖片      
             tempBrandbox.Image = bitmap;
-            
+
             // 新增至控制項
             this.flowLayoutBrands[(int)state].Controls.Add(tempBrandbox);
+            this.Update();
         }
 
         void tempBrandbox_Click(object sender, EventArgs e)
@@ -293,10 +295,10 @@ namespace Mahjong.Forms
             s.Append(Mahjong.Properties.Settings.Default.Debug_Picture);
             s.Append(":\nX:" + b.Location.X + " Y: " + b.Location.Y + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Picture_Width);
-            s.Append(": "+b.Size.Width+"\n");
+            s.Append(": " + b.Size.Width + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Picture_Height);
             s.Append(": " + b.Size.Height + "\n");
-            MessageBox.Show(s.ToString(),Mahjong.Properties.Settings.Default.Debug);
+            MessageBox.Show(s.ToString(), Mahjong.Properties.Settings.Default.Debug);
         }
         /// <summary>
         /// 重繪Bitmap(縮放)
@@ -315,7 +317,7 @@ namespace Mahjong.Forms
         }
         void brandBox_MouseHover(object sender, EventArgs e)
         {
-            BrandBox b = (BrandBox)sender;            
+            BrandBox b = (BrandBox)sender;
             cc = b.BackColor;
             b.BackColor = Color.Blue;
             //PictureBox temp = new PictureBox();
@@ -331,13 +333,13 @@ namespace Mahjong.Forms
         {
             BrandBox b = (BrandBox)sender;
             b.BackColor = cc;
-            this.Update();
+            //this.Update();
         }
         void brandBox_MouseClick(object sender, EventArgs e)
         {
             BrandBox b = (BrandBox)sender;
             pc.makeBrand(b.brand);
-            this.Update();
+            //this.Update();
         }
         /// <summary>
         /// 新增玩家、桌面圖片
@@ -372,7 +374,7 @@ namespace Mahjong.Forms
             flowLayoutBrands[all.state].Controls.Clear();
             switch (all.state)
             {
-                case 1:                    
+                case 1:
                     addEast();
                     break;
                 case 0:
@@ -392,7 +394,7 @@ namespace Mahjong.Forms
         public void updateTable()
         {
             flowLayoutBrands[(int)State.Table].Controls.Clear();
-            addShowTable();            
+            addShowTable();
         }
         /// <summary>
         /// 更新Title和資訊盒
@@ -419,7 +421,7 @@ namespace Mahjong.Forms
 
         private void 關於ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            pc.about();  
+            pc.about();
         }
 
         private void 結束ToolStripMenuItem1_Click(object sender, EventArgs e)

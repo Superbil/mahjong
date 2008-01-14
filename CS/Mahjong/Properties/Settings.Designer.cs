@@ -256,7 +256,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("周歡弘")]
+        [global::System.Configuration.DefaultSettingValueAttribute("王小民")]
         public string Player3 {
             get {
                 return ((string)(this["Player3"]));
