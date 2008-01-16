@@ -28,7 +28,7 @@ namespace Mahjong.Forms
             Kong.Text = Mahjong.Properties.Settings.Default.Kong;
             Win.Text = Mahjong.Properties.Settings.Default.Win;
             Pass.Text = Mahjong.Properties.Settings.Default.Pass;
-            if (brand.getClass() == Mahjong.Properties.Settings.Default.WhiteTile)
+            if (brand.getClass() == Mahjong.Properties.Settings.Default.Wordtiles)
             {
                 WordBrand w = (WordBrand)brand;
                 this.Text = w.getWordClass();

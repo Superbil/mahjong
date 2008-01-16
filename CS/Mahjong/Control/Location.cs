@@ -103,7 +103,7 @@ namespace Mahjong.Control
             else
                 lo = location.East;
         }
-        string location_to_string(location lo)
+        internal string location_to_string(location lo)
         {
             if (lo == location.East)
                 return Mahjong.Properties.Settings.Default.East;

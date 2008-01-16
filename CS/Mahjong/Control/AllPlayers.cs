@@ -42,7 +42,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 目前玩家
         /// </summary>
-        internal int state;
+        internal uint state;
         /// <summary>
         /// 玩家組別計算
         /// </summary>
@@ -252,27 +252,8 @@ namespace Mahjong.Control
         /// </summary>
         public void next()
         {
-            // 1 -> 0 -> 3 -> 2
-            //switch (state)
-            //{
-            //    case 0:
-            //        state = 3;
-            //        break;
-            //    case 1:
-            //        state = 0;
-            //        break;
-            //    case 2:
-            //        state = 1;
-            //        break;
-            //    case 3:
-            //        state = 2;
-            //        break;
-            //}
-            //state--;
-            //state = state % countplayers;
-            state++;
-            if (state % countplayers == 0)
-                state = 0;
+            state--;
+            state = state % (uint)countplayers;
         }
         /// <summary>
         /// 摸牌
@@ -362,21 +343,17 @@ namespace Mahjong.Control
         /// <param name="player">玩家</param>
         private void set_Team(BrandPlayer player,bool isCanSee)
         {
-            if (!player.getBrand(0).IsCanSee)
+            teamCount[state]++;
+            // 把牌從現在玩家手上移出
+            for (int i = 0; i < player.getCount(); i++)
+                NowPlayer.remove(player.getBrand(i));
+            // 把牌設為可視並且加上組別號碼後加回現在玩家
+            teamCount[state]++;
+            for (int i = 0; i < player.getCount(); i++)
             {
-                PlayerSort ps = new PlayerSort(player);
-                teamCount[state]++;
-                // 把牌從現在玩家手上移出
-                for (int i = 0; i < player.getCount(); i++)
-                    NowPlayer.remove(player.getBrand(i));
-                // 把牌設為可視並且加上組別號碼後加回現在玩家
-                teamCount[state]++;
-                for (int i = 0; i < ps.getPlayer().getCount(); i++)
-                {
-                    ps.getPlayer().getBrand(i).IsCanSee = isCanSee;
-                    ps.getPlayer().getBrand(i).Team = teamCount[state];
-                    NowPlayer.add(ps.getPlayer().getBrand(i));
-                }
+                player.getBrand(i).IsCanSee = isCanSee;
+                player.getBrand(i).Team = teamCount[state];
+                NowPlayer.add(player.getBrand(i));
             }
         }
         /// <summary>
