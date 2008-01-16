@@ -42,7 +42,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 目前玩家
         /// </summary>
-        public int state;
+        internal int state;
         /// <summary>
         /// 玩家組別計算
         /// </summary>
@@ -171,6 +171,27 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
+        /// 傳回現在的位置
+        /// </summary>
+        public location State
+        {
+            get
+            {
+                switch (state)
+                {
+                    case 0:
+                        return location.North;
+                    case 1:
+                        return location.East;
+                    case 2:
+                        return location.South;
+                    case 3:
+                        return location.West;
+                }
+                return location.East;
+            }
+        }
+        /// <summary>
         /// 連莊次數
         /// </summary>
         public int Win_Times
@@ -231,6 +252,7 @@ namespace Mahjong.Control
         /// </summary>
         public void next()
         {
+            // 1 -> 0 -> 3 -> 2
             //switch (state)
             //{
             //    case 0:
@@ -244,8 +266,10 @@ namespace Mahjong.Control
             //        break;
             //    case 3:
             //        state = 2;
-            //        break;                     
+            //        break;
             //}
+            //state--;
+            //state = state % countplayers;
             state++;
             if (state % countplayers == 0)
                 state = 0;
@@ -308,24 +332,29 @@ namespace Mahjong.Control
         public void chow_pong(Brand brand,BrandPlayer player)
         {
             NowPlayer.add(brand);
-            set_Team(player,true);
-            //lastBrand = brand;            
+            Show_Table.remove(brand);
+            set_Team(player,true);        
         }
         /// <summary>
         /// 槓
         /// </summary>
+        /// <param name="brand"></param>
+        /// <param name="player">要槓的牌</param>
         public void kong(Brand brand,BrandPlayer player)
         {
             NowPlayer.add(brand);
+            Show_Table.remove(brand);
             set_Team(player, true);
-            // 槓要補一張
-            //NowPlayer.add(nextBrand());
         }
+        /// <summary>
+        /// 暗槓
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <param name="player"></param>
         public void BlackKong(Brand brand,BrandPlayer player)
         {
             NowPlayer.add(brand);
             set_Team(player, false);
-            //NowPlayer.add(nextBrand());
         }
         /// <summary>
         /// 設定群組號碼
@@ -333,14 +362,21 @@ namespace Mahjong.Control
         /// <param name="player">玩家</param>
         private void set_Team(BrandPlayer player,bool isCanSee)
         {
-            teamCount[state]++;
-            for (int i = 0; i < player.getCount(); i++)
-                NowPlayer.remove(player.getBrand(i));
-            for (int i = 0; i < player.getCount(); i++)
+            if (!player.getBrand(0).IsCanSee)
             {
-                player.getBrand(i).IsCanSee = isCanSee;
-                player.getBrand(i).Team = teamCount[state];
-                NowPlayer.add(player.getBrand(i));
+                PlayerSort ps = new PlayerSort(player);
+                teamCount[state]++;
+                // 把牌從現在玩家手上移出
+                for (int i = 0; i < player.getCount(); i++)
+                    NowPlayer.remove(player.getBrand(i));
+                // 把牌設為可視並且加上組別號碼後加回現在玩家
+                teamCount[state]++;
+                for (int i = 0; i < ps.getPlayer().getCount(); i++)
+                {
+                    ps.getPlayer().getBrand(i).IsCanSee = isCanSee;
+                    ps.getPlayer().getBrand(i).Team = teamCount[state];
+                    NowPlayer.add(ps.getPlayer().getBrand(i));
+                }
             }
         }
         /// <summary>
@@ -351,8 +387,8 @@ namespace Mahjong.Control
             bool ans = false;
             int f_count = 0;
             for (int i = 0; i < NowPlayer.getCount(); i++)
-                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower &&
-                    !NowPlayer.getBrand(i).IsCanSee) // 花牌而且不可見
+                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower 
+                    && !NowPlayer.getBrand(i).IsCanSee) // 花牌而且不可見
                 {
                     NowPlayer.getBrand(i).IsCanSee = true;
                     NowPlayer.getBrand(i).Team = 1;

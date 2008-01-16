@@ -127,7 +127,7 @@
     <Compile Include="Forms\Table.Designer.cs">
       <DependentUpon>Table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Players\AllPlayers.cs" />
+    <Compile Include="Control\AllPlayers.cs" />
     <Compile Include="Control\Location.cs" />
     <Compile Include="Players\PlayerSort.cs" />
     <Compile Include="Players\PlayerInterator.cs" />
@@ -343,7 +343,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mahjong.config" />
-    <None Include="app.config" />
     <None Include="Resources\a.gif" />
   </ItemGroup>
   <ItemGroup>

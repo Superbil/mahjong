@@ -108,6 +108,9 @@ namespace Mahjong.AIs
                 else if (player.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Wordtiles)
                     brands[4].add(player.getBrand(i));
                 player.getBrand(i).Source = 0;
+
+                //if (player.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower)
+                //    player.getBrand(i).Source = 9548;
             }
         }
         void step1()

@@ -268,7 +268,7 @@ namespace Mahjong.Forms
                 tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
             }
-            else
+            else 
                 bitmap = ResizeBitmap(bitmap, Mahjong.Properties.Settings.Default.ResizePercentage);
 
             // 設定圖片      

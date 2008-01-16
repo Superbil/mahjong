@@ -53,19 +53,19 @@ namespace Mahjong.Forms
 
         private void Chow_Click(object sender, EventArgs e)
         {
-            pc.chow();
+            pc.chow(brand);
             this.Close();
         }
 
         private void Pong_Click(object sender, EventArgs e)
         {
-            pc.pong();
+            pc.pong(brand);
             this.Close();
         }
 
         private void Kong_Click(object sender, EventArgs e)
         {
-            pc.kong();
+            pc.kong(brand);
             this.Close();
         }
 

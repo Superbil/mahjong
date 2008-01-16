@@ -483,7 +483,7 @@ namespace Mahjong.Forms
                 s = "莊家連"+ win_count.ToString() +"拉"+ win_count.ToString()+"\r\n";
                 textBox1.Text += s;
                 tally += win_count *2;
-                if (all.state == (int)l.Winer)
+                if (all.State == l.Winer)
                 {
                     textBox1.Text += "莊家放槍\r\n";
                     tally -= 1;

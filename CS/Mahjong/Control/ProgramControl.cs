@@ -22,7 +22,6 @@ namespace Mahjong.Control
         AllPlayers all;
         MahjongAI Ai;
         Information inforamtion;
-        Brand brand_temp;
         Config con;
         bool Player_Push_Brand;
 
@@ -30,7 +29,7 @@ namespace Mahjong.Control
         {
             InitializeComponent();
             setup();
-            table.ShowDialog();        
+            table.ShowDialog();
         }
         void setup()
         {
@@ -46,25 +45,24 @@ namespace Mahjong.Control
         {
             try
             {
-                touchBrand();
+                //touchBrand();
+                round();
             }
             catch (GameOverException)
             {
                 // 流局
                 addWiner();
+
+                RoundEnd(); 
                 // 新局
                 newgame2();
-                //RoundEnd();                
+                               
             }
-            //catch (ArgumentOutOfRangeException)
-            //{
-            //    MessageBox.Show("玩家是空的");
-            //}
         }
 
         private void addWiner()
         {
-            all.Win_Times++;            
+            all.Win_Times++;
         }
         public void exit()
         {
@@ -82,13 +80,13 @@ namespace Mahjong.Control
         }
         public void newgame()
         {
-            table.cleanAll();            
+            table.cleanAll();
             table.ShowAll = false;
             Ai = new Level_1();
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
             table.Setup(all);
-            rotateTimer.Interval = 50;
+            rotateTimer.Interval = 15;
             rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             newgame2();
         }
@@ -107,6 +105,12 @@ namespace Mahjong.Control
                 }
                 all.next();
             }
+            for (int i = 0; i < 4; i++)
+            {
+                all.sortNowPlayer();
+                table.updateNowPlayer();
+                all.next();
+            }
             table.updateInforamation();
             rotateTimer.Start();
         }
@@ -115,14 +119,12 @@ namespace Mahjong.Control
         /// </summary>
         void touchBrand()
         {
-            rotateTimer.Stop();
             table.updateNowPlayer();
             // 摸牌給現在的玩家
             Brand nextbrand = all.nextBrand();
             all.NowPlayer.add(nextbrand);
-            all.sortNowPlayer();
-            //table.updateNowPlayer();
-            updatePlayer_Table();
+            //all.sortNowPlayer();
+            table.updateNowPlayer();
             // 補花並更新
             if (all.setFlower())
             {
@@ -130,22 +132,22 @@ namespace Mahjong.Control
                 table.updateNowPlayer();
             }
             // 是否胡牌
-            Check c = new Check(all.NowPlayer);
+            Check c = new Check(removeTeam);
             //Brand b;
             if (c.Win())
                 RoundEnd();
             else if (c.BlackKong())
             {
                 if (all.state == (int)location.South)
-                    toUser(nextbrand, all.NowPlayer);
+                    toUser(nextbrand);
                 else
                 {
-                    if (black_kong_to_AI(nextbrand, all.NowPlayer))
+                    if (black_kong_to_AI(nextbrand))
                         touchBrand();
-                }                
+                }
             }
-            else
-                pushToTable(nextbrand);
+            //else
+            //    pushToTable(nextbrand);
         }
         /// <summary>
         /// 打牌
@@ -155,40 +157,42 @@ namespace Mahjong.Control
         {
             // 把牌從現在的玩家手上移除
             all.NowPlayer.remove(brand);
+            // 放到桌面上
+            all.PushToTable(brand);
             // 排序現在的玩家
             all.sortNowPlayer();
-            //table.updateNowPlayer();
+            // 更新現在玩家和桌面
             updatePlayer_Table();
 
-            if (check_chow_pong_kong_win(brand)||Player_Push_Brand)
+            // 如果沒有人要吃碰槓，就把牌打到桌面
+            if (check_chow_pong_kong_win(brand,0) || Player_Push_Brand)
             {
-                all.PushToTable(brand);
-                //table.updateTable();
-                updatePlayer_Table();
-                all.next();
-                table.updateInforamation();
-                RoundEnd();
-                rotateTimer.Start();
-                //touchBrand();
-                Player_Push_Brand = false;
-            }
+                //all.PushToTable(brand);
+                //updatePlayer_Table();
 
+                //all.next();
+                //table.updateInforamation();
+
+                //RoundEnd();                
+                Player_Push_Brand = false;
+                //rotateTimer.Start();
+            }
         }
-        bool check_chow_pong_kong_win(Brand brand)
+        bool check_chow_pong_kong_win(Brand brand,int nowstate)
         {
             Check c;
-            for (int i = 0; i < 4; i++)
+            for (int i = nowstate; i < 3; i++)
             {
                 all.next();
-                c = new Check(brand, all.NowPlayer);
+                c = new Check(brand, removeTeam);
                 // 測試是否被 胡 槓 碰 吃
-                if (all.state == (int)location.South)
+                if (all.State == location.South)
                 {
-                    toUser(brand, all.NowPlayer);
-                    all.sortNowPlayer();
-                    table.updateInforamation();
-                    table.updateNowPlayer();
-                    return false;
+                    if (c.Chow() || c.Pong() || c.Kong() || c.Win())
+                    {
+                        toUser(brand);
+                        return false;
+                    }
                 }
                 else
                 {
@@ -217,12 +221,28 @@ namespace Mahjong.Control
                     }
                 }
             }
+            all.next();
             return true;
+        }
+
+        void round()
+        {
+            rotateTimer.Stop();
+            touchBrand();
+            if (all.State != location.South)
+            {
+                Ai.setPlayer(all.NowPlayer);
+                pushToTable(Ai.getReadyBrand());
+                all.next();
+                table.updateInforamation();
+                rotateTimer.Start();
+            }            
+            
         }
 
         private Brand getfromAI()
         {
-            Ai.setPlayer(all.NowPlayer);
+            Ai.setPlayer(removeTeam);
             return Ai.getReadyBrand();
         }
         /// <summary>
@@ -234,29 +254,32 @@ namespace Mahjong.Control
             all.nextRound(true);
         }
 
-        private bool black_kong_to_AI(Brand brand, BrandPlayer player)
+        private bool black_kong_to_AI(Brand brand)
         {
-            Check c = new Check(player);
-            Ai.setPlayer(brand,player);
+            Check c = new Check(removeTeam);
+            Ai.setPlayer(brand, removeTeam);
             //if (Ai.getReadyBrandPlayer().getCount() != null && c.Kong())
-            c.Kong();
-                all.BlackKong(brand,c.SuccessPlayer);
+            if (c.Kong())
+                all.BlackKong(brand, c.SuccessPlayer);
             return true;
         }
-
-        private void toUser(Brand brand,BrandPlayer player)
+        /// <summary>
+        /// 把牌丟給玩家，看是否要吃 碰 槓 過水
+        /// </summary>
+        /// <param name="brand">打到桌面上的牌</param>
+        private void toUser(Brand brand)
         {
             // Lister user to Make Brand
-            rotateTimer.Stop();
-            //MessageBox.Show(brand.getNumber() + brand.getClass());
-            brand_temp = brand;
+            //rotateTimer.Stop();
             CPK cpk = new CPK(this, brand);
-            Check c = new Check(brand, player);
+            Check c = new Check(brand, removeTeam);
             cpk.Enabled_Button(c.Chow(), c.Pong(), c.Kong(), c.Win());
             if (c.Chow() || c.Pong() || c.Kong() || c.Win())
-                cpk.Show();
-        }        
-
+                cpk.ShowDialog();
+        }
+        /// <summary>
+        /// 結束遊戲
+        /// </summary>
         void overgame()
         {
             table.cleanImage();
@@ -269,103 +292,106 @@ namespace Mahjong.Control
             t.ShowDialog();
             RoundEnd();
         }
-
+        /// <summary>
+        /// 更新現在的玩家和桌面
+        /// </summary>
         void updatePlayer_Table()
         {
             table.updateNowPlayer();
-            
             table.updateTable();
         }
         /// <summary>
         /// 連線設定
         /// </summary>
-        public void onlineGame()
+        internal void onlineGame()
         {
-            chat = new ChatServerForm();            
+            chat = new ChatServerForm();
             chat.Show();
         }
         /// <summary>
         /// 使用者按下一張牌
         /// </summary>
         /// <param name="brand">按下的牌</param>
-        public void makeBrand(Brand brand)
+        internal void makeBrand(Brand brand)
         {
             Player_Push_Brand = true;
             pushToTable(brand);
-            rotateTimer.Start();            
+            all.next();
+            rotateTimer.Start();
         }
         /// <summary>
         /// 設定顯示資訊
         /// </summary>
-        public void setInforamtion()
+        internal void setInforamtion()
         {
             inforamtion.setAllPlayers(all);
             inforamtion.Show();
         }
         /// <summary>
+        /// 移除掉已經打出去的牌組，以Team編號來區分
+        /// </summary>
+        BrandPlayer removeTeam
+        {
+            get
+            {
+                BrandPlayer bp = new BrandPlayer();
+                for (int i = 0; i < all.NowPlayer.getCount(); i++)
+                    if (all.NowPlayer.getBrand(i).Team < 1)
+                        bp.add(all.NowPlayer.getBrand(i));
+                return bp;
+            }
+        }
+        /// <summary>
         /// 吃
         /// </summary>
-        public void chow()
+        internal void chow(Brand brand)
         {
-            Check c = new Check(brand_temp, all.NowPlayer);
+            Check c = new Check(brand, removeTeam);
             if (c.Chow())
-                all.chow_pong(brand_temp,c.SuccessPlayer);
-            //all.next();
+                all.chow_pong(brand, c.SuccessPlayer);
             //Player_Push_Brand = true;
-            //rotateTimer.Start();
-            //table.updateNowPlayer();
-            //touchBrand();
             updatePlayer_Table();
         }
         /// <summary>
         /// 碰
         /// </summary>
-        public void pong()
+        internal void pong(Brand brand)
         {
-            Check c = new Check(brand_temp,all.NowPlayer);
+            Check c = new Check(brand, removeTeam);
             if (c.Pong())
-                all.chow_pong(brand_temp,c.SuccessPlayer);
-            //all.next();
+                all.chow_pong(brand, c.SuccessPlayer);
             //Player_Push_Brand = true;
-            //rotateTimer.Start();
-            //table.updateNowPlayer();
-            //touchBrand();
             updatePlayer_Table();
-
         }
         /// <summary>
         /// 槓
         /// </summary>
-        public void kong()
+        internal void kong(Brand brand)
         {
-            Check c = new Check(brand_temp,all.NowPlayer);
+            Check c = new Check(brand, removeTeam);
             if (c.Kong())
-                all.kong(brand_temp,c.SuccessPlayer);
-            //all.next();
-            //table.updateNowPlayer();
+                all.kong(brand, c.SuccessPlayer);
             updatePlayer_Table();
             //Player_Push_Brand = true;
-            //rotateTimer.Start();
             touchBrand();
         }
         /// <summary>
         /// 胡
         /// </summary>
-        public void win()
+        internal void win()
         {
-            overgame();      
+            overgame();
         }
         /// <summary>
         /// 過水
         /// </summary>
         /// <param name="brand">牌</param>
-        public void pass(Brand brand)
+        internal void pass(Brand brand)
         {
             all.PushToTable(brand);
-            //table.updateTable();
-            updatePlayer_Table();
-            //touchBrand();
-            //rotateTimer.Start();
+            table.updateTable();
+            Player_Push_Brand = false;
+            rotateTimer.Start();
         }
 
     }

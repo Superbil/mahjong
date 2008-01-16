@@ -56,6 +56,8 @@ namespace Mahjong.Forms
             string s = all.getLocation().ToString();
             s += " - (";
             s += all.Brand_Count.ToString();
+            s += "/";
+            s += all.Table.getCount() - all.Brand_Count;
             s += ")";
             this.Text = s;
         }

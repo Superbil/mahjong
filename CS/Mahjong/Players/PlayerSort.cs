@@ -54,9 +54,9 @@ namespace Mahjong.Players
             BrandClass[3] = new TubeBrand(0);
             BrandClass[4] = new WordBrand(0);
 
-            creak();
             getBrands( inputPlayer.creatIterator() );
-            sort();
+            sortPlayer();
+            //sortTeam();
             compose();
         }
 
@@ -82,20 +82,10 @@ namespace Mahjong.Players
             BrandClass[3] = b4;
             BrandClass[4] = b5;
 
-            creak();
             getBrands(inputPlayer.creatIterator());
-            sort();
+            sortPlayer();
+            //sortTeam();
             compose();
-        }
-        private void creak()
-        {
-            for (int i = 0; i < inputPlayer.getCount(); i++)
-            {
-                if (inputPlayer.getBrand(i).IsCanSee)
-                    show.add(inputPlayer.getBrand(i));
-                if (inputPlayer.getBrand(i).Team > 0)
-                    team.add(inputPlayer.getBrand(i));
-            }
         }
         /// <summary>
         /// 得到排序完的玩家
@@ -106,22 +96,55 @@ namespace Mahjong.Players
             return ans;
         }
         /// <summary>
-        /// 結果輸出
+        /// 結果組合輸出
         /// </summary>
         private void compose()
         {
+            for (int i = 0; i < teamBrands.getCount(); i++)
+                ans.add(teamBrands.getBrand(i));
             for (int i = 0; i < tempPlayers.Length; i++)
                 for (int j = 0; j < tempPlayers[i].getCount(); j++)
                     ans.add(tempPlayers[i].getBrand(j));
+            for (int i = 0; i < teamBrands.getCount(); i++)
+                ans.remove(teamBrands.getBrand(i));
         }
         /// <summary>
-        /// 排序
+        /// 排序玩家
         /// </summary>
-        private void sort()
+        private void sortPlayer()
         {
             for (int i = 0; i < BrandClass.Length; i++ )
                 if(tempPlayers[i].getCount() > 1 )
                     tempPlayers[i] = ButtleSort(tempPlayers[i]);
+        }
+        /// <summary>
+        /// 排序牌組
+        /// </summary>
+        private void sortTeam()
+        {
+            if (teamBrands.getCount() > 1)
+            {
+                // 設定最大的team號碼
+                int team_count = 0;
+                for (int i = 0; i < teamBrands.getCount(); i++)
+                    if (teamBrands.getBrand(i).Team > team_count)
+                        team_count = teamBrands.getBrand(i).Team;
+                // 設定新的陣列以最大的team號碼
+                BrandPlayer[] b = new BrandPlayer[team_count];
+                for (int i = 0; i < b.Length; i++)
+                    b[i] = new BrandPlayer();
+
+                for (int i = 0; i < teamBrands.getCount(); i++)
+                    b[teamBrands.getBrand(i).Team-1].add(teamBrands.getBrand(i));
+
+                for (int i = 0; i < b.Length; i++)
+                    b[i] = ButtleSort(b[i]);
+
+                teamBrands.clear();
+                for (int i = 0; i < b.Length; i++)
+                    for (int j = 0; j < b[i].getCount(); j++)
+                        teamBrands.add(b[i].getBrand(j));
+            }
         }
         private BrandPlayer ButtleSort(BrandPlayer player)
         {      
@@ -157,7 +180,7 @@ namespace Mahjong.Players
                 for (int i=0; i < tempPlayers.Length ; i++ )
                     if (brandtemp.getClass()==BrandClass[i].getClass())
                         tempPlayers[i].add(brandtemp);
-                if (brandtemp.Team >= 0)
+                if (brandtemp.Team > 0)
                     teamBrands.add(brandtemp);
             }
         }
