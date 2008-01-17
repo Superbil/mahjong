@@ -28,6 +28,8 @@ namespace Mahjong.Forms
             Kong.Text = Mahjong.Properties.Settings.Default.Kong;
             Win.Text = Mahjong.Properties.Settings.Default.Win;
             Pass.Text = Mahjong.Properties.Settings.Default.Pass;
+            DarkKong.Text = Mahjong.Properties.Settings.Default.DarkKong;
+
             if (brand.getClass() == Mahjong.Properties.Settings.Default.Wordtiles)
             {
                 WordBrand w = (WordBrand)brand;
@@ -43,12 +45,13 @@ namespace Mahjong.Forms
         /// <param name="pong">¸I«ö¶s</param>
         /// <param name="kong">ºb«ö¶s</param>
         /// <param name="win">­J«ö¶s</param>
-        public void Enabled_Button(bool chow,bool pong,bool kong,bool win)
+        public void Enabled_Button(bool chow,bool pong,bool kong,bool darkong,bool win)
         {
             this.Chow.Enabled = chow;
             this.Pong.Enabled = pong;
             this.Kong.Enabled = kong;
             this.Win.Enabled = win;
+            this.DarkKong.Enabled = darkong;
         }
 
         private void Chow_Click(object sender, EventArgs e)
@@ -78,6 +81,12 @@ namespace Mahjong.Forms
         private void Pass_Click(object sender, EventArgs e)
         {
             pc.pass(brand);
+            this.Close();
+        }
+
+        private void DarkKong_Click(object sender, EventArgs e)
+        {
+            
             this.Close();
         }        
     }

@@ -357,9 +357,9 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
-        /// 現在的玩家補花
+        /// 新遊戲補花
         /// </summary>
-        public bool setFlower()
+        public bool Newgame_setFlower()
         {
             bool ans = false;
             int f_count = 0;
@@ -376,6 +376,21 @@ namespace Mahjong.Control
             for (int i = 0; i < f_count; i++)
                 NowPlayer.add( nextTableBrand() );
             return ans;
+        }
+        /// <summary>
+        /// 現在的玩家補花
+        /// </summary>
+        public bool Player_setFlower()
+        {
+            for (int i = 0; i < NowPlayer.getCount(); i++)
+                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower
+                    && !NowPlayer.getBrand(i).IsCanSee) // 花牌而且不可見
+                {
+                    NowPlayer.getBrand(i).IsCanSee = true;
+                    NowPlayer.getBrand(i).Team = 1;
+                    return true;
+                }
+            return false;
         }
         /// <summary>
         /// 現在的玩家排序

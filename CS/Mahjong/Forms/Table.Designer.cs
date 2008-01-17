@@ -106,7 +106,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(692, 570);
+            this.ClientSize = new System.Drawing.Size(612, 600);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Name = "Table";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

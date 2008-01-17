@@ -256,7 +256,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("王小民")]
+        [global::System.Configuration.DefaultSettingValueAttribute("張惠娟")]
         public string Player3 {
             get {
                 return ((string)(this["Player3"]));
@@ -268,7 +268,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("林雅光")]
+        [global::System.Configuration.DefaultSettingValueAttribute("吳昆賢")]
         public string Player4 {
             get {
                 return ((string)(this["Player4"]));
@@ -461,6 +461,15 @@ namespace Mahjong.Properties {
         public string Pass {
             get {
                 return ((string)(this["Pass"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("暗槓")]
+        public string DarkKong {
+            get {
+                return ((string)(this["DarkKong"]));
             }
         }
     }

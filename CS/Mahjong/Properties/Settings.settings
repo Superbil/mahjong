@@ -78,10 +78,10 @@
       <Value Profile="(Default)">林宗水</Value>
     </Setting>
     <Setting Name="Player3" Type="System.String" Scope="User">
-      <Value Profile="(Default)">王小民</Value>
+      <Value Profile="(Default)">張惠娟</Value>
     </Setting>
     <Setting Name="Player4" Type="System.String" Scope="User">
-      <Value Profile="(Default)">林雅光</Value>
+      <Value Profile="(Default)">吳昆賢</Value>
     </Setting>
     <Setting Name="Money" Type="System.Double" Scope="User">
       <Value Profile="(Default)">5000</Value>
@@ -142,6 +142,9 @@
     </Setting>
     <Setting Name="Pass" Type="System.String" Scope="Application">
       <Value Profile="(Default)">過水</Value>
+    </Setting>
+    <Setting Name="DarkKong" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">暗槓</Value>
     </Setting>
   </Settings>
 </SettingsFile>

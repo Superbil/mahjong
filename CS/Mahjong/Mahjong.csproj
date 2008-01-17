@@ -343,6 +343,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mahjong.config" />
+    <None Include="app.config" />
     <None Include="Resources\a.gif" />
   </ItemGroup>
   <ItemGroup>
