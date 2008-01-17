@@ -110,7 +110,7 @@ namespace Mahjong.Control
         /// ·tºb ¦¨¥ß
         /// </summary>
         /// <returns>¬O/§_</returns>
-        public bool BlackKong()
+        public bool DarkKong()
         {
             ans_player.clear();
             for (int i = 0; i < x.getCount() - 3; i++)

@@ -332,7 +332,7 @@ namespace Mahjong.Control
         /// </summary>
         /// <param name="brand"></param>
         /// <param name="player"></param>
-        public void BlackKong(Brand brand,BrandPlayer player)
+        public void DarkKong(Brand brand,BrandPlayer player)
         {
             NowPlayer.add(brand);
             set_Team(player, false);

@@ -42,7 +42,7 @@ namespace Mahjong.Control
                 Console.WriteLine("¦³¸I");
             if (c.Kong())
                 Console.WriteLine("¦³ºb");
-            if (c.BlackKong())
+            if (c.DarkKong())
                 Console.WriteLine("¦³·tºb");
 
             if (!c.Win() && !c.Chow() && !c.Pong() && !c.Kong())

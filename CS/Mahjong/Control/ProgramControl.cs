@@ -24,6 +24,7 @@ namespace Mahjong.Control
         Information inforamtion;
         Config con;
         bool Player_Chow_Pong_Brand;
+        bool Player_Pass_Brand;
 
         public ProgramControl()
         {
@@ -40,6 +41,7 @@ namespace Mahjong.Control
             //Ai = new Level_1();
             con = new Config(table);
             Player_Chow_Pong_Brand = false;
+            Player_Pass_Brand = false;
         }
         void rotateTimer_Tick(object sender, EventArgs e)
         {
@@ -49,6 +51,7 @@ namespace Mahjong.Control
             }
             catch (GameOverException)
             {
+                MessageBox.Show("流局");
                 // 流局
                 addWiner();
 
@@ -59,24 +62,6 @@ namespace Mahjong.Control
             }
         }
 
-        private void addWiner()
-        {
-            all.Win_Times++;
-        }
-        public void exit()
-        {
-            Application.Exit();
-        }
-        public void about()
-        {
-            new AboutBox();
-        }
-        public void config()
-        {
-            con.Dispose();
-            con = new Config(table);
-            con.Show();
-        }
         public void newgame()
         {
             table.cleanAll();
@@ -131,18 +116,19 @@ namespace Mahjong.Control
                 table.updateNowPlayer();
             }
             // 是否胡牌
-            Check c = new Check(removeTeam);
+            Check c = new Check(all.NowPlayer);
             //Brand b;
             if (c.Win())
                 RoundEnd();
-            else if (c.BlackKong())
+            else if (c.DarkKong())
             {
                 if (all.state == (int)location.South)
                     toUser(nextbrand);
                 else
                 {
-                    if (black_kong_to_AI(nextbrand))
-                        touchBrand();
+                    dark_kong_to_AI(nextbrand);
+                    //if (dark_kong_to_AI(nextbrand))
+                    //    touchBrand();
                 }
             }
         }
@@ -188,7 +174,11 @@ namespace Mahjong.Control
                     if (c.Chow() || c.Pong() || c.Kong() || c.Win())
                     {
                         toUser(brand);
-                        return false;
+                        if (!Player_Pass_Brand)
+                        {
+                            Player_Pass_Brand = false;
+                            return false;
+                        }
                     }
                 }
                 else
@@ -212,7 +202,7 @@ namespace Mahjong.Control
                         pushToTable(getfromAI());
                         return false;
                     }
-                    else if (c.Chow() && i == 3)
+                    else if (c.Chow() && i == 2)
                     {
                         MessageBox.Show(Mahjong.Properties.Settings.Default.Chow, all.Name[all.state].ToString());
                         all.chow_pong(brand, c.SuccessPlayer);
@@ -237,7 +227,7 @@ namespace Mahjong.Control
             }
             if (all.State != location.South)
             {
-                Ai.setPlayer(all.NowPlayer);
+                Ai.setPlayer(removeTeam);
                 if (pushToTable(Ai.getReadyBrand()))
                 {
                     all.next();
@@ -262,12 +252,13 @@ namespace Mahjong.Control
             all.nextRound(true);
         }
 
-        private bool black_kong_to_AI(Brand brand)
+        private bool dark_kong_to_AI(Brand brand)
         {
+            MessageBox.Show(Mahjong.Properties.Settings.Default.Kong, all.Name[all.state].ToString());
             Check c = new Check(removeTeam);
             Ai.setPlayer(brand, removeTeam);
             if (c.Kong())
-                all.BlackKong(brand, c.SuccessPlayer);
+                all.DarkKong(brand, c.SuccessPlayer);
             return true;
         }
         /// <summary>
@@ -276,7 +267,6 @@ namespace Mahjong.Control
         /// <param name="brand">打到桌面上的牌</param>
         private void toUser(Brand brand)
         {
-            // Lister user to Make Brand
             CPK cpk = new CPK(this, brand);
             Check c = new Check(brand, removeTeam);
             cpk.Enabled_Button(c.Chow(), c.Pong(), c.Kong(), c.Win());
@@ -298,22 +288,7 @@ namespace Mahjong.Control
             t.ShowDialog();
             RoundEnd();
         }
-        /// <summary>
-        /// 更新現在的玩家和桌面
-        /// </summary>
-        void updatePlayer_Table()
-        {
-            table.updateNowPlayer();
-            table.updateTable();
-        }
-        /// <summary>
-        /// 連線設定
-        /// </summary>
-        internal void onlineGame()
-        {
-            chat = new ChatServerForm();
-            chat.Show();
-        }
+        
         /// <summary>
         /// 使用者按下一張牌
         /// </summary>
@@ -322,30 +297,10 @@ namespace Mahjong.Control
         {
             pushToTable(brand);
             all.next();
+            Player_Chow_Pong_Brand = false;
             rotateTimer.Start();
         }
-        /// <summary>
-        /// 設定顯示資訊
-        /// </summary>
-        internal void setInforamtion()
-        {
-            inforamtion.setAllPlayers(all);
-            inforamtion.Show();
-        }
-        /// <summary>
-        /// 移除掉已經打出去的牌組，以Team編號來區分
-        /// </summary>
-        BrandPlayer removeTeam
-        {
-            get
-            {
-                BrandPlayer bp = new BrandPlayer();
-                for (int i = 0; i < all.NowPlayer.getCount(); i++)
-                    if (all.NowPlayer.getBrand(i).Team < 1)
-                        bp.add(all.NowPlayer.getBrand(i));
-                return bp;
-            }
-        }
+        
         /// <summary>
         /// 吃
         /// </summary>
@@ -394,9 +349,73 @@ namespace Mahjong.Control
         {
             all.PushToTable(brand);
             table.updateTable();
-            rotateTimer.Start();
+            Player_Pass_Brand = true;
         }
-
+        private void addWiner()
+        {
+            all.Win_Times++;
+        }
+        /// <summary>
+        /// 程式結束
+        /// </summary>
+        public void exit()
+        {
+            Application.Exit();
+        }
+        /// <summary>
+        /// About box
+        /// </summary>
+        public void about()
+        {
+            new AboutBox();
+        }
+        /// <summary>
+        /// config Box
+        /// </summary>
+        public void config()
+        {
+            con.Dispose();
+            con = new Config(table);
+            con.Show();
+        }
+        /// <summary>
+        /// 設定顯示資訊
+        /// </summary>
+        internal void setInforamtion()
+        {
+            inforamtion.setAllPlayers(all);
+            inforamtion.Show();
+        }
+        /// <summary>
+        /// 移除掉已經打出去的牌組，以Team編號來區分
+        /// </summary>
+        BrandPlayer removeTeam
+        {
+            get
+            {
+                BrandPlayer bp = new BrandPlayer();
+                for (int i = 0; i < all.NowPlayer.getCount(); i++)
+                    if (all.NowPlayer.getBrand(i).Team < 1)
+                        bp.add(all.NowPlayer.getBrand(i));
+                return bp;
+            }
+        }
+        /// <summary>
+        /// 更新現在的玩家和桌面
+        /// </summary>
+        void updatePlayer_Table()
+        {
+            table.updateNowPlayer();
+            table.updateTable();
+        }
+        /// <summary>
+        /// 連線設定
+        /// </summary>
+        internal void onlineGame()
+        {
+            chat = new ChatServerForm();
+            chat.Show();
+        }
     }
     class GameOverException : Exception
     {
