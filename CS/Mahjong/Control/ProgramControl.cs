@@ -35,10 +35,8 @@ namespace Mahjong.Control
         void setup()
         {
             rotateTimer = new Timer();
-            // 陪ボTable ざ
             table = new Table(this);
             inforamtion = new Information();
-            //Ai = new Level_1();
             con = new Config(table);
             Chow_Pong_Brand = false;
             Player_Pass_Brand = false;
@@ -51,7 +49,7 @@ namespace Mahjong.Control
             }
             catch (GameOverException)
             {
-                MessageBox.Show("瑈Ы");
+                MessageBox.Show(Mahjong.Properties.Settings.Default.FlowEnd);
                 // 瑈Ы
                 addWiner();
                 table.cleanImage();
@@ -69,14 +67,13 @@ namespace Mahjong.Control
             // 砞﹚4產,–16眎
             all = new AllPlayers(4, 16);
             table.Setup(all);
-            rotateTimer.Interval = 15;
+            rotateTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTimes;
             rotateTimer.Tick += new EventHandler(rotateTimer_Tick);
             newgame2();
         }
         void newgame2()
         {
             all.creatBrands();
-            //table.cleanImage();
             table.addImage();
             // 干
             for (int i = 0; i < 4; i++)
@@ -102,38 +99,42 @@ namespace Mahjong.Control
         /// </summary>
         void touchBrand()
         {
+            bool Patch_Flow = false;
             table.updateNowPlayer();
             // 篘礟倒瞷產
             Brand nextbrand = all.nextBrand();
             all.NowPlayer.add(nextbrand);
-            //all.sortNowPlayer();
             table.updateNowPlayer();
             // 干眎礟
             if (all.Player_setFlower())
             {
                 all.sortNowPlayer();
                 table.updateNowPlayer();
-                // 干Ч篘眎礟
-                touchBrand();
+                Patch_Flow = true;       
             }
             // 琌璊礟
             Check c = new Check(all.NowPlayer);
             Check d = new Check(removeTeam);
-            //Brand b;
             if (c.Win())
                 RoundEnd();
             else if (d.DarkKong())
             {
                 if (all.State == location.South)
-                {
-                    touchBrand();
+                {                    
                     toUser(nextbrand, false, false, false,true, false);
+                    touchBrand();
                 }
                 else
                 {
                     dark_kong_to_AI(nextbrand);
                     touchBrand();
                 }
+            }
+            // 干Ч篘眎礟    
+            if (Patch_Flow)
+            {
+                touchBrand();
+                Patch_Flow = false;
             }
         }
         /// <summary>
@@ -235,7 +236,10 @@ namespace Mahjong.Control
             return true;
         }
         
-
+        /// <summary>
+        /// 眖AI眔眎礟
+        /// </summary>
+        /// <returns></returns>
         private Brand getfromAI()
         {
             Ai.setPlayer(removeTeam);

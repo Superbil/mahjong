@@ -407,7 +407,6 @@ namespace Mahjong.Control
         public void PushToTable(Brand brand)
         {
             brand.IsCanSee = true;
-            //NowPlayer.remove(brand);
             show_table.add(brand);
         }
     }

@@ -90,14 +90,14 @@ namespace Mahjong.Forms
                 setInforamtion();
             }
             // 按下F7開啟牌的資訊顯示
-            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.DebugInformationKey)
+            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.Debug_InformationKey)
             {
                 if (ShowBrandInfo)
                     ShowBrandInfo = false;
                 else
                     ShowBrandInfo = true;
             }
-            if (e.KeyCode.ToString() == "F5")
+            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.Debug_RenewKey)
             {
                 cleanImage();
                 addImage();
@@ -339,7 +339,6 @@ namespace Mahjong.Forms
         {
             BrandBox b = (BrandBox)sender;
             pc.makeBrand(b.brand);
-            //this.Update();
         }
         /// <summary>
         /// 新增玩家、桌面圖片

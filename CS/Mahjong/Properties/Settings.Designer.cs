@@ -314,9 +314,9 @@ namespace Mahjong.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("F7")]
-        public string DebugInformationKey {
+        public string Debug_InformationKey {
             get {
-                return ((string)(this["DebugInformationKey"]));
+                return ((string)(this["Debug_InformationKey"]));
             }
         }
         
@@ -470,6 +470,36 @@ namespace Mahjong.Properties {
         public string DarkKong {
             get {
                 return ((string)(this["DarkKong"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("流局")]
+        public string FlowEnd {
+            get {
+                return ((string)(this["FlowEnd"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int RunRoundTimes {
+            get {
+                return ((int)(this["RunRoundTimes"]));
+            }
+            set {
+                this["RunRoundTimes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F5")]
+        public string Debug_RenewKey {
+            get {
+                return ((string)(this["Debug_RenewKey"]));
             }
         }
     }
