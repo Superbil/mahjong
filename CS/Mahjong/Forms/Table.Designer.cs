@@ -35,6 +35,7 @@
             this.網路ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.開新遊戲ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.設定ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowMessageBox_Menu = new System.Windows.Forms.ToolStripMenuItem();
             this.關於ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.結束ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,10 +78,21 @@
             // 
             // 設定ToolStripMenuItem1
             // 
+            this.設定ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ShowMessageBox_Menu});
             this.設定ToolStripMenuItem1.Name = "設定ToolStripMenuItem1";
             this.設定ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.設定ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.Config;
             this.設定ToolStripMenuItem1.Click += new System.EventHandler(this.設定ToolStripMenuItem1_Click);
+            // 
+            // ShowMessageBox_Menu
+            // 
+            this.ShowMessageBox_Menu.Checked = true;
+            this.ShowMessageBox_Menu.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ShowMessageBox_Menu.Name = "ShowMessageBox_Menu";
+            this.ShowMessageBox_Menu.Size = new System.Drawing.Size(152, 22);
+            this.ShowMessageBox_Menu.Text = global::Mahjong.Properties.Settings.Default.ShowMessageBox;
+            this.ShowMessageBox_Menu.Click += new System.EventHandler(this.ShowMessageBox_Menu_Click);
             // 
             // 關於ToolStripMenuItem1
             // 
@@ -128,6 +140,7 @@
         private System.Windows.Forms.ToolStripMenuItem 關於ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 結束ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ShowMessageBox_Menu;
 
         
     }

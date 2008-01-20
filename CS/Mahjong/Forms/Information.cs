@@ -19,6 +19,10 @@ namespace Mahjong.Forms
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// ³]©w AllPlayers
+        /// </summary>
+        /// <param name="all">AllPlayers</param>
         public void setAllPlayers(AllPlayers all)
         {
             this.all = all;
@@ -100,7 +104,7 @@ namespace Mahjong.Forms
             s += " - (";
             s += all.Brand_Count.ToString();
             s += "/";
-            s += all.Table.getCount() - all.Brand_Count;
+            s += all.Table.getCount();
             s += ")";
             this.Text = s;
         }

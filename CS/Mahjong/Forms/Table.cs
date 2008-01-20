@@ -61,7 +61,16 @@ namespace Mahjong.Forms
             ShowBrandInfo = false;
             lockuser = false;
             this.KeyUp += new KeyEventHandler(Table_KeyUp);
+            this.ShowMessageBox_Menu.CheckedChanged += new EventHandler(ShowMessageBox_Menu_CheckedChanged);
         }
+
+        void ShowMessageBox_Menu_CheckedChanged(object sender, EventArgs e)
+        {
+            pc.ShowMessageBox = ShowMessageBox_Menu.Checked;
+        }
+        /// <summary>
+        /// 鎖定使用者
+        /// </summary>
         internal bool LockUser
         {
             set
@@ -106,8 +115,26 @@ namespace Mahjong.Forms
             {
                 pc.newgame();
             }
-
         }
+        /// <summary>
+        /// 設定或取得 是否"顯示提示"
+        /// </summary>
+        internal bool SetCheck
+        {
+            get
+            {
+                return ShowMessageBox_Menu.Checked;
+
+            }
+            set
+            {
+                ShowMessageBox_Menu.Checked = value;
+            }
+        }
+        /// <summary>
+        /// 設定玩家
+        /// </summary>
+        /// <param name="all">AllPlayers</param>
         public void Setup(AllPlayers all)
         {
             this.all = all;
@@ -378,6 +405,9 @@ namespace Mahjong.Forms
         {
             this.Controls.Clear();
         }
+        /// <summary>
+        /// 更新現在玩家
+        /// </summary>
         public void updateNowPlayer()
         {
             flowLayoutBrands[all.state].Controls.Clear();
@@ -437,5 +467,14 @@ namespace Mahjong.Forms
         {
             pc.exit();
         }
+
+        private void ShowMessageBox_Menu_Click(object sender, EventArgs e)
+        {
+            if (ShowMessageBox_Menu.Checked)
+                ShowMessageBox_Menu.Checked = false;
+            else
+                ShowMessageBox_Menu.Checked = true;
+        }
+
     }
 }

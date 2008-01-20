@@ -394,7 +394,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("新遊戲 (F4)")]
+        [global::System.Configuration.DefaultSettingValueAttribute("新遊戲")]
         public string NewGame {
             get {
                 return ((string)(this["NewGame"]));
@@ -484,7 +484,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2000")]
         public int RunRoundTimes {
             get {
                 return ((int)(this["RunRoundTimes"]));
@@ -527,6 +527,24 @@ namespace Mahjong.Properties {
         public string TouchWin {
             get {
                 return ((string)(this["TouchWin"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("相公")]
+        public string ErrorBrandPlayer {
+            get {
+                return ((string)(this["ErrorBrandPlayer"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("顯示提示")]
+        public string ShowMessageBox {
+            get {
+                return ((string)(this["ShowMessageBox"]));
             }
         }
     }

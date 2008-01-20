@@ -91,7 +91,7 @@ namespace Mahjong.Control
             this.dealnumber = deal;
             this.countplayers = playernumber;
             this.sumBrands = factory.SumBrands;
-            this.state = 1;
+            this.state = (uint)lo.Winer;
             this.brand_count = 0;
             this.basic_tai = Mahjong.Properties.Settings.Default.BasicTai;            
             this.teamCount = new int[playernumber];
@@ -263,7 +263,7 @@ namespace Mahjong.Control
         public Brand nextBrand()
         {
             if (table.getCount() <= 8) // 保留8張不摸
-                throw new GameOverException();
+                throw new FlowOverException();
             else
             {
                 Brand b = nextTableBrand();
@@ -301,13 +301,19 @@ namespace Mahjong.Control
                 this.lo.next();
                 this.win_Times = 1;
             }
+            //設定新的開牌位置
             this.lo.setPosition();
+            //新的桌面和牌工廠
             this.table = new BrandPlayer();
             this.factory = new BrandFactory();
+            //更新莊家
             this.state = (uint)lo.Winer;
+            //設定牌組和打牌次數
             for (int i = 0; i < countplayers; i++)
                 teamCount[i] = 1;
             this.brand_count = 0;
+            //清除打出去的牌
+            Show_Table.clear();            
 
         }
         /// <summary>

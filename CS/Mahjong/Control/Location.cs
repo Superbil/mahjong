@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Mahjong.Control
 {
+    /// <summary>
+    /// 方位 北 東 南 西
+    /// </summary>
     public enum location
     {
         /// <summary>
@@ -29,7 +32,9 @@ namespace Mahjong.Control
         location round;
         location winer;
         Random r = new Random();
-
+        /// <summary>
+        /// 方位建構子預設 東風東 開始
+        /// </summary>
         public Location()
         {
             round = location.East;
@@ -113,6 +118,11 @@ namespace Mahjong.Control
             else
                 return location.East;
         }
+        /// <summary>
+        /// 轉換方位到字串
+        /// </summary>
+        /// <param name="lo">方位</param>
+        /// <returns>字串</returns>
         internal string location_to_string(location lo)
         {
             if (lo == location.East)
