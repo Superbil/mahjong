@@ -335,7 +335,6 @@ namespace Mahjong.Control
         /// <param name="player">可以槓的牌組</param>
         public void kong(Brand brand,BrandPlayer player)
         {
-            NowPlayer.add(brand);
             Show_Table.remove(brand);
             set_Team(player, true);
         }
@@ -346,7 +345,6 @@ namespace Mahjong.Control
         /// <param name="player">可以槓的牌組</param>
         public void DarkKong(Brand brand,BrandPlayer player)
         {
-          //  NowPlayer.add(brand);
             set_Team(player, false);
         }
         /// <summary>

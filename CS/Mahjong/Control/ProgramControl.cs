@@ -72,7 +72,7 @@ namespace Mahjong.Control
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
             table.Setup(all);
-            rotateTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTimes;            
+            rotateTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTimes;   
             newgame2();
         }
         void newgame2()
@@ -186,7 +186,7 @@ namespace Mahjong.Control
                     {
                         MessageBox.Show(Mahjong.Properties.Settings.Default.Kong, all.Name[all.state].ToString());
                         all.kong(nextbrand, darkkong.SuccessPlayer);
-                        all.NowPlayer.add(nextbrand);
+                        //all.NowPlayer.add(nextbrand);
                         table.updateNowPlayer();
                         touchBrand();
                     }
