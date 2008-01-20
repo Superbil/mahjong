@@ -150,7 +150,7 @@
       <Value Profile="(Default)">流局</Value>
     </Setting>
     <Setting Name="RunRoundTimes" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2000</Value>
+      <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="Debug_RenewKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">F5</Value>

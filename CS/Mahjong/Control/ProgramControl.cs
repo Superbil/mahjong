@@ -552,7 +552,7 @@ namespace Mahjong.Control
         internal void setInforamtion()
         {
             information.setAllPlayers(all);
-            //information.DebugMode = table.ShowAll;
+            information.DebugMode = table.ShowAll;
             information.Show();
         }
         /// <summary>

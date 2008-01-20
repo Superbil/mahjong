@@ -484,7 +484,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
         public int RunRoundTimes {
             get {
                 return ((int)(this["RunRoundTimes"]));
