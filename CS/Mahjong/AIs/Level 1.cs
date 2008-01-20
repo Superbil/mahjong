@@ -82,7 +82,7 @@ namespace Mahjong.AIs
             ans = player.getBrand(0);
             for (int i = 1; i < player.getCount(); i++)
             {
-                if (player.getBrand(i).Source < ans.Source ||player.getBrand(i).getClass()!=Mahjong.Properties.Settings.Default.Flower)
+                if (player.getBrand(i).Source < ans.Source && player.getBrand(i).getClass() != Mahjong.Properties.Settings.Default.Flower)
                     ans = player.getBrand(i);
             }
             //print();
@@ -92,6 +92,27 @@ namespace Mahjong.AIs
         {
             return null;
         }
+
+        public bool Chow
+        {
+            get { return true; }
+        }
+
+        public bool Pong
+        {
+            get { return true; }
+        }
+
+        public bool Kong
+        {
+            get { return true; }
+        }
+
+        public bool Win
+        {
+            get { return true; }
+        }
+
         void step0()
         {
             for (int i = 0; i < player.getCount(); i++)

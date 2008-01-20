@@ -50,5 +50,13 @@ namespace Mahjong.Brands
             get;
             set;
         }
+        /// <summary>
+        /// 誰打出去的
+        /// </summary>
+        Mahjong.Control.location WhoPush
+        {
+            get;
+            set;
+        }
     }
 }

@@ -86,7 +86,7 @@ namespace Mahjong.Forms
 
         private void DarkKong_Click(object sender, EventArgs e)
         {
-            
+            pc.dark_kong(brand);
             this.Close();
         }        
     }

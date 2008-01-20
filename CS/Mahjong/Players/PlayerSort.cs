@@ -100,13 +100,16 @@ namespace Mahjong.Players
         /// </summary>
         private void compose()
         {
-            for (int i = 0; i < teamBrands.getCount(); i++)
-                ans.add(teamBrands.getBrand(i));
+            // 加入排序好的牌
             for (int i = 0; i < tempPlayers.Length; i++)
                 for (int j = 0; j < tempPlayers[i].getCount(); j++)
                     ans.add(tempPlayers[i].getBrand(j));
+            // 移除有組別重複的牌
             for (int i = 0; i < teamBrands.getCount(); i++)
                 ans.remove(teamBrands.getBrand(i));
+            // 加入有組別的牌
+            for (int i = 0; i < teamBrands.getCount(); i++)
+                ans.add(teamBrands.getBrand(i));
         }
         /// <summary>
         /// 排序玩家

@@ -13,6 +13,8 @@ namespace Mahjong.Forms
     public partial class Information : Form
     {
         AllPlayers all;
+        bool Debug = false;
+
         public Information()
         {
             InitializeComponent();
@@ -24,6 +26,20 @@ namespace Mahjong.Forms
             updateName();
             updateTitle();
             updateNowPlayer();
+        }
+        /// <summary>
+        /// °£¿ù¼Ò¦¡
+        /// </summary>
+        public bool DebugMode
+        {
+            get
+            {
+                return Debug;
+            }
+            set
+            {
+                Debug = value;
+            }
         }
 
         private void Information_Load(object sender, EventArgs e)
@@ -41,6 +57,7 @@ namespace Mahjong.Forms
             Down_label.BackColor = Color.Coral;
             Left_label.BackColor = Color.Coral;
             Up_label.BackColor = Color.Coral;
+
             if (all.state == (int)location.East)
                 Right_label.BackColor = c;
             else if (all.state == (int)location.South)
@@ -49,6 +66,32 @@ namespace Mahjong.Forms
                 Left_label.BackColor = c;
             else if (all.state == (int)location.North)
                 Up_label.BackColor = c;
+
+            if (all.getLocation().Winer == location.North)
+            {
+                Up_label.Text += "(";
+                Up_label.Text += all.Win_Times;
+                Up_label.Text += ")";
+            }
+            else if (all.getLocation().Winer == location.East)
+            {
+                Right_label.Text += "(";
+                Right_label.Text += all.Win_Times;
+                Right_label.Text += ")";
+            }
+            else if (all.getLocation().Winer == location.South)
+            {
+                Down_label.Text += "(";
+                Down_label.Text += all.Win_Times;
+                Down_label.Text += ")";
+            }
+            else if (all.getLocation().Winer == location.West)
+            {                
+                Left_label.Text += "(";
+                Left_label.Text += all.Win_Times;
+                Left_label.Text += ")";
+            }
+
         }
 
         private void updateTitle()
@@ -64,10 +107,20 @@ namespace Mahjong.Forms
 
         private void updateName()
         {
-            Up_label.Text = all.Name[(int)location.North].ToString();
-            Right_label.Text = all.Name[(int)location.East].ToString();
-            Down_label.Text = all.Name[(int)location.South].ToString();
-            Left_label.Text = all.Name[(int)location.West].ToString();
+            if (Debug)
+            {
+                Up_label.Text = all.Name[(int)location.North].ToString() + "~" + all.Players[(int)location.North].getCount().ToString();
+                Right_label.Text = all.Name[(int)location.East].ToString() + "~" + all.Players[(int)location.East].getCount().ToString();
+                Down_label.Text = all.Name[(int)location.South].ToString() + "~" + all.Players[(int)location.South].getCount().ToString();
+                Left_label.Text = all.Name[(int)location.West].ToString() + "~" + all.Players[(int)location.West].getCount().ToString();
+            }
+            else
+            {
+                Up_label.Text = all.Name[(int)location.North].ToString();
+                Right_label.Text = all.Name[(int)location.East].ToString();
+                Down_label.Text = all.Name[(int)location.South].ToString();
+                Left_label.Text = all.Name[(int)location.West].ToString();
+            }
         }
         void updateMoney()
         {

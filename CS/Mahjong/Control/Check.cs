@@ -11,32 +11,34 @@ namespace Mahjong.Control
     /// </summary>
     class Check
     {
-        BrandPlayer x;
-        BrandPlayer a;
-        BrandPlayer b;
-        BrandPlayer c;
+        BrandPlayer x = new BrandPlayer();
+        BrandPlayer a = new BrandPlayer();
+        BrandPlayer b = new BrandPlayer();
+        BrandPlayer c = new BrandPlayer();
+        BrandPlayer d = new BrandPlayer();
         Brand brand;
-        BrandPlayer ans_player;
+        BrandPlayer ans_player = new BrandPlayer();
         /// <summary>
-        /// 牌的狀態檢查建構子
+        /// 牌的狀態檢查 暗槓
         /// </summary>
         /// <param name="player">牌玩家</param>
         public Check(BrandPlayer player)
         {
-            this.x = player;
-            a = new BrandPlayer();
-            b = new BrandPlayer();
-            c = new BrandPlayer();
-            ans_player = new BrandPlayer();
+            for (int i = 0; i < player.getCount(); i++)
+                if (player.getBrand(i).getClass() != Mahjong.Properties.Settings.Default.Flower)
+                    x.add(player.getBrand(i));           
         }
+        /// <summary>
+        /// 牌的狀態檢查 吃 碰 槓 胡
+        /// </summary>
+        /// <param name="otherbrand">進來的牌</param>
+        /// <param name="player">成立的玩家組合</param>
         public Check(Brand otherbrand, BrandPlayer player)
         {
-            this.x = player;
+            for (int i = 0; i < player.getCount(); i++)
+                if (player.getBrand(i).getClass() != Mahjong.Properties.Settings.Default.Flower)
+                    x.add(player.getBrand(i));
             this.brand = otherbrand;
-            a = new BrandPlayer();
-            b = new BrandPlayer();
-            c = new BrandPlayer();
-            ans_player = new BrandPlayer();
         }
         /// <summary>
         /// 吃 成立
@@ -241,15 +243,59 @@ namespace Mahjong.Control
                             }
                         } // 碰的牌組
         }
-
+        private void bradn_4()
+        {
+            if (x.getCount() > 31)
+                throw new ErrorBrandPlayerCountException();
+            if (x.getCount() >= 17)
+            {
+                for (int i = 0; i < x.getCount() - 3; i++)
+                    if (x.getBrand(i).getClass() == x.getBrand(i + 1).getClass() &&
+                                 x.getBrand(i).getNumber() == x.getBrand(i + 1).getNumber() &&
+                                 x.getBrand(i).getClass() == x.getBrand(i + 2).getClass() &&
+                                 x.getBrand(i).getNumber() == x.getBrand(i + 2).getNumber() &&
+                                 x.getBrand(i).getClass() == x.getBrand(i + 3).getClass() &&
+                                 x.getBrand(i).getNumber() == x.getBrand(i + 3).getNumber() &&
+                                 x.getBrand(i).Team > 1)
+                    { // 碰的牌組
+                        if (a.getCount() == 0)
+                        {
+                            a.add(x.getBrand(i));
+                            a.add(x.getBrand(i + 1));
+                            a.add(x.getBrand(i + 2));
+                            x.remove(x.getBrand(i));
+                            //  a.add(x.getBrand(i + 3));
+                        }
+                        else if (//x.getBrand(i) != a.getBrand(a.getCount() - 4) &&
+                            x.getBrand(i + 1) != a.getBrand(a.getCount() - 3) &&
+                            x.getBrand(i + 2) != a.getBrand(a.getCount() - 2) &&
+                            x.getBrand(i + 3) != a.getBrand(a.getCount() - 1))
+                        {
+                            a.add(x.getBrand(i));
+                            a.add(x.getBrand(i + 1));
+                            a.add(x.getBrand(i + 2));
+                            x.remove(x.getBrand(i));
+                            // a.add(x.getBrand(i + 3));
+                        }
+                    } // 碰的牌組
+            }
+        }
         /// <summary>
         /// 胡牌 成立
         /// </summary>
         /// <returns>是/否</returns>
         public bool Win()
         {
+            if (brand != null)
+            {
+                x.add(brand);
+                PlayerSort d = new PlayerSort(x);
+                x = d.getPlayer();
+            }
             brand_2();
+            bradn_4();
             bradn_3();
+            
             // 組合測試
             // a 三支
             // b 兩隻
@@ -302,16 +348,21 @@ namespace Mahjong.Control
                                             break;
                                     }
                                     if (count == x.getCount() - 1)
+                                    {
+                                        if (brand != null)
+                                            x.remove(brand);
                                         return true; // 成立
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+            if (brand != null)
+                x.remove(brand);
             return false;
         }
-
 
     }
 }

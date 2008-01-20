@@ -16,7 +16,7 @@
     <TargetZone>LocalIntranet</TargetZone>
     <SignManifests>true</SignManifests>
     <ApplicationIcon>mahjong.ico</ApplicationIcon>
-    <PublishUrl>C:\Documents and Settings\Administrator\桌面\Test\</PublishUrl>
+    <PublishUrl>D:\Files\專題\Mahjong_SVN\Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>

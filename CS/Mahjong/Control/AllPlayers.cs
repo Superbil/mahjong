@@ -74,7 +74,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 第幾次摸牌
         /// </summary>
-        int barnd_count;
+        int brand_count;
 
         /// <summary>
         /// 全部玩家集合
@@ -92,15 +92,15 @@ namespace Mahjong.Control
             this.countplayers = playernumber;
             this.sumBrands = factory.SumBrands;
             this.state = 1;
-            this.barnd_count = 0;
+            this.brand_count = 0;
             this.basic_tai = Mahjong.Properties.Settings.Default.BasicTai;            
             this.teamCount = new int[playernumber];
             this.names = new string[playernumber];
-            for (int i = 0; i < playernumber;i++ )
-                teamCount[i]=0;            
+            for (int i = 0; i < playernumber; i++)
+                teamCount[i] = 1;
             money = new double[playernumber];
             setBasicMoney(Mahjong.Properties.Settings.Default.Money);
-            win_Times = 0;
+            win_Times = 1;
             names[0] = Mahjong.Properties.Settings.Default.Player1;
             names[1] = Mahjong.Properties.Settings.Default.Player2;
             names[2] = Mahjong.Properties.Settings.Default.Player3;
@@ -133,7 +133,7 @@ namespace Mahjong.Control
         {
             get
             {
-                return barnd_count;
+                return brand_count;
             }
         }
         /// <summary>
@@ -252,6 +252,7 @@ namespace Mahjong.Control
         /// </summary>
         public void next()
         {
+            // 1->0->3->2->1
             state--;
             state = state % (uint)countplayers;
         }
@@ -261,12 +262,12 @@ namespace Mahjong.Control
         /// <returns>牌</returns>
         public Brand nextBrand()
         {
-            if (table.getCount() < 8) // 保留8張不摸
+            if (table.getCount() <= 8) // 保留8張不摸
                 throw new GameOverException();
             else
             {
                 Brand b = nextTableBrand();
-                barnd_count++;
+                brand_count++;
                 return b;
             }            
         }
@@ -288,15 +289,26 @@ namespace Mahjong.Control
         /// <summary>
         /// 下一莊
         /// </summary>
-        public void nextRound(bool aby)
+        public void nextWiner(bool flow)
         {
-            if (aby)
-                lo.next();
+            // 如果流局或莊家贏
+            if (flow || this.lo.Winer == this.State)
+            {
+                this.win_Times++;
+            }
+            else
+            {
+                this.lo.next();
+                this.win_Times = 1;
+            }
+            this.lo.setPosition();
             this.table = new BrandPlayer();
             this.factory = new BrandFactory();
-            this.state = 0;
+            this.state = (uint)lo.Winer;
             for (int i = 0; i < countplayers; i++)
-                teamCount[i] = 0;   
+                teamCount[i] = 1;
+            this.brand_count = 0;
+
         }
         /// <summary>
         /// 設定玩家的基本金錢
@@ -319,8 +331,8 @@ namespace Mahjong.Control
         /// <summary>
         /// 槓
         /// </summary>
-        /// <param name="brand"></param>
-        /// <param name="player">要槓的牌</param>
+        /// <param name="brand">要槓的牌</param>
+        /// <param name="player">可以槓的牌組</param>
         public void kong(Brand brand,BrandPlayer player)
         {
             NowPlayer.add(brand);
@@ -330,11 +342,11 @@ namespace Mahjong.Control
         /// <summary>
         /// 暗槓
         /// </summary>
-        /// <param name="brand"></param>
-        /// <param name="player"></param>
+        /// <param name="brand">要槓的牌</param>
+        /// <param name="player">可以槓的牌組</param>
         public void DarkKong(Brand brand,BrandPlayer player)
         {
-            NowPlayer.add(brand);
+          //  NowPlayer.add(brand);
             set_Team(player, false);
         }
         /// <summary>
@@ -348,7 +360,6 @@ namespace Mahjong.Control
             for (int i = 0; i < player.getCount(); i++)
                 NowPlayer.remove(player.getBrand(i));
             // 把牌設為可視並且加上組別號碼後加回現在玩家
-            teamCount[state]++;
             for (int i = 0; i < player.getCount(); i++)
             {
                 player.getBrand(i).IsCanSee = isCanSee;
@@ -380,8 +391,9 @@ namespace Mahjong.Control
         /// <summary>
         /// 現在的玩家補花
         /// </summary>
-        public bool Player_setFlower()
+        public bool Player_setFlower(Brand brand)
         {
+            NowPlayer.add(brand);
             for (int i = 0; i < NowPlayer.getCount(); i++)
                 if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower
                     && !NowPlayer.getBrand(i).IsCanSee) // 花牌而且不可見
@@ -390,6 +402,7 @@ namespace Mahjong.Control
                     NowPlayer.getBrand(i).Team = 1;
                     return true;
                 }
+            NowPlayer.remove(brand);
             return false;
         }
         /// <summary>
@@ -407,6 +420,7 @@ namespace Mahjong.Control
         public void PushToTable(Brand brand)
         {
             brand.IsCanSee = true;
+            brand.WhoPush = State;
             show_table.add(brand);
         }
     }

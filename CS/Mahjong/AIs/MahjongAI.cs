@@ -29,5 +29,33 @@ namespace Mahjong.AIs
         /// </summary>
         /// <returns></returns>
         BrandPlayer getReadyBrandPlayer();
+        /// <summary>
+        /// 是否要吃
+        /// </summary>
+        bool Chow
+        {
+            get;
+        }
+        /// <summary>
+        /// 是否要碰
+        /// </summary>
+        bool Pong
+        {
+            get;
+        }
+        /// <summary>
+        /// 是否要槓
+        /// </summary>
+        bool Kong
+        {
+            get;
+        }
+        /// <summary>
+        /// 是否要胡
+        /// </summary>
+        bool Win
+        {
+            get;
+        }
     }
 }

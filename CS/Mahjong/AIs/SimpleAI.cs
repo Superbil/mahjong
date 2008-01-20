@@ -41,5 +41,26 @@ namespace Mahjong.AIs
             this.brandplayer = player;
         }
 
+
+        public bool Chow
+        {
+            get { return true; }
+        }
+
+        public bool Pong
+        {
+            get { return true; }
+        }
+
+        public bool Kong
+        {
+            get { return true; }
+        }
+
+        public bool Win
+        {
+            get { return true; }
+        }
+
     }
 }

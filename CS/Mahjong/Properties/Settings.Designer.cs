@@ -214,7 +214,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("局")]
+        [global::System.Configuration.DefaultSettingValueAttribute("開")]
         public string Position {
             get {
                 return ((string)(this["Position"]));
@@ -292,7 +292,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int BasicTai {
             get {
                 return ((int)(this["BasicTai"]));
@@ -394,7 +394,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("新遊戲")]
+        [global::System.Configuration.DefaultSettingValueAttribute("新遊戲 (F4)")]
         public string NewGame {
             get {
                 return ((string)(this["NewGame"]));
@@ -484,7 +484,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int RunRoundTimes {
             get {
                 return ((int)(this["RunRoundTimes"]));
@@ -500,6 +500,33 @@ namespace Mahjong.Properties {
         public string Debug_RenewKey {
             get {
                 return ((string)(this["Debug_RenewKey"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("誰打的")]
+        public string WhoPush {
+            get {
+                return ((string)(this["WhoPush"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F4")]
+        public string NewGame_Key {
+            get {
+                return ((string)(this["NewGame_Key"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("自摸")]
+        public string TouchWin {
+            get {
+                return ((string)(this["TouchWin"]));
             }
         }
     }

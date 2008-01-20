@@ -92,10 +92,10 @@ namespace Mahjong.Brands
             }
         }
 
+        private int source = 0;
         /// <summary>
         /// 牌的分數
         /// </summary>
-        private int source = 0;
         public int Source
         {
             get
@@ -105,6 +105,22 @@ namespace Mahjong.Brands
             set
             {
                 source = value;
+            }
+        }
+
+        Mahjong.Control.location from;
+        /// <summary>
+        /// 那個方位打了這張牌
+        /// </summary>
+        public Mahjong.Control.location WhoPush
+        {
+            get
+            {
+                return from;
+            }
+            set
+            {
+                from = value;
             }
         }
     }

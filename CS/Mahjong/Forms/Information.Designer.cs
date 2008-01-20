@@ -140,6 +140,7 @@
             this.Name = "Information";
             this.ShowIcon = false;
             this.Text = "Information";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Information_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

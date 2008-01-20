@@ -46,8 +46,8 @@ namespace Mahjong.Forms
         int width = Mahjong.Properties.Settings.Default.image_w;
         int height = Mahjong.Properties.Settings.Default.image_h;
         int padding = 1;
-        public bool ShowAll;
-        bool ShowBrandInfo;
+        internal bool ShowAll;
+        internal bool ShowBrandInfo;
         Bitmap arrow;
         bool lockuser;
 
@@ -84,10 +84,6 @@ namespace Mahjong.Forms
                 }
                 else
                     ShowAll = true;
-                cleanImage();
-                addImage();
-                setTitle();
-                setInforamtion();
             }
             // 按下F7開啟牌的資訊顯示
             if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.Debug_InformationKey)
@@ -97,11 +93,20 @@ namespace Mahjong.Forms
                 else
                     ShowBrandInfo = true;
             }
+            // 更新桌面上的牌和其他資訊
             if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.Debug_RenewKey)
             {
                 cleanImage();
                 addImage();
+                setTitle();
+                setInforamtion();
             }
+            // 開新遊戲熱鍵
+            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.NewGame_Key)
+            {
+                pc.newgame();
+            }
+
         }
         public void Setup(AllPlayers all)
         {
@@ -264,9 +269,12 @@ namespace Mahjong.Forms
                 && all.state == (int)location.South
                 )
             {
-                tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
+                tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);                
                 tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
+
+                if (ShowAll && ShowBrandInfo)
+                    tempBrandbox.MouseHover += new EventHandler(tempBrandbox_Click);
             }
             else 
                 bitmap = ResizeBitmap(bitmap, Mahjong.Properties.Settings.Default.ResizePercentage);
@@ -292,12 +300,14 @@ namespace Mahjong.Forms
             s.Append(": " + b.brand.Source + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Team);
             s.Append(": " + b.brand.Team + "\n");
+            s.Append(Mahjong.Properties.Settings.Default.WhoPush);
+            s.Append(": " + all.getLocation().location_to_string(b.brand.WhoPush) + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Picture);
             s.Append(":\nX:" + b.Location.X + " Y: " + b.Location.Y + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Picture_Width);
             s.Append(": " + b.Size.Width + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Picture_Height);
-            s.Append(": " + b.Size.Height + "\n");
+            s.Append(": " + b.Size.Height + "\n");            
             MessageBox.Show(s.ToString(), Mahjong.Properties.Settings.Default.Debug);
         }
         /// <summary>

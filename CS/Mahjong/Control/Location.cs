@@ -28,12 +28,13 @@ namespace Mahjong.Control
         location position;
         location round;
         location winer;
+        Random r = new Random();
 
         public Location()
         {
-            position = location.East;
             round = location.East;
             winer = location.East;
+            setPosition();
         }
         /// <summary>
         /// 局
@@ -43,6 +44,27 @@ namespace Mahjong.Control
             get
             {
                 return round;
+            }
+        }
+        /// <summary>
+        /// 設定開牌位置
+        /// </summary>
+        public void setPosition()
+        {
+            switch (r.Next(3))
+            {
+                case 0:
+                    position = location.North;
+                    break;
+                case 1:
+                    position = location.East;
+                    break;
+                case 2:
+                    position = location.South;
+                    break;
+                case 3:
+                    position = location.West;
+                    break;
             }
         }
         /// <summary>
@@ -56,7 +78,7 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
-        /// 莊家
+        /// 風(莊家)
         /// </summary>
         public location Winer
         {
@@ -66,42 +88,30 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
-        /// 下一莊 E->N->W->S
-        /// </summary>
-        public void next_Winer()
-        {
-            if (winer == location.East)
-                winer = location.North;
-            else if (winer == location.North)
-                winer = location.West;
-            else if (winer == location.West)
-                winer = location.South;
-            else
-                winer = location.East;
-        }
-        /// <summary>
         /// 下一個方位 E->S->W->N
         /// </summary>
         public void next()
         {
-            if (position == location.West)
+            if (winer == location.North)
             {
-                add(round);
-                add(position);
+                winer = add(winer);
+                round = add(round);
             }
             else
-                add(position);
+                winer = add(winer);
         }
-        void add(location lo)
+        location add(location lo)
         {
             if (lo == location.East)
-                lo = location.South;
+                return location.South;
             else if (lo == location.South)
-                lo = location.West;
+                return location.West;
             else if (lo == location.West)
-                lo = location.North;
+                return location.North;
+            else if (lo == location.North)
+                return location.East;
             else
-                lo = location.East;
+                return location.East;
         }
         internal string location_to_string(location lo)
         {
@@ -125,6 +135,8 @@ namespace Mahjong.Control
             string temp="";
             temp += location_to_string(round);
             temp += Mahjong.Properties.Settings.Default.Round;
+            temp += location_to_string(winer);
+            temp += " ";
             temp += location_to_string(position);
             temp += Mahjong.Properties.Settings.Default.Position;
             return temp;
