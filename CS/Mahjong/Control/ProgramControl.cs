@@ -192,7 +192,10 @@ namespace Mahjong.Control
                     {
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.DarkKong, all.Name[all.state].ToString());
-                        all.DarkKong(nextbrand, darkkong.SuccessPlayer);
+                        if (kong.Kong())
+                            all.DarkKong(nextbrand, kong.SuccessPlayer);
+                        if (darkkong.DarkKong())
+                            all.DarkKong(nextbrand, darkkong.SuccessPlayer);
                         all.NowPlayer.add(nextbrand);
                         table.updateNowPlayer();
                         touchBrand();
