@@ -101,10 +101,10 @@ namespace Mahjong.Control
             money = new double[playernumber];
             setBasicMoney(Mahjong.Properties.Settings.Default.Money);
             win_Times = 1;
-            names[0] = Mahjong.Properties.Settings.Default.Player1;
-            names[1] = Mahjong.Properties.Settings.Default.Player2;
-            names[2] = Mahjong.Properties.Settings.Default.Player3;
-            names[3] = Mahjong.Properties.Settings.Default.Player4;
+            names[0] = Mahjong.Properties.Settings.Default.Player_North;
+            names[1] = Mahjong.Properties.Settings.Default.Player_East;
+            names[2] = Mahjong.Properties.Settings.Default.Player_South;
+            names[3] = Mahjong.Properties.Settings.Default.Player_West;
         }
         /// <summary>
         /// ª±®a°}¦C

@@ -74,7 +74,7 @@ namespace Mahjong.Forms
 
         private void Win_Click(object sender, EventArgs e)
         {
-            pc.win();
+            pc.win(brand);
             this.Close();
         }
 

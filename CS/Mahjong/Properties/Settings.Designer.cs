@@ -233,48 +233,48 @@ namespace Mahjong.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("王廷亨")]
-        public string Player1 {
+        public string Player_North {
             get {
-                return ((string)(this["Player1"]));
+                return ((string)(this["Player_North"]));
             }
             set {
-                this["Player1"] = value;
+                this["Player_North"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("林宗水")]
-        public string Player2 {
+        public string Player_East {
             get {
-                return ((string)(this["Player2"]));
+                return ((string)(this["Player_East"]));
             }
             set {
-                this["Player2"] = value;
+                this["Player_East"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("張惠娟")]
-        public string Player3 {
+        public string Player_South {
             get {
-                return ((string)(this["Player3"]));
+                return ((string)(this["Player_South"]));
             }
             set {
-                this["Player3"] = value;
+                this["Player_South"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("吳昆賢")]
-        public string Player4 {
+        public string Player_West {
             get {
-                return ((string)(this["Player4"]));
+                return ((string)(this["Player_West"]));
             }
             set {
-                this["Player4"] = value;
+                this["Player_West"] = value;
             }
         }
         
@@ -484,13 +484,13 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public int RunRoundTimes {
+        [global::System.Configuration.DefaultSettingValueAttribute("2500")]
+        public int RunRoundTime_Slow {
             get {
-                return ((int)(this["RunRoundTimes"]));
+                return ((int)(this["RunRoundTime_Slow"]));
             }
             set {
-                this["RunRoundTimes"] = value;
+                this["RunRoundTime_Slow"] = value;
             }
         }
         
@@ -554,6 +554,57 @@ namespace Mahjong.Properties {
         public string Debug_IsCanSee {
             get {
                 return ((string)(this["Debug_IsCanSee"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int RunRoundTime_Quick {
+            get {
+                return ((int)(this["RunRoundTime_Quick"]));
+            }
+            set {
+                this["RunRoundTime_Quick"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1500")]
+        public int RunRoundTime_Normal {
+            get {
+                return ((int)(this["RunRoundTime_Normal"]));
+            }
+            set {
+                this["RunRoundTime_Normal"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("正常速")]
+        public string RunRoundTime_Normal_Text {
+            get {
+                return ((string)(this["RunRoundTime_Normal_Text"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("超快速")]
+        public string RunRoundTime_Quick_Text {
+            get {
+                return ((string)(this["RunRoundTime_Quick_Text"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("慢速")]
+        public string RunRoundTime_Slow_Text {
+            get {
+                return ((string)(this["RunRoundTime_Slow_Text"]));
             }
         }
     }

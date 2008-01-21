@@ -180,17 +180,9 @@ namespace Mahjong.Forms
             setFlowLayout_Dock();
             //this.flowLayoutBrands[4].BackColor = Color.Blue;
             setFlowLayout_FlowDirection();
-            //setFlowLayout_AutoSize();
-            this.flowLayoutBrands[4].Anchor = AnchorStyles.Right;
-        }
-
-        private void setFlowLayout_AutoSize()
-        {
-            this.flowLayoutBrands[0].AutoSize = true;
-            this.flowLayoutBrands[1].AutoSize = true;
-            this.flowLayoutBrands[2].AutoSize = true;
-            this.flowLayoutBrands[3].AutoSize = true;
-            this.flowLayoutBrands[4].AutoSize = true; 
+            this.flowLayoutBrands[4].Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
         }
 
         private void setFlowLayout_FlowDirection()
@@ -530,6 +522,30 @@ namespace Mahjong.Forms
                 ShowMessageBox_Menu.Checked = false;
             else
                 ShowMessageBox_Menu.Checked = true;
+        }
+
+        private void 非常慢ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Slow.Checked = true;
+            Normal.Checked = false;
+            Quick.Checked = false;
+            pc.SetDealyTime = Mahjong.Properties.Settings.Default.RunRoundTime_Slow;
+        }
+
+        private void 正常ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Slow.Checked = false;
+            Normal.Checked = true;
+            Quick.Checked = false;
+            pc.SetDealyTime = Mahjong.Properties.Settings.Default.RunRoundTime_Normal;
+        }
+
+        private void 非常快ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Slow.Checked = false;
+            Normal.Checked = false;
+            Quick.Checked = true;
+            pc.SetDealyTime = Mahjong.Properties.Settings.Default.RunRoundTime_Quick;
         }
 
     }

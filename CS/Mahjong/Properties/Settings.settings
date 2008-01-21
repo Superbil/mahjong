@@ -71,16 +71,16 @@
     <Setting Name="Title" Type="System.String" Scope="Application">
       <Value Profile="(Default)">十六張麻將遊戲</Value>
     </Setting>
-    <Setting Name="Player1" Type="System.String" Scope="User">
+    <Setting Name="Player_North" Type="System.String" Scope="User">
       <Value Profile="(Default)">王廷亨</Value>
     </Setting>
-    <Setting Name="Player2" Type="System.String" Scope="User">
+    <Setting Name="Player_East" Type="System.String" Scope="User">
       <Value Profile="(Default)">林宗水</Value>
     </Setting>
-    <Setting Name="Player3" Type="System.String" Scope="User">
+    <Setting Name="Player_South" Type="System.String" Scope="User">
       <Value Profile="(Default)">張惠娟</Value>
     </Setting>
-    <Setting Name="Player4" Type="System.String" Scope="User">
+    <Setting Name="Player_West" Type="System.String" Scope="User">
       <Value Profile="(Default)">吳昆賢</Value>
     </Setting>
     <Setting Name="Money" Type="System.Double" Scope="User">
@@ -149,8 +149,8 @@
     <Setting Name="FlowEnd" Type="System.String" Scope="Application">
       <Value Profile="(Default)">流局</Value>
     </Setting>
-    <Setting Name="RunRoundTimes" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">20</Value>
+    <Setting Name="RunRoundTime_Slow" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2500</Value>
     </Setting>
     <Setting Name="Debug_RenewKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">F5</Value>
@@ -172,6 +172,21 @@
     </Setting>
     <Setting Name="Debug_IsCanSee" Type="System.String" Scope="Application">
       <Value Profile="(Default)">可視</Value>
+    </Setting>
+    <Setting Name="RunRoundTime_Quick" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="RunRoundTime_Normal" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1500</Value>
+    </Setting>
+    <Setting Name="RunRoundTime_Normal_Text" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">正常速</Value>
+    </Setting>
+    <Setting Name="RunRoundTime_Quick_Text" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">超快速</Value>
+    </Setting>
+    <Setting Name="RunRoundTime_Slow_Text" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">慢速</Value>
     </Setting>
   </Settings>
 </SettingsFile>

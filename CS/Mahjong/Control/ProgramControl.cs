@@ -71,6 +71,7 @@ namespace Mahjong.Control
             con = new Config(table);
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
             showMessageBox = table.SetCheck;
+            roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTime_Slow;
         }
         void rotateTimer_Tick(object sender, EventArgs e)
         {
@@ -101,8 +102,7 @@ namespace Mahjong.Control
             Ai = new Level_1();
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
-            table.Setup(all);
-            roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTimes;
+            table.Setup(all);            
             newgame2();
         }
         /// <summary>
@@ -162,7 +162,7 @@ namespace Mahjong.Control
                     table.updateNowPlayer();
                     if (showMessageBox)
                         MessageBox.Show(Mahjong.Properties.Settings.Default.TouchWin, all.Name[all.state].ToString());
-                    win_game();
+                    win_game(nextbrand);
                 }
                     // 手牌暗槓(摸到有暗槓和手牌中就有暗槓)
                 else if (darkkong.DarkKong() || kong.Kong())
@@ -307,7 +307,7 @@ namespace Mahjong.Control
                     {
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.Win, all.Name[all.state].ToString());
-                        win_game();
+                        win_game(brand);
                         return false;
                     }
                 }
@@ -424,7 +424,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 結束遊戲
         /// </summary>
-        void win_game()
+        void win_game(Brand brand)
         {
             //清除桌面上的牌
             table.cleanImage();
@@ -433,6 +433,8 @@ namespace Mahjong.Control
             //設定牌為可視並更新
             table.ShowAll = true;
             table.addImage();
+            //把最後那張牌加入玩家手牌
+            all.NowPlayer.add(brand);
             //呼叫台數計算
             Tally t = new Tally();
             t.setLocation(all.getLocation(), all.Win_Times);
@@ -513,9 +515,9 @@ namespace Mahjong.Control
         /// <summary>
         /// 胡
         /// </summary>
-        internal void win()
+        internal void win(Brand brand)
         {
-            win_game();
+            win_game(brand);
         }
         /// <summary>
         /// 過水
@@ -554,7 +556,7 @@ namespace Mahjong.Control
         internal void setInforamtion()
         {
             information.setAllPlayers(all);
-            //information.DebugMode = table.ShowAll;
+            information.DebugMode = table.ShowAll;
             information.Show();
         }
         /// <summary>
@@ -610,6 +612,16 @@ namespace Mahjong.Control
             set
             {
                 showMessageBox = value;
+            }
+        }
+        /// <summary>
+        /// 設定延遲時間
+        /// </summary>
+        internal int SetDealyTime
+        {
+            set 
+            {
+                roundTimer.Interval = value;
             }
         }
     }
