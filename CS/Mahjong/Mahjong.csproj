@@ -71,6 +71,12 @@
     <Compile Include="Control\Test\CheckTest.cs" />
     <Compile Include="Control\Deal.cs" />
     <Compile Include="Control\Test\DealTest.cs" />
+    <Compile Include="Forms\ChowBrandCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChowBrandCheck.Designer.cs">
+      <DependentUpon>ChowBrandCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Information.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -344,6 +350,10 @@
     <None Include="Resources\a.gif" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\ChowBrandCheck.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChowBrandCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="mahjong.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

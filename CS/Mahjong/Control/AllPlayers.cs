@@ -75,6 +75,10 @@ namespace Mahjong.Control
         /// 第幾次摸牌
         /// </summary>
         int brand_count;
+        /// <summary>
+        /// 一台多少錢
+        /// </summary>
+        public int one_tai;
 
         /// <summary>
         /// 全部玩家集合
@@ -93,7 +97,8 @@ namespace Mahjong.Control
             this.sumBrands = factory.SumBrands;
             this.state = (uint)lo.Winer;
             this.brand_count = 0;
-            this.basic_tai = Mahjong.Properties.Settings.Default.BasicTai;            
+            this.basic_tai = Mahjong.Properties.Settings.Default.BasicTai;
+            this.one_tai = Mahjong.Properties.Settings.Default.One_Tai;
             this.teamCount = new int[playernumber];
             this.names = new string[playernumber];
             for (int i = 0; i < playernumber; i++)
@@ -350,7 +355,7 @@ namespace Mahjong.Control
         /// </summary>
         public void chow_pong(Brand brand,BrandPlayer player)
         {
-            NowPlayer.add(brand);
+            //NowPlayer.add(brand);
             Show_Table.remove(brand);
             set_Team(player,true);        
         }

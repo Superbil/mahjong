@@ -52,7 +52,6 @@ namespace Mahjong.Control
         /// <returns>¬O/§_</returns>
         public bool Chow()
         {
-            
             bool chow_bool = false;
             ans_player.clear();
             if (brand != null && brand.getClass() !=Mahjong.Properties.Settings.Default.Wordtiles )
@@ -65,14 +64,17 @@ namespace Mahjong.Control
                             brand.getClass() == x.getBrand(j).getClass() &&
                             brand.getNumber() + 2 == x.getBrand(j).getNumber())
                         {
-                            //ans_player.add(brand);
-                            //ans_player.add(x.getBrand(i));
-                            //ans_player.add(x.getBrand(j));
-                            chow_player[chow_index].add(brand);
-                            chow_player[chow_index].add(x.getBrand(i));
-                            chow_player[chow_index].add(x.getBrand(j));
-                            chow_index++;
-                            chow_bool = true;
+                            if (chow_player[0].getCount() < 3)
+                            {
+                                ans_player.add(brand);
+                                ans_player.add(x.getBrand(i));
+                                ans_player.add(x.getBrand(j));
+                                chow_player[0].add(brand);
+                                chow_player[0].add(x.getBrand(i));
+                                chow_player[0].add(x.getBrand(j));
+                                chow_index++;
+                                chow_bool = true;
+                            }
                         }
                         if ( // 234
                             brand.getClass() == x.getBrand(i).getClass() &&
@@ -80,14 +82,17 @@ namespace Mahjong.Control
                             brand.getClass() == x.getBrand(j).getClass() &&
                             brand.getNumber() + 1 == x.getBrand(j).getNumber())
                         {
-                            //ans_player.add(brand);
-                            //ans_player.add(x.getBrand(i));
-                            //ans_player.add(x.getBrand(j));
-                            chow_player[chow_index].add(brand);
-                            chow_player[chow_index].add(x.getBrand(i));
-                            chow_player[chow_index].add(x.getBrand(j));
-                            chow_index++;
-                            chow_bool = true;
+                            if (chow_player[0].getCount() < 3)
+                            {
+                                ans_player.add(brand);
+                                ans_player.add(x.getBrand(i));
+                                ans_player.add(x.getBrand(j));
+                                chow_player[1].add(brand);
+                                chow_player[1].add(x.getBrand(i));
+                                chow_player[1].add(x.getBrand(j));
+                                chow_index++;
+                                chow_bool = true;
+                            }
                         }
                         else if ( // 123
                        brand.getClass() == x.getBrand(i).getClass() &&
@@ -95,14 +100,17 @@ namespace Mahjong.Control
                        brand.getClass() == x.getBrand(j).getClass() &&
                        brand.getNumber() - 1 == x.getBrand(j).getNumber())
                         {
-                            //ans_player.add(brand);
-                            //ans_player.add(x.getBrand(i));
-                            //ans_player.add(x.getBrand(j));
-                            chow_player[chow_index].add(brand);
-                            chow_player[chow_index].add(x.getBrand(i));
-                            chow_player[chow_index].add(x.getBrand(j));
-                            chow_index++;
-                            chow_bool = true;
+                            if (chow_player[0].getCount() < 3)
+                            {
+                                ans_player.add(brand);
+                                ans_player.add(x.getBrand(i));
+                                ans_player.add(x.getBrand(j));
+                                chow_player[2].add(brand);
+                                chow_player[2].add(x.getBrand(i));
+                                chow_player[2].add(x.getBrand(j));
+                                chow_index++;
+                                chow_bool = true;
+                            }
                         }
                     }
             return chow_bool;

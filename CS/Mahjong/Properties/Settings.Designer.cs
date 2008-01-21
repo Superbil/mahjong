@@ -607,5 +607,23 @@ namespace Mahjong.Properties {
                 this["Money"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("吃牌選擇")]
+        public string ChowBrandCheck {
+            get {
+                return ((string)(this["ChowBrandCheck"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int One_Tai {
+            get {
+                return ((int)(this["One_Tai"]));
+            }
+        }
     }
 }

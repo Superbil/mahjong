@@ -188,5 +188,11 @@
     <Setting Name="Money" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5000</Value>
     </Setting>
+    <Setting Name="ChowBrandCheck" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">吃牌選擇</Value>
+    </Setting>
+    <Setting Name="One_Tai" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
