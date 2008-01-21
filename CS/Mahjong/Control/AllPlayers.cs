@@ -58,7 +58,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 玩家所有的錢
         /// </summary>
-        double[] money;
+        int[] money;
         /// <summary>
         /// 連莊次數
         /// </summary>
@@ -98,7 +98,7 @@ namespace Mahjong.Control
             this.names = new string[playernumber];
             for (int i = 0; i < playernumber; i++)
                 teamCount[i] = 1;
-            money = new double[playernumber];
+            money = new int[playernumber];
             setBasicMoney(Mahjong.Properties.Settings.Default.Money);
             win_Times = 1;
             names[0] = Mahjong.Properties.Settings.Default.Player_North;
@@ -206,13 +206,31 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
-        /// 傳回玩家的金錢
+        /// 取得或設定玩家的金錢
         /// </summary>
-        public double[] Money
+        public int[] Money
         {
             get
             {
                 return money;
+            }
+            set
+            {
+                money = value;
+            }
+        }
+        /// <summary>
+        /// 取得或設定現在玩家的金錢
+        /// </summary>
+        public int NowPlayerMoney
+        {
+            get
+            {
+                return money[state];
+            }
+            set
+            {
+                money[state] = value;
             }
         }
         /// <summary>
@@ -320,7 +338,7 @@ namespace Mahjong.Control
         /// 設定玩家的基本金錢
         /// </summary>
         /// <param name="number"></param>
-        public void setBasicMoney(double number)
+        public void setBasicMoney(int number)
         {
             for (int i = 0; i < money.Length; i++)
                 money[i] = number;
