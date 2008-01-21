@@ -613,6 +613,26 @@ namespace Mahjong.Control
                 showMessageBox = value;
             }
         }
+        internal Brand fr
+        {
+            set
+            {
+                if (all.Show_Table.remove(value))
+                {
+                    all.Show_Table.remove(value);
+                    all.Show_Table.add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
+                }
+                else
+                {
+                    all.Table.remove(value);
+                    all.Table.add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
+                }
+                all.NowPlayer.remove(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
+                all.NowPlayer.add(value);
+                table.cleanImage();
+                table.addImage();
+            }
+        }
     }
     /// <summary>
     /// ¬y§½¨Ò¥~

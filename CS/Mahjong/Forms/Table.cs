@@ -50,6 +50,7 @@ namespace Mahjong.Forms
         internal bool ShowBrandInfo;
         Bitmap arrow;
         bool lockuser;
+        internal bool f;
 
         public Table(ProgramControl pc)
         {
@@ -60,6 +61,7 @@ namespace Mahjong.Forms
             ShowAll = false;
             ShowBrandInfo = false;
             lockuser = false;
+            f = false;
             this.KeyUp += new KeyEventHandler(Table_KeyUp);
             this.ShowMessageBox_Menu.CheckedChanged += new EventHandler(ShowMessageBox_Menu_CheckedChanged);
         }
@@ -114,6 +116,16 @@ namespace Mahjong.Forms
             if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.NewGame_Key)
             {
                 pc.newgame();
+            }
+            // 作弊
+            if (e.KeyCode == Keys.F12 )
+            {
+                if (f)
+                {
+                    f = false;
+                }
+                else
+                    f = true;
             }
         }
         /// <summary>
@@ -296,15 +308,25 @@ namespace Mahjong.Forms
                 && all.state == (int)location.South
                 )
             {
-                tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);                
+                tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
                 tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
 
                 if (ShowAll && ShowBrandInfo)
                     tempBrandbox.MouseHover += new EventHandler(tempBrandbox_Click);
+                else
+                    tempBrandbox.MouseHover -= new EventHandler(tempBrandbox_Click);
             }
-            else 
+            else if (f && (state == State.Table))
+            {
+                tempBrandbox.MouseClick += new MouseEventHandler(tempBrandbox_MouseClick);
+            }
+            else
+            {
+                tempBrandbox.Click -= new EventHandler(brandBox_MouseClick);
+                tempBrandbox.MouseClick -= new MouseEventHandler(tempBrandbox_MouseClick);
                 bitmap = ResizeBitmap(bitmap, Mahjong.Properties.Settings.Default.ResizePercentage);
+            }
 
             // 設定圖片      
             tempBrandbox.Image = bitmap;
@@ -312,6 +334,12 @@ namespace Mahjong.Forms
             // 新增至控制項
             this.flowLayoutBrands[(int)state].Controls.Add(tempBrandbox);
             this.Update();
+        }
+
+        void tempBrandbox_MouseClick(object sender, MouseEventArgs e)
+        {
+            BrandBox b = (BrandBox)sender;
+            pc.fr = b.brand;
         }
 
         void tempBrandbox_Click(object sender, EventArgs e)
