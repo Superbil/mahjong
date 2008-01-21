@@ -241,6 +241,8 @@ namespace Mahjong.Control
             factory.createBrands();
             factory.randomBrands();
             table = factory.getBrands();
+            for (int i = 0; i < table.getCount(); i++)
+                table.getBrand(i).WhoPush = location.Table;
             dealbrands();
         }
         /// <summary>

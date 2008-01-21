@@ -224,6 +224,9 @@ namespace Mahjong.Brands
             WordbrandArray = new ArrayList();
             creatImageArray_Word();
         }
+        /// <summary>
+        /// µPÁ`¼Æ
+        /// </summary>
         public int SumBrands
         {
             get

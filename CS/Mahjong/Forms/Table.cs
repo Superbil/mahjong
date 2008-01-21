@@ -13,30 +13,6 @@ using Mahjong.Brands;
 
 namespace Mahjong.Forms
 {
-    enum State
-    {
-        /// <summary>
-        /// 北
-        /// </summary>
-        North = 0,
-        /// <summary>
-        /// 東
-        /// </summary>
-        East = 1,
-        /// <summary>
-        /// 南
-        /// </summary>
-        South = 2,
-        /// <summary>
-        /// 西
-        /// </summary>
-        West = 3,
-        /// <summary>
-        /// 桌面
-        /// </summary>
-        Table = 4
-    }
-
     public partial class Table : Form
     {
         ProgramControl pc;
@@ -233,37 +209,37 @@ namespace Mahjong.Forms
         void addNouth()
         {
             //圖片旋轉180度
-            addimage_player(all.Players[(int)State.North], State.North, RotateFlipType.Rotate180FlipNone);
+            addimage_player(all.Players[(int)location.North], location.North, RotateFlipType.Rotate180FlipNone);
         }
         void addEast()
         {
             //圖片旋轉270度
-            addimage_player(all.Players[(int)State.East], State.East, RotateFlipType.Rotate270FlipNone);
+            addimage_player(all.Players[(int)location.East], location.East, RotateFlipType.Rotate270FlipNone);
         }
         void addSouth()
         {
-            addimage_player(all.Players[(int)State.South], State.South, RotateFlipType.RotateNoneFlipNone);
+            addimage_player(all.Players[(int)location.South], location.South, RotateFlipType.RotateNoneFlipNone);
         }
         void addWest()
         {
             //圖片旋轉90度
-            addimage_player(all.Players[(int)State.West], State.West, RotateFlipType.Rotate90FlipNone);
+            addimage_player(all.Players[(int)location.West], location.West, RotateFlipType.Rotate90FlipNone);
         }
         void addShowTable()
         {
-            addimage_player(all.Show_Table, State.Table, RotateFlipType.RotateNoneFlipNone);
+            addimage_player(all.Show_Table, location.Table, RotateFlipType.RotateNoneFlipNone);
         }
         void addTable()
         {
-            addimage_player(all.Table, State.Table, RotateFlipType.RotateNoneFlipNone);
+            addimage_player(all.Table, location.Table, RotateFlipType.RotateNoneFlipNone);
         }
-        void addimage_player(BrandPlayer player, State state, RotateFlipType rotate)
+        void addimage_player(BrandPlayer player, location state, RotateFlipType rotate)
         {
             Iterator temp = player.creatIterator();
             addimage_iterator(temp, state, rotate);
             this.Update();
         }
-        private void addimage_iterator(Iterator iterator, State state, RotateFlipType rotate)
+        private void addimage_iterator(Iterator iterator, location state, RotateFlipType rotate)
         {
             while (iterator.hasNext())
             {
@@ -271,11 +247,11 @@ namespace Mahjong.Forms
                 addimage(state, brand, rotate);
             }
         }
-        private void addimage(State state, Brand brand, RotateFlipType rotate)
+        private void addimage(location state, Brand brand, RotateFlipType rotate)
         {
             Bitmap bitmap;
             // 如果是可視的牌就設定顯示牌的圖型，否則就顯示直立的牌 Mahjong.Properties.Resources.upbarnd
-            if (brand.IsCanSee || state == State.South || ShowAll)
+            if (brand.IsCanSee || state == location.South || ShowAll)
                 bitmap = new Bitmap(brand.image);
             else
                 bitmap = new Bitmap(Mahjong.Properties.Resources.upbarnd);
@@ -297,7 +273,7 @@ namespace Mahjong.Forms
 
             // 滑鼠事件
             if (
-                state == State.South
+                state == location.South
                 && brand.getClass() != Mahjong.Properties.Settings.Default.Flower
                 && !brand.IsCanSee
                 && all.state == (int)location.South
@@ -312,7 +288,7 @@ namespace Mahjong.Forms
                 else
                     tempBrandbox.MouseHover -= new EventHandler(tempBrandbox_Click);
             }
-            else if (f && state != State.South)
+            else if (f && state != location.South)
             {
                 tempBrandbox.MouseClick += new MouseEventHandler(tempBrandbox_MouseClick);
             }
@@ -480,7 +456,7 @@ namespace Mahjong.Forms
         /// </summary>
         public void updateTable()
         {
-            flowLayoutBrands[(int)State.Table].Controls.Clear();
+            flowLayoutBrands[(int)location.Table].Controls.Clear();
             addShowTable();
         }
         /// <summary>
@@ -547,6 +523,5 @@ namespace Mahjong.Forms
             Quick.Checked = true;
             pc.SetDealyTime = Mahjong.Properties.Settings.Default.RunRoundTime_Quick;
         }
-
     }
 }

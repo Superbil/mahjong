@@ -83,9 +83,6 @@
     <Setting Name="Player_West" Type="System.String" Scope="User">
       <Value Profile="(Default)">吳昆賢</Value>
     </Setting>
-    <Setting Name="Money" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">5000</Value>
-    </Setting>
     <Setting Name="BasicTai" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
@@ -187,6 +184,9 @@
     </Setting>
     <Setting Name="RunRoundTime_Slow_Text" Type="System.String" Scope="Application">
       <Value Profile="(Default)">慢速</Value>
+    </Setting>
+    <Setting Name="Money" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -24,7 +24,11 @@ namespace Mahjong.Control
         /// <summary>
         /// ¦è
         /// </summary>
-        West = 3
+        West = 3,
+        /// <summary>
+        /// ®à­±
+        /// </summary>
+        Table = 4
     }
     public class Location
     {

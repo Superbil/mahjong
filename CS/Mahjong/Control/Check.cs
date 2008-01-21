@@ -18,6 +18,8 @@ namespace Mahjong.Control
         BrandPlayer d = new BrandPlayer();
         Brand brand;
         BrandPlayer ans_player = new BrandPlayer();
+        BrandPlayer[] chow_player = new BrandPlayer[3];
+        uint chow_index = 0;
         /// <summary>
         /// 牌的狀態檢查 暗槓
         /// </summary>
@@ -26,7 +28,9 @@ namespace Mahjong.Control
         {
             for (int i = 0; i < player.getCount(); i++)
                 if (player.getBrand(i).getClass() != Mahjong.Properties.Settings.Default.Flower)
-                    x.add(player.getBrand(i));           
+                    x.add(player.getBrand(i));
+            for (int i = 0; i < chow_player.Length; i++)
+                chow_player[i] = new BrandPlayer();
         }
         /// <summary>
         /// 牌的狀態檢查 吃 碰 槓 胡
@@ -39,6 +43,8 @@ namespace Mahjong.Control
                 if (player.getBrand(i).getClass() != Mahjong.Properties.Settings.Default.Flower)
                     x.add(player.getBrand(i));
             this.brand = otherbrand;
+            for (int i = 0; i < chow_player.Length; i++)
+                chow_player[i] = new BrandPlayer();
         }
         /// <summary>
         /// 吃 成立
@@ -46,31 +52,42 @@ namespace Mahjong.Control
         /// <returns>是/否</returns>
         public bool Chow()
         {
+            
+            bool chow_bool = false;
             ans_player.clear();
             if (brand != null && brand.getClass() !=Mahjong.Properties.Settings.Default.Wordtiles )
                 for (int i = 0; i < x.getCount() - 1; i++)
                     for (int j = i + 1; j < x.getCount() - 1; j++)
+                    {
                         if ( // 345
                             brand.getClass() == x.getBrand(i).getClass() &&
                             brand.getNumber() + 1 == x.getBrand(i).getNumber() &&
                             brand.getClass() == x.getBrand(j).getClass() &&
                             brand.getNumber() + 2 == x.getBrand(j).getNumber())
                         {
-                            ans_player.add(brand);
-                            ans_player.add(x.getBrand(i));
-                            ans_player.add(x.getBrand(j));
-                            return true;
+                            //ans_player.add(brand);
+                            //ans_player.add(x.getBrand(i));
+                            //ans_player.add(x.getBrand(j));
+                            chow_player[chow_index].add(brand);
+                            chow_player[chow_index].add(x.getBrand(i));
+                            chow_player[chow_index].add(x.getBrand(j));
+                            chow_index++;
+                            chow_bool = true;
                         }
-                        else if ( // 234
+                        if ( // 234
                             brand.getClass() == x.getBrand(i).getClass() &&
                             brand.getNumber() - 1 == x.getBrand(i).getNumber() &&
                             brand.getClass() == x.getBrand(j).getClass() &&
                             brand.getNumber() + 1 == x.getBrand(j).getNumber())
                         {
-                            ans_player.add(brand);
-                            ans_player.add(x.getBrand(i));
-                            ans_player.add(x.getBrand(j));
-                            return true;
+                            //ans_player.add(brand);
+                            //ans_player.add(x.getBrand(i));
+                            //ans_player.add(x.getBrand(j));
+                            chow_player[chow_index].add(brand);
+                            chow_player[chow_index].add(x.getBrand(i));
+                            chow_player[chow_index].add(x.getBrand(j));
+                            chow_index++;
+                            chow_bool = true;
                         }
                         else if ( // 123
                        brand.getClass() == x.getBrand(i).getClass() &&
@@ -78,12 +95,37 @@ namespace Mahjong.Control
                        brand.getClass() == x.getBrand(j).getClass() &&
                        brand.getNumber() - 1 == x.getBrand(j).getNumber())
                         {
-                            ans_player.add(brand);
-                            ans_player.add(x.getBrand(i));
-                            ans_player.add(x.getBrand(j));
-                            return true;
+                            //ans_player.add(brand);
+                            //ans_player.add(x.getBrand(i));
+                            //ans_player.add(x.getBrand(j));
+                            chow_player[chow_index].add(brand);
+                            chow_player[chow_index].add(x.getBrand(i));
+                            chow_player[chow_index].add(x.getBrand(j));
+                            chow_index++;
+                            chow_bool = true;
                         }
-            return false;
+                    }
+            return chow_bool;
+        }
+        /// <summary>
+        /// 成立的吃的牌組
+        /// </summary>
+        public BrandPlayer[] ChowPlayer
+        {
+            get
+            {
+                return chow_player;
+            }
+        }
+        /// <summary>
+        /// 傳回吃成立有多少組
+        /// </summary>
+        public int ChowLength
+        {
+            get
+            {
+                return (int)chow_index;
+            }
         }
         /// <summary>
         /// 碰 成立

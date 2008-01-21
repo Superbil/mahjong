@@ -280,18 +280,6 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
-        public double Money {
-            get {
-                return ((double)(this["Money"]));
-            }
-            set {
-                this["Money"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int BasicTai {
             get {
@@ -605,6 +593,18 @@ namespace Mahjong.Properties {
         public string RunRoundTime_Slow_Text {
             get {
                 return ((string)(this["RunRoundTime_Slow_Text"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public int Money {
+            get {
+                return ((int)(this["Money"]));
+            }
+            set {
+                this["Money"] = value;
             }
         }
     }
