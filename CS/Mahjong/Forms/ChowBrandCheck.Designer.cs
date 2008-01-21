@@ -35,7 +35,6 @@
             // 
             // flowLayout1
             // 
-            this.flowLayout1.AutoSize = true;
             this.flowLayout1.Location = new System.Drawing.Point(12, 12);
             this.flowLayout1.Name = "flowLayout1";
             this.flowLayout1.Size = new System.Drawing.Size(132, 60);
@@ -44,7 +43,6 @@
             // 
             // flowLayout2
             // 
-            this.flowLayout2.AutoSize = true;
             this.flowLayout2.Location = new System.Drawing.Point(12, 78);
             this.flowLayout2.Name = "flowLayout2";
             this.flowLayout2.Size = new System.Drawing.Size(132, 60);
@@ -53,7 +51,6 @@
             // 
             // flowLayout3
             // 
-            this.flowLayout3.AutoSize = true;
             this.flowLayout3.Location = new System.Drawing.Point(12, 144);
             this.flowLayout3.Name = "flowLayout3";
             this.flowLayout3.Size = new System.Drawing.Size(132, 60);
@@ -64,7 +61,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(156, 218);
             this.ControlBox = false;
             this.Controls.Add(this.flowLayout3);
@@ -75,7 +71,6 @@
             this.Text = global::Mahjong.Properties.Settings.Default.ChowBrandCheck;
             this.Load += new System.EventHandler(this.ChowBrandCheck_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

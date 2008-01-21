@@ -72,9 +72,9 @@ namespace Mahjong.Control
                                 chow_player[0].add(brand);
                                 chow_player[0].add(x.getBrand(i));
                                 chow_player[0].add(x.getBrand(j));
-                                chow_index++;
-                                chow_bool = true;
+                                chow_index++;                                
                             }
+                            chow_bool = true;
                         }
                         if ( // 234
                             brand.getClass() == x.getBrand(i).getClass() &&
@@ -82,7 +82,7 @@ namespace Mahjong.Control
                             brand.getClass() == x.getBrand(j).getClass() &&
                             brand.getNumber() + 1 == x.getBrand(j).getNumber())
                         {
-                            if (chow_player[0].getCount() < 3)
+                            if (chow_player[1].getCount() < 3)
                             {
                                 ans_player.add(brand);
                                 ans_player.add(x.getBrand(i));
@@ -91,8 +91,8 @@ namespace Mahjong.Control
                                 chow_player[1].add(x.getBrand(i));
                                 chow_player[1].add(x.getBrand(j));
                                 chow_index++;
-                                chow_bool = true;
                             }
+                            chow_bool = true;
                         }
                         else if ( // 123
                        brand.getClass() == x.getBrand(i).getClass() &&
@@ -100,7 +100,7 @@ namespace Mahjong.Control
                        brand.getClass() == x.getBrand(j).getClass() &&
                        brand.getNumber() - 1 == x.getBrand(j).getNumber())
                         {
-                            if (chow_player[0].getCount() < 3)
+                            if (chow_player[2].getCount() < 3)
                             {
                                 ans_player.add(brand);
                                 ans_player.add(x.getBrand(i));
@@ -109,8 +109,8 @@ namespace Mahjong.Control
                                 chow_player[2].add(x.getBrand(i));
                                 chow_player[2].add(x.getBrand(j));
                                 chow_index++;
-                                chow_bool = true;
                             }
+                            chow_bool = true;
                         }
                     }
             return chow_bool;

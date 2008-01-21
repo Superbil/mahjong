@@ -436,10 +436,10 @@ namespace Mahjong.Control
             //把最後那張牌加入玩家手牌
             all.NowPlayer.add(brand);
             //呼叫台數計算
-            Tally t = new Tally();
-            t.setLocation(all.getLocation(), all.Win_Times);
-            t.setPlayer(all);
-            t.ShowDialog();
+            //Tally t = new Tally();
+            //t.setLocation(all.getLocation(), all.Win_Times);
+            //t.setPlayer(all);
+            //t.ShowDialog();
             //清除桌面上的牌
             table.cleanImage();
             //換到下一個莊
@@ -471,7 +471,16 @@ namespace Mahjong.Control
         {
             Check c = new Check(brand, NowPlayer_removeTeam);
             if (c.Chow())
-                all.chow_pong(brand, c.SuccessPlayer);
+                if (c.ChowLength == 1)
+                {
+                    all.chow_pong(brand, c.SuccessPlayer);
+                }
+                else
+                {
+                    ChowBrandCheck cbc = new ChowBrandCheck(c.ChowPlayer);
+                    cbc.ShowDialog();
+                    all.chow_pong(brand, cbc.SelectBrandPlayer);
+                }
             Chow_Pong_Brand = true;
             updatePlayer_Table();
         }

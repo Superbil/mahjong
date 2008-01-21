@@ -30,16 +30,19 @@ namespace Mahjong.Forms
         private void flowLayout1_Paint(object sender, PaintEventArgs e)
         {
             ans_check = 0;
+            this.Close();
         }
 
         private void flowLayout2_Paint(object sender, PaintEventArgs e)
         {
             ans_check = 1;
+            this.Close();
         }
 
         private void flowLayout3_Paint(object sender, PaintEventArgs e)
         {
             ans_check = 2;
+            this.Close();
         }
         /// <summary>
         /// 取得按下的玩家
