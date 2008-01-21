@@ -60,7 +60,7 @@ namespace Mahjong.Control
         /// </summary>
         public void setPosition()
         {
-            switch (r.Next(3))
+            switch (r.Next(4))
             {
                 case 0:
                     position = location.North;
