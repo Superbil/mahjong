@@ -173,6 +173,7 @@
             // 
             // sum1
             // 
+            this.sum1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.sum1.Location = new System.Drawing.Point(122, 45);
             this.sum1.Name = "sum1";
             this.sum1.Size = new System.Drawing.Size(69, 23);
@@ -180,6 +181,7 @@
             // 
             // sum2
             // 
+            this.sum2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.sum2.Location = new System.Drawing.Point(211, 45);
             this.sum2.Name = "sum2";
             this.sum2.Size = new System.Drawing.Size(69, 23);
@@ -187,6 +189,7 @@
             // 
             // sum3
             // 
+            this.sum3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.sum3.Location = new System.Drawing.Point(317, 45);
             this.sum3.Name = "sum3";
             this.sum3.Size = new System.Drawing.Size(69, 23);
@@ -194,6 +197,7 @@
             // 
             // sum4
             // 
+            this.sum4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.sum4.Location = new System.Drawing.Point(424, 45);
             this.sum4.Name = "sum4";
             this.sum4.Size = new System.Drawing.Size(69, 23);
