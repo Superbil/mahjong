@@ -411,7 +411,7 @@ namespace Mahjong.Forms
             ////temp.Location.Y = b.Location.Y - arrow.Height;
             //temp.Image = arrow;
             //this.Controls.Add(temp);
-            //this.Update();
+            //this.Update();            
         }
         Color cc;
         void brandBox_MouseLeave(object sender, EventArgs e)
@@ -503,7 +503,7 @@ namespace Mahjong.Forms
 
         private void 設定ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            pc.config();
+            //pc.config();
         }
 
         private void 關於ToolStripMenuItem1_Click(object sender, EventArgs e)
