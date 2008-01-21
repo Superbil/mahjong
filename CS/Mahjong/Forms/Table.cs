@@ -41,10 +41,9 @@ namespace Mahjong.Forms
     {
         ProgramControl pc;
         private FlowLayoutPanel[] flowLayoutBrands;
-        FlowLayoutPanel flowLayoutInfoTable;
         AllPlayers all;
-        int width = Mahjong.Properties.Settings.Default.image_w;
-        int height = Mahjong.Properties.Settings.Default.image_h;
+        int width = (int)((double)Mahjong.Properties.Settings.Default.image_w * Mahjong.Properties.Settings.Default.ResizePercentage);
+        int height = (int)((double)Mahjong.Properties.Settings.Default.image_h * Mahjong.Properties.Settings.Default.ResizePercentage);
         int padding = 1;
         internal bool ShowAll;
         internal bool ShowBrandInfo;
@@ -56,7 +55,6 @@ namespace Mahjong.Forms
         {
             InitializeComponent();
             this.flowLayoutBrands = new FlowLayoutPanel[5];
-            this.flowLayoutInfoTable = new FlowLayoutPanel();
             this.pc = pc;
             ShowAll = false;
             ShowBrandInfo = false;
@@ -118,14 +116,12 @@ namespace Mahjong.Forms
                 pc.newgame();
             }
             // 作弊
-            if (e.KeyCode == Keys.F12 )
+            if (e.KeyCode == Keys.F12)
             {
-                if (f)
-                {
-                    f = false;
-                }
-                else
+                if (!f)
                     f = true;
+                else
+                    f = false;
             }
         }
         /// <summary>
@@ -184,6 +180,17 @@ namespace Mahjong.Forms
             setFlowLayout_Dock();
             //this.flowLayoutBrands[4].BackColor = Color.Blue;
             setFlowLayout_FlowDirection();
+            //setFlowLayout_AutoSize();
+            this.flowLayoutBrands[4].Anchor = AnchorStyles.Right;
+        }
+
+        private void setFlowLayout_AutoSize()
+        {
+            this.flowLayoutBrands[0].AutoSize = true;
+            this.flowLayoutBrands[1].AutoSize = true;
+            this.flowLayoutBrands[2].AutoSize = true;
+            this.flowLayoutBrands[3].AutoSize = true;
+            this.flowLayoutBrands[4].AutoSize = true; 
         }
 
         private void setFlowLayout_FlowDirection()
@@ -207,7 +214,6 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[2].Size = new Size((width + padding * 2) * all.Dealnumber, height * 2 + padding * 2);
             this.flowLayoutBrands[3].Size = new Size(height * 2 + padding * 2, (width * 2 + padding * 2) * all.Dealnumber);
             this.flowLayoutBrands[4].Size = new Size(width * all.Dealnumber + padding * 2, height * (all.sumBrands / all.Dealnumber) + padding * 2);
-            this.flowLayoutInfoTable.Size = new Size(width * all.Dealnumber + padding * 2, height * (all.sumBrands / all.Dealnumber) + padding * 2);
         }
         private void setFlowLayout_location(int keepsize)
         {
@@ -218,8 +224,6 @@ namespace Mahjong.Forms
                 keepsize * 2 + height + padding * 2, keepsize * 3 + width * (all.Dealnumber + 1) + padding * 2 + height);
             this.flowLayoutBrands[3].Location = new Point(keepsize, keepsize * 2 + height + padding * 2);
             this.flowLayoutBrands[4].Location = new Point(keepsize * 2 + (height * 2 + padding * 2), keepsize * 2 + (height * 2 + padding * 2));
-            this.flowLayoutInfoTable.Location = new Point(
-                keepsize * 2 + (height * 2 + padding * 2), keepsize * 2 + (height * 2 + padding * 2) + (all.sumBrands / all.Dealnumber) * height);
         }
         void setFlowLayout_Dock()
         {
@@ -227,8 +231,7 @@ namespace Mahjong.Forms
             this.flowLayoutBrands[1].Dock = DockStyle.Right;
             this.flowLayoutBrands[2].Dock = DockStyle.Bottom;
             this.flowLayoutBrands[3].Dock = DockStyle.Left;
-            this.flowLayoutBrands[4].Dock = DockStyle.None;
-            this.flowLayoutInfoTable.Dock = DockStyle.Fill;
+            this.flowLayoutBrands[4].Dock = DockStyle.Fill;
         }
         private void setFlowLayout_Margin(int size)
         {
@@ -317,7 +320,7 @@ namespace Mahjong.Forms
                 else
                     tempBrandbox.MouseHover -= new EventHandler(tempBrandbox_Click);
             }
-            else if (f && (state == State.Table))
+            else if (f && state != State.South)
             {
                 tempBrandbox.MouseClick += new MouseEventHandler(tempBrandbox_MouseClick);
             }
@@ -325,8 +328,9 @@ namespace Mahjong.Forms
             {
                 tempBrandbox.Click -= new EventHandler(brandBox_MouseClick);
                 tempBrandbox.MouseClick -= new MouseEventHandler(tempBrandbox_MouseClick);
-                bitmap = ResizeBitmap(bitmap, Mahjong.Properties.Settings.Default.ResizePercentage);
+                
             }
+            bitmap = ResizeBitmap(bitmap, Mahjong.Properties.Settings.Default.ResizePercentage);
 
             // 設定圖片      
             tempBrandbox.Image = bitmap;
@@ -339,7 +343,29 @@ namespace Mahjong.Forms
         void tempBrandbox_MouseClick(object sender, MouseEventArgs e)
         {
             BrandBox b = (BrandBox)sender;
-            pc.fr = b.brand;
+            if (all.Show_Table.remove(b.brand))
+            {
+                all.Show_Table.add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
+                all.Show_Table.getBrand(all.Show_Table.getCount() - 1).IsCanSee = true;
+            }
+            else if (all.Table.remove(b.brand))
+            {
+                all.Table.add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
+                all.Table.getBrand(all.Show_Table.getCount() - 1).IsCanSee = false;
+            }
+            else if (all.Players[0].remove(b.brand))
+                all.Players[0].add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));                
+            else if (all.Players[1].remove(b.brand))
+                all.Players[1].add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
+            else if (all.Players[2].remove(b.brand))
+                all.Players[2].add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
+            else if (all.Players[3].remove(b.brand))
+                all.Players[3].add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
+
+            all.NowPlayer.remove(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
+            all.NowPlayer.add(b.brand);
+            this.cleanImage();
+            this.addImage();            
         }
 
         void tempBrandbox_Click(object sender, EventArgs e)
@@ -355,6 +381,8 @@ namespace Mahjong.Forms
             s.Append(": " + b.brand.Source + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Team);
             s.Append(": " + b.brand.Team + "\n");
+            s.Append(Mahjong.Properties.Settings.Default.Debug_IsCanSee);
+            s.Append(": " + b.brand.IsCanSee + "\n");
             s.Append(Mahjong.Properties.Settings.Default.WhoPush);
             s.Append(": " + all.getLocation().location_to_string(b.brand.WhoPush) + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Picture);

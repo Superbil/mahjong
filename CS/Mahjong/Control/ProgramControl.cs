@@ -196,7 +196,6 @@ namespace Mahjong.Control
                             all.DarkKong(nextbrand, kong.SuccessPlayer);
                         if (darkkong.DarkKong())
                             all.DarkKong(nextbrand, darkkong.SuccessPlayer);
-                        all.NowPlayer.add(nextbrand);
                         table.updateNowPlayer();
                         touchBrand();
                     }
@@ -555,7 +554,7 @@ namespace Mahjong.Control
         internal void setInforamtion()
         {
             information.setAllPlayers(all);
-            information.DebugMode = table.ShowAll;
+            //information.DebugMode = table.ShowAll;
             information.Show();
         }
         /// <summary>
@@ -611,26 +610,6 @@ namespace Mahjong.Control
             set
             {
                 showMessageBox = value;
-            }
-        }
-        internal Brand fr
-        {
-            set
-            {
-                if (all.Show_Table.remove(value))
-                {
-                    all.Show_Table.remove(value);
-                    all.Show_Table.add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
-                }
-                else
-                {
-                    all.Table.remove(value);
-                    all.Table.add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
-                }
-                all.NowPlayer.remove(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
-                all.NowPlayer.add(value);
-                table.cleanImage();
-                table.addImage();
             }
         }
     }

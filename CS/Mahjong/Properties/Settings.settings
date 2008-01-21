@@ -170,5 +170,8 @@
     <Setting Name="ShowMessageBox" Type="System.String" Scope="Application">
       <Value Profile="(Default)">顯示提示</Value>
     </Setting>
+    <Setting Name="Debug_IsCanSee" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">可視</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

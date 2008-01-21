@@ -52,12 +52,12 @@
             this.toolStripSeparator1,
             this.結束ToolStripMenuItem1});
             this.contextMenu.Name = "contextMenuStrip1";
-            this.contextMenu.Size = new System.Drawing.Size(153, 142);
+            this.contextMenu.Size = new System.Drawing.Size(125, 120);
             // 
             // 新遊戲ToolStripMenuItem
             // 
             this.新遊戲ToolStripMenuItem.Name = "新遊戲ToolStripMenuItem";
-            this.新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.新遊戲ToolStripMenuItem.Text = global::Mahjong.Properties.Settings.Default.NewGame;
             this.新遊戲ToolStripMenuItem.Click += new System.EventHandler(this.新遊戲ToolStripMenuItem_Click);
             // 
@@ -66,7 +66,7 @@
             this.網路ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.開新遊戲ToolStripMenuItem});
             this.網路ToolStripMenuItem1.Name = "網路ToolStripMenuItem1";
-            this.網路ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.網路ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.網路ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.OnlineGame;
             // 
             // 開新遊戲ToolStripMenuItem
@@ -81,7 +81,7 @@
             this.設定ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ShowMessageBox_Menu});
             this.設定ToolStripMenuItem1.Name = "設定ToolStripMenuItem1";
-            this.設定ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.設定ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.設定ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.Config;
             this.設定ToolStripMenuItem1.Click += new System.EventHandler(this.設定ToolStripMenuItem1_Click);
             // 
@@ -90,26 +90,26 @@
             this.ShowMessageBox_Menu.Checked = true;
             this.ShowMessageBox_Menu.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ShowMessageBox_Menu.Name = "ShowMessageBox_Menu";
-            this.ShowMessageBox_Menu.Size = new System.Drawing.Size(152, 22);
+            this.ShowMessageBox_Menu.Size = new System.Drawing.Size(124, 22);
             this.ShowMessageBox_Menu.Text = global::Mahjong.Properties.Settings.Default.ShowMessageBox;
             this.ShowMessageBox_Menu.Click += new System.EventHandler(this.ShowMessageBox_Menu_Click);
             // 
             // 關於ToolStripMenuItem1
             // 
             this.關於ToolStripMenuItem1.Name = "關於ToolStripMenuItem1";
-            this.關於ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.關於ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.關於ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.About;
             this.關於ToolStripMenuItem1.Click += new System.EventHandler(this.關於ToolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
             // 
             // 結束ToolStripMenuItem1
             // 
             this.結束ToolStripMenuItem1.Name = "結束ToolStripMenuItem1";
-            this.結束ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.結束ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.結束ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.Exit;
             this.結束ToolStripMenuItem1.Click += new System.EventHandler(this.結束ToolStripMenuItem1_Click);
             // 
@@ -121,8 +121,10 @@
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(692, 680);
             this.ContextMenuStrip = this.contextMenu;
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Table";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = global::Mahjong.Properties.Settings.Default.Title;
             this.contextMenu.ResumeLayout(false);

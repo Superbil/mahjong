@@ -547,5 +547,14 @@ namespace Mahjong.Properties {
                 return ((string)(this["ShowMessageBox"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("可視")]
+        public string Debug_IsCanSee {
+            get {
+                return ((string)(this["Debug_IsCanSee"]));
+            }
+        }
     }
 }
