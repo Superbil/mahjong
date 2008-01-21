@@ -93,7 +93,7 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
-        /// 下一個方位 E->S->W->N
+        /// 下一莊 E->S->W->N
         /// </summary>
         public void next()
         {
@@ -104,6 +104,13 @@ namespace Mahjong.Control
             }
             else
                 winer = add(winer);
+        }
+        /// <summary>
+        /// 下一位
+        /// </summary>
+        public void nextPosition()
+        {
+            add(position);
         }
         location add(location lo)
         {
