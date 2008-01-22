@@ -14,9 +14,9 @@ namespace Mahjong.Control
         public CheckTest()
         {
             BrandPlayer a = new BrandPlayer();
-            a.add(new TenThousandBrand(5));
-            a.add(new TenThousandBrand(6));
-            a.add(new TenThousandBrand(7));
+            //a.add(new TenThousandBrand(5));
+            //a.add(new TenThousandBrand(6));
+            //a.add(new TenThousandBrand(7));
             //a.add(new TenThousandBrand(6));
             //a.add(new TenThousandBrand(7));
             //a.add(new TenThousandBrand(8));
@@ -25,30 +25,30 @@ namespace Mahjong.Control
             //a.add(new RopeBrand(5));
             //a.add(new RopeBrand(6));
 
-            a.add(new TubeBrand(3));
+            a.add(new TubeBrand(1));
+            a.add(new TubeBrand(2));
             a.add(new TubeBrand(3));
             a.add(new TubeBrand(4));
             a.add(new TubeBrand(5));
-            a.add(new TubeBrand(6));
-            a.add(new TubeBrand(8));
-            a.add(new TubeBrand(8));
+            //a.add(new TubeBrand(8));
+            //a.add(new TubeBrand(8));
 
-            FlowerBrand f = new FlowerBrand(1);
-            f.Team = 1;
-            a.add(f);
+            //FlowerBrand f = new FlowerBrand(1);
+            //f.Team = 1;
+            //a.add(f);
 
-            WordBrand r = new WordBrand(9);
-            //r.Team = 2;
-            a.add(r);
-            a.add(r);
-            a.add(r);
+            //WordBrand r = new WordBrand(9);
+            ////r.Team = 2;
             //a.add(r);
+            //a.add(r);
+            //a.add(r);
+            ////a.add(r);
 
-            TubeBrand t = new TubeBrand(9);
-            t.Team = 3;
-            a.add(t);
-            a.add(t);
-            a.add(t);
+            //TubeBrand t = new TubeBrand(9);
+            //t.Team = 3;
+            //a.add(t);
+            //a.add(t);
+            //a.add(t);
 
             //a.add(new TubeBrand(2));
             //a.add(new TubeBrand(2));
@@ -68,16 +68,22 @@ namespace Mahjong.Control
             //Brand b = new TubeBrand(2);
             //Check c = new Check(b,a);
             printplayer(a);
-            Check c = new Check(new WordBrand(9), a);
-            if (c.Win())
-            {
-                Console.WriteLine("有胡！！");
-                printplayer(c.SuccessPlayer);
-            }
+            Check c = new Check(new TubeBrand(3), a);
+            //if (c.Win())
+            //{
+            //    Console.WriteLine("有胡！！");
+            //    printplayer(c.SuccessPlayer);
+            //}
             if (c.Chow())
             {
+                Console.WriteLine("===========");
                 Console.WriteLine("有吃");
+                Console.WriteLine(c.ChowLength);
                 printplayer(c.SuccessPlayer);
+                printplayer(c.ChowPlayer[0]);
+                printplayer(c.ChowPlayer[1]);
+                printplayer(c.ChowPlayer[2]);
+                Console.WriteLine("===========");
             }
             if (c.Pong())
             {
@@ -95,7 +101,8 @@ namespace Mahjong.Control
                 printplayer(c.SuccessPlayer);
             }
 
-            if (!c.Win() && !c.Chow() && !c.Pong() && !c.Kong() && !c.DarkKong())
+            if (//!c.Win() &&
+                !c.Chow() && !c.Pong() && !c.Kong() && !c.DarkKong())
                 Console.WriteLine("都沒");
             printplayer(a);
         }

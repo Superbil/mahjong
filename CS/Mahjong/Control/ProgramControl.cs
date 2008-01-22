@@ -71,7 +71,7 @@ namespace Mahjong.Control
             con = new Config(table);
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
             showMessageBox = table.SetCheck;
-            roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTime_Slow;
+            roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTime_Normal;
         }
         void rotateTimer_Tick(object sender, EventArgs e)
         {
@@ -436,10 +436,10 @@ namespace Mahjong.Control
             //把最後那張牌加入玩家手牌
             all.NowPlayer.add(brand);
             //呼叫台數計算
-            //Tally t = new Tally();
-            //t.setLocation(all.getLocation(), all.Win_Times);
-            //t.setPlayer(all);
-            //t.ShowDialog();
+            Tally t = new Tally();
+            t.setLocation(all.getLocation(), all.Win_Times);
+            t.setPlayer(all);
+            t.ShowDialog();
             //清除桌面上的牌
             table.cleanImage();
             //換到下一個莊

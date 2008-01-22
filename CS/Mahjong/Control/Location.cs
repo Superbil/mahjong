@@ -114,7 +114,7 @@ namespace Mahjong.Control
         /// </summary>
         public void nextPosition()
         {
-            add(position);
+            position = add(position);
         }
         location add(location lo)
         {

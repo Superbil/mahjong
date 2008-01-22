@@ -56,7 +56,7 @@ namespace Mahjong.Control
             ans_player.clear();
             if (brand != null && brand.getClass() !=Mahjong.Properties.Settings.Default.Wordtiles )
                 for (int i = 0; i < x.getCount() - 1; i++)
-                    for (int j = i + 1; j < x.getCount() - 1; j++)
+                    for (int j = i + 1; j < x.getCount(); j++)
                     {
                         if ( // 345
                             brand.getClass() == x.getBrand(i).getClass() &&
@@ -64,11 +64,14 @@ namespace Mahjong.Control
                             brand.getClass() == x.getBrand(j).getClass() &&
                             brand.getNumber() + 2 == x.getBrand(j).getNumber())
                         {
-                            if (chow_player[0].getCount() < 3)
+                            if (ans_player.getCount() < 3)
                             {
                                 ans_player.add(brand);
                                 ans_player.add(x.getBrand(i));
                                 ans_player.add(x.getBrand(j));
+                            }
+                            if (chow_player[0].getCount() < 3)
+                            {                                
                                 chow_player[0].add(brand);
                                 chow_player[0].add(x.getBrand(i));
                                 chow_player[0].add(x.getBrand(j));
@@ -82,11 +85,14 @@ namespace Mahjong.Control
                             brand.getClass() == x.getBrand(j).getClass() &&
                             brand.getNumber() + 1 == x.getBrand(j).getNumber())
                         {
-                            if (chow_player[1].getCount() < 3)
+                            if (ans_player.getCount() < 3)
                             {
                                 ans_player.add(brand);
                                 ans_player.add(x.getBrand(i));
                                 ans_player.add(x.getBrand(j));
+                            }
+                            if (chow_player[1].getCount() < 3)
+                            {
                                 chow_player[1].add(brand);
                                 chow_player[1].add(x.getBrand(i));
                                 chow_player[1].add(x.getBrand(j));
@@ -94,17 +100,20 @@ namespace Mahjong.Control
                             }
                             chow_bool = true;
                         }
-                        else if ( // 123
+                        if ( // 123
                        brand.getClass() == x.getBrand(i).getClass() &&
                        brand.getNumber() - 2 == x.getBrand(i).getNumber() &&
                        brand.getClass() == x.getBrand(j).getClass() &&
                        brand.getNumber() - 1 == x.getBrand(j).getNumber())
                         {
-                            if (chow_player[2].getCount() < 3)
+                            if (ans_player.getCount() < 3)
                             {
                                 ans_player.add(brand);
                                 ans_player.add(x.getBrand(i));
                                 ans_player.add(x.getBrand(j));
+                            }
+                            if (chow_player[2].getCount() < 3)
+                            {
                                 chow_player[2].add(brand);
                                 chow_player[2].add(x.getBrand(i));
                                 chow_player[2].add(x.getBrand(j));

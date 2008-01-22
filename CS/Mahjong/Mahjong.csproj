@@ -345,7 +345,6 @@
     <None Include="Resources\upbarnd.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Mahjong.config" />
     <None Include="Resources\a.gif" />
   </ItemGroup>

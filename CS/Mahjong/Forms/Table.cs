@@ -275,7 +275,7 @@ namespace Mahjong.Forms
             if (
                 state == location.South
                 && brand.getClass() != Mahjong.Properties.Settings.Default.Flower
-                && !brand.IsCanSee
+                && brand.Team < 1
                 && all.state == (int)location.South
                 )
             {

@@ -85,7 +85,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(12, 143);
+            this.label3.Location = new System.Drawing.Point(12, 107);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 19);
             this.label3.TabIndex = 3;
@@ -93,18 +93,19 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(16, 189);
+            this.textBox1.Location = new System.Drawing.Point(16, 143);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(219, 142);
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(354, 63);
             this.textBox1.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(241, 198);
+            this.label4.Location = new System.Drawing.Point(267, 107);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 19);
             this.label4.TabIndex = 5;
@@ -114,7 +115,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(335, 198);
+            this.label5.Location = new System.Drawing.Point(372, 107);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(28, 19);
             this.label5.TabIndex = 6;
@@ -123,7 +124,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(397, 292);
+            this.button1.Location = new System.Drawing.Point(390, 155);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 39);
             this.button1.TabIndex = 7;
@@ -134,7 +135,7 @@
             // labeltally
             // 
             this.labeltally.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.labeltally.Location = new System.Drawing.Point(299, 198);
+            this.labeltally.Location = new System.Drawing.Point(327, 107);
             this.labeltally.Name = "labeltally";
             this.labeltally.Size = new System.Drawing.Size(39, 19);
             this.labeltally.TabIndex = 8;
@@ -239,7 +240,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 350);
+            this.ClientSize = new System.Drawing.Size(518, 218);
             this.Controls.Add(this.score4);
             this.Controls.Add(this.score3);
             this.Controls.Add(this.score2);
@@ -261,7 +262,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Textlable);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Tally";
+            this.ShowIcon = false;
             this.Text = "麻將計分板";
             this.Load += new System.EventHandler(this.Tally_Load);
             this.ResumeLayout(false);

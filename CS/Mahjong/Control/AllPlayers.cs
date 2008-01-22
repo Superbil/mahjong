@@ -287,7 +287,7 @@ namespace Mahjong.Control
         /// <returns>牌</returns>
         public Brand nextBrand()
         {
-            if (table.getCount() <= 8) // 保留8張不摸
+            if (table.getCount() <= 16) // 保留8張不摸
                 throw new FlowOverException();
             else
             {
