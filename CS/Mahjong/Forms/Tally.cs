@@ -109,7 +109,7 @@ namespace Mahjong.Forms
                         i++;
                     count++;
                 }
-                if (count == 5)
+                if (count == 4)
                 {
                     textBox1.Text += "碰碰胡\r\n";
                     tally += 4;
@@ -626,14 +626,14 @@ namespace Mahjong.Forms
            sums += ss;
            sumw += ws;
            sumn += ns;
-           sum1.Text = sume.ToString();
-           sum2.Text = sums.ToString();
-           sum3.Text = sumw.ToString();
-           sum4.Text = sumn.ToString();
            all.Money[(int)location.North] = sumn;
            all.Money[(int)location.East] = sume;
            all.Money[(int)location.South] = sums;
            all.Money[(int)location.West] = sumw;
+           sum1.Text = all.Money[(int)location.East].ToString();
+           sum2.Text = all.Money[(int)location.South].ToString();
+           sum3.Text = all.Money[(int)location.West].ToString();
+           sum4.Text = all.Money[(int)location.North].ToString();
        }
 
         int scoree()
@@ -642,11 +642,13 @@ namespace Mahjong.Forms
             //t= (all.basic_tai + tally) * 10;
             if (all.State == location.East && all.NowPlayer.getBrand(all.NowPlayer.getCount()-1).WhoPush==location.Table)
             {
+                textBox1.Text += "自摸\r\n";
+                tally += 1;
                 if (l.Winer == location.East)
                 {
                     es = (all.basic_tai + tally + win_count) * 30;
-
                     textBox1.Text += "莊家";
+                    tally += 1;
                     int ww = win_count - 1;
                     if(win_count>1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
@@ -692,10 +694,13 @@ namespace Mahjong.Forms
             int ss = 0;// t = (all.basic_tai + tally) * 10;
             if (all.State == location.South && all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
+                textBox1.Text += "自摸\r\n";
+                tally += 1;
                 if (l.Winer == location.South)
                 {
                     ss = (all.basic_tai + tally + win_count) * 30;
                     textBox1.Text += "莊家";
+                    tally += 1;
                     int ww = win_count - 1;
                     if (win_count > 1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
@@ -743,10 +748,13 @@ namespace Mahjong.Forms
             int ws = 0;// t = (all.basic_tai + tally) * 10;
             if (all.State == location.West && all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
+                textBox1.Text += "自摸\r\n";
+                tally += 1;
                   if (l.Winer == location.West)
                   {
                       ws = (all.basic_tai + tally + win_count) * 30;
                       textBox1.Text += "莊家";
+                      tally += 1;
                       int ww = win_count - 1;
                       if (win_count > 1)
                           textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
@@ -793,10 +801,13 @@ namespace Mahjong.Forms
             int ns = 0;// t = (all.basic_tai + tally) * 10;
             if (all.State == location.North && all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
+                textBox1.Text += "自摸\r\n";
+                tally += 1;
                 if (l.Winer == location.North)
                 {
                     ns = (all.basic_tai + tally + win_count) * 30;
                     textBox1.Text += "莊家";
+                    tally += 1;
                     int ww = win_count - 1;
                     if (win_count > 1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
