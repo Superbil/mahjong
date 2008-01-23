@@ -11,12 +11,13 @@
     <AssemblyName>十六張麻將</AssemblyName>
     <StartupObject>Mahjong.Control.Mahjong_Main</StartupObject>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>1E6B8A1FCEFA06EDEB97BA6ABD8D947D4978DBBC</ManifestCertificateThumbprint>
     <GenerateManifests>true</GenerateManifests>
     <TargetZone>LocalIntranet</TargetZone>
     <SignManifests>true</SignManifests>
     <ApplicationIcon>mahjong.ico</ApplicationIcon>
-    <PublishUrl>D:\Files\專題\Mahjong_SVN\Release\</PublishUrl>
+    <ManifestCertificateThumbprint>F252F1338787965ACA7719B9F7A288444E3C3C43</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Mahjong_TemporaryKey.pfx</ManifestKeyFile>
+    <PublishUrl>D:\Files\專題\Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -255,9 +256,6 @@
     <None Include="Resources\tobe9.gif" />
   </ItemGroup>
   <ItemGroup>
-    <BaseApplicationManifest Include="Properties\app.manifest" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0</ProductName>
@@ -354,6 +352,17 @@
       <DependentUpon>ChowBrandCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mahjong.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Microsoft.VisualStudio.DebuggerVisualizers">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
