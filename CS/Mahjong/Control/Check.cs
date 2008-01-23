@@ -65,15 +65,15 @@ namespace Mahjong.Control
                             brand.getNumber() + 2 == x.getBrand(j).getNumber())
                         {
                             if (ans_player.getCount() < 3)
-                            {
-                                ans_player.add(brand);
+                            {                                
                                 ans_player.add(x.getBrand(i));
+                                ans_player.add(brand);
                                 ans_player.add(x.getBrand(j));
                             }
                             if (chow_player[0].getCount() < 3)
-                            {                                
-                                chow_player[0].add(brand);
+                            {                             
                                 chow_player[0].add(x.getBrand(i));
+                                chow_player[0].add(brand);
                                 chow_player[0].add(x.getBrand(j));
                                 chow_index++;                                
                             }
@@ -86,15 +86,15 @@ namespace Mahjong.Control
                             brand.getNumber() + 1 == x.getBrand(j).getNumber())
                         {
                             if (ans_player.getCount() < 3)
-                            {
-                                ans_player.add(brand);
+                            {                                
                                 ans_player.add(x.getBrand(i));
+                                ans_player.add(brand);
                                 ans_player.add(x.getBrand(j));
                             }
                             if (chow_player[1].getCount() < 3)
-                            {
-                                chow_player[1].add(brand);
+                            {                                
                                 chow_player[1].add(x.getBrand(i));
+                                chow_player[1].add(brand);
                                 chow_player[1].add(x.getBrand(j));
                                 chow_index++;
                             }
@@ -107,15 +107,15 @@ namespace Mahjong.Control
                        brand.getNumber() - 1 == x.getBrand(j).getNumber())
                         {
                             if (ans_player.getCount() < 3)
-                            {
-                                ans_player.add(brand);
+                            {                                
                                 ans_player.add(x.getBrand(i));
+                                ans_player.add(brand);
                                 ans_player.add(x.getBrand(j));
                             }
                             if (chow_player[2].getCount() < 3)
-                            {
-                                chow_player[2].add(brand);
+                            {                                
                                 chow_player[2].add(x.getBrand(i));
+                                chow_player[2].add(brand);
                                 chow_player[2].add(x.getBrand(j));
                                 chow_index++;
                             }

@@ -69,6 +69,8 @@ namespace Mahjong.Control
             //Check c = new Check(b,a);
             printplayer(a);
             Check c = new Check(new TubeBrand(2), a);
+            a.add(new TubeBrand(2));
+            Check d = new Check(a);
             //if (c.Win())
             //{
             //    Console.WriteLine("¦³­J¡I¡I");
@@ -95,7 +97,7 @@ namespace Mahjong.Control
                 Console.WriteLine("\n¦³ºb");
                 printplayer(c.SuccessPlayer);
             }
-            if (c.DarkKong())
+            if (d.DarkKong())
             {
                 Console.WriteLine("\n¦³·tºb");
                 printplayer(c.SuccessPlayer);

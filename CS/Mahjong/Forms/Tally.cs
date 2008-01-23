@@ -110,7 +110,7 @@ namespace Mahjong.Forms
                         i++;
                     count++;
                 }
-                if (count == 4)
+                if (count == 4 && y.getBrand(i).getClass() == y.getBrand(i+1).getClass() && y.getBrand(i).getNumber() == y.getBrand(i+1).getNumber())
                 {
                     textBox1.Text += "碰碰胡\r\n";
                     tally += 4;
@@ -231,13 +231,13 @@ namespace Mahjong.Forms
                 textBox1.Text = "大三元\r\n";
                 tally += 5;
             }
-            else if (temp == 2 && index==true)
+            /*else if (temp == 2 && index==true)
             {
                 textBox1.Text = "小三元\r\n";
                 tally += 2;
             }
             temp = 0;
-            index = false;
+            index = false;*/
         }
 
         void east()

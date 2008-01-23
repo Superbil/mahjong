@@ -32,6 +32,8 @@
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
     <BootstrapperEnabled>false</BootstrapperEnabled>
+    <ManifestCertificateThumbprint>DA6649F4DAE102FA669937F1B2F8F67AAB53A9C6</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Mahjong_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -343,6 +345,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Mahjong.config" />
+    <None Include="Mahjong_TemporaryKey.pfx" />
     <None Include="Resources\a.gif" />
   </ItemGroup>
   <ItemGroup>
