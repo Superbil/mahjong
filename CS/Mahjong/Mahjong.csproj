@@ -16,8 +16,6 @@
     <TargetZone>LocalIntranet</TargetZone>
     <SignManifests>true</SignManifests>
     <ApplicationIcon>mahjong.ico</ApplicationIcon>
-    <ManifestCertificateThumbprint>F252F1338787965ACA7719B9F7A288444E3C3C43</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Mahjong_TemporaryKey.pfx</ManifestKeyFile>
     <PublishUrl>D:\Files\專題\Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
