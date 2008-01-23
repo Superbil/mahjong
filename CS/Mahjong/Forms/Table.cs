@@ -399,6 +399,7 @@ namespace Mahjong.Forms
         void brandBox_MouseClick(object sender, EventArgs e)
         {
             BrandBox b = (BrandBox)sender;
+            flowLayoutBrands[all.state].Controls.Remove(b);
             pc.makeBrand(b.brand);
         }
         /// <summary>
@@ -457,7 +458,7 @@ namespace Mahjong.Forms
         public void updateTable()
         {
             flowLayoutBrands[(int)location.Table].Controls.Clear();
-            addShowTable();
+            addShowTable();            
         }
         /// <summary>
         /// 更新Title和資訊盒

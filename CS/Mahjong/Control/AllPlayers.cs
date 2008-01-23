@@ -314,6 +314,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 下一莊
         /// </summary>
+        /// <param name="flow">是否流局</param>
         public void nextWiner(bool flow)
         {
             // 如果流局或莊家贏
@@ -333,9 +334,10 @@ namespace Mahjong.Control
             this.factory = new BrandFactory();
             //更新莊家
             this.state = (uint)lo.Winer;
-            //設定牌組和打牌次數
+            //設定牌組
             for (int i = 0; i < countplayers; i++)
                 teamCount[i] = 1;
+            //打牌次數
             this.brand_count = 0;
             //清除打出去的牌
             Show_Table.clear();            
@@ -399,9 +401,8 @@ namespace Mahjong.Control
         /// <summary>
         /// 新遊戲補花
         /// </summary>
-        public bool Newgame_setFlower()
+        public void Newgame_setFlower()
         {
-            bool ans = false;
             int f_count = 0;
             for (int i = 0; i < NowPlayer.getCount(); i++)
                 if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower 
@@ -410,12 +411,10 @@ namespace Mahjong.Control
                     NowPlayer.getBrand(i).IsCanSee = true;
                     NowPlayer.getBrand(i).Team = 1;
                     f_count++;
-                    ans = true;
                 }
             // 補上少的牌數
             for (int i = 0; i < f_count; i++)
                 NowPlayer.add( nextTableBrand() );
-            return ans;
         }
         /// <summary>
         /// 現在的玩家補花

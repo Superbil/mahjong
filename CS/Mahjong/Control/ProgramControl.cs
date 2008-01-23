@@ -102,37 +102,65 @@ namespace Mahjong.Control
             Ai = new Level_1();
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
-            table.Setup(all);            
+            table.Setup(all);
             newgame2();
         }
         /// <summary>
         /// 開新莊
         /// </summary>
         void newgame2()
-        {
+        {            
             all.creatBrands();
             table.addImage();
+            setInforamtion();
             Chow_Pong_Brand = false;
             Player_Pass_Brand = false;
             // 補花
             for (int i = 0; i < 4; i++)
             {
-                if (all.Newgame_setFlower())
-                {
-                    all.sortNowPlayer();
-                    table.updateNowPlayer();
-                }
-                all.next();
-            }
-            for (int i = 0; i < 4; i++)
-            {
+                // 補花
+                all.Newgame_setFlower();
+                // 排序
                 all.sortNowPlayer();
+                // 更新
                 table.updateNowPlayer();
+                // 下一家
                 all.next();
-            }
-            setInforamtion();
+            }            
             roundTimer.Start();
         }
+
+        /// <summary>
+        /// 打一圈要做的事
+        /// </summary>
+        void round()
+        {
+            // 計時器停止
+            roundTimer.Stop();
+
+            // 如果是吃或碰不摸牌
+            if (Chow_Pong_Brand)
+                Chow_Pong_Brand = false;
+            else
+                touchBrand();
+            // 目前狀態不等於玩家時
+            if (all.State != location.South)
+            {
+                // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
+                // 若成立就表示沒有人要，不成立就表示被人拿走
+                if (pushToTable(getfromAI()))
+                {
+                    // 換下一個人
+                    all.next();
+                    setInforamtion();
+                }
+                // 計時器重新啟動
+                roundTimer.Start();
+            }
+            else
+                setInforamtion();
+        }
+
         /// <summary>
         /// 摸牌
         /// </summary>
@@ -158,8 +186,8 @@ namespace Mahjong.Control
                 Check teamKong = new Check(nextbrand, NowPlayer_OnlyTeam);
                 if (win.Win())
                 {
-                    all.NowPlayer.add(nextbrand);
-                    table.updateNowPlayer();
+                    // 更新資訊盒
+                    setInforamtion();
                     if (showMessageBox)
                         MessageBox.Show(Mahjong.Properties.Settings.Default.TouchWin, all.Name[all.state].ToString());
                     win_game(nextbrand);
@@ -167,6 +195,7 @@ namespace Mahjong.Control
                     // 手牌暗槓(摸到有暗槓和手牌中就有暗槓)
                 else if (darkkong.DarkKong() || kong.Kong())
                 {
+                    // 如果是玩家
                     if (all.State == location.South)
                     {
                         Brand br = null;
@@ -180,6 +209,7 @@ namespace Mahjong.Control
                         }
 
                         toUser(br, false, false, false, kong.Kong() || darkkong.DarkKong(), false);
+                        // 如果玩家按下過水 就跳過
                         if (Player_Pass_Brand)
                             Player_Pass_Brand = false;
                         else
@@ -188,13 +218,14 @@ namespace Mahjong.Control
                             touchBrand();
                         }
                     }
+                        // 如果不是玩家
                     else
                     {
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.DarkKong, all.Name[all.state].ToString());
                         if (kong.Kong())
                             all.DarkKong(nextbrand, kong.SuccessPlayer);
-                        if (darkkong.DarkKong())
+                        else if (darkkong.DarkKong())
                             all.DarkKong(nextbrand, darkkong.SuccessPlayer);
                         table.updateNowPlayer();
                         touchBrand();
@@ -232,36 +263,7 @@ namespace Mahjong.Control
             }
 
         }
-        /// <summary>
-        /// 打一圈要做的事
-        /// </summary>
-        void round()
-        {
-            // 計時器停止
-            roundTimer.Stop();
 
-            // 如果是吃或碰不摸牌
-            if (Chow_Pong_Brand)
-                Chow_Pong_Brand = false;
-            else
-                touchBrand();
-            // 目前狀態不等於玩家時
-            if (all.State != location.South)
-            {
-                // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
-                if (pushToTable(getfromAI()))
-                {
-                    // 換下一個人
-                    all.next();
-                    setInforamtion();
-                }
-                // 計時器重新啟動
-                roundTimer.Start();
-            }
-            else
-                setInforamtion();
-
-        }
         /// <summary>
         /// 打牌
         /// </summary>
@@ -298,13 +300,17 @@ namespace Mahjong.Control
                     if (all.State == location.South)
                     {
                         toUser(brand, false, false, false, false, true);
+                        // 如果玩家按下過水 就跳過
                         if (Player_Pass_Brand)
                             Player_Pass_Brand = false;
+                        // 若不是按下過水就傳回 失敗
                         else
                             return false;
                     }
                     else if (Ai.Win)
                     {
+                        // 更新資訊盒
+                        setInforamtion();
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.Win, all.Name[all.state].ToString());
                         win_game(brand);
@@ -415,7 +421,7 @@ namespace Mahjong.Control
         {
             CPK cpk = new CPK(this, brand);
             Check c = new Check(brand, NowPlayer_removeTeam);
-            Check w = new Check(all.NowPlayer);
+            Check w = new Check(brand, all.NowPlayer);
             cpk.Enabled_Button(chow, pong, kong, darkkong, win);
             if (chow || pong || kong || win || darkkong)
                 cpk.ShowDialog();
@@ -430,11 +436,11 @@ namespace Mahjong.Control
             table.cleanImage();
             //停止迴圈
             roundTimer.Stop();
-            //設定牌為可視並更新
-            table.ShowAll = true;
-            table.addImage();
             //把最後那張牌加入玩家手牌
             all.NowPlayer.add(brand);
+            //設定牌為可視並更新
+            table.ShowAll = true;
+            table.addImage();            
             //呼叫台數計算
             Tally t = new Tally();
             t.setLocation(all.getLocation(), all.Win_Times);
@@ -456,16 +462,19 @@ namespace Mahjong.Control
         /// <param name="brand">按下的牌</param>
         internal void makeBrand(Brand brand)
         {
+            // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
             if (pushToTable(brand))
             {
+                // 換下一個人
                 all.next();
                 setInforamtion();
             }
+            // 計時器重新啟動
             roundTimer.Start();
         }
 
         /// <summary>
-        /// 吃
+        /// 玩家按下吃事件呼叫
         /// </summary>
         internal void chow(Brand brand)
         {
@@ -473,19 +482,21 @@ namespace Mahjong.Control
             if (c.Chow())
                 if (c.ChowLength == 1)
                 {
-                    all.chow_pong(brand, c.SuccessPlayer);
+                    PlayerSort p = new PlayerSort(c.SuccessPlayer);
+                    all.chow_pong(brand, p.getPlayer());
                 }
                 else
                 {
                     ChowBrandCheck cbc = new ChowBrandCheck(c.ChowPlayer);
                     cbc.ShowDialog();
-                    all.chow_pong(brand, cbc.SelectBrandPlayer);
+                    PlayerSort p = new PlayerSort(cbc.SelectBrandPlayer);
+                    all.chow_pong(brand, p.getPlayer());
                 }
             Chow_Pong_Brand = true;
             updatePlayer_Table();
         }
         /// <summary>
-        /// 碰
+        /// 玩家按下碰事件呼叫
         /// </summary>
         internal void pong(Brand brand)
         {
@@ -496,7 +507,7 @@ namespace Mahjong.Control
             updatePlayer_Table();
         }
         /// <summary>
-        /// 槓
+        /// 玩家按下槓事件呼叫
         /// </summary>
         internal void kong(Brand brand)
         {
@@ -510,7 +521,7 @@ namespace Mahjong.Control
 
         }
         /// <summary>
-        /// 暗槓
+        /// 玩家按下暗槓事件呼叫
         /// </summary>
         internal void dark_kong(Brand brand)
         {
@@ -518,18 +529,18 @@ namespace Mahjong.Control
             Check d = new Check(NowPlayer_removeTeam);
             if (c.Kong())
                 all.DarkKong(brand, c.SuccessPlayer);
-            if (d.DarkKong())
+            else if (d.DarkKong())
                 all.DarkKong(brand, d.SuccessPlayer);
         }
         /// <summary>
-        /// 胡
+        /// 玩家按下胡事件呼叫
         /// </summary>
         internal void win(Brand brand)
         {
             win_game(brand);
         }
         /// <summary>
-        /// 過水
+        /// 玩家按下過水事件呼叫
         /// </summary>
         /// <param name="brand">牌</param>
         internal void pass(Brand brand)

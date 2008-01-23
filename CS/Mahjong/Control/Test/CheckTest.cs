@@ -25,11 +25,11 @@ namespace Mahjong.Control
             //a.add(new RopeBrand(5));
             //a.add(new RopeBrand(6));
 
-            a.add(new TubeBrand(1));
             a.add(new TubeBrand(2));
-            a.add(new TubeBrand(3));
-            a.add(new TubeBrand(4));
-            a.add(new TubeBrand(5));
+            a.add(new TubeBrand(2));
+            a.add(new TubeBrand(2));
+            //a.add(new TubeBrand(2));
+            //a.add(new TubeBrand(5));
             //a.add(new TubeBrand(8));
             //a.add(new TubeBrand(8));
 
@@ -68,7 +68,7 @@ namespace Mahjong.Control
             //Brand b = new TubeBrand(2);
             //Check c = new Check(b,a);
             printplayer(a);
-            Check c = new Check(new TubeBrand(3), a);
+            Check c = new Check(new TubeBrand(2), a);
             //if (c.Win())
             //{
             //    Console.WriteLine("有胡！！");
@@ -77,7 +77,7 @@ namespace Mahjong.Control
             if (c.Chow())
             {
                 Console.WriteLine("===========");
-                Console.WriteLine("有吃");
+                Console.WriteLine("\n有吃");
                 Console.WriteLine(c.ChowLength);
                 printplayer(c.SuccessPlayer);
                 printplayer(c.ChowPlayer[0]);
@@ -87,23 +87,23 @@ namespace Mahjong.Control
             }
             if (c.Pong())
             {
-                Console.WriteLine("有碰");
+                Console.WriteLine("\n有碰");
                 printplayer(c.SuccessPlayer);
             }
             if (c.Kong())
             {
-                Console.WriteLine("有槓");
+                Console.WriteLine("\n有槓");
                 printplayer(c.SuccessPlayer);
             }
             if (c.DarkKong())
             {
-                Console.WriteLine("有暗槓");
+                Console.WriteLine("\n有暗槓");
                 printplayer(c.SuccessPlayer);
             }
 
             if (//!c.Win() &&
                 !c.Chow() && !c.Pong() && !c.Kong() && !c.DarkKong())
-                Console.WriteLine("都沒");
+                Console.WriteLine("\n都沒");
             printplayer(a);
         }
         void printplayer(BrandPlayer player)

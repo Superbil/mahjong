@@ -9,7 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mahjong</RootNamespace>
     <AssemblyName>十六張麻將</AssemblyName>
-    <StartupObject>Mahjong.Control.Mahjong_Main</StartupObject>
+    <StartupObject>
+    </StartupObject>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <GenerateManifests>true</GenerateManifests>
     <TargetZone>LocalIntranet</TargetZone>
