@@ -181,7 +181,7 @@ namespace Mahjong.Brands
         /// </summary>
         private void creatRandomTable()
         {
-            randomNumber = new Random(System.DateTime.Now.Millisecond);
+            randomNumber = new Random((int)System.DateTime.Now.Ticks%int.MaxValue);
             randomTable = new ArrayList();
             randomTable.Capacity = sumBrands;         
 

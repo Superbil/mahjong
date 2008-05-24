@@ -15,6 +15,7 @@ namespace Mahjong.Forms
         public ChatServerForm()
         {
             InitializeComponent();
+            this.Show();
         } // end constructor
         private Player[] players;
         private Thread getPlayers;
@@ -168,7 +169,7 @@ namespace Mahjong.Forms
                         writer = new BinaryWriter(socketStream);
                         reader = new BinaryReader(socketStream);
                         writer.Write(myMarkname + "¡G" + inputTextBox.Text);
-
+                        
                     }
                     // if the user at the server signaled termination
                     // sever the connection to the client
@@ -232,7 +233,8 @@ namespace Mahjong.Forms
             if (listener.Server.Connected == false)
                 n++;
             else
-                n--;
+                n--;            
+
         }
 
         private void displayTextBox_TextChanged(object sender, EventArgs e)
@@ -314,7 +316,7 @@ namespace Mahjong.Forms
 
         private void cancelbutton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
         private void lanButton_CheckedChanged(object sender, EventArgs e)

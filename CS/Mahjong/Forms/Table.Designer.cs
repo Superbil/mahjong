@@ -56,12 +56,12 @@
             this.toolStripSeparator1,
             this.結束ToolStripMenuItem1});
             this.contextMenu.Name = "contextMenuStrip1";
-            this.contextMenu.Size = new System.Drawing.Size(125, 120);
+            this.contextMenu.Size = new System.Drawing.Size(153, 142);
             // 
             // 新遊戲ToolStripMenuItem
             // 
             this.新遊戲ToolStripMenuItem.Name = "新遊戲ToolStripMenuItem";
-            this.新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.新遊戲ToolStripMenuItem.Text = "新遊戲";
             this.新遊戲ToolStripMenuItem.Click += new System.EventHandler(this.新遊戲ToolStripMenuItem_Click);
             // 
@@ -70,14 +70,13 @@
             this.網路ToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.開新遊戲ToolStripMenuItem});
             this.網路ToolStripMenuItem1.Name = "網路ToolStripMenuItem1";
-            this.網路ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.網路ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.網路ToolStripMenuItem1.Text = "網路遊戲";
             // 
             // 開新遊戲ToolStripMenuItem
             // 
-            this.開新遊戲ToolStripMenuItem.Enabled = false;
             this.開新遊戲ToolStripMenuItem.Name = "開新遊戲ToolStripMenuItem";
-            this.開新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.開新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.開新遊戲ToolStripMenuItem.Text = "新增/加入網路遊戲";
             this.開新遊戲ToolStripMenuItem.Click += new System.EventHandler(this.開新遊戲ToolStripMenuItem_Click);
             // 
@@ -87,7 +86,7 @@
             this.ShowMessageBox_Menu,
             this.速度ToolStripMenuItem});
             this.設定ToolStripMenuItem1.Name = "設定ToolStripMenuItem1";
-            this.設定ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.設定ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.設定ToolStripMenuItem1.Text = "設定";
             this.設定ToolStripMenuItem1.Click += new System.EventHandler(this.設定ToolStripMenuItem1_Click);
             // 
@@ -96,7 +95,7 @@
             this.ShowMessageBox_Menu.Checked = true;
             this.ShowMessageBox_Menu.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ShowMessageBox_Menu.Name = "ShowMessageBox_Menu";
-            this.ShowMessageBox_Menu.Size = new System.Drawing.Size(124, 22);
+            this.ShowMessageBox_Menu.Size = new System.Drawing.Size(152, 22);
             this.ShowMessageBox_Menu.Text = "顯示提示";
             this.ShowMessageBox_Menu.Click += new System.EventHandler(this.ShowMessageBox_Menu_Click);
             // 
@@ -107,13 +106,13 @@
             this.Normal,
             this.Quick});
             this.速度ToolStripMenuItem.Name = "速度ToolStripMenuItem";
-            this.速度ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.速度ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.速度ToolStripMenuItem.Text = "速度";
             // 
             // Slow
             // 
             this.Slow.Name = "Slow";
-            this.Slow.Size = new System.Drawing.Size(112, 22);
+            this.Slow.Size = new System.Drawing.Size(110, 22);
             this.Slow.Text = "慢速";
             this.Slow.Click += new System.EventHandler(this.非常慢ToolStripMenuItem_Click);
             // 
@@ -122,33 +121,33 @@
             this.Normal.Checked = true;
             this.Normal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.Normal.Name = "Normal";
-            this.Normal.Size = new System.Drawing.Size(112, 22);
+            this.Normal.Size = new System.Drawing.Size(110, 22);
             this.Normal.Text = "正常速";
             this.Normal.Click += new System.EventHandler(this.正常ToolStripMenuItem_Click);
             // 
             // Quick
             // 
             this.Quick.Name = "Quick";
-            this.Quick.Size = new System.Drawing.Size(112, 22);
+            this.Quick.Size = new System.Drawing.Size(110, 22);
             this.Quick.Text = "超快速";
             this.Quick.Click += new System.EventHandler(this.非常快ToolStripMenuItem_Click);
             // 
             // 關於ToolStripMenuItem1
             // 
             this.關於ToolStripMenuItem1.Name = "關於ToolStripMenuItem1";
-            this.關於ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.關於ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.關於ToolStripMenuItem1.Text = "關於";
             this.關於ToolStripMenuItem1.Click += new System.EventHandler(this.關於ToolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // 結束ToolStripMenuItem1
             // 
             this.結束ToolStripMenuItem1.Name = "結束ToolStripMenuItem1";
-            this.結束ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.結束ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.結束ToolStripMenuItem1.Text = "結束";
             this.結束ToolStripMenuItem1.Click += new System.EventHandler(this.結束ToolStripMenuItem1_Click);
             // 

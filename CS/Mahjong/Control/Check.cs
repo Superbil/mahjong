@@ -42,7 +42,7 @@ namespace Mahjong.Control
             for (int i = 0; i < player.getCount(); i++)
                 if (player.getBrand(i).getClass() != Mahjong.Properties.Settings.Default.Flower)
                     x.add(player.getBrand(i));
-            this.brand = otherbrand;
+            brand = otherbrand;
             for (int i = 0; i < chow_player.Length; i++)
                 chow_player[i] = new BrandPlayer();
         }
@@ -54,7 +54,7 @@ namespace Mahjong.Control
         {
             bool chow_bool = false;
             ans_player.clear();
-            if (brand != null && brand.getClass() !=Mahjong.Properties.Settings.Default.Wordtiles )
+            if (brand != null && brand.getClass() != Mahjong.Properties.Settings.Default.Wordtiles)
                 for (int i = 0; i < x.getCount() - 1; i++)
                     for (int j = i + 1; j < x.getCount(); j++)
                     {
@@ -65,17 +65,17 @@ namespace Mahjong.Control
                             brand.getNumber() + 2 == x.getBrand(j).getNumber())
                         {
                             if (ans_player.getCount() < 3)
-                            {                                
+                            {
                                 ans_player.add(x.getBrand(i));
                                 ans_player.add(brand);
                                 ans_player.add(x.getBrand(j));
                             }
                             if (chow_player[0].getCount() < 3)
-                            {                             
+                            {
                                 chow_player[0].add(x.getBrand(i));
                                 chow_player[0].add(brand);
                                 chow_player[0].add(x.getBrand(j));
-                                chow_index++;                                
+                                chow_index++;
                             }
                             chow_bool = true;
                         }
@@ -86,13 +86,13 @@ namespace Mahjong.Control
                             brand.getNumber() + 1 == x.getBrand(j).getNumber())
                         {
                             if (ans_player.getCount() < 3)
-                            {                                
+                            {
                                 ans_player.add(x.getBrand(i));
                                 ans_player.add(brand);
                                 ans_player.add(x.getBrand(j));
                             }
                             if (chow_player[1].getCount() < 3)
-                            {                                
+                            {
                                 chow_player[1].add(x.getBrand(i));
                                 chow_player[1].add(brand);
                                 chow_player[1].add(x.getBrand(j));
@@ -107,13 +107,13 @@ namespace Mahjong.Control
                        brand.getNumber() - 1 == x.getBrand(j).getNumber())
                         {
                             if (ans_player.getCount() < 3)
-                            {                                
+                            {
                                 ans_player.add(x.getBrand(i));
                                 ans_player.add(brand);
                                 ans_player.add(x.getBrand(j));
                             }
                             if (chow_player[2].getCount() < 3)
-                            {                                
+                            {
                                 chow_player[2].add(x.getBrand(i));
                                 chow_player[2].add(brand);
                                 chow_player[2].add(x.getBrand(j));
@@ -185,9 +185,9 @@ namespace Mahjong.Control
                     )
                 {
                     ans_player.add(x.getBrand(i));
-                    ans_player.add(x.getBrand(i+1));
-                    ans_player.add(x.getBrand(i+2));
-                    ans_player.add(x.getBrand(i+3));
+                    ans_player.add(x.getBrand(i + 1));
+                    ans_player.add(x.getBrand(i + 2));
+                    ans_player.add(x.getBrand(i + 3));
                     return true;
                 }
             return false;
@@ -240,7 +240,7 @@ namespace Mahjong.Control
         {
             // 對子的牌組
             for (int i = 0; i < x.getCount() - 1; i++)
-                if (x.getBrand(i).getClass() == x.getBrand(i + 1).getClass() && x.getBrand(i).getNumber() == x.getBrand(i + 1).getNumber())
+                if (x.getBrand(i).getClass() == x.getBrand(i + 1).getClass() && x.getBrand(i).getNumber() == x.getBrand(i + 1).getNumber() && x.getBrand(i).Team == 0 && x.getBrand(i + 1).Team == 0)
                 {
                     if (b.getCount() == 0)
                     {
@@ -264,7 +264,9 @@ namespace Mahjong.Control
                             x.getBrand(i).getClass() == x.getBrand(j).getClass() &&
                             x.getBrand(i).getNumber() == x.getBrand(j).getNumber() - 1 &&
                             x.getBrand(j).getClass() == x.getBrand(k).getClass() &&
-                            x.getBrand(j).getNumber() == x.getBrand(k).getNumber() - 1)
+                            x.getBrand(j).getNumber() == x.getBrand(k).getNumber() - 1 &&
+                            x.getBrand(i).Team == x.getBrand(j).Team &&
+                            x.getBrand(j).Team == x.getBrand(k).Team)
                         {
                             if (a.getCount() == 0)
                             {
@@ -284,7 +286,9 @@ namespace Mahjong.Control
                         else if (x.getBrand(i).getClass() == x.getBrand(j).getClass() &&
                             x.getBrand(i).getNumber() == x.getBrand(j).getNumber() &&
                             x.getBrand(j).getClass() == x.getBrand(k).getClass() &&
-                            x.getBrand(j).getNumber() == x.getBrand(k).getNumber())
+                            x.getBrand(j).getNumber() == x.getBrand(k).getNumber() &&
+                            x.getBrand(i).Team == x.getBrand(j).Team &&
+                            x.getBrand(j).Team == x.getBrand(k).Team)
                         { // 碰的牌組
                             if (a.getCount() == 0)
                             {
@@ -315,7 +319,10 @@ namespace Mahjong.Control
                                  x.getBrand(i).getNumber() == x.getBrand(i + 2).getNumber() &&
                                  x.getBrand(i).getClass() == x.getBrand(i + 3).getClass() &&
                                  x.getBrand(i).getNumber() == x.getBrand(i + 3).getNumber() &&
-                                 x.getBrand(i).Team > 1)
+                                 x.getBrand(i).Team > 1 &&
+                                 x.getBrand(i).Team == x.getBrand(i + 1).Team &&
+                                 x.getBrand(i + 1).Team == x.getBrand(i + 2).Team &&
+                                 x.getBrand(i + 2).Team == x.getBrand(i + 3).Team)
                     { // 碰的牌組
                         if (a.getCount() == 0)
                         {
@@ -325,10 +332,10 @@ namespace Mahjong.Control
                             x.remove(x.getBrand(i));
                             //  a.add(x.getBrand(i + 3));
                         }
-                        else if (//x.getBrand(i) != a.getBrand(a.getCount() - 4) &&
-                            x.getBrand(i + 1) != a.getBrand(a.getCount() - 3) &&
-                            x.getBrand(i + 2) != a.getBrand(a.getCount() - 2) &&
-                            x.getBrand(i + 3) != a.getBrand(a.getCount() - 1))
+                        else if (x.getBrand(i) != a.getBrand(a.getCount() - 3) &&
+                            x.getBrand(i + 1) != a.getBrand(a.getCount() - 2) &&
+                            x.getBrand(i + 2) != a.getBrand(a.getCount() - 1))
+                        //x.getBrand(i + 3) != a.getBrand(a.getCount()))
                         {
                             a.add(x.getBrand(i));
                             a.add(x.getBrand(i + 1));
@@ -354,7 +361,7 @@ namespace Mahjong.Control
             brand_2();
             bradn_4();
             bradn_3();
-            
+
             // 組合測試
             // a 三支
             // b 兩隻

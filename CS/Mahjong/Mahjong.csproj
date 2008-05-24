@@ -16,6 +16,8 @@
     <TargetZone>LocalIntranet</TargetZone>
     <SignManifests>true</SignManifests>
     <ApplicationIcon>mahjong.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>DA6649F4DAE102FA669937F1B2F8F67AAB53A9C6</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Mahjong_TemporaryKey.pfx</ManifestKeyFile>
     <PublishUrl>D:\Files\專題\Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -32,8 +34,6 @@
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
     <BootstrapperEnabled>false</BootstrapperEnabled>
-    <ManifestCertificateThumbprint>DA6649F4DAE102FA669937F1B2F8F67AAB53A9C6</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Mahjong_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -176,10 +176,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Control\ProgramControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ProgramControl.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -195,10 +191,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Control\ProgramControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Control\ProgramControl.Designer.cs">
-      <DependentUpon>ProgramControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Control\Settings.cs" />
   </ItemGroup>
