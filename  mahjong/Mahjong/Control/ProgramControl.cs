@@ -59,7 +59,6 @@ namespace Mahjong.Control
 
         public ProgramControl()
         {
-            InitializeComponent();
             setup();
             table.ShowDialog();
         }
