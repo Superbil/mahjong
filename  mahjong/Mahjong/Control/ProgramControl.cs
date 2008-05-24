@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace Mahjong.Control
 {
-    public partial class ProgramControl : UserControl
+    public partial class ProgramControl
     {
         /// <summary>
         /// ®à­±¤¶­±
