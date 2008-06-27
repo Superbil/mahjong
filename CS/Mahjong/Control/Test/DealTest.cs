@@ -23,7 +23,7 @@ namespace Mahjong.Control
             printplayer(table,"亂數牌");
 
             PlayerSort bbs = new PlayerSort(table);
-            BrandPlayer sort_table = bbs.getPlayer();
+            BrandPlayer sort_table = bbs.getPlayer;
             printplayer(sort_table,"亂數排序回去");
 
             // 分配牌
@@ -42,7 +42,7 @@ namespace Mahjong.Control
             for (int i = 0; i < table.getCount(); i++)
                 check.add(table.getBrand(i));
             PlayerSort bs = new PlayerSort(check);
-            check = bs.getPlayer();
+            check = bs.getPlayer;
             Console.WriteLine("\n共有: {0}",check.getCount());
             printplayer(check,"重新檢查");
         }

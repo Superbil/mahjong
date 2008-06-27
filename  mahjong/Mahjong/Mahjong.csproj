@@ -1,0 +1,370 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6CC05815-FA24-4F5F-BA6B-B4CBE0878D63}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mahjong</RootNamespace>
+    <AssemblyName>十六張麻將</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <GenerateManifests>true</GenerateManifests>
+    <TargetZone>LocalIntranet</TargetZone>
+    <SignManifests>true</SignManifests>
+    <ApplicationIcon>mahjong.ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>DA6649F4DAE102FA669937F1B2F8F67AAB53A9C6</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Mahjong_TemporaryKey.pfx</ManifestKeyFile>
+    <PublishUrl>D:\Files\專題\Release\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <TargetCulture>zh-TW</TargetCulture>
+    <ProductName>網路麻將</ProductName>
+    <PublisherName>CWS</PublisherName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AIs\Level 1.cs" />
+    <Compile Include="AIs\MahjongAI.cs" />
+    <Compile Include="AIs\SimpleAI.cs" />
+    <Compile Include="Control\BTest.cs" />
+    <Compile Include="Control\Test\AiTest.cs" />
+    <Compile Include="Control\Check.cs" />
+    <Compile Include="Control\Test\CheckTest.cs" />
+    <Compile Include="Control\Deal.cs" />
+    <Compile Include="Control\Test\DealTest.cs" />
+    <Compile Include="Forms\ChowBrandCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChowBrandCheck.Designer.cs">
+      <DependentUpon>ChowBrandCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Information.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Information.Designer.cs">
+      <DependentUpon>Information.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mahjong_Main.cs" />
+    <Compile Include="Control\Test\TallyTest.cs">
+    </Compile>
+    <Compile Include="Forms\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Brands\Brand.cs" />
+    <Compile Include="Control\Test\BrandsTest.cs" />
+    <Compile Include="Brands\BrandFactory.cs" />
+    <Compile Include="Brands\FlowerBrand.cs" />
+    <Compile Include="Brands\RopeBrand.cs" />
+    <Compile Include="Brands\TenThousandBrand.cs" />
+    <Compile Include="Brands\TubeBrand.cs" />
+    <Compile Include="Brands\WordBrand.cs" />
+    <Compile Include="Forms\BrandBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\ChatServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChatServer.designer.cs">
+      <DependentUpon>ChatServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Config.Designer.cs">
+      <DependentUpon>Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CPK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CPK.Designer.cs">
+      <DependentUpon>CPK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Tally.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Tally.Designer.cs">
+      <DependentUpon>Tally.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Table.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Table.Designer.cs">
+      <DependentUpon>Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\AllPlayers.cs" />
+    <Compile Include="Control\Location.cs" />
+    <Compile Include="Players\PlayerSort.cs" />
+    <Compile Include="Players\PlayerInterator.cs" />
+    <Compile Include="Players\Iterator.cs" />
+    <Compile Include="Players\BrandPlayer.cs" />
+    <Compile Include="Players\PlayerInteratorLimit.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AboutBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChatServer.resx">
+      <DependentUpon>ChatServer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Config.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CPK.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CPK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Information.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Information.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Tally.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Tally.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Table.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Control\ProgramControl.cs">
+    </Compile>
+    <Compile Include="Control\Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten4.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten5.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten6.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten7.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten8.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten9.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tobe1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tobe2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tobe3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tobe4.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tobe5.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tobe6.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tobe7.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tobe8.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tobe9.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Visual.C++.8.0.x86">
+      <Visible>False</Visible>
+      <ProductName>Visual C++ 執行階段程式庫 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flower1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flower2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flower3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flower4.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flower5.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flower6.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flower7.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flower8.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rope1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rope2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rope3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rope4.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rope5.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rope6.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rope7.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rope8.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rope9.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word1.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word3.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word4.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word5.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word6.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\word7.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\upbarnd.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mahjong.config" />
+    <None Include="Mahjong_TemporaryKey.pfx" />
+    <None Include="Resources\a.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\ChowBrandCheck.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChowBrandCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mahjong.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Microsoft.VisualStudio.DebuggerVisualizers">
+      <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
