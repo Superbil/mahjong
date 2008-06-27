@@ -15,7 +15,9 @@ namespace Mahjong.Control
         static void Main()
         {
             // 程式控制
-            new ProgramControl();
+            ProgramControl pc = new ProgramControl();
+            //Table table = new Table(pc);
+            //table.ShowDialog();
             // 測試牌和產生牌
             //new BrandsTest();
             // 測試AI

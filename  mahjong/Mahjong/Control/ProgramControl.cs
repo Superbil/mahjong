@@ -27,7 +27,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 換到下一家的計時器
         /// </summary>
-        internal Timer roundTimer;
+        internal Timer roundTimer = new Timer();
         /// <summary>
         /// 全部玩家和桌面
         /// </summary>
@@ -35,11 +35,11 @@ namespace Mahjong.Control
         /// <summary>
         /// AI介面
         /// </summary>
-        internal MahjongAI Ai;
+        internal MahjongAI Ai = new Level_1();
         /// <summary>
         /// 資訊盒
         /// </summary>
-        internal Information information;
+        internal Information information = new Information();
         /// <summary>
         /// 設定盒
         /// </summary>
@@ -47,7 +47,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 牌工廠
         /// </summary>
-        internal BrandFactory factory;
+        internal BrandFactory factory = new BrandFactory();
         /// <summary>
         /// 吃碰牌之後是否要補牌
         /// </summary>
@@ -65,15 +65,12 @@ namespace Mahjong.Control
         /// </summary>
         public ProgramControl()
         {
-            roundTimer = new Timer();
-            table = new Table(this);
-            information = new Information();
-            con = new Config(table);
-            factory = new BrandFactory();
+            table = new Table(this);        
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
-            showMessageBox = table.SetCheck;
+            showMessageBox = true;
             roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTime_Normal;            
             table.ShowDialog();
+            //this.table = table;
         }
         /// <summary>
         /// 切換到下個玩家所要做的事情
@@ -267,9 +264,11 @@ namespace Mahjong.Control
         /// </summary>
         internal void onlineGame()
         {
+            table.Close();
             chat = new ChatServerForm();
-            chat.Show();
+            chat.Show();            
             //table = new Table(new PC_Network());
+            //new PC_Network(table);
         }
         /// <summary>
         /// 提示資訊是否開啟

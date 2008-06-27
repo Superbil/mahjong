@@ -275,11 +275,11 @@ namespace Mahjong.Forms
                 state == location.South
                 && brand.getClass() != Mahjong.Properties.Settings.Default.Flower
                 && brand.Team < 1
-                && all.state == (int)location.South
+                //&& all.State == location.South
                 )
             {
-                tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
-                tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
+                //tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
+                //tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
 
                 if (ShowAll && ShowBrandInfo)
@@ -400,6 +400,7 @@ namespace Mahjong.Forms
             BrandBox b = (BrandBox)sender;
             flowLayoutBrands[all.state].Controls.Remove(b);
             pc.makeBrand(b.brand);
+            b.Click -= new EventHandler(tempBrandbox_Click);
         }
         /// <summary>
         /// 新增玩家、桌面圖片

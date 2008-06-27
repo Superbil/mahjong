@@ -14,8 +14,7 @@ namespace Mahjong.Control
         /// </summary>
         public void newgame()
         {
-            table.cleanAll();
-            Ai = new Level_1();
+            table.cleanAll();            
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
             all.sumBrands = factory.SumBrands;
