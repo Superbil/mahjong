@@ -75,7 +75,6 @@
             this.panel_color.Name = "panel_color";
             this.panel_color.Size = new System.Drawing.Size(33, 25);
             this.panel_color.TabIndex = 3;
-            this.panel_color.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_color_Paint);
             // 
             // trackBarSpeed
             // 

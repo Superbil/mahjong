@@ -20,10 +20,5 @@ namespace Mahjong.Forms
         {
             this.Close();
         }
-
-        private void panel_color_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

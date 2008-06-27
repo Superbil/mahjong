@@ -20,12 +20,12 @@ namespace Mahjong.Control
             all = new AllPlayers(4, 16);
             all.sumBrands = factory.SumBrands;
             table.Setup(all);
-            newgame2();
+            newgame_round();
         }
         /// <summary>
         /// ¶}·s²ø
         /// </summary>
-        void newgame2()
+        void newgame_round()
         {
             creatBrands();
             table.addImage();

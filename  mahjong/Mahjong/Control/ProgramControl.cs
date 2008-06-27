@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 using Mahjong.Forms;
+using Mahjong.AIs;
 using Mahjong.Brands;
 using Mahjong.Players;
-using Mahjong.AIs;
-using System.Diagnostics;
 
 namespace Mahjong.Control
 {
@@ -19,47 +19,50 @@ namespace Mahjong.Control
         /// <summary>
         /// 桌面介面
         /// </summary>
-        Table table;
+        internal Table table;
         /// <summary>
         /// 網路連線介面
         /// </summary>
-        ChatServerForm chat;
+        internal ChatServerForm chat;
         /// <summary>
         /// 換到下一家的計時器
         /// </summary>
-        Timer roundTimer;
+        internal Timer roundTimer;
         /// <summary>
         /// 全部玩家和桌面
         /// </summary>
-        AllPlayers all;
+        internal AllPlayers all;
         /// <summary>
         /// AI介面
         /// </summary>
-        MahjongAI Ai;
+        internal MahjongAI Ai;
         /// <summary>
         /// 資訊盒
         /// </summary>
-        Information information;
+        internal Information information;
         /// <summary>
         /// 設定盒
         /// </summary>
-        Config con;
+        internal Config con;
         /// <summary>
         /// 牌工廠
         /// </summary>
-        BrandFactory factory;
+        internal BrandFactory factory;
         /// <summary>
         /// 吃碰牌之後是否要補牌
         /// </summary>
-        bool Chow_Pong_Brand;
+        internal bool Chow_Pong_Brand;
         /// <summary>
         /// 玩家按下過水
         /// </summary>
-        bool Player_Pass_Brand;
+        internal bool Player_Pass_Brand;
         /// <summary>
         /// 是否要顯示提示訊息
         /// </summary>
-        bool showMessageBox;
+        internal bool showMessageBox;
+        /// <summary>
+        /// 遊戲控制建構子
+        /// </summary>
         public ProgramControl()
         {
             roundTimer = new Timer();
@@ -72,8 +75,12 @@ namespace Mahjong.Control
             roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTime_Normal;            
             table.ShowDialog();
         }
-
-        void rotateTimer_Tick(object sender, EventArgs e)
+        /// <summary>
+        /// 切換到下個玩家所要做的事情
+        /// </summary>
+        /// <param name="sender">時間倒數器</param>
+        /// <param name="e"></param>
+        internal void rotateTimer_Tick(object sender, EventArgs e)
         {
             try
             {
@@ -87,7 +94,7 @@ namespace Mahjong.Control
                 factory = new BrandFactory();
                 all.nextWiner(true);                
                 // 新局
-                newgame2();
+                newgame_round();
             }
             catch (ErrorBrandPlayerCountException)
             {
@@ -98,7 +105,7 @@ namespace Mahjong.Control
         /// 使用者按下一張牌
         /// </summary>
         /// <param name="brand">按下的牌</param>
-        internal void makeBrand(Brand brand)
+        internal virtual void makeBrand(Brand brand)
         {
             // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
             if (pushToTable(brand))
@@ -221,7 +228,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 移除掉已經打出去的牌組，以牌組編號來區分
         /// </summary>
-        BrandPlayer NowPlayer_removeTeam
+        internal BrandPlayer NowPlayer_removeTeam
         {
             get
             {
@@ -235,7 +242,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 只有牌組
         /// </summary>
-        BrandPlayer NowPlayer_OnlyTeam
+        internal BrandPlayer NowPlayer_OnlyTeam
         {
             get
             {
@@ -262,6 +269,7 @@ namespace Mahjong.Control
         {
             chat = new ChatServerForm();
             chat.Show();
+            //table = new Table(new PC_Network());
         }
         /// <summary>
         /// 提示資訊是否開啟

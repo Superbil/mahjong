@@ -20,22 +20,16 @@ namespace Mahjong.Control
             o.ShowDialog();
             try
             {
+                //設定檔案流
                 input = new FileStream(o.FileName, FileMode.Open, FileAccess.ReadWrite);
-                AllPlayers temp = new AllPlayers(4, 16);
-                temp = (AllPlayers)formatter.Deserialize(input);
-                this.all = temp;
-                //this.all = (AllPlayers)formatter.Deserialize(input);
+                //讀檔並且解序列化
+                this.all = (AllPlayers)formatter.Deserialize(input);
+                //關閉檔案
                 input.Close();
-                //更新畫面
-                table.cleanImage();
+                //更新設定畫面
+                table.cleanAll();
                 table.Setup(all);
                 table.addImage();
-                //for (int i = 0; i < 4; i++)
-                //{
-                //    table.updateNowPlayer();
-                //    all.next();
-                //}
-                //table.updateTable();
                 setInforamtion();
             }
             catch

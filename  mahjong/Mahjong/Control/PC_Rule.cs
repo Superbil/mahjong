@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Mahjong.Brands;
 using System.Windows.Forms;
+using Mahjong.Brands;
 using Mahjong.Forms;
 using Mahjong.Players;
 
@@ -13,7 +13,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 摸牌
         /// </summary>
-        void touchBrand()
+        internal void touchBrand()
         {
             table.updateNowPlayer();
             // 摸牌給現在的玩家
@@ -117,7 +117,7 @@ namespace Mahjong.Control
         /// 打牌
         /// </summary>
         /// <param name="brand">準備要打的牌</param>
-        bool pushToTable(Brand brand)
+        internal bool pushToTable(Brand brand)
         {
             // 把牌從現在的玩家手上移除
             all.NowPlayer.remove(brand);
@@ -135,7 +135,7 @@ namespace Mahjong.Control
         /// </summary>
         /// <param name="brand">打出到桌面的牌</param>
         /// <returns>是否被拿走了</returns>
-        bool check_chow_pong_kong_win(Brand brand)
+        internal bool check_chow_pong_kong_win(Brand brand)
         {
             // 有沒有人要胡
             for (int i = 0; i < 3; i++)
@@ -257,7 +257,7 @@ namespace Mahjong.Control
         /// 從AI得到一張牌
         /// </summary>
         /// <returns></returns>
-        private Brand getfromAI()
+        internal Brand getfromAI()
         {
             Ai.setPlayer(NowPlayer_removeTeam);
             return Ai.getReadyBrand();
@@ -266,7 +266,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 把牌丟給玩家，看是否要吃 碰 槓 過水 胡
         /// </summary>
-        private void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
+        internal void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
         {
             CPK cpk = new CPK(this, brand);
             Check c = new Check(brand, NowPlayer_removeTeam);
@@ -279,7 +279,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 結束遊戲
         /// </summary>
-        void win_game(Brand brand)
+        internal void win_game(Brand brand)
         {
             //清除桌面上的牌
             table.cleanImage();
@@ -302,14 +302,14 @@ namespace Mahjong.Control
             //設定全部的牌為不顯示
             table.ShowAll = false;
             //開新的遊戲
-            newgame2();
+            newgame_round();
             this.factory = new BrandFactory();
         }
 
         /// <summary>
         /// 打一圈要做的事
         /// </summary>
-        void round()
+        internal void round()
         {
             // 計時器停止
             roundTimer.Stop();

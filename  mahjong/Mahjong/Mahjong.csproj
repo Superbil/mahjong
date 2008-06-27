@@ -71,6 +71,7 @@
     <Compile Include="Control\BTest.cs" />
     <Compile Include="Control\Mahjon_Exception.cs" />
     <Compile Include="Control\PC_FileStream.cs" />
+    <Compile Include="Control\PC_Network.cs" />
     <Compile Include="Control\PC_NewGame.cs" />
     <Compile Include="Control\PC_Rule.cs" />
     <Compile Include="Control\Test\AiTest.cs" />
