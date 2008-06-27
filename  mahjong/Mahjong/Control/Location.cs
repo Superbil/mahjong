@@ -163,5 +163,25 @@ namespace Mahjong.Control
             temp += Mahjong.Properties.Settings.Default.Position;
             return temp;
         }
+        /// <summary>
+        /// 數字轉換成方位
+        /// </summary>
+        /// <param name="state">數字</param>
+        /// <returns>方位</returns>
+        public location getlocation(uint state)
+        {
+            switch (state)
+            {
+                case 0:
+                    return location.North;
+                case 1:
+                    return location.East;
+                case 2:
+                    return location.South;
+                case 3:
+                    return location.West;
+            }
+            return location.East;
+        }
     }
 }

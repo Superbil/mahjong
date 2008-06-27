@@ -23,11 +23,6 @@ namespace Mahjong.Control
         /// 準備要顯示的桌面牌
         /// </summary>
         BrandPlayer show_table;
-        [NonSerialized]
-        /// <summary>
-        /// 牌工廠
-        /// </summary>
-        BrandFactory factory;
         /// <summary>
         /// 每個玩家分多少張
         /// </summary>
@@ -63,7 +58,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 連莊次數
         /// </summary>
-        int win_Times;
+        internal int win_Times;
         /// <summary>
         /// 玩家姓名
         /// </summary>
@@ -92,10 +87,8 @@ namespace Mahjong.Control
             this.lo = new Location();
             this.table = new BrandPlayer();
             this.show_table = new BrandPlayer();
-            this.factory = new BrandFactory();            
             this.dealnumber = deal;
             this.countplayers = playernumber;
-            this.sumBrands = factory.SumBrands;
             this.state = (uint)lo.Winer;
             this.brand_count = 0;
             this.basic_tai = Mahjong.Properties.Settings.Default.BasicTai;
@@ -121,6 +114,10 @@ namespace Mahjong.Control
             {
                 return players;
             }
+            set
+            {
+                players = value;
+            }
         }
         /// <summary>
         /// 桌面
@@ -130,6 +127,10 @@ namespace Mahjong.Control
             get
             {
                 return table;
+            }
+            set
+            {
+                table = value;
             }
         }
         /// <summary>
@@ -183,18 +184,7 @@ namespace Mahjong.Control
         {
             get
             {
-                switch (state)
-                {
-                    case 0:
-                        return location.North;
-                    case 1:
-                        return location.East;
-                    case 2:
-                        return location.South;
-                    case 3:
-                        return location.West;
-                }
-                return location.East;
+                return lo.getlocation(state);
             }
         }
         /// <summary>
@@ -240,18 +230,6 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
-        /// 建立牌,並分配牌
-        /// </summary>
-        public void creatBrands()
-        {
-            factory.createBrands();
-            factory.randomBrands();
-            table = factory.getBrands();
-            for (int i = 0; i < table.getCount(); i++)
-                table.getBrand(i).WhoPush = location.Table;
-            dealbrands();
-        }
-        /// <summary>
         /// 傳回一個玩家設定多少張
         /// </summary>
         public int Dealnumber
@@ -262,17 +240,21 @@ namespace Mahjong.Control
             }
         }
         /// <summary>
-        /// 分配牌
+        /// 傳回方位
         /// </summary>
-        void dealbrands()
+        /// <returns>方位</returns>
+        public Location getLocation()
         {
-            Deal deal = new Deal(dealnumber, countplayers, table);
-            deal.DealBrands();
-            // get Players
-            players = deal.Player;
-            // get Table
-            table = deal.Table;
+            return lo;
         }
+        public int CountPlayer
+        {
+            get
+            {
+                return countplayers;
+            }
+        }
+
         /// <summary>
         /// 換下一家
         /// </summary>
@@ -288,7 +270,7 @@ namespace Mahjong.Control
         /// <returns>牌</returns>
         public Brand nextBrand()
         {
-            if (table.getCount() <= 16) // 保留8張不摸
+            if (table.getCount() <= 16) // 保留16張不摸
                 throw new FlowOverException();
             else
             {
@@ -304,14 +286,7 @@ namespace Mahjong.Control
             lastBrand = b;
             return b;
         }
-        /// <summary>
-        /// 傳回方位
-        /// </summary>
-        /// <returns>方位</returns>
-        public Location getLocation()
-        {
-            return lo;
-        }
+
         /// <summary>
         /// 下一莊
         /// </summary>
@@ -330,9 +305,8 @@ namespace Mahjong.Control
             }
             //設定新的開牌位置
             this.lo.setPosition();
-            //新的桌面和牌工廠
+            //新的桌面
             this.table = new BrandPlayer();
-            this.factory = new BrandFactory();
             //更新莊家
             this.state = (uint)lo.Winer;
             //設定牌組
@@ -358,7 +332,6 @@ namespace Mahjong.Control
         /// </summary>
         public void chow_pong(Brand brand,BrandPlayer player)
         {
-            //NowPlayer.add(brand);
             Show_Table.remove(brand);
             set_Team(player,true);        
         }
