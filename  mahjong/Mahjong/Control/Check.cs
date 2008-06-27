@@ -232,7 +232,7 @@ namespace Mahjong.Control
             get
             {
                 PlayerSort p = new PlayerSort(ans_player);
-                ans_player = p.getPlayer();
+                ans_player = p.getPlayer;
                 return ans_player;
             }
         }
@@ -356,7 +356,7 @@ namespace Mahjong.Control
             {
                 x.add(brand);
                 PlayerSort d = new PlayerSort(x);
-                x = d.getPlayer();
+                x = d.getPlayer;
             }
             brand_2();
             bradn_4();
@@ -399,7 +399,7 @@ namespace Mahjong.Control
                                     c.add(b.getBrand(n + 1));
 
                                     PlayerSort d = new PlayerSort(c);
-                                    c = d.getPlayer();
+                                    c = d.getPlayer;
                                     //牌的比對
                                     //完全成立代表胡牌
                                     for (int o = 0; o < x.getCount(); o++)

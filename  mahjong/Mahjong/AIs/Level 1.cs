@@ -35,7 +35,7 @@ namespace Mahjong.AIs
                 new TubeBrand(0),
                 new RopeBrand(0),
                 new WordBrand(0));
-            this.player = ps.getPlayer();
+            this.player = ps.getPlayer;
 
             for (int j = 0; j < brands.Length; j++)
                 brands[j] = new BrandPlayer();
@@ -51,13 +51,15 @@ namespace Mahjong.AIs
         }
         public void setPlayer(Brand brand, BrandPlayer player)
         {
-            PlayerSort ps = new PlayerSort(player,
+            PlayerSort ps = new PlayerSort (
+                player,
                 new FlowerBrand(0),
                 new TenThousandBrand(0),
                 new TubeBrand(0),
                 new RopeBrand(0),
-                new WordBrand(0));
-            this.player = ps.getPlayer();
+                new WordBrand(0)
+                );
+            this.player = ps.getPlayer;
             this.input_brand = brand;
 
             for (int j = 0; j < brands.Length; j++)

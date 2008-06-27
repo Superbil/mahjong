@@ -30,6 +30,7 @@ namespace Mahjong.Control
         /// </summary>
         Table = 4
     }
+    [Serializable]
     public class Location
     {
         location position;

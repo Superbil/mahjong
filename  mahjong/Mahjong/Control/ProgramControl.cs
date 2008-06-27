@@ -59,11 +59,6 @@ namespace Mahjong.Control
 
         public ProgramControl()
         {
-            setup();
-            table.ShowDialog();
-        }
-        void setup()
-        {
             roundTimer = new Timer();
             table = new Table(this);
             information = new Information();
@@ -71,7 +66,10 @@ namespace Mahjong.Control
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
             showMessageBox = table.SetCheck;
             roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTime_Normal;
+
+            table.ShowDialog();
         }
+
         void rotateTimer_Tick(object sender, EventArgs e)
         {
             try
@@ -482,14 +480,14 @@ namespace Mahjong.Control
                 if (c.ChowLength == 1)
                 {
                     PlayerSort p = new PlayerSort(c.SuccessPlayer);
-                    all.chow_pong(brand, p.getPlayer());
+                    all.chow_pong(brand, p.getPlayer);
                 }
                 else
                 {
                     ChowBrandCheck cbc = new ChowBrandCheck(c.ChowPlayer);
                     cbc.ShowDialog();
                     PlayerSort p = new PlayerSort(cbc.SelectBrandPlayer);
-                    all.chow_pong(brand, p.getPlayer());
+                    all.chow_pong(brand, p.getPlayer);
                 }
             Chow_Pong_Brand = true;
             updatePlayer_Table();

@@ -5,6 +5,7 @@ using System.Drawing;
 
 namespace Mahjong.Brands
 {
+    [Serializable]
     /// <summary>
     /// ¸U¦rµP
     /// </summary>

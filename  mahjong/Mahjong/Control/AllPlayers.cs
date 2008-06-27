@@ -23,6 +23,7 @@ namespace Mahjong.Control
         /// 準備要顯示的桌面牌
         /// </summary>
         BrandPlayer show_table;
+        [NonSerialized]
         /// <summary>
         /// 牌工廠
         /// </summary>
@@ -439,7 +440,7 @@ namespace Mahjong.Control
         public void sortNowPlayer()
         {
             PlayerSort bs = new PlayerSort(players[state]);
-            players[state] = bs.getPlayer();
+            players[state] = bs.getPlayer;
         }
         /// <summary>
         /// 把牌打到桌面上
