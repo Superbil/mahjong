@@ -10,6 +10,23 @@ namespace Mahjong.Control
 {
     public partial class ProgramControl
     {
+        internal virtual void IamPlayer()
+        {
+            all.isPlayer[(int)location.South] = true;
+        }
+        /// <summary>
+        /// 現在的玩家是不是真實的玩家
+        /// </summary>
+        /// <returns>布林</returns>
+        internal bool NowPlayer_isPlayer
+        {
+            get
+            {
+                if (all.isPlayer[all.state])
+                    return true;
+                return false;
+            }
+        }
         /// <summary>
         /// 摸牌
         /// </summary>
@@ -45,7 +62,7 @@ namespace Mahjong.Control
                 else if (darkkong.DarkKong() || kong.Kong())
                 {
                     // 如果是玩家
-                    if (all.State == location.South)
+                    if (NowPlayer_isPlayer)
                     {
                         Brand br = null;
                         if (darkkong.DarkKong())
@@ -83,7 +100,7 @@ namespace Mahjong.Control
                 // 明碰之後再槓 
                 else if (teamKong.Kong())
                 {
-                    if (all.State == location.South)
+                    if (NowPlayer_isPlayer)
                     {
                         toUser(nextbrand, false, false, teamKong.Kong(), false, false);
                         if (Player_Pass_Brand)
@@ -146,7 +163,7 @@ namespace Mahjong.Control
                 if (w.Win())
                 {
                     // 如果是玩家
-                    if (all.State == location.South)
+                    if (NowPlayer_isPlayer)
                     {
                         toUser(brand, false, false, false, false, true);
                         // 如果玩家按下過水 就跳過
@@ -177,7 +194,7 @@ namespace Mahjong.Control
                 Check w = new Check(brand, all.NowPlayer);
                 Ai.setPlayer(brand, all.NowPlayer);
                 // 如果是玩家
-                if (all.State == location.South)
+                if (NowPlayer_isPlayer)
                 {
                     if (c.Pong() || c.Kong())
                     {
@@ -227,7 +244,7 @@ namespace Mahjong.Control
                 if (c.Chow() && i == 0)
                 {
                     // 如果是玩家
-                    if (all.State == location.South)
+                    if (NowPlayer_isPlayer)
                     {
                         toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
                         if (Player_Pass_Brand)
@@ -320,7 +337,7 @@ namespace Mahjong.Control
             else
                 touchBrand();
             // 目前狀態不等於玩家時
-            if (all.State != location.South)
+            if (!NowPlayer_isPlayer)
             {
                 // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
                 // 若成立就表示沒有人要，不成立就表示被人拿走

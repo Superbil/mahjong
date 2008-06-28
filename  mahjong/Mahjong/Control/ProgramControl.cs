@@ -64,13 +64,10 @@ namespace Mahjong.Control
         /// 遊戲控制建構子
         /// </summary>
         public ProgramControl()
-        {
-            table = new Table(this);        
+        {      
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
             showMessageBox = true;
-            roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTime_Normal;            
-            table.ShowDialog();
-            //this.table = table;
+            roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTime_Normal;
         }
         /// <summary>
         /// 切換到下個玩家所要做的事情
@@ -263,12 +260,11 @@ namespace Mahjong.Control
         /// 連線設定
         /// </summary>
         internal void onlineGame()
-        {
-            table.Close();
+        {            
             chat = new ChatServerForm();
-            chat.Show();            
-            //table = new Table(new PC_Network());
-            //new PC_Network(table);
+            chat.Show();
+            table.pc = new PC_Network();
+            table.pc.table = table;
         }
         /// <summary>
         /// 提示資訊是否開啟
@@ -288,6 +284,16 @@ namespace Mahjong.Control
             set 
             {
                 roundTimer.Interval = value;
+            }
+        }
+        /// <summary>
+        /// 設定所有玩家
+        /// </summary>
+        public AllPlayers setAllPlayer
+        {
+            set
+            {
+                this.all = value;
             }
         }
 

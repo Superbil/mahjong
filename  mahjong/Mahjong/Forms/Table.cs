@@ -14,7 +14,7 @@ namespace Mahjong.Forms
 {
     public partial class Table : Form
     {
-        ProgramControl pc;
+        internal ProgramControl pc;
         private FlowLayoutPanel[] flowLayoutBrands;
         AllPlayers all;
         int width = (int)((double)Mahjong.Properties.Settings.Default.image_w * Mahjong.Properties.Settings.Default.ResizePercentage);
@@ -25,12 +25,14 @@ namespace Mahjong.Forms
         Bitmap arrow;
         bool lockuser;
         internal bool f;
+        uint nowplace;
 
         public Table(ProgramControl pc)
         {
             InitializeComponent();
             this.flowLayoutBrands = new FlowLayoutPanel[5];
             this.pc = pc;
+            this.pc.table = this;
             ShowAll = false;
             ShowBrandInfo = false;
             lockuser = false;

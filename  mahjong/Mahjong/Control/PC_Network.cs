@@ -9,16 +9,15 @@ namespace Mahjong.Control
 {
     public class PC_Network : ProgramControl
     {
-        public PC_Network()
-        {
-        }
-        public PC_Network(Table table)
-        {
-            
-        }
         internal override void makeBrand(Brand brand)
         {
             MessageBox.Show("hello");
+            //sendAll(all);
+            //chat.send(this.all);
+        }
+        internal override void IamPlayer()
+        {
+            base.IamPlayer();
         }
 
     }

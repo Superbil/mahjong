@@ -75,7 +75,10 @@ namespace Mahjong.Control
         /// 一台多少錢
         /// </summary>
         public int one_tai;
-
+        /// <summary>
+        /// 是否是玩家
+        /// </summary>
+        public bool[] isPlayer;
         /// <summary>
         /// 全部玩家集合
         /// </summary>
@@ -84,6 +87,7 @@ namespace Mahjong.Control
         public AllPlayers(int playernumber,int deal)
         {
             this.players = new BrandPlayer[playernumber];
+            this.isPlayer = new bool[playernumber];
             this.lo = new Location();
             this.table = new BrandPlayer();
             this.show_table = new BrandPlayer();
@@ -254,7 +258,6 @@ namespace Mahjong.Control
                 return countplayers;
             }
         }
-
         /// <summary>
         /// 換下一家
         /// </summary>

@@ -18,6 +18,7 @@ namespace Mahjong.Control
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
             all.sumBrands = factory.SumBrands;
+            IamPlayer();
             table.Setup(all);
             newgame_round();
         }
