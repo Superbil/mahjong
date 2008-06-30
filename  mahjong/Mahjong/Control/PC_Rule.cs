@@ -29,6 +29,25 @@ namespace Mahjong.Control
             else
                 setInforamtion();
         }
+
+        /// <summary>
+        /// 使用者/AI丟出一張牌
+        /// </summary>
+        /// <param name="brand">牌</param>
+        internal virtual void makeBrand(Brand brand)
+        {
+            // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
+            // 若成立就表示沒有人要，不成立就表示被人拿走
+            if (pushToTable(brand))
+            {
+                // 換下一個人
+                all.next();
+                setInforamtion();
+            }
+            // 計時器重新啟動
+            roundTimer.Start();
+        }
+
         /// <summary>
         /// 摸牌
         /// </summary>
@@ -270,29 +289,6 @@ namespace Mahjong.Control
             all.next();
 
             return true;
-        }
-
-        /// <summary>
-        /// 從AI得到一張牌
-        /// </summary>
-        /// <returns></returns>
-        internal Brand getfromAI()
-        {
-            Ai.setPlayer(NowPlayer_removeTeam);
-            return Ai.getReadyBrand();
-        }
-
-        /// <summary>
-        /// 把牌丟給玩家，看是否要吃 碰 槓 過水 胡
-        /// </summary>
-        internal void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
-        {
-            CPK cpk = new CPK(this, brand);
-            Check c = new Check(brand, NowPlayer_removeTeam);
-            Check w = new Check(brand, all.NowPlayer);
-            cpk.Enabled_Button(chow, pong, kong, darkkong, win);
-            if (chow || pong || kong || win || darkkong)
-                cpk.ShowDialog();
         }
 
         /// <summary>

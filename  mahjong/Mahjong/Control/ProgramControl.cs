@@ -11,6 +11,7 @@ using Mahjong.Forms;
 using Mahjong.AIs;
 using Mahjong.Brands;
 using Mahjong.Players;
+using Mahjong.Properties;
 
 namespace Mahjong.Control
 {
@@ -67,8 +68,52 @@ namespace Mahjong.Control
         {      
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
             showMessageBox = true;
-            roundTimer.Interval = Mahjong.Properties.Settings.Default.RunRoundTime_Normal;
+            roundTimer.Interval = Settings.Default.RunRoundTime_Normal;
         }
+        /// <summary>
+        /// 提示資訊是否開啟
+        /// </summary>
+        internal bool ShowMessageBox
+        {
+            set
+            {
+                showMessageBox = value;
+            }
+        }
+        /// <summary>
+        /// 設定延遲時間
+        /// </summary>
+        internal int SetDealyTime
+        {
+            set
+            {
+                roundTimer.Interval = value;
+            }
+        }
+        /// <summary>
+        /// 設定所有玩家
+        /// </summary>
+        public AllPlayers setAllPlayer
+        {
+            set
+            {
+                this.all = value;
+            }
+        }
+        /// <summary>
+        /// 現在的玩家是不是真實的玩家
+        /// </summary>
+        /// <returns>布林</returns>
+        internal bool NowPlayer_isPlayer
+        {
+            get
+            {
+                if (all.isPlayer[all.state])
+                    return true;
+                return false;
+            }
+        }
+
         /// <summary>
         /// 切換到下個玩家所要做的事情
         /// </summary>
@@ -83,7 +128,7 @@ namespace Mahjong.Control
             catch (FlowOverException)
             {
                 // 流局
-                MessageBox.Show(Mahjong.Properties.Settings.Default.FlowEnd);
+                MessageBox.Show(Settings.Default.FlowEnd);
                 table.cleanImage();
                 factory = new BrandFactory();
                 all.nextWiner(true);                
@@ -92,25 +137,8 @@ namespace Mahjong.Control
             }
             catch (ErrorBrandPlayerCountException)
             {
-                MessageBox.Show(Mahjong.Properties.Settings.Default.ErrorBrandPlayer);
+                MessageBox.Show(Settings.Default.ErrorBrandPlayer);
             }
-        }
-        /// <summary>
-        /// 使用者按下一張牌
-        /// </summary>
-        /// <param name="brand">按下的牌</param>
-        internal virtual void makeBrand(Brand brand)
-        {
-            // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
-            // 若成立就表示沒有人要，不成立就表示被人拿走
-            if (pushToTable(brand))
-            {
-                // 換下一個人
-                all.next();
-                setInforamtion();
-            }
-            // 計時器重新啟動
-            roundTimer.Start();
         }
 
         /// <summary>
@@ -270,48 +298,28 @@ namespace Mahjong.Control
             chat.PC = table.pc;
             chat.Show();
         }
+
         /// <summary>
-        /// 提示資訊是否開啟
+        /// 從AI得到一張牌
         /// </summary>
-        internal bool ShowMessageBox
+        /// <returns></returns>
+        internal Brand getfromAI()
         {
-            set
-            {
-                showMessageBox = value;
-            }
+            Ai.setPlayer(NowPlayer_removeTeam);
+            return Ai.getReadyBrand();
         }
+
         /// <summary>
-        /// 設定延遲時間
+        /// 把牌丟給玩家，看是否要吃 碰 槓 過水 胡
         /// </summary>
-        internal int SetDealyTime
+        internal void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
         {
-            set 
-            {
-                roundTimer.Interval = value;
-            }
-        }
-        /// <summary>
-        /// 設定所有玩家
-        /// </summary>
-        public AllPlayers setAllPlayer
-        {
-            set
-            {
-                this.all = value;
-            }
-        }
-        /// <summary>
-        /// 現在的玩家是不是真實的玩家
-        /// </summary>
-        /// <returns>布林</returns>
-        internal bool NowPlayer_isPlayer
-        {
-            get
-            {
-                if (all.isPlayer[all.state])
-                    return true;
-                return false;
-            }
+            CPK cpk = new CPK(this, brand);
+            Check c = new Check(brand, NowPlayer_removeTeam);
+            Check w = new Check(brand, all.NowPlayer);
+            cpk.Enabled_Button(chow, pong, kong, darkkong, win);
+            if (chow || pong || kong || win || darkkong)
+                cpk.ShowDialog();
         }
 
     }
