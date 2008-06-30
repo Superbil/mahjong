@@ -37,7 +37,7 @@ namespace Mahjong.Control
                 MessageBox.Show("開啟檔案錯誤！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        public void savefile()
+        public virtual void savefile()
         {
             SaveFileDialog s = new SaveFileDialog();
             s.InitialDirectory = ".";

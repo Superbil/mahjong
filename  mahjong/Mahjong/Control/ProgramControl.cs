@@ -27,7 +27,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 換到下一家的計時器
         /// </summary>
-        internal Timer roundTimer = new Timer();
+        Timer roundTimer = new Timer();
         /// <summary>
         /// 全部玩家和桌面
         /// </summary>
@@ -35,7 +35,7 @@ namespace Mahjong.Control
         /// <summary>
         /// AI介面
         /// </summary>
-        internal MahjongAI Ai = new Level_1();
+        MahjongAI Ai = new Level_1();
         /// <summary>
         /// 資訊盒
         /// </summary>
@@ -74,7 +74,7 @@ namespace Mahjong.Control
         /// </summary>
         /// <param name="sender">時間倒數器</param>
         /// <param name="e"></param>
-        internal void rotateTimer_Tick(object sender, EventArgs e)
+        protected void rotateTimer_Tick(object sender, EventArgs e)
         {
             try
             {
@@ -102,6 +102,7 @@ namespace Mahjong.Control
         internal virtual void makeBrand(Brand brand)
         {
             // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
+            // 若成立就表示沒有人要，不成立就表示被人拿走
             if (pushToTable(brand))
             {
                 // 換下一個人
@@ -215,14 +216,15 @@ namespace Mahjong.Control
         /// </summary>
         internal void setInforamtion()
         {
-            information.setAllPlayers(all);
+            information.setup(table,all);
+            information.updateInformation();            
             information.DebugMode = table.ShowAll;
             information.Show();
         }
         /// <summary>
         /// 移除掉已經打出去的牌組，以牌組編號來區分
         /// </summary>
-        internal BrandPlayer NowPlayer_removeTeam
+        BrandPlayer NowPlayer_removeTeam
         {
             get
             {
@@ -251,7 +253,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 更新現在的玩家和桌面
         /// </summary>
-        void updatePlayer_Table()
+        protected void updatePlayer_Table()
         {
             table.updateNowPlayer();
             table.updateTable();
@@ -261,10 +263,12 @@ namespace Mahjong.Control
         /// </summary>
         internal void onlineGame()
         {            
-            chat = new ChatServerForm();
+            chat = new ChatServerForm();            
+            table.pc.all = new AllPlayers(4,16);
+            table.pc = new PC_Network(this);
+            chat.AllPlayer = table.pc.all;
+            chat.PC = this;
             chat.Show();
-            table.pc = new PC_Network();
-            table.pc.table = table;
         }
         /// <summary>
         /// 提示資訊是否開啟
@@ -294,6 +298,19 @@ namespace Mahjong.Control
             set
             {
                 this.all = value;
+            }
+        }
+        /// <summary>
+        /// 現在的玩家是不是真實的玩家
+        /// </summary>
+        /// <returns>布林</returns>
+        internal bool NowPlayer_isPlayer
+        {
+            get
+            {
+                if (all.isPlayer[all.state])
+                    return true;
+                return false;
             }
         }
 

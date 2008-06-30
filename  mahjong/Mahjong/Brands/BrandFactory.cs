@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
-using Mahjong.Players;
 using System.Collections;
 using System.Drawing;
+using Mahjong.Players;
+using Mahjong.Properties;
 
 namespace Mahjong.Brands
 {
@@ -236,60 +236,60 @@ namespace Mahjong.Brands
         }
         void creatImageArray_Flower()
         {
-            creatImage(FlowerbrandArray, Mahjong.Properties.Resources.flower1);
-            creatImage(FlowerbrandArray, Mahjong.Properties.Resources.flower2);
-            creatImage(FlowerbrandArray, Mahjong.Properties.Resources.flower3);
-            creatImage(FlowerbrandArray, Mahjong.Properties.Resources.flower4);
-            creatImage(FlowerbrandArray, Mahjong.Properties.Resources.flower5);
-            creatImage(FlowerbrandArray, Mahjong.Properties.Resources.flower6);
-            creatImage(FlowerbrandArray, Mahjong.Properties.Resources.flower7);
-            creatImage(FlowerbrandArray, Mahjong.Properties.Resources.flower8);
+            creatImage(FlowerbrandArray, Resources.flower1);
+            creatImage(FlowerbrandArray, Resources.flower2);
+            creatImage(FlowerbrandArray, Resources.flower3);
+            creatImage(FlowerbrandArray, Resources.flower4);
+            creatImage(FlowerbrandArray, Resources.flower5);
+            creatImage(FlowerbrandArray, Resources.flower6);
+            creatImage(FlowerbrandArray, Resources.flower7);
+            creatImage(FlowerbrandArray, Resources.flower8);
         }
         void creatImageArray_Rope()
         {
-            creatImage(RopebrandArray, Mahjong.Properties.Resources.rope1);
-            creatImage(RopebrandArray, Mahjong.Properties.Resources.rope2);
-            creatImage(RopebrandArray, Mahjong.Properties.Resources.rope3);
-            creatImage(RopebrandArray, Mahjong.Properties.Resources.rope4);
-            creatImage(RopebrandArray, Mahjong.Properties.Resources.rope5);
-            creatImage(RopebrandArray, Mahjong.Properties.Resources.rope6);
-            creatImage(RopebrandArray, Mahjong.Properties.Resources.rope7);
-            creatImage(RopebrandArray, Mahjong.Properties.Resources.rope8);
-            creatImage(RopebrandArray, Mahjong.Properties.Resources.rope9);
+            creatImage(RopebrandArray, Resources.rope1);
+            creatImage(RopebrandArray, Resources.rope2);
+            creatImage(RopebrandArray, Resources.rope3);
+            creatImage(RopebrandArray, Resources.rope4);
+            creatImage(RopebrandArray, Resources.rope5);
+            creatImage(RopebrandArray, Resources.rope6);
+            creatImage(RopebrandArray, Resources.rope7);
+            creatImage(RopebrandArray, Resources.rope8);
+            creatImage(RopebrandArray, Resources.rope9);
         }
         void creatImageArray_TenThousand()
         {
-            creatImage(TenthousandbrandArray, Mahjong.Properties.Resources.ten1);
-            creatImage(TenthousandbrandArray, Mahjong.Properties.Resources.ten2);
-            creatImage(TenthousandbrandArray, Mahjong.Properties.Resources.ten3);
-            creatImage(TenthousandbrandArray, Mahjong.Properties.Resources.ten4);
-            creatImage(TenthousandbrandArray, Mahjong.Properties.Resources.ten5);
-            creatImage(TenthousandbrandArray, Mahjong.Properties.Resources.ten6);
-            creatImage(TenthousandbrandArray, Mahjong.Properties.Resources.ten7);
-            creatImage(TenthousandbrandArray, Mahjong.Properties.Resources.ten8);
-            creatImage(TenthousandbrandArray, Mahjong.Properties.Resources.ten9);
+            creatImage(TenthousandbrandArray, Resources.ten1);
+            creatImage(TenthousandbrandArray, Resources.ten2);
+            creatImage(TenthousandbrandArray, Resources.ten3);
+            creatImage(TenthousandbrandArray, Resources.ten4);
+            creatImage(TenthousandbrandArray, Resources.ten5);
+            creatImage(TenthousandbrandArray, Resources.ten6);
+            creatImage(TenthousandbrandArray, Resources.ten7);
+            creatImage(TenthousandbrandArray, Resources.ten8);
+            creatImage(TenthousandbrandArray, Resources.ten9);
         }
         void creatImageArray_Tobe()
         {
-            creatImage(TobebrandArray, Mahjong.Properties.Resources.tobe1);
-            creatImage(TobebrandArray, Mahjong.Properties.Resources.tobe2);
-            creatImage(TobebrandArray, Mahjong.Properties.Resources.tobe3);
-            creatImage(TobebrandArray, Mahjong.Properties.Resources.tobe4);
-            creatImage(TobebrandArray, Mahjong.Properties.Resources.tobe5);
-            creatImage(TobebrandArray, Mahjong.Properties.Resources.tobe6);
-            creatImage(TobebrandArray, Mahjong.Properties.Resources.tobe7);
-            creatImage(TobebrandArray, Mahjong.Properties.Resources.tobe8);
-            creatImage(TobebrandArray, Mahjong.Properties.Resources.tobe9);
+            creatImage(TobebrandArray, Resources.tobe1);
+            creatImage(TobebrandArray, Resources.tobe2);
+            creatImage(TobebrandArray, Resources.tobe3);
+            creatImage(TobebrandArray, Resources.tobe4);
+            creatImage(TobebrandArray, Resources.tobe5);
+            creatImage(TobebrandArray, Resources.tobe6);
+            creatImage(TobebrandArray, Resources.tobe7);
+            creatImage(TobebrandArray, Resources.tobe8);
+            creatImage(TobebrandArray, Resources.tobe9);
         }
         void creatImageArray_Word()
         {
-            creatImage(WordbrandArray, Mahjong.Properties.Resources.word1);
-            creatImage(WordbrandArray, Mahjong.Properties.Resources.word2);
-            creatImage(WordbrandArray, Mahjong.Properties.Resources.word3);
-            creatImage(WordbrandArray, Mahjong.Properties.Resources.word4);
-            creatImage(WordbrandArray, Mahjong.Properties.Resources.word5);
-            creatImage(WordbrandArray, Mahjong.Properties.Resources.word6);
-            creatImage(WordbrandArray, Mahjong.Properties.Resources.word7);
+            creatImage(WordbrandArray, Resources.word1);
+            creatImage(WordbrandArray, Resources.word2);
+            creatImage(WordbrandArray, Resources.word3);
+            creatImage(WordbrandArray, Resources.word4);
+            creatImage(WordbrandArray, Resources.word5);
+            creatImage(WordbrandArray, Resources.word6);
+            creatImage(WordbrandArray, Resources.word7);
         }
         void creatImage(ArrayList array, Image image)
         {

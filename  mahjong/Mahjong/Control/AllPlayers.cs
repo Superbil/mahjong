@@ -80,6 +80,14 @@ namespace Mahjong.Control
         /// </summary>
         public bool[] isPlayer;
         /// <summary>
+        /// 儲存對應到的玩家的真實位置
+        /// </summary>
+        public Place place;
+        /// <summary>
+        /// 是否顯示提示
+        /// </summary>
+        public bool showMessageBox;
+        /// <summary>
         /// 全部玩家集合
         /// </summary>
         /// <param name="playernumber">設定有多少個玩家</param>
@@ -99,6 +107,8 @@ namespace Mahjong.Control
             this.one_tai = Mahjong.Properties.Settings.Default.One_Tai;
             this.teamCount = new int[playernumber];
             this.names = new string[playernumber];
+            this.showMessageBox = true;
+            this.place = new Place();
             for (int i = 0; i < playernumber; i++)
                 teamCount[i] = 1;
             money = new int[playernumber];
@@ -188,7 +198,7 @@ namespace Mahjong.Control
         {
             get
             {
-                return lo.getlocation(state);
+                return Location.getlocation(state);
             }
         }
         /// <summary>
@@ -247,9 +257,12 @@ namespace Mahjong.Control
         /// 傳回方位
         /// </summary>
         /// <returns>方位</returns>
-        public Location getLocation()
+        public Location getLocation
         {
-            return lo;
+            get
+            {
+                return lo;
+            }
         }
         public int CountPlayer
         {
@@ -280,7 +293,7 @@ namespace Mahjong.Control
                 Brand b = nextTableBrand();
                 brand_count++;
                 return b;
-            }            
+            }
         }
         Brand nextTableBrand()
         {

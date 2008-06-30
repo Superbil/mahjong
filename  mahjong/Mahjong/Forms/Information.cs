@@ -13,6 +13,7 @@ namespace Mahjong.Forms
     public partial class Information : Form
     {
         AllPlayers all;
+        Table table;
         bool Debug = false;
 
         public Information()
@@ -20,16 +21,25 @@ namespace Mahjong.Forms
             InitializeComponent();
         }
         /// <summary>
-        /// 設定 AllPlayers
+        /// 更新資訊
         /// </summary>
         /// <param name="all">AllPlayers</param>
-        public void setAllPlayers(AllPlayers all)
+        public void updateInformation()
         {
-            this.all = all;
             updateMoney();
             updateName();
             updateTitle();
             updateNowPlayer();
+        }
+        /// <summary>
+        /// 設定
+        /// </summary>
+        /// <param name="table">Table</param>
+        /// <param name="all">Allplayers</param>
+        public void setup(Table table,AllPlayers all)
+        {
+            this.table = table;
+            this.all = all;
         }
         /// <summary>
         /// 除錯模式
@@ -62,34 +72,34 @@ namespace Mahjong.Forms
             Left_label.BackColor = Color.Coral;
             Up_label.BackColor = Color.Coral;
 
-            if (all.state == (int)location.East)
+            if (all.State == table.place.Right)
                 Right_label.BackColor = c;
-            else if (all.state == (int)location.South)
+            else if (all.State == table.place.Down)
                 Down_label.BackColor = c;
-            else if (all.state == (int)location.West)
+            else if (all.State == table.place.Left)
                 Left_label.BackColor = c;
-            else if (all.state == (int)location.North)
+            else if (all.State == table.place.Up)
                 Up_label.BackColor = c;
 
-            if (all.getLocation().Winer == location.North)
+            if (all.getLocation.Winer == table.place.Up)
             {
                 Up_label.Text += "(";
                 Up_label.Text += all.Win_Times;
                 Up_label.Text += ")";
             }
-            else if (all.getLocation().Winer == location.East)
+            else if (all.getLocation.Winer == table.place.Right)
             {
                 Right_label.Text += "(";
                 Right_label.Text += all.Win_Times;
                 Right_label.Text += ")";
             }
-            else if (all.getLocation().Winer == location.South)
+            else if (all.getLocation.Winer == table.place.Down)
             {
                 Down_label.Text += "(";
                 Down_label.Text += all.Win_Times;
                 Down_label.Text += ")";
             }
-            else if (all.getLocation().Winer == location.West)
+            else if (all.getLocation.Winer == table.place.Left)
             {                
                 Left_label.Text += "(";
                 Left_label.Text += all.Win_Times;
@@ -100,7 +110,7 @@ namespace Mahjong.Forms
 
         private void updateTitle()
         {
-            string s = all.getLocation().ToString();
+            string s = all.getLocation.ToString();
             s += " - (";
             s += all.Brand_Count.ToString();
             s += "/";
@@ -113,25 +123,25 @@ namespace Mahjong.Forms
         {
             if (Debug)
             {
-                Up_label.Text = all.Name[(int)location.North].ToString() + "~" + all.Players[(int)location.North].getCount().ToString();
-                Right_label.Text = all.Name[(int)location.East].ToString() + "~" + all.Players[(int)location.East].getCount().ToString();
-                Down_label.Text = all.Name[(int)location.South].ToString() + "~" + all.Players[(int)location.South].getCount().ToString();
-                Left_label.Text = all.Name[(int)location.West].ToString() + "~" + all.Players[(int)location.West].getCount().ToString();
+                Up_label.Text = all.Name[table.place.getRealPlace_Up].ToString() + "\n~" + all.Players[table.place.getRealPlace_Up].getCount().ToString();
+                Right_label.Text = all.Name[table.place.getRealPlace_Right].ToString() + "\n~" + all.Players[table.place.getRealPlace_Right].getCount().ToString();
+                Down_label.Text = all.Name[table.place.getRealPlace_Down].ToString() + "\n~" + all.Players[table.place.getRealPlace_Down].getCount().ToString();
+                Left_label.Text = all.Name[table.place.getRealPlace_Left].ToString() + "\n~" + all.Players[table.place.getRealPlace_Left].getCount().ToString();
             }
             else
             {
-                Up_label.Text = all.Name[(int)location.North].ToString();
-                Right_label.Text = all.Name[(int)location.East].ToString();
-                Down_label.Text = all.Name[(int)location.South].ToString();
-                Left_label.Text = all.Name[(int)location.West].ToString();
+                Up_label.Text = all.Name[table.place.getRealPlace_Up].ToString();
+                Right_label.Text = all.Name[table.place.getRealPlace_Right].ToString();
+                Down_label.Text = all.Name[table.place.getRealPlace_Down].ToString();
+                Left_label.Text = all.Name[table.place.getRealPlace_Left].ToString();
             }
         }
         void updateMoney()
         {
-            Up_money.Text = all.Money[(int)location.North].ToString();
-            Right_money.Text = all.Money[(int)location.East].ToString();
-            Down_money.Text = all.Money[(int)location.South].ToString();
-            Left_money.Text = all.Money[(int)location.West].ToString();
+            Up_money.Text = all.Money[table.place.getRealPlace_Up].ToString();
+            Right_money.Text = all.Money[table.place.getRealPlace_Right].ToString();
+            Down_money.Text = all.Money[table.place.getRealPlace_Down].ToString();
+            Left_money.Text = all.Money[table.place.getRealPlace_Left].ToString();
         }
     }
 }

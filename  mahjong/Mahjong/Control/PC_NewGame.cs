@@ -12,20 +12,43 @@ namespace Mahjong.Control
         /// <summary>
         /// 開新遊戲(第一次)
         /// </summary>
-        public void newgame()
+        public virtual void newgame()
         {
             table.cleanAll();            
             // 設定4個玩家,每個人16張
             all = new AllPlayers(4, 16);
             all.sumBrands = factory.SumBrands;
+            // 設定誰是玩家
             IamPlayer();
+            // 設定 AllPlayers
             table.Setup(all);
+            // 設定牌桌讀到的位置
+            setupPlace();
             newgame_round();
+        }
+
+        /// <summary>
+        /// 設定牌桌對應到的玩家位置(單機)
+        /// </summary>
+        internal virtual void setupPlace()
+        {
+            table.place.Up = location.North;
+            table.place.Right = location.East;
+            table.place.Down = location.South;
+            table.place.Left = location.West;
+            all.place = table.place;
+        }
+        /// <summary>
+        /// 設定我是玩家
+        /// </summary>
+        internal virtual void IamPlayer()
+        {
+            all.isPlayer[(int)location.South] = true;
         }
         /// <summary>
         /// 開新莊
         /// </summary>
-        void newgame_round()
+        internal void newgame_round()
         {
             creatBrands();
             table.addImage();

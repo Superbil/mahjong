@@ -168,7 +168,7 @@ namespace Mahjong.Control
         /// </summary>
         /// <param name="state">¼Æ¦r</param>
         /// <returns>¤è¦ì</returns>
-        public location getlocation(uint state)
+        public static location getlocation(uint state)
         {
             switch (state)
             {

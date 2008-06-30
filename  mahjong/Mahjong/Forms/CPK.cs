@@ -33,10 +33,10 @@ namespace Mahjong.Forms
             if (brand.getClass() == Mahjong.Properties.Settings.Default.Wordtiles)
             {
                 WordBrand w = (WordBrand)brand;
-                this.Text = w.getWordClass();
+                this.Text = pc.all.Name[pc.all.state] + " - " + w.getWordClass();
             }
             else
-                this.Text = brand.getNumber() + brand.getClass();
+                this.Text = pc.all.Name[pc.all.state] + " - " + brand.getNumber() + brand.getClass();
         }
         /// <summary>
         /// ³]©w«ö¶sª¬ºA

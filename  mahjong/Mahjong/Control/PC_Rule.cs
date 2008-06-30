@@ -9,23 +9,25 @@ using Mahjong.Players;
 namespace Mahjong.Control
 {
     public partial class ProgramControl
-    {
-        internal virtual void IamPlayer()
-        {
-            all.isPlayer[(int)location.South] = true;
-        }
+    {        
         /// <summary>
-        /// 現在的玩家是不是真實的玩家
+        /// 打一圈要做的事
         /// </summary>
-        /// <returns>布林</returns>
-        internal bool NowPlayer_isPlayer
+        internal virtual void round()
         {
-            get
-            {
-                if (all.isPlayer[all.state])
-                    return true;
-                return false;
-            }
+            // 計時器停止
+            roundTimer.Stop();
+
+            // 如果是吃或碰不摸牌
+            if (Chow_Pong_Brand)
+                Chow_Pong_Brand = false;
+            else
+                touchBrand();
+            // 目前狀態不等於玩家時
+            if (!NowPlayer_isPlayer)
+                makeBrand(getfromAI());
+            else
+                setInforamtion();
         }
         /// <summary>
         /// 摸牌
@@ -134,7 +136,7 @@ namespace Mahjong.Control
         /// 打牌
         /// </summary>
         /// <param name="brand">準備要打的牌</param>
-        internal bool pushToTable(Brand brand)
+        internal virtual bool pushToTable(Brand brand)
         {
             // 把牌從現在的玩家手上移除
             all.NowPlayer.remove(brand);
@@ -309,7 +311,7 @@ namespace Mahjong.Control
             table.addImage();
             //呼叫台數計算
             Tally t = new Tally();
-            t.setLocation(all.getLocation(), all.Win_Times);
+            t.setLocation(all.getLocation, all.Win_Times);
             t.setPlayer(all);
             t.ShowDialog();
             //清除桌面上的牌
@@ -321,37 +323,6 @@ namespace Mahjong.Control
             //開新的遊戲
             newgame_round();
             this.factory = new BrandFactory();
-        }
-
-        /// <summary>
-        /// 打一圈要做的事
-        /// </summary>
-        internal void round()
-        {
-            // 計時器停止
-            roundTimer.Stop();
-
-            // 如果是吃或碰不摸牌
-            if (Chow_Pong_Brand)
-                Chow_Pong_Brand = false;
-            else
-                touchBrand();
-            // 目前狀態不等於玩家時
-            if (!NowPlayer_isPlayer)
-            {
-                // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
-                // 若成立就表示沒有人要，不成立就表示被人拿走
-                if (pushToTable(getfromAI()))
-                {
-                    // 換下一個人
-                    all.next();
-                    setInforamtion();
-                }
-                // 計時器重新啟動
-                roundTimer.Start();
-            }
-            else
-                setInforamtion();
         }
     }
 }

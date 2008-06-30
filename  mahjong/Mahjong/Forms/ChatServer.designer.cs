@@ -39,6 +39,7 @@ namespace Mahjong.Forms
             this.namelabel = new System.Windows.Forms.Label();
             this.lanButton = new System.Windows.Forms.RadioButton();
             this.IPButton = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // inputTextBox
@@ -149,11 +150,22 @@ namespace Mahjong.Forms
             this.IPButton.UseVisualStyleBackColor = true;
             this.IPButton.CheckedChanged += new System.EventHandler(this.IPButton_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(192, 10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ChatServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(562, 246);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.IPButton);
             this.Controls.Add(this.lanButton);
             this.Controls.Add(this.namelabel);
@@ -187,6 +199,7 @@ namespace Mahjong.Forms
         private System.Windows.Forms.Label namelabel;
         private System.Windows.Forms.RadioButton lanButton;
         private System.Windows.Forms.RadioButton IPButton;
+        private System.Windows.Forms.Button button1;
     }
 
 }

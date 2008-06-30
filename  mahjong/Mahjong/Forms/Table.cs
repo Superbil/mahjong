@@ -24,8 +24,14 @@ namespace Mahjong.Forms
         internal bool ShowBrandInfo;
         Bitmap arrow;
         bool lockuser;
-        internal bool f;
-        uint nowplace;
+        /// <summary>
+        /// 作弊功能
+        /// </summary>
+        internal bool cheat;
+        /// <summary>
+        /// 牌桌位置所對應到的玩家
+        /// </summary>
+        internal Place place = new Place();
 
         public Table(ProgramControl pc)
         {
@@ -33,10 +39,10 @@ namespace Mahjong.Forms
             this.flowLayoutBrands = new FlowLayoutPanel[5];
             this.pc = pc;
             this.pc.table = this;
-            ShowAll = false;
-            ShowBrandInfo = false;
-            lockuser = false;
-            f = false;
+            this.ShowAll = false;
+            this.ShowBrandInfo = false;
+            this.lockuser = false;
+            this.cheat = false;
             this.KeyUp += new KeyEventHandler(Table_KeyUp);
             this.ShowMessageBox_Menu.CheckedChanged += new EventHandler(ShowMessageBox_Menu_CheckedChanged);
         }
@@ -95,10 +101,10 @@ namespace Mahjong.Forms
             // 作弊
             if (e.KeyCode == Keys.F12)
             {
-                if (!f)
-                    f = true;
+                if (!cheat)
+                    cheat = true;
                 else
-                    f = false;
+                    cheat = false;
             }
         }
         /// <summary>
@@ -123,6 +129,8 @@ namespace Mahjong.Forms
         public void Setup(AllPlayers all)
         {
             this.all = all;
+            this.place = all.place;
+            ShowMessageBox_Menu.Checked = this.pc.ShowMessageBox = this.all.showMessageBox;
             arrow = Mahjong.Properties.Resources.a;
             setFlowLayout();
             setTitle();
@@ -153,7 +161,7 @@ namespace Mahjong.Forms
             setFlowLayout_location(3);
             setFlowLayout_name();
             setFlowLayout_size();
-            //setFlowLayout_Margin(10);
+            setFlowLayout_Margin(10);
             setFlowLayout_Dock();
             //this.flowLayoutBrands[4].BackColor = Color.Blue;
             setFlowLayout_FlowDirection();
@@ -204,27 +212,27 @@ namespace Mahjong.Forms
         }
         private void setFlowLayout_Margin(int size)
         {
-            for (int i = 0; i < flowLayoutBrands.Length; i++)
-                this.flowLayoutBrands[i].Margin = new Padding(size);
+            foreach (FlowLayoutPanel f in flowLayoutBrands)
+                f.Margin = new Padding(size);
         }
         void addNouth()
         {
             //圖片旋轉180度
-            addimage_player(all.Players[(int)location.North], location.North, RotateFlipType.Rotate180FlipNone);
+            addimage_player(all.Players[(int)place.Up], location.North, RotateFlipType.Rotate180FlipNone);
         }
         void addEast()
         {
             //圖片旋轉270度
-            addimage_player(all.Players[(int)location.East], location.East, RotateFlipType.Rotate270FlipNone);
+            addimage_player(all.Players[(int)place.Right], location.East, RotateFlipType.Rotate270FlipNone);
         }
         void addSouth()
         {
-            addimage_player(all.Players[(int)location.South], location.South, RotateFlipType.RotateNoneFlipNone);
+            addimage_player(all.Players[(int)place.Down], location.South, RotateFlipType.RotateNoneFlipNone);
         }
         void addWest()
         {
             //圖片旋轉90度
-            addimage_player(all.Players[(int)location.West], location.West, RotateFlipType.Rotate90FlipNone);
+            addimage_player(all.Players[(int)place.Left], location.West, RotateFlipType.Rotate90FlipNone);
         }
         void addShowTable()
         {
@@ -263,14 +271,15 @@ namespace Mahjong.Forms
             tempBrandbox.SizeMode = PictureBoxSizeMode.AutoSize;
 
             // 設定邊距            
-            tempBrandbox.Margin = new Padding(padding);
+            tempBrandbox.Margin = new Padding(0);
+            tempBrandbox.Padding = new Padding(padding);
 
             // 要轉的角度
             bitmap.RotateFlip(rotate);
 
             // 提示
             if (ShowAll && ShowBrandInfo)
-                tempBrandbox.Click += new EventHandler(tempBrandbox_Click);
+                tempBrandbox.Click += new EventHandler(debug_Click);
 
             // 滑鼠事件
             if (
@@ -280,24 +289,28 @@ namespace Mahjong.Forms
                 //&& all.State == location.South
                 )
             {
-                //tempBrandbox.MouseHover += new EventHandler(brandBox_MouseHover);
-                //tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
+                tempBrandbox.MouseMove += new MouseEventHandler(tempBrandbox_MouseMove);
+                tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
 
                 if (ShowAll && ShowBrandInfo)
-                    tempBrandbox.MouseHover += new EventHandler(tempBrandbox_Click);
+                    tempBrandbox.MouseHover += new EventHandler(debug_Click);
                 else
-                    tempBrandbox.MouseHover -= new EventHandler(tempBrandbox_Click);
+                    tempBrandbox.MouseHover -= new EventHandler(debug_Click);
             }
-            else if (f && state != location.South)
+            else if (brand.Team >= 1)
             {
-                tempBrandbox.MouseClick += new MouseEventHandler(tempBrandbox_MouseClick);
+                tempBrandbox.BackColor = Color.DarkGreen;
+            }
+            else if (cheat && state != location.South)
+            {
+                tempBrandbox.MouseClick += new MouseEventHandler(cheat_MouseClick);
             }
             else
             {
                 tempBrandbox.Click -= new EventHandler(brandBox_MouseClick);
-                tempBrandbox.MouseClick -= new MouseEventHandler(tempBrandbox_MouseClick);
-                
+                tempBrandbox.MouseClick -= new MouseEventHandler(cheat_MouseClick);
+
             }
             bitmap = ResizeBitmap(bitmap, Mahjong.Properties.Settings.Default.ResizePercentage);
 
@@ -309,7 +322,24 @@ namespace Mahjong.Forms
             this.Update();
         }
 
-        void tempBrandbox_MouseClick(object sender, MouseEventArgs e)
+        void tempBrandbox_MouseMove(object sender, MouseEventArgs e)
+        {
+            BrandBox b = (BrandBox)sender;
+            b.BackColor = Color.Blue;            
+        }
+
+        void brandBox_MouseLeave(object sender, EventArgs e)
+        {
+            BrandBox b = (BrandBox)sender;
+            b.BackColor = this.BackColor;
+        }
+
+        /// <summary>
+        /// 作弊事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void cheat_MouseClick(object sender, MouseEventArgs e)
         {
             BrandBox b = (BrandBox)sender;
             if (all.Show_Table.remove(b.brand))
@@ -337,7 +367,7 @@ namespace Mahjong.Forms
             this.addImage();            
         }
 
-        void tempBrandbox_Click(object sender, EventArgs e)
+        void debug_Click(object sender, EventArgs e)
         {
             BrandBox b = (BrandBox)sender;
             StringBuilder s = new StringBuilder();
@@ -353,7 +383,7 @@ namespace Mahjong.Forms
             s.Append(Mahjong.Properties.Settings.Default.Debug_IsCanSee);
             s.Append(": " + b.brand.IsCanSee + "\n");
             s.Append(Mahjong.Properties.Settings.Default.WhoPush);
-            s.Append(": " + all.getLocation().location_to_string(b.brand.WhoPush) + "\n");
+            s.Append(": " + all.getLocation.location_to_string(b.brand.WhoPush) + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Picture);
             s.Append(":\nX:" + b.Location.X + " Y: " + b.Location.Y + "\n");
             s.Append(Mahjong.Properties.Settings.Default.Debug_Picture_Width);
@@ -377,32 +407,18 @@ namespace Mahjong.Forms
                 g.DrawImage(b, 0, 0, nWidth, nHeight);
             return result;
         }
-        void brandBox_MouseHover(object sender, EventArgs e)
-        {
-            BrandBox b = (BrandBox)sender;
-            cc = b.BackColor;
-            b.BackColor = Color.Blue;
-            //PictureBox temp = new PictureBox();
-            //temp.Location = new Point(b.Location.X, b.Location.Y - arrow.Height);
-            ////temp.l = b.Location.X;
-            ////temp.Location.Y = b.Location.Y - arrow.Height;
-            //temp.Image = arrow;
-            //this.Controls.Add(temp);
-            //this.Update();            
-        }
-        Color cc;
-        void brandBox_MouseLeave(object sender, EventArgs e)
-        {
-            BrandBox b = (BrandBox)sender;
-            b.BackColor = cc;
-            //this.Update();
-        }
+
+        /// <summary>
+        /// 按下一張牌的事件
+        /// </summary>
+        /// <param name="sender">BrandBox</param>
+        /// <param name="e"></param>
         void brandBox_MouseClick(object sender, EventArgs e)
         {
             BrandBox b = (BrandBox)sender;
-            flowLayoutBrands[all.state].Controls.Remove(b);
+            flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Remove(b);
             pc.makeBrand(b.brand);
-            b.Click -= new EventHandler(tempBrandbox_Click);
+            b.Click -= new EventHandler(debug_Click);
         }
         /// <summary>
         /// 新增玩家、桌面圖片
@@ -437,19 +453,19 @@ namespace Mahjong.Forms
         /// </summary>
         public void updateNowPlayer()
         {
-            flowLayoutBrands[all.state].Controls.Clear();
-            switch (all.state)
+            flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
+            switch (place.getRealPlace(all.State))
             {
-                case 1:
+                case location.East:
                     addEast();
                     break;
-                case 0:
+                case location.North:
                     addNouth();
                     break;
-                case 3:
+                case location.West:
                     addWest();
                     break;
-                case 2:
+                case location.South:
                     addSouth();
                     break;
             }
@@ -469,6 +485,7 @@ namespace Mahjong.Forms
         {
             setTitle();
             setInforamtion();
+            all.showMessageBox = ShowMessageBox_Menu.Checked;
         }
         private void 新遊戲ToolStripMenuItem_Click(object sender, EventArgs e)
         {
