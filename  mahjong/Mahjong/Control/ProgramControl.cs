@@ -267,7 +267,7 @@ namespace Mahjong.Control
             table.pc.all = new AllPlayers(4,16);
             table.pc = new PC_Network(this);
             chat.AllPlayer = table.pc.all;
-            chat.PC = this;
+            chat.PC = table.pc;
             chat.Show();
         }
         /// <summary>

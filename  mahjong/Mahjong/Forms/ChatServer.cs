@@ -663,10 +663,10 @@ namespace Mahjong.Forms
                         // read the string sent to the server
                         allplayer = reader.ReadBytes(this.server.size);
                         g2 = (AllPlayers)getObjectWithByteArray(allplayer);
-                        MessageBox.Show(this.server.size.ToString());
+                        MessageBox.Show(server.size.ToString());
 
                     } // end try
-                    catch (IOException)
+                    catch ()
                     {
                         // handle exception if error reading data
                         //MessageBox.Show("Error");
