@@ -666,7 +666,7 @@ namespace Mahjong.Forms
                         MessageBox.Show(server.size.ToString());
 
                     } // end try
-                    catch ()
+                    catch (Exception)
                     {
                         // handle exception if error reading data
                         //MessageBox.Show("Error");

@@ -9,6 +9,7 @@ using Mahjong.Forms;
 using Mahjong.Control;
 using Mahjong.Players;
 using Mahjong.Brands;
+using Mahjong.Properties;
 
 namespace Mahjong.Forms
 {
@@ -17,12 +18,18 @@ namespace Mahjong.Forms
         internal ProgramControl pc;
         private FlowLayoutPanel[] flowLayoutBrands;
         AllPlayers all;
-        int width = (int)((double)Mahjong.Properties.Settings.Default.image_w * Mahjong.Properties.Settings.Default.ResizePercentage);
-        int height = (int)((double)Mahjong.Properties.Settings.Default.image_h * Mahjong.Properties.Settings.Default.ResizePercentage);
+        int width = (int)((double)Settings.Default.image_w * Settings.Default.ResizePercentage);
+        int height = (int)((double)Settings.Default.image_h * Settings.Default.ResizePercentage);
+        /// <summary>
+        /// 圖片盒的內距
+        /// </summary>
         int padding = 1;
+        /// <summary>
+        /// 是否顯示所有的牌
+        /// </summary>
         internal bool ShowAll;
         internal bool ShowBrandInfo;
-        Bitmap arrow;
+        
         bool lockuser;
         /// <summary>
         /// 作弊功能
@@ -68,7 +75,7 @@ namespace Mahjong.Forms
         void Table_KeyUp(object sender, KeyEventArgs e)
         {
             // 按下F8開啟 Debug
-            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.DebugKey)
+            if (e.KeyCode.ToString() == Settings.Default.DebugKey)
             {
                 if (ShowAll)
                 {
@@ -78,7 +85,7 @@ namespace Mahjong.Forms
                     ShowAll = true;
             }
             // 按下F7開啟牌的資訊顯示
-            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.Debug_InformationKey)
+            if (e.KeyCode.ToString() == Settings.Default.Debug_InformationKey)
             {
                 if (ShowBrandInfo)
                     ShowBrandInfo = false;
@@ -86,7 +93,7 @@ namespace Mahjong.Forms
                     ShowBrandInfo = true;
             }
             // 更新桌面上的牌和其他資訊
-            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.Debug_RenewKey)
+            if (e.KeyCode.ToString() == Settings.Default.Debug_RenewKey)
             {
                 cleanImage();
                 addImage();
@@ -94,7 +101,7 @@ namespace Mahjong.Forms
                 setInforamtion();
             }
             // 開新遊戲熱鍵
-            if (e.KeyCode.ToString() == Mahjong.Properties.Settings.Default.NewGame_Key)
+            if (e.KeyCode.ToString() == Settings.Default.NewGame_Key)
             {
                 pc.newgame();
             }
@@ -131,7 +138,6 @@ namespace Mahjong.Forms
             this.all = all;
             this.place = all.place;
             ShowMessageBox_Menu.Checked = this.pc.ShowMessageBox = this.all.showMessageBox;
-            arrow = Mahjong.Properties.Resources.a;
             setFlowLayout();
             setTitle();
         }
@@ -139,11 +145,11 @@ namespace Mahjong.Forms
         private void setTitle()
         {
             string s;
-            s = Mahjong.Properties.Settings.Default.Title;
+            s = Settings.Default.Title;
             if (ShowAll)
             {
                 s += " - ";
-                s += Mahjong.Properties.Settings.Default.Debug;
+                s += Settings.Default.Debug;
             }
             this.Text = s;
         }
@@ -179,10 +185,10 @@ namespace Mahjong.Forms
         }
         private void setFlowLayout_name()
         {
-            this.flowLayoutBrands[0].Name = Mahjong.Properties.Settings.Default.Nouth;
-            this.flowLayoutBrands[1].Name = Mahjong.Properties.Settings.Default.East;
-            this.flowLayoutBrands[2].Name = Mahjong.Properties.Settings.Default.South;
-            this.flowLayoutBrands[3].Name = Mahjong.Properties.Settings.Default.West;
+            this.flowLayoutBrands[0].Name = Settings.Default.Nouth;
+            this.flowLayoutBrands[1].Name = Settings.Default.East;
+            this.flowLayoutBrands[2].Name = Settings.Default.South;
+            this.flowLayoutBrands[3].Name = Settings.Default.West;
         }
         private void setFlowLayout_size()
         {
@@ -259,11 +265,11 @@ namespace Mahjong.Forms
         private void addimage(location state, Brand brand, RotateFlipType rotate)
         {
             Bitmap bitmap;
-            // 如果是可視的牌就設定顯示牌的圖型，否則就顯示直立的牌 Mahjong.Properties.Resources.upbarnd
+            // 如果是可視的牌就設定顯示牌的圖型，否則就顯示直立的牌 Resources.upbarnd
             if (brand.IsCanSee || state == location.South || ShowAll)
                 bitmap = new Bitmap(brand.image);
             else
-                bitmap = new Bitmap(Mahjong.Properties.Resources.upbarnd);
+                bitmap = new Bitmap(Resources.upbarnd);
             // 設定牌
             BrandBox tempBrandbox = new BrandBox(brand);
 
@@ -284,7 +290,7 @@ namespace Mahjong.Forms
             // 滑鼠事件
             if (
                 state == location.South
-                && brand.getClass() != Mahjong.Properties.Settings.Default.Flower
+                && brand.getClass() != Settings.Default.Flower
                 && brand.Team < 1
                 //&& all.State == location.South
                 )
@@ -312,7 +318,7 @@ namespace Mahjong.Forms
                 tempBrandbox.MouseClick -= new MouseEventHandler(cheat_MouseClick);
 
             }
-            bitmap = ResizeBitmap(bitmap, Mahjong.Properties.Settings.Default.ResizePercentage);
+            bitmap = ResizeBitmap(bitmap, Settings.Default.ResizePercentage);
 
             // 設定圖片      
             tempBrandbox.Image = bitmap;
@@ -372,25 +378,25 @@ namespace Mahjong.Forms
             BrandBox b = (BrandBox)sender;
             StringBuilder s = new StringBuilder();
             s.Append(b.brand.getNumber() + "," + b.brand.getClass() + "\n");
-            s.Append(Mahjong.Properties.Settings.Default.Debug_Number);
+            s.Append(Settings.Default.Debug_Number);
             s.Append(": " + b.brand.getNumber() + "\n");
-            s.Append(Mahjong.Properties.Settings.Default.Debug_Class);
+            s.Append(Settings.Default.Debug_Class);
             s.Append(": " + b.brand.getClass() + "\n");
-            s.Append(Mahjong.Properties.Settings.Default.Debug_Source);
+            s.Append(Settings.Default.Debug_Source);
             s.Append(": " + b.brand.Source + "\n");
-            s.Append(Mahjong.Properties.Settings.Default.Debug_Team);
+            s.Append(Settings.Default.Debug_Team);
             s.Append(": " + b.brand.Team + "\n");
-            s.Append(Mahjong.Properties.Settings.Default.Debug_IsCanSee);
+            s.Append(Settings.Default.Debug_IsCanSee);
             s.Append(": " + b.brand.IsCanSee + "\n");
-            s.Append(Mahjong.Properties.Settings.Default.WhoPush);
+            s.Append(Settings.Default.WhoPush);
             s.Append(": " + all.getLocation.location_to_string(b.brand.WhoPush) + "\n");
-            s.Append(Mahjong.Properties.Settings.Default.Debug_Picture);
+            s.Append(Settings.Default.Debug_Picture);
             s.Append(":\nX:" + b.Location.X + " Y: " + b.Location.Y + "\n");
-            s.Append(Mahjong.Properties.Settings.Default.Debug_Picture_Width);
+            s.Append(Settings.Default.Debug_Picture_Width);
             s.Append(": " + b.Size.Width + "\n");
-            s.Append(Mahjong.Properties.Settings.Default.Debug_Picture_Height);
+            s.Append(Settings.Default.Debug_Picture_Height);
             s.Append(": " + b.Size.Height + "\n");            
-            MessageBox.Show(s.ToString(), Mahjong.Properties.Settings.Default.Debug);
+            MessageBox.Show(s.ToString(), Settings.Default.Debug);
         }
         /// <summary>
         /// 重繪Bitmap(縮放)
@@ -525,7 +531,7 @@ namespace Mahjong.Forms
             Slow.Checked = true;
             Normal.Checked = false;
             Quick.Checked = false;
-            pc.SetDealyTime = Mahjong.Properties.Settings.Default.RunRoundTime_Slow;
+            pc.SetDealyTime = Settings.Default.RunRoundTime_Slow;
         }
 
         private void 正常ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -533,7 +539,7 @@ namespace Mahjong.Forms
             Slow.Checked = false;
             Normal.Checked = true;
             Quick.Checked = false;
-            pc.SetDealyTime = Mahjong.Properties.Settings.Default.RunRoundTime_Normal;
+            pc.SetDealyTime = Settings.Default.RunRoundTime_Normal;
         }
 
         private void 非常快ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -541,7 +547,7 @@ namespace Mahjong.Forms
             Slow.Checked = false;
             Normal.Checked = false;
             Quick.Checked = true;
-            pc.SetDealyTime = Mahjong.Properties.Settings.Default.RunRoundTime_Quick;
+            pc.SetDealyTime = Settings.Default.RunRoundTime_Quick;
         }
 
         private void 儲存牌局ToolStripMenuItem_Click(object sender, EventArgs e)

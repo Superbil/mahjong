@@ -13,7 +13,7 @@ namespace Mahjong.Control
         {
             this.table = pc.table;
             this.information = pc.information;
-            this.table.pc = pc;
+            //this.table.pc = pc;
             this.chat = pc.chat;
             this.all = pc.all;
         }
