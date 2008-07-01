@@ -292,9 +292,8 @@ namespace Mahjong.Control
         internal void onlineGame()
         {            
             chat = new ChatServerForm();            
-            table.pc.all = new AllPlayers(4,16);
+            //table.pc.all = new AllPlayers(4,16);
             table.pc = new PC_Network(this);
-            chat.AllPlayer = table.pc.all;
             chat.PC = table.pc;
             chat.Show();
         }

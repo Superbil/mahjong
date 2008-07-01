@@ -422,7 +422,6 @@ namespace Mahjong.Forms
         void brandBox_MouseClick(object sender, EventArgs e)
         {
             BrandBox b = (BrandBox)sender;
-            flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Remove(b);
             pc.makeBrand(b.brand);
             b.Click -= new EventHandler(debug_Click);
         }

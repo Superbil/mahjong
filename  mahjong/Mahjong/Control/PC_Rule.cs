@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Mahjong.Brands;
 using Mahjong.Forms;
 using Mahjong.Players;
+using System.Threading;
 
 namespace Mahjong.Control
 {
@@ -36,16 +37,19 @@ namespace Mahjong.Control
         /// <param name="brand">牌</param>
         internal virtual void makeBrand(Brand brand)
         {
+            // 把牌從現在的桌面上移除
+            all.Players[(int)all.place.getRealPlace(all.State)].remove(brand);
             // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
             // 若成立就表示沒有人要，不成立就表示被人拿走
             if (pushToTable(brand))
             {
                 // 換下一個人
                 all.next();
+                // 更新資訊盒
                 setInforamtion();
             }
             // 計時器重新啟動
-            roundTimer.Start();
+            roundTimer.Start();            
         }
 
         /// <summary>

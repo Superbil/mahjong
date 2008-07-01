@@ -179,8 +179,8 @@ namespace Mahjong.Forms
             this.Controls.Add(this.inputTextBox);
             this.Name = "ChatServerForm";
             this.Text = "Chat Server";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChatServerForm_FormClosing);
             this.Load += new System.EventHandler(this.ChatServerForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChatServerForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

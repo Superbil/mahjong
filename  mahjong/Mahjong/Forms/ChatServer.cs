@@ -20,46 +20,53 @@ namespace Mahjong.Forms
         {
             InitializeComponent();
         } // end constructor
-        private Player[] players;
-        private Thread getPlayers, getPlayersobject;
-        private TcpListener listener, listenerobject;
+        private NetPlayer[] players;
+        private Thread getPlayers;
+        private TcpListener listener;
         private NetworkStream socketStream; // network data stream 
-        private BinaryWriter writer, writerobject; // facilitates writing to the stream    
-        private BinaryReader reader, readerobject; // facilitates reading from the stream 
+        private BinaryWriter writer; // facilitates writing to the stream    
+        private BinaryReader reader; // facilitates reading from the stream 
         //private Socket connection; // Socket for accepting a connection      
         private Thread[] playerThreads; // Thread for processing incoming messages
         private string temp;
         //
-        private NetworkStream output, outputobject; // stream for receiving data           
+        private NetworkStream output; // stream for receiving data           
         private IPAddress serverIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];
         private string message = "";
 
-        private Thread outputThread, outputThreadobject; // Thread for receiving data from server
-        private TcpClient connection, connectionobject; // client to establish connection  
+        private Thread outputThread; // Thread for receiving data from server
+        private TcpClient connection; // client to establish connection  
 
-        private NetworkStream stream, streamobject; // network data stream                 
-        private int i = 0, n = 0;
+        private NetworkStream stream; // network data stream                 
+        private int n = 0;
+        private bool ckeckplayer = false;
         private string myMark; // player's mark on the board    
         private string myMarkname;
         public int Port = 50000;
-        private const string Allplayer_Head = "ALLPLAYERS:";
-        public int size;
+        public const string AllPlayers_Head = "/allplaysize:";
         // initialize thread for reading
+        General g2;
+        internal ProgramControl PC;
+        internal String[] name = new string[4];
+
 
         public ChatServerForm(int port)
         {
             this.Port = port;
         }
 
-        public byte[] getByteArrayWithObject(AllPlayers g1)
+        public byte[] getByteArrayWithObject(AllPlayers all)
         {
-
-           // General g1 = new General("¼B§Ó«T", "c:\\liu.bmp",60, 99, 80, 95, true, true, false);
-
-
             MemoryStream ms = new MemoryStream();
             BinaryFormatter bf1 = new BinaryFormatter();
-            bf1.Serialize(ms, g1);
+            bf1.Serialize(ms, all);
+            return ms.ToArray();
+        }
+        public byte[] getByteArrayWithObject(General all)
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf1 = new BinaryFormatter();
+            bf1.Serialize(ms, all);
             return ms.ToArray();
         }
 
@@ -95,7 +102,7 @@ namespace Mahjong.Forms
                 IPButton.Enabled = false;
             else if (Dns.GetHostEntry(Dns.GetHostName()).AddressList.Length < 1)
                 lanButton.Enabled = false;
-            displayTextBox.AppendText(getByteArrayWithObject(this.all).Length.ToString());
+
 
             /*   players = new Player[3];
                playerThreads = new Thread[3];
@@ -107,35 +114,32 @@ namespace Mahjong.Forms
         } // end method CharServerForm_Load
         public void ChatServer()
         {
-            players = new Player[6];
-            playerThreads = new Thread[6];
+            players = new NetPlayer[3];
+            playerThreads = new Thread[3];
 
             // accept connections on a different thread         
             getPlayers = new Thread(new ThreadStart(SetUp));
             getPlayers.Start();
 
-            getPlayersobject = new Thread(new ThreadStart(SetUpObject));
-            getPlayersobject.Start();
+
 
 
         }
         public void ChatClient()
         {
-            i = 1;
+            ckeckplayer = true;
 
             IPtextBox.Text = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString();
             connection = new TcpClient(IPtextBox.Text, Port);
-            connectionobject = new TcpClient(IPtextBox.Text, 50001);
+
             stream = connection.GetStream();
-            streamobject = connectionobject.GetStream();
+
             writer = new BinaryWriter(stream);
             reader = new BinaryReader(stream);
-            writerobject = new BinaryWriter(streamobject);
-            readerobject = new BinaryReader(streamobject);
+
             outputThread = new Thread(new ThreadStart(Run));
             outputThread.Start();
-            outputThreadobject = new Thread(new ThreadStart(RunObject));
-            outputThreadobject.Start();
+
         }
         // close all threads associated with this application
         private void ChatServerForm_FormClosing(object sender,
@@ -152,33 +156,38 @@ namespace Mahjong.Forms
         // in a thread-safe manner
         internal void DisplayMessage(string message)
         {
-            if (i == 1)
+            //           string tempp = message;
+            if (ckeckplayer == true)
             {
                 myMarkname = nametextBox.Text;
                 myMark = message;
-                i--;
+                writer.Write(myMark+"."+ myMarkname);
+                ckeckplayer = false;
+
             }
             // if modifying displayTextBox is not thread safe
-
-
-            
-           
             if (displayTextBox.InvokeRequired)
             {
                 // use inherited method Invoke to execute DisplayMessage
                 // via a delegate                                       
-                Invoke(new DisplayDelegate(DisplayMessage),new object[] { message });
+                Invoke(new DisplayDelegate(DisplayMessage), new object[] { message });
+
             }// end if
-            else if (message.Contains(Allplayer_Head))
-            {
-                size = int.Parse(message.Remove(0, Allplayer_Head.Length));
-            }
+            /*
+                        else if(tempp.Remove(AllPlayers_Head.Length)==AllPlayers_Head)
+                        {
+                            message = message.Remove(0, AllPlayers_Head.Length);
+                            size = int.Parse(message);
+               
+                        }
+             */
             else if (temp != message)// OK to modify displayTextBox in current thread
             {
                 displayTextBox.AppendText("\r\n" + message);
                 temp = message;
 
             }
+
 
         } // end method DisplayMessage
 
@@ -205,7 +214,7 @@ namespace Mahjong.Forms
         {
 
 
-            for (int i = 0; i < n; i += 2)
+            for (int i = 0; i < n; i++)
             {
                 socketStream = new NetworkStream(players[i].connection);
 
@@ -213,6 +222,23 @@ namespace Mahjong.Forms
                 writer = new BinaryWriter(socketStream);
                 reader = new BinaryReader(socketStream);
                 writer.Write(reply);
+
+
+            }
+        }
+        internal void serverobject(byte[] date)
+        {
+
+
+            for (int i = 0; i < n; i++)
+            {
+                socketStream = new NetworkStream(players[i].connection);
+
+                // create objects for transferring data across stream
+                writer = new BinaryWriter(socketStream);
+                reader = new BinaryReader(socketStream);
+                writer.Write(date);
+
 
             }
         }
@@ -227,7 +253,7 @@ namespace Mahjong.Forms
                     displayTextBox.AppendText("\r\n" + myMarkname + "¡G" + inputTextBox.Text);
                     temp = myMarkname + "¡G" + inputTextBox.Text;
 
-                    for (int i = 0; i < n; i += 2)
+                    for (int i = 0; i < n; i++)
                     {
                         socketStream = new NetworkStream(players[i].connection);
 
@@ -269,74 +295,40 @@ namespace Mahjong.Forms
             listener.Start();
             // accept first player and start a player thread
 
-            players[0] = new Player(listener.AcceptSocket(), this, 0);
+            players[0] = new NetPlayer(listener.AcceptSocket(), this, 1);
             playerThreads[0] =
                new Thread(new ThreadStart(players[0].Run));
             playerThreads[0].Start();
 
             if (listener.Server.Connected == false)
-                n += 2;
+                n++;
             else
-                n -= 2;
+                n--;
 
             // accept second player and start another player thread       
-            players[2] = new Player(listener.AcceptSocket(), this, 2);
+            players[1] = new NetPlayer(listener.AcceptSocket(), this, 2);
+            playerThreads[1] =
+               new Thread(new ThreadStart(players[1].Run));
+            playerThreads[1].Start();
+
+            if (listener.Server.Connected == false)
+                n++;
+            else
+                n--;
+
+            players[2] = new NetPlayer(listener.AcceptSocket(), this, 3);
             playerThreads[2] =
                new Thread(new ThreadStart(players[2].Run));
             playerThreads[2].Start();
 
-            if (listener.Server.Connected == false)
-                n += 2;
-            else
-                n -= 2;
-
-            players[4] = new Player(listener.AcceptSocket(), this, 4);
-            playerThreads[4] =
-               new Thread(new ThreadStart(players[4].Run));
-            playerThreads[4].Start();
-
             // let the first player know that the other player has connected
             if (listener.Server.Connected == false)
-                n += 2;
+                n++;
             else
-                n -= 2;
+                n--;
 
         }
 
-        public void SetUpObject()
-        {
-
-
-            // set up Socket                                           
-            listenerobject =
-                 new TcpListener(serverIP, 50001);
-            listenerobject.Start();
-            // accept first player and start a player thread
-
-            players[1] = new Player(listenerobject.AcceptSocket(), this, 1);
-            playerThreads[1] =
-               new Thread(new ThreadStart(players[1].RunObject));
-            playerThreads[1].Start();
-
-
-
-            // accept second player and start another player thread       
-            players[3] = new Player(listenerobject.AcceptSocket(), this, 3);
-            playerThreads[3] =
-               new Thread(new ThreadStart(players[3].RunObject));
-            playerThreads[3].Start();
-
-
-
-            players[5] = new Player(listenerobject.AcceptSocket(), this, 5);
-            playerThreads[5] =
-               new Thread(new ThreadStart(players[5].RunObject));
-            playerThreads[5].Start();
-
-            // let the first player know that the other player has connected
-
-
-        }
 
         private void displayTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -357,7 +349,7 @@ namespace Mahjong.Forms
             if (myMark == "Server")
             {
                 DisableInput(false);
-                pc.newgame();
+                PC.newgame();
             }
             else
             {
@@ -366,6 +358,9 @@ namespace Mahjong.Forms
                 ChatClient();
             }
         } // end method SetUp
+        /// <summary>
+        /// Client 
+        /// </summary>
         public void Run()
         {
 
@@ -378,16 +373,24 @@ namespace Mahjong.Forms
 
 
             DisableInput(false); // enable inputTextBox
+            
 
             // loop until server signals termination
             do
             {
+               
                 // Step 3: processing phase
                 try
                 {
-                    // read message from server        
-                    message = reader.ReadString();
+                    // read message from server   
+
+
+                    stringcheck(reader.ReadString());
+
+
+
                     DisplayMessage(/*"\r\n" +*/ message);
+
                 } // end try
                 catch (Exception)
                 {
@@ -407,47 +410,24 @@ namespace Mahjong.Forms
 
 
         }
-
-        public void RunObject()
+        /// <summary>
+        /// Client ºÝªº±µ¦¬
+        /// </summary>
+        /// <param name="s">¦r¦ê</param>
+        private void stringcheck(string s)
         {
-
-            // Step 2: get NetworkStream associated with TcpClient
-            outputobject = connectionobject.GetStream();
-
-            // create objects for writing and reading across stream
-            writerobject = new BinaryWriter(outputobject);
-            readerobject = new BinaryReader(outputobject);
-
-
-
             byte[] allplayer;
-            AllPlayers g2;
-            // Step 4: read string data sent from client
-            do
+            if (s.Contains(AllPlayers_Head))
             {
-                try
-                {
-                    // read the string sent to the server
-                    allplayer = readerobject.ReadBytes(size);
-                    g2 = (AllPlayers)getObjectWithByteArray(allplayer);
-                    this.pc.all = g2;
-                    //MessageBox.Show(size.ToString());
-                } // end try
-                catch (Exception)
-                {
-                    break;
-                    // handle exception if error in reading server data
-                    //System.Environment.Exit(System.Environment.ExitCode);
-                } // end catch
-            } while (connectionobject.Connected);
+                allplayer = reader.ReadBytes(int.Parse(s.Remove(0, AllPlayers_Head.Length)));
+                g2 = (General)getObjectWithByteArray(allplayer);
+                // clinet ±µ¦¬¨ìallplayerªº³]©w
+                //PC.all = (AllPlayers)getObjectWithByteArray(allplayer);
 
-            // Step 4: close connection
-            writerobject.Close();
-            readerobject.Close();
-            outputobject.Close();
-            connectionobject.Close();
-            outputThreadobject.Abort();
-            getPlayersobject.Abort();
+                MessageBox.Show(g2.Name,myMark);
+            }
+            else
+                message = s;
 
 
         }
@@ -480,214 +460,72 @@ namespace Mahjong.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //socketStream = new NetworkStream(players[1].connection);
-            //writerobject = new BinaryWriter(socketStream);
-            //writerobject.Write(getByteArrayWithObject(all));
-            SendAllPlayer(all);
+            General g1 = new General("¼B§Ó«T", "c:\\liu.bmp", 60, 99, 80, 95, true, true, false);
+
+            try
+            {
+                if (myMark == "Server")
+                {
+                    for (int i = 0; i < n; i++)
+                    {
+                        socketStream = new NetworkStream(players[i].connection);
+
+                        writer = new BinaryWriter(socketStream);
+                        reader = new BinaryReader(socketStream);
+                        writer.Write(AllPlayers_Head + getByteArrayWithObject(g1).Length.ToString());
+                        writer.Write(getByteArrayWithObject(g1));
+
+                    }
+
+                }
+                else
+                {
+                    writer.Write(AllPlayers_Head + getByteArrayWithObject(g1).Length.ToString());
+                    writer.Write(getByteArrayWithObject(g1));
+                }
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("!");
+            }
         } // end method RunClient
-
-
-        AllPlayers all;
-        internal void  SendAllPlayer(AllPlayers all)
+        private void sentallplayer(AllPlayers all)
         {
-            this.all = all;
-            if (myMark == "Server")
+            try
             {
-                for (int i = 0; i < n; i += 2)
+                if (myMark == "Server")
                 {
-                    socketStream = new NetworkStream(players[i].connection);
-                    writer = new BinaryWriter(socketStream);
-                    writer.Write(Allplayer_Head +size.ToString());
+                    for (int i = 0; i < n; i++)
+                    {
+                        socketStream = new NetworkStream(players[i].connection);
+
+
+                        writer = new BinaryWriter(socketStream);
+                        reader = new BinaryReader(socketStream);
+                        writer.Write(AllPlayers_Head + getByteArrayWithObject(all).Length.ToString());
+                        writer.Write(getByteArrayWithObject(all));
+
+                    }
+
                 }
-                for (int i = 1; i < n; i += 2)
+                else
                 {
-                    socketStream = new NetworkStream(players[i].connection);
-                    writerobject = new BinaryWriter(socketStream);
-                    writerobject.Write(getByteArrayWithObject(all));
+                    writer.Write(AllPlayers_Head + getByteArrayWithObject(all).Length.ToString());
+                    writer.Write(getByteArrayWithObject(all));
                 }
             }
-            else
+            catch (SocketException)
             {
-                
-                    writer.Write(Allplayer_Head+size.ToString());
-
-                    writerobject.Write(getByteArrayWithObject(all));
-                
+                MessageBox.Show("±µ¤f³]©w¿ù»~¡I");
             }
-
         }
-        internal AllPlayers AllPlayer
+
+        internal void SendAllPlayer(AllPlayers all)
         {
-            set
-            {
-                this.all = value;
-                size = getByteArrayWithObject(this.all).Length;                
-            }
-            get
-            {
-                return this.all;
-            }
+            sentallplayer(all);
         }
-        ProgramControl pc;
-        internal ProgramControl PC
-        {
-            set
-            {
-                pc = value;
-            }
-            get
-            {
-                return pc;
-            }
-        }
-
-
     } // end class ChatServerForm
 
-    public class Player
-    {
-        internal Socket connection; // Socket for accepting a connection  
-        private NetworkStream socketStream; // network data stream 
-        private ChatServerForm server; // reference to server 
-        private BinaryWriter writer; // facilitates writing to the stream    
-        private BinaryReader reader; // facilitates reading from the stream 
 
-        private string number; // player number                                
-        //private string mark; // playerŠö mark on the board     
-        public int size12;
-        public string theReply = "";
-        private const string Allplayer_Head = "ALLPLAYERS:";
-
-        internal Player(Socket socket, ChatServerForm serverValue, int newNumber)
-        {
-
-            connection = socket;
-            server = serverValue;
-            number = newNumber + "player";
-
-            // create NetworkStream object for Socket      
-            socketStream = new NetworkStream(connection);
-
-            // create Streams for reading/writing bytes
-            writer = new BinaryWriter(socketStream);
-            reader = new BinaryReader(socketStream);
-            int size12;
-        } // end constructor       
-
-        
-
-        public object getObjectWithByteArray(byte[] theByteArray)
-        {
-            MemoryStream ms = new MemoryStream(theByteArray);
-            BinaryFormatter bf1 = new BinaryFormatter();
-            ms.Position = 0;
-
-            return bf1.Deserialize(ms);
-        }
-
-
-        internal void Run()
-        {
-            while (true)
-            {
-                server.DisplayMessage("Waiting for connection");
-                // accept an incoming connection     
-
-                server.DisplayMessage(number + " Connection " + " received.");
-
-                // inform client that connection was successfull
-                writer.Write(number);
-                writer.Write("SERVER>>> Connection successful");
-
-                //server.DisableInput(false); // enable inputTextBox
-
-                
-
-                // Step 4: read string data sent from client
-                do
-                {
-                    try
-                    {
-                        // read the string sent to the server
-                        theReply = reader.ReadString();
-                        
-                        // display the message
-                        server.DisplayMessage(theReply);
-                        server.servermessage(theReply);
-                        getobjectsize();
-
-                    } // end try
-                    catch (Exception)
-                    {
-                        // handle exception if error reading data
-                        break;
-                    } // end catch
-
-                } while (connection.Connected);
-
-                server.DisplayMessage("\r\nUser terminated connection\r\n");
-
-                // Step 5: close connection  
-                writer.Close();
-                reader.Close();
-                socketStream.Close();
-                connection.Close();
-
-                server.DisableInput(true); // disable InputTextBox
-
-            }
-        }
-
-        public void getobjectsize()
-        {
-           if (theReply.Contains(Allplayer_Head))
-           {
-              this.server.size = int.Parse(theReply.Remove(0, Allplayer_Head.Length));
-               //size12 = int.Parse(theReply);
-           }
-
-        }
-        internal void RunObject()
-        {
-            while (true)
-            {
-
-
-                byte[] allplayer;
-                AllPlayers g2;
-                // Step 4: read string data sent from client
-                do
-                {
-                    try
-                    {
-                        // read the string sent to the server
-                        allplayer = reader.ReadBytes(this.server.size);
-                        g2 = (AllPlayers)getObjectWithByteArray(allplayer);
-                        MessageBox.Show(server.size.ToString());
-
-                    } // end try
-                    catch (Exception)
-                    {
-                        // handle exception if error reading data
-                        //MessageBox.Show("Error");
-                        break;
-                    } // end catch
-
-                } while (connection.Connected);
-
-
-
-                // Step 5: close connection  
-                writer.Close();
-                reader.Close();
-                socketStream.Close();
-                connection.Close();
-
-
-
-            }
-        }
-
-    }
 
 }

@@ -21,7 +21,7 @@ namespace Mahjong.Control
         {
             table.cleanAll();
             // 設定4個玩家,每個人16張
-            all = chat.AllPlayer;
+            all = new AllPlayers(4, 16);
             all.sumBrands = factory.SumBrands;
             // 設定誰是玩家
             IamPlayer();
@@ -56,10 +56,11 @@ namespace Mahjong.Control
             all.PushToTable(brand);
 
             chat.SendAllPlayer(all);
+            
             updatePlace();
             
             // 排序現在的玩家
-            this.chat.AllPlayer.sortNowPlayer();
+            //this.chat.AllPlayer.sortNowPlayer();
             // 更新現在玩家和桌面
             
             //updatePlayer_Table();
@@ -100,6 +101,13 @@ namespace Mahjong.Control
             this.table.place.Left = all.State;
             this.all.next();
             this.all.place = this.table.place;
+        }
+        internal override void makeBrand(Brand brand)
+        {
+            lock (this)
+            {
+                base.makeBrand(brand);
+            }
         }
     }
 }
