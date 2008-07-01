@@ -15,7 +15,7 @@ namespace Mahjong.Control
             information = pc.information;
             table.pc = this;
             chat = pc.chat;
-            all = pc.all;
+            //all = pc.all;
             chat.PC = this;
         }
         public override void newgame()
@@ -32,8 +32,31 @@ namespace Mahjong.Control
             setupPlace();
             
             creatBrands();
-            chat.SendAllPlayer(all);
+            //chat.SendAllPlayer(all);
             newgame_round();
+        }
+
+        internal override void newgame_round()
+        {
+            //chat.SendAllPlayer(all);
+            MessageBox.Show("Run!",chat.ChatName);
+            table.addImage();
+            setInforamtion();
+            Chow_Pong_Brand = false;
+            Player_Pass_Brand = false;
+            // 干
+            for (int i = 0; i < 4; i++)
+            {
+                // 干
+                all.Newgame_setFlower();
+                // 逼
+                all.sortNowPlayer();
+                // 穝
+                table.updateNowPlayer();
+                // 產
+                all.next();
+            }
+            //roundTimer.Start();
         }
 
         internal override void round()
@@ -126,26 +149,6 @@ namespace Mahjong.Control
                 roundTimer.Start(); 
             //}
         }
-        internal override void newgame_round()
-        {
-           // MessageBox.Show("Run!");
-            table.addImage();
-            setInforamtion();
-            Chow_Pong_Brand = false;
-            Player_Pass_Brand = false;
-            // 干
-            for (int i = 0; i < 4; i++)
-            {
-                // 干
-                all.Newgame_setFlower();
-                // 逼
-                all.sortNowPlayer();
-                // 穝
-                table.updateNowPlayer();
-                // 產
-                all.next();
-            }
-            //roundTimer.Start();
-        }
+
     }
 }

@@ -292,17 +292,17 @@ namespace Mahjong.Forms
                 state == location.South
                 && brand.getClass() != Settings.Default.Flower
                 && brand.Team < 1
-                //&& all.State == location.South
                 )
             {
                 tempBrandbox.MouseMove += new MouseEventHandler(tempBrandbox_MouseMove);
                 tempBrandbox.MouseLeave += new EventHandler(brandBox_MouseLeave);
                 tempBrandbox.Click += new EventHandler(brandBox_MouseClick);
 
-                if (ShowAll && ShowBrandInfo)
-                    tempBrandbox.MouseHover += new EventHandler(debug_Click);
-                else
-                    tempBrandbox.MouseHover -= new EventHandler(debug_Click);
+                // 作弊事件
+                //if (ShowAll && ShowBrandInfo)
+                //    tempBrandbox.MouseHover += new EventHandler(debug_Click);
+                //else
+                //    tempBrandbox.MouseHover -= new EventHandler(debug_Click);
             }
             else if (brand.Team >= 1)
             {
@@ -331,7 +331,8 @@ namespace Mahjong.Forms
         void tempBrandbox_MouseMove(object sender, MouseEventArgs e)
         {
             BrandBox b = (BrandBox)sender;
-            b.BackColor = Color.Blue;            
+            if (pc.NowPlayer_isPlayer)
+                b.BackColor = Color.Blue;           
         }
 
         void brandBox_MouseLeave(object sender, EventArgs e)
@@ -422,7 +423,9 @@ namespace Mahjong.Forms
         void brandBox_MouseClick(object sender, EventArgs e)
         {
             BrandBox b = (BrandBox)sender;
-            pc.makeBrand(b.brand);
+            // 確定為玩家才發送事件
+            if (pc.NowPlayer_isPlayer)
+                pc.makeBrand(b.brand);
             b.Click -= new EventHandler(debug_Click);
         }
         /// <summary>

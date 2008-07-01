@@ -55,6 +55,13 @@ namespace Mahjong.Forms
         {
             this.Port = port;
         }
+        public string ChatName
+        {
+            get
+            {
+                return myMark;
+            }
+        }
 
         public byte[] getByteArrayWithObject(AllPlayers all)
         {
@@ -350,28 +357,28 @@ namespace Mahjong.Forms
             if (myMark == "Server")
             {
                 DisableInput(false);
-                PC.newgame();
-                try
-                {
+                //PC.newgame();
+                //try
+                //{
                     
-                        for (int i = 0; i < n; i++)
-                        {
-                            socketStream = new NetworkStream(players[i].connection);
+                //        for (int i = 0; i < n; i++)
+                //        {
+                //            socketStream = new NetworkStream(players[i].connection);
 
-                            // create objects for transferring data across stream
-                            writer = new BinaryWriter(socketStream);
-                            reader = new BinaryReader(socketStream);
-                            writer.Write(newgameround);
+                //            // create objects for transferring data across stream
+                //            writer = new BinaryWriter(socketStream);
+                //            reader = new BinaryReader(socketStream);
+                //            writer.Write(newgameround);
 
-                        }
-                        // if the user at the server signaled termination
-                        // sever the connection to the client
+                //        }
+                //        // if the user at the server signaled termination
+                //        // sever the connection to the client
 
-                     // clear the userŠö input
+                //     // clear the userŠö input
                  
-                }
-                catch
-                { }
+                //}
+                //catch
+                //{ }
             }
             else
             {
@@ -441,7 +448,8 @@ namespace Mahjong.Forms
             byte[] allplayer;
             if (s.Contains(newgameround))
             {
-                PC.newgame_round();
+                if (myMark!="Server")
+                    PC.newgame_round();
             }
             else if (s.Contains(AllPlayers_Head))
             {
@@ -491,25 +499,37 @@ namespace Mahjong.Forms
 
             try
             {
-                if (myMark == "Server")
-                {
-                    for (int i = 0; i < n; i++)
-                    {
-                        socketStream = new NetworkStream(players[i].connection);
+                PC.newgame();
+                    
+                        for (int i = 0; i < n; i++)
+                        {
+                            socketStream = new NetworkStream(players[i].connection);
 
-                        writer = new BinaryWriter(socketStream);
-                        reader = new BinaryReader(socketStream);
-                        writer.Write(AllPlayers_Head + getByteArrayWithObject(g1).Length.ToString());
-                        writer.Write(getByteArrayWithObject(g1));
+                            // create objects for transferring data across stream
+                            writer = new BinaryWriter(socketStream);
+                            //reader = new BinaryReader(socketStream);
+                            writer.Write(newgameround);
 
-                    }
+                        }
+                //if (myMark == "Server")
+                //{
+                //    for (int i = 0; i < n; i++)
+                //    {
+                //        socketStream = new NetworkStream(players[i].connection);
 
-                }
-                else
-                {
-                    writer.Write(AllPlayers_Head + getByteArrayWithObject(g1).Length.ToString());
-                    writer.Write(getByteArrayWithObject(g1));
-                }
+                //        writer = new BinaryWriter(socketStream);
+                //        reader = new BinaryReader(socketStream);
+                //        writer.Write(AllPlayers_Head + getByteArrayWithObject(g1).Length.ToString());
+                //        writer.Write(getByteArrayWithObject(g1));
+
+                //    }
+
+                //}
+                //else
+                //{
+                //    writer.Write(AllPlayers_Head + getByteArrayWithObject(g1).Length.ToString());
+                //    writer.Write(getByteArrayWithObject(g1));
+            //}
             }
             catch (SocketException)
             {
@@ -526,12 +546,10 @@ namespace Mahjong.Forms
                     {
                         socketStream = new NetworkStream(players[i].connection);
 
-
                         writer = new BinaryWriter(socketStream);
-                        reader = new BinaryReader(socketStream);
+                        //reader = new BinaryReader(socketStream);
                         writer.Write(AllPlayers_Head + getByteArrayWithObject(all).Length.ToString());
                         writer.Write(getByteArrayWithObject(all));
-
                     }
 
                 }
