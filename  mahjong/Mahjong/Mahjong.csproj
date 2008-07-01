@@ -270,7 +270,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\flower1.gif" />
+    <None Include="Resources\flower1.gif">
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\flower2.gif" />
