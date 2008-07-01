@@ -11,11 +11,12 @@ namespace Mahjong.Control
     {
         public PC_Network(ProgramControl pc)
         {
-            this.table = pc.table;
-            this.information = pc.information;
-            //this.table.pc = pc;
-            this.chat = pc.chat;
-            this.all = pc.all;
+            table = pc.table;
+            information = pc.information;
+            table.pc = this;
+            chat = pc.chat;
+            all = pc.all;
+            chat.PC = this;
         }
         public override void newgame()
         {
@@ -29,6 +30,9 @@ namespace Mahjong.Control
             table.Setup(all);
             // 設定牌桌讀到的位置
             setupPlace();
+            
+            creatBrands();
+            chat.SendAllPlayer(all);
             newgame_round();
         }
 
@@ -55,7 +59,7 @@ namespace Mahjong.Control
             // 放到桌面上
             all.PushToTable(brand);
 
-            chat.SendAllPlayer(all);
+            //chat.SendAllPlayer(all);
             
             updatePlace();
             
@@ -104,10 +108,44 @@ namespace Mahjong.Control
         }
         internal override void makeBrand(Brand brand)
         {
-            lock (this)
+            //lock (this)
+            //{
+                chat.SendAllPlayer(all);
+
+                all.Players[(int)all.place.getRealPlace(all.State)].remove(brand);
+                // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
+                // 若成立就表示沒有人要，不成立就表示被人拿走
+                if (pushToTable(brand))
+                {
+                    // 換下一個人
+                    all.next();
+                    // 更新資訊盒
+                    setInforamtion();
+                }
+                // 計時器重新啟動
+                roundTimer.Start(); 
+            //}
+        }
+        internal override void newgame_round()
+        {
+           // MessageBox.Show("Run!");
+            table.addImage();
+            setInforamtion();
+            Chow_Pong_Brand = false;
+            Player_Pass_Brand = false;
+            // 補花
+            for (int i = 0; i < 4; i++)
             {
-                base.makeBrand(brand);
+                // 補花
+                all.Newgame_setFlower();
+                // 排序
+                all.sortNowPlayer();
+                // 更新
+                table.updateNowPlayer();
+                // 下一家
+                all.next();
             }
+            //roundTimer.Start();
         }
     }
 }

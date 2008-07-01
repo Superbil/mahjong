@@ -28,7 +28,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 換到下一家的計時器
         /// </summary>
-        Timer roundTimer = new Timer();
+        internal Timer roundTimer = new Timer();
         /// <summary>
         /// 全部玩家和桌面
         /// </summary>
@@ -293,8 +293,8 @@ namespace Mahjong.Control
         {            
             chat = new ChatServerForm();            
             //table.pc.all = new AllPlayers(4,16);
-            table.pc = new PC_Network(this);
-            chat.PC = table.pc;
+            //table.pc = new PC_Network(this);
+            chat.PC = new PC_Network(this);
             chat.Show();
         }
 

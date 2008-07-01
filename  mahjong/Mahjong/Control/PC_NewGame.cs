@@ -48,7 +48,7 @@ namespace Mahjong.Control
         /// <summary>
         /// ¶}·s²ø
         /// </summary>
-        internal void newgame_round()
+        internal virtual void newgame_round()
         {
             creatBrands();
             table.addImage();

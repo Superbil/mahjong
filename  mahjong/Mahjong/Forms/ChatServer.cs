@@ -44,9 +44,10 @@ namespace Mahjong.Forms
         private string myMarkname;
         public int Port = 50000;
         public const string AllPlayers_Head = "/allplaysize:";
+        public const string newgameround = "/newgame";
         // initialize thread for reading
         General g2;
-        internal ProgramControl PC;
+        internal PC_Network PC;
         internal String[] name = new string[4];
 
 
@@ -350,6 +351,27 @@ namespace Mahjong.Forms
             {
                 DisableInput(false);
                 PC.newgame();
+                try
+                {
+                    
+                        for (int i = 0; i < n; i++)
+                        {
+                            socketStream = new NetworkStream(players[i].connection);
+
+                            // create objects for transferring data across stream
+                            writer = new BinaryWriter(socketStream);
+                            reader = new BinaryReader(socketStream);
+                            writer.Write(newgameround);
+
+                        }
+                        // if the user at the server signaled termination
+                        // sever the connection to the client
+
+                     // clear the userŠö input
+                 
+                }
+                catch
+                { }
             }
             else
             {
@@ -417,14 +439,19 @@ namespace Mahjong.Forms
         private void stringcheck(string s)
         {
             byte[] allplayer;
-            if (s.Contains(AllPlayers_Head))
+            if (s.Contains(newgameround))
+            {
+                PC.newgame_round();
+            }
+            else if (s.Contains(AllPlayers_Head))
             {
                 allplayer = reader.ReadBytes(int.Parse(s.Remove(0, AllPlayers_Head.Length)));
-                g2 = (General)getObjectWithByteArray(allplayer);
+                //g2 = (General)getObjectWithByteArray(allplayer);
                 // clinet ±µ¦¬¨ìallplayerªº³]©w
-                //PC.all = (AllPlayers)getObjectWithByteArray(allplayer);
+                PC.all = (AllPlayers)getObjectWithByteArray(allplayer);
 
-                MessageBox.Show(g2.Name,myMark);
+                //MessageBox.Show(g2.Name,myMark);
+                //MessageBox.Show(PC.all.Name[PC.all.state],myMark);
             }
             else
                 message = s;
