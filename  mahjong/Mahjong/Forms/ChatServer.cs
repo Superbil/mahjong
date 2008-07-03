@@ -599,6 +599,10 @@ namespace Mahjong.Forms
         {
             return false;
         }
+        public AllPlayers returnallplayer()
+        {
+            return PC.all;
+        }
     } // end class ChatServerForm
     
 

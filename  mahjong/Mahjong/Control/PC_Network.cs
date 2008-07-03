@@ -34,6 +34,8 @@ namespace Mahjong.Control
             creatBrands();
             // 同步玩家資料
             chat.SendAllPlayer(all);
+            
+
             newgame_round();
             //newgame_network();
         }
@@ -51,6 +53,7 @@ namespace Mahjong.Control
         internal override void newgame_round()
         {
             //chat.SendAllPlayer(all);
+            all = chat.returnallplayer();
             table.Setup(all);
             MessageBox.Show(all.Name[all.state]+" Get Run!",chat.ChatName);
             //updatePlace();
