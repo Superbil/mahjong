@@ -520,7 +520,7 @@ namespace Mahjong.Forms
 
                             // create objects for transferring data across stream
                             writer = new BinaryWriter(socketStream);
-                            //reader = new BinaryReader(socketStream);
+                            reader = new BinaryReader(socketStream);
                             writer.Write(newgameround);
 
                         }

@@ -70,8 +70,11 @@ namespace Mahjong.Control
             showMessageBox = true;
             roundTimer.Interval = Settings.Default.RunRoundTime_Normal;
             table = (Table)f;
-            table.pc = this;
-            f.ShowDialog();
+            table.pc = this;            
+        }
+        internal void showTable()
+        {
+            table.ShowDialog();
         }
         /// <summary>
         /// 提示資訊是否開啟

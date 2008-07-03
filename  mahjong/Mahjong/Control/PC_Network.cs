@@ -32,14 +32,14 @@ namespace Mahjong.Control
             setupPlace();
             
             creatBrands();
-            //chat.SendAllPlayer(all);
+            chat.SendAllPlayer(all);
             newgame_round();
         }
 
         internal override void newgame_round()
         {
             //chat.SendAllPlayer(all);
-            MessageBox.Show("Run!",chat.ChatName);
+            //MessageBox.Show("Run!",chat.ChatName);
             table.addImage();
             setInforamtion();
             Chow_Pong_Brand = false;
