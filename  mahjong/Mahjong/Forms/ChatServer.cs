@@ -49,6 +49,7 @@ namespace Mahjong.Forms
         General g2;
         internal PC_Network PC;
         internal String[] name = new string[4];
+        internal bool disconnected = false;
 
 
         public ChatServerForm(int port)
@@ -324,6 +325,12 @@ namespace Mahjong.Forms
             else
                 n--;
 
+            lock (players[0])
+            {
+                players[0].threadSuspended = false;
+                Monitor.Pulse(players[0]);
+            } // end lock
+
             players[2] = new NetPlayer(listener.AcceptSocket(), this, 3);
             playerThreads[2] =
                new Thread(new ThreadStart(players[2].Run));
@@ -334,6 +341,12 @@ namespace Mahjong.Forms
                 n++;
             else
                 n--;
+
+             lock ( players[ 1 ] )
+             {
+             players[ 1 ].threadSuspended = false;
+             Monitor.Pulse( players[ 1 ] );
+             } // end lock
 
         }
 
@@ -413,10 +426,10 @@ namespace Mahjong.Forms
                 {
                     // read message from server   
 
-
+                    
                     stringcheck(reader.ReadString());
 
-
+                    
 
                     DisplayMessage(/*"\r\n" +*/ message);
 
@@ -569,8 +582,17 @@ namespace Mahjong.Forms
         {
             sentallplayer(all);
         }
+       protected void Server_Closing(object sender,FormClosedEventArgs e)
+       {
+           disconnected=true;
+           System.Environment.Exit(System.Environment.ExitCode);
+       }
+        public bool GameOver()
+        {
+            return false;
+        }
     } // end class ChatServerForm
-
+    
 
 
 }
