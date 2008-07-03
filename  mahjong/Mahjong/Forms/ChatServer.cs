@@ -138,7 +138,7 @@ namespace Mahjong.Forms
         {
             ckeckplayer = true;
 
-            IPtextBox.Text = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString();
+            //IPtextBox.Text = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString();
             connection = new TcpClient(IPtextBox.Text, Port);
 
             stream = connection.GetStream();
@@ -469,7 +469,7 @@ namespace Mahjong.Forms
                 if (myMark != "Server")
                 {
                     //MessageBox.Show("Call "+myMark+"Run");
-                    PC.newgame_round();
+                    //PC.newgame_round();
                 }
             }
             else if (s.Contains(AllPlayers_Head))

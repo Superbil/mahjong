@@ -20,24 +20,25 @@ namespace Mahjong.Control
         }
         public override void newgame()
         {
-            table.cleanAll();
-            // 設定4個玩家,每個人16張
-            all = new AllPlayers(4, 16);
-            all.sumBrands = factory.SumBrands;
-            // 設定誰是玩家
-            IamPlayer();
-            // 設定 AllPlayers
-            table.Setup(all);
-            // 設定牌桌讀到的位置
-            setupPlace();
+            //table.cleanAll();
+            //// 設定4個玩家,每個人16張
+            //all = new AllPlayers(4, 16);
+            //all.sumBrands = factory.SumBrands;
+            //// 設定誰是玩家
+            //IamPlayer();
+            //// 設定 AllPlayers
+            //table.Setup(all);
+            //// 設定牌桌讀到的位置
+            //setupPlace();
             
-            creatBrands();
-            // 同步玩家資料
-            chat.SendAllPlayer(all);
+            //creatBrands();
+            //// 同步玩家資料
+            //chat.SendAllPlayer(all);
             
 
-            newgame_round();
-            //newgame_network();
+            //newgame_round();
+            ////newgame_network();
+            base.newgame();
         }
 
         internal void newgame_network()
@@ -52,29 +53,30 @@ namespace Mahjong.Control
 
         internal override void newgame_round()
         {
-            //chat.SendAllPlayer(all);
-            all = chat.returnallplayer();
-            table.Setup(all);
-            MessageBox.Show(all.Name[all.state]+" Get Run!",chat.ChatName);
-            //updatePlace();
-            table.addImage();
-            setInforamtion();
-            Chow_Pong_Brand = false;
-            Player_Pass_Brand = false;
-            // 補花
-            for (int i = 0; i < 4; i++)
-            {
-                // 補花
-                all.Newgame_setFlower();
-                // 排序
-                all.sortNowPlayer();
-                // 更新
-                table.updateNowPlayer();
-                // 下一家
-                all.next();
-            }
+            ////chat.SendAllPlayer(all);
+            //all = chat.returnallplayer();
+            //table.Setup(all);
+            //MessageBox.Show(all.Name[all.state]+" Get Run!",chat.ChatName);
+            ////updatePlace();
+            //table.addImage();
+            //setInforamtion();
+            //Chow_Pong_Brand = false;
+            //Player_Pass_Brand = false;
+            //// 補花
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    // 補花
+            //    all.Newgame_setFlower();
+            //    // 排序
+            //    all.sortNowPlayer();
+            //    // 更新
+            //    table.updateNowPlayer();
+            //    // 下一家
+            //    all.next();
+            //}
 
-            roundTimer.Start();
+            //roundTimer.Start();
+            base.newgame_round();
         }
 
         internal override void round()
@@ -87,10 +89,10 @@ namespace Mahjong.Control
 
         internal override void IamPlayer()
         {
-            this.all.isPlayer[(int)location.West] = true;
-            this.all.isPlayer[(int)location.South] = true;
+            this.all.isPlayer[(int)location.West] = false;
+            this.all.isPlayer[(int)location.South] = false;
             this.all.isPlayer[(int)location.East] = true;
-            this.all.isPlayer[(int)location.North] = true;
+            this.all.isPlayer[(int)location.North] = false;
         }
         internal override bool pushToTable(Brand brand)
         {            
@@ -129,22 +131,22 @@ namespace Mahjong.Control
         }
         internal void updatePlace()
         {
-            //this.table.place.Down = all.State;
-            //this.all.next();
-            //this.table.place.Right = all.State;
-            //this.all.next();
-            //this.table.place.Up = all.State;
-            //this.all.next();
-            //this.table.place.Left = all.State;
-            //this.all.next();
-            //this.all.place = this.table.place;
-            if (all.Name[all.state]==chat.ChatName)
-            {
-                table.place.Down = location.South;
+            this.table.place.Down = all.State;
+            this.all.next();
+            this.table.place.Right = all.State;
+            this.all.next();
+            this.table.place.Up = all.State;
+            this.all.next();
+            this.table.place.Left = all.State;
+            this.all.next();
+            this.all.place = this.table.place;
+            //if (all.Name[all.state]==chat.ChatName)
+            //{
+            //    table.place.Down = location.South;
                 
-            }
+            //}
 
-            table.place = all.place;
+            //table.place = all.place;
         }
         internal override void makeBrand(Brand brand)
         {
