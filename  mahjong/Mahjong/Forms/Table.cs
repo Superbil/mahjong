@@ -40,12 +40,10 @@ namespace Mahjong.Forms
         /// </summary>
         internal Place place = new Place();
 
-        public Table(ProgramControl pc)
+        public Table()
         {
             InitializeComponent();
             this.flowLayoutBrands = new FlowLayoutPanel[5];
-            this.pc = pc;
-            this.pc.table = this;
             this.ShowAll = false;
             this.ShowBrandInfo = false;
             this.lockuser = false;
@@ -133,7 +131,7 @@ namespace Mahjong.Forms
         /// 設定玩家
         /// </summary>
         /// <param name="all">AllPlayers</param>
-        public void Setup(AllPlayers all)
+        public virtual void Setup(AllPlayers all)
         {
             this.all = all;
             this.place = all.place;
@@ -221,30 +219,30 @@ namespace Mahjong.Forms
             foreach (FlowLayoutPanel f in flowLayoutBrands)
                 f.Margin = new Padding(size);
         }
-        void addNouth()
+        protected virtual void addNouth()
         {
             //圖片旋轉180度
             addimage_player(all.Players[(int)place.Up], location.North, RotateFlipType.Rotate180FlipNone);
         }
-        void addEast()
+        protected virtual void addEast()
         {
             //圖片旋轉270度
             addimage_player(all.Players[(int)place.Right], location.East, RotateFlipType.Rotate270FlipNone);
         }
-        void addSouth()
+        protected virtual void addSouth()
         {
             addimage_player(all.Players[(int)place.Down], location.South, RotateFlipType.RotateNoneFlipNone);
         }
-        void addWest()
+        protected virtual void addWest()
         {
             //圖片旋轉90度
             addimage_player(all.Players[(int)place.Left], location.West, RotateFlipType.Rotate90FlipNone);
         }
-        void addShowTable()
+        protected virtual void addShowTable()
         {
             addimage_player(all.Show_Table, location.Table, RotateFlipType.RotateNoneFlipNone);
         }
-        void addTable()
+        protected virtual void addTable()
         {
             addimage_player(all.Table, location.Table, RotateFlipType.RotateNoneFlipNone);
         }
@@ -254,7 +252,7 @@ namespace Mahjong.Forms
             addimage_iterator(temp, state, rotate);
             this.Update();
         }
-        private void addimage_iterator(Iterator iterator, location state, RotateFlipType rotate)
+        protected virtual void addimage_iterator(Iterator iterator, location state, RotateFlipType rotate)
         {
             while (iterator.hasNext())
             {
@@ -262,7 +260,7 @@ namespace Mahjong.Forms
                 addimage(state, brand, rotate);
             }
         }
-        private void addimage(location state, Brand brand, RotateFlipType rotate)
+        protected virtual void addimage(location state, Brand brand, RotateFlipType rotate)
         {
             Bitmap bitmap;
             // 如果是可視的牌就設定顯示牌的圖型，否則就顯示直立的牌 Resources.upbarnd
@@ -444,7 +442,7 @@ namespace Mahjong.Forms
         /// <summary>
         /// 清除所有顯示的圖片
         /// </summary>
-        public void cleanImage()
+        public virtual void cleanImage()
         {
             foreach (FlowLayoutPanel f in flowLayoutBrands)
                 f.Controls.Clear();
@@ -452,14 +450,14 @@ namespace Mahjong.Forms
         /// <summary>
         /// 清除所有控制項
         /// </summary>
-        public void cleanAll()
+        public virtual void cleanAll()
         {
             this.Controls.Clear();
         }
         /// <summary>
         /// 更新現在玩家
         /// </summary>
-        public void updateNowPlayer()
+        public virtual void updateNowPlayer()
         {
             flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
             switch (place.getRealPlace(all.State))
@@ -481,7 +479,7 @@ namespace Mahjong.Forms
         /// <summary>
         /// 更新桌面
         /// </summary>
-        public void updateTable()
+        public virtual void updateTable()
         {
             flowLayoutBrands[(int)location.Table].Controls.Clear();
             addShowTable();            
@@ -489,7 +487,7 @@ namespace Mahjong.Forms
         /// <summary>
         /// 更新Title和資訊盒
         /// </summary>
-        public void updateInforamation()
+        public virtual void updateInforamation()
         {
             setTitle();
             setInforamtion();
@@ -554,12 +552,12 @@ namespace Mahjong.Forms
 
         private void 儲存牌局ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pc.savefile();
+            pc.savegame();
         }
 
         private void 讀取牌局ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pc.openfile();       
+            pc.loadgame();       
         }
     }
 }

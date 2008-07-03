@@ -9,9 +9,9 @@ namespace Mahjong.Control
 {
     public class PC_Network : ProgramControl
     {
-        public PC_Network(ProgramControl pc)
-        {
-            table = pc.table;
+        public PC_Network(Form f,ProgramControl pc) : base(f)
+        {            
+            table = (Table)f;
             information = pc.information;
             table.pc = this;
             chat = pc.chat;

@@ -94,6 +94,12 @@
     <Compile Include="Forms\Information.Designer.cs">
       <DependentUpon>Information.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NewTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewTable.Designer.cs">
+      <DependentUpon>NewTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mahjong_Main.cs" />
     <Compile Include="Control\Test\TallyTest.cs">
     </Compile>
@@ -346,6 +352,7 @@
     <None Include="Resources\upbarnd.gif" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Mahjong.config" />
     <None Include="Mahjong_TemporaryKey.pfx" />
     <None Include="Resources\a.gif" />
@@ -354,6 +361,10 @@
     <EmbeddedResource Include="Forms\ChowBrandCheck.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ChowBrandCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewTable.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>NewTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mahjong.ico" />
   </ItemGroup>

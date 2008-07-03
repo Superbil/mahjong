@@ -12,7 +12,7 @@ namespace Mahjong.Control
     {
         private BinaryFormatter formatter = new BinaryFormatter();
         private FileStream output, input;
-        public void openfile()
+        public void loadgame()
         {
             OpenFileDialog o = new OpenFileDialog();
             o.InitialDirectory = ".";
@@ -37,7 +37,7 @@ namespace Mahjong.Control
                 MessageBox.Show("開啟檔案錯誤！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        public virtual void savefile()
+        public virtual void savegame()
         {
             SaveFileDialog s = new SaveFileDialog();
             s.InitialDirectory = ".";

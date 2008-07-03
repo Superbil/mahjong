@@ -64,11 +64,14 @@ namespace Mahjong.Control
         /// <summary>
         /// 遊戲控制建構子
         /// </summary>
-        public ProgramControl()
+        public ProgramControl(Form f)
         {      
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
             showMessageBox = true;
             roundTimer.Interval = Settings.Default.RunRoundTime_Normal;
+            table = (Table)f;
+            table.pc = this;
+            f.ShowDialog();
         }
         /// <summary>
         /// 提示資訊是否開啟
@@ -294,7 +297,7 @@ namespace Mahjong.Control
             chat = new ChatServerForm();            
             //table.pc.all = new AllPlayers(4,16);
             //table.pc = new PC_Network(this);
-            chat.PC = new PC_Network(this);
+            chat.PC = new PC_Network(table,this);
             chat.Show();
         }
 
