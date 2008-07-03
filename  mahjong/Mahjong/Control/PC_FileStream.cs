@@ -23,7 +23,7 @@ namespace Mahjong.Control
                 //設定檔案流
                 input = new FileStream(o.FileName, FileMode.Open, FileAccess.ReadWrite);
                 //讀檔並且解序列化                
-                this.all = (AllPlayers)formatter.Deserialize(input);
+                all = (AllPlayers)formatter.Deserialize(input);
                 //關閉檔案
                 input.Close();
                 //更新設定畫面

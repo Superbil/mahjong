@@ -10,7 +10,7 @@ namespace Mahjong.Control
     public class PC_Network : ProgramControl
     {
         public PC_Network(Form f,ProgramControl pc) : base(f)
-        {            
+        {
             table = (Table)f;
             information = pc.information;
             table.pc = this;
@@ -32,14 +32,28 @@ namespace Mahjong.Control
             setupPlace();
             
             creatBrands();
+            // 同步玩家資料
             chat.SendAllPlayer(all);
             newgame_round();
+            //newgame_network();
+        }
+
+        internal void newgame_network()
+        {
+            //MessageBox.Show("Setup Table");
+            table.Setup(all);
+            //setupPlace();
+            table.addImage();
+            //setInforamtion();
+            //newgame_round();
         }
 
         internal override void newgame_round()
         {
             //chat.SendAllPlayer(all);
-            //MessageBox.Show("Run!",chat.ChatName);
+            table.Setup(all);
+            MessageBox.Show(all.Name[all.state]+" Get Run!",chat.ChatName);
+            //updatePlace();
             table.addImage();
             setInforamtion();
             Chow_Pong_Brand = false;
@@ -56,7 +70,8 @@ namespace Mahjong.Control
                 // 下一家
                 all.next();
             }
-            //roundTimer.Start();
+
+            roundTimer.Start();
         }
 
         internal override void round()
@@ -101,9 +116,16 @@ namespace Mahjong.Control
         }
         internal override void setupPlace()
         {
-            //uint temp = this.all.state;
-            //this.all.state = (int)location.East;
-            
+            //this.all.state = temp;
+            base.setupPlace();
+            //table.place.Up = location.North;
+            //table.place.Right = location.East;
+            //table.place.Down = location.South;
+            //table.place.Left = location.West;
+            //all.place = table.place;
+        }
+        internal void updatePlace()
+        {
             //this.table.place.Down = all.State;
             //this.all.next();
             //this.table.place.Right = all.State;
@@ -113,28 +135,16 @@ namespace Mahjong.Control
             //this.table.place.Left = all.State;
             //this.all.next();
             //this.all.place = this.table.place;
+            if (all.Name[all.state]==chat.ChatName)
+            {
+                table.place.Down = location.South;
+                
+            }
 
-            //this.all.state = temp;
-            base.setupPlace();
-        }
-        internal void updatePlace()
-        {
-            this.table.place.Down = all.State;
-            this.all.next();
-            this.table.place.Right = all.State;
-            this.all.next();
-            this.table.place.Up = all.State;
-            this.all.next();
-            this.table.place.Left = all.State;
-            this.all.next();
-            this.all.place = this.table.place;
+            table.place = all.place;
         }
         internal override void makeBrand(Brand brand)
         {
-            //lock (this)
-            //{
-                chat.SendAllPlayer(all);
-
                 all.Players[(int)all.place.getRealPlace(all.State)].remove(brand);
                 // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
                 // 若成立就表示沒有人要，不成立就表示被人拿走
@@ -146,8 +156,8 @@ namespace Mahjong.Control
                     setInforamtion();
                 }
                 // 計時器重新啟動
-                roundTimer.Start(); 
-            //}
+                //roundTimer.Start();
+                chat.SendAllPlayer(all);
         }
 
     }

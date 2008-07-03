@@ -70,7 +70,7 @@ namespace Mahjong.Control
             showMessageBox = true;
             roundTimer.Interval = Settings.Default.RunRoundTime_Normal;
             table = (Table)f;
-            table.pc = this;            
+            table.pc = this;
         }
         internal void showTable()
         {
@@ -103,7 +103,7 @@ namespace Mahjong.Control
         {
             set
             {
-                this.all = value;
+                all = value;
             }
         }
         /// <summary>

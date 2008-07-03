@@ -60,7 +60,7 @@ namespace Mahjong.Forms
         {
             get
             {
-                return myMark;
+                return myMarkname;
             }
         }
 
@@ -313,6 +313,11 @@ namespace Mahjong.Forms
                 n++;
             else
                 n--;
+            lock (players[0])
+            {
+                players[0].threadSuspended = false;
+                Monitor.Pulse(players[0]);
+            } // end lock
 
             // accept second player and start another player thread       
             players[1] = new NetPlayer(listener.AcceptSocket(), this, 2);
@@ -325,10 +330,10 @@ namespace Mahjong.Forms
             else
                 n--;
 
-            lock (players[0])
+            lock (players[1])
             {
-                players[0].threadSuspended = false;
-                Monitor.Pulse(players[0]);
+                players[1].threadSuspended = false;
+                Monitor.Pulse(players[1]);
             } // end lock
 
             players[2] = new NetPlayer(listener.AcceptSocket(), this, 3);
@@ -342,11 +347,11 @@ namespace Mahjong.Forms
             else
                 n--;
 
-             lock ( players[ 1 ] )
-             {
-             players[ 1 ].threadSuspended = false;
-             Monitor.Pulse( players[ 1 ] );
-             } // end lock
+            lock (players[2])
+            {
+                players[2].threadSuspended = false;
+                Monitor.Pulse(players[2]);
+            } // end lock
 
         }
 
@@ -461,8 +466,11 @@ namespace Mahjong.Forms
             byte[] allplayer;
             if (s.Contains(newgameround))
             {
-                if (myMark!="Server")
+                if (myMark != "Server")
+                {
+                    //MessageBox.Show("Call "+myMark+"Run");
                     PC.newgame_round();
+                }
             }
             else if (s.Contains(AllPlayers_Head))
             {
@@ -472,7 +480,7 @@ namespace Mahjong.Forms
                 PC.all = (AllPlayers)getObjectWithByteArray(allplayer);
 
                 //MessageBox.Show(g2.Name,myMark);
-                //MessageBox.Show(PC.all.Name[PC.all.state],myMark);
+                MessageBox.Show(PC.all.Name[PC.all.state],myMark);
             }
             else
                 message = s;
@@ -509,10 +517,10 @@ namespace Mahjong.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             General g1 = new General("¼B§Ó«T", "c:\\liu.bmp", 60, 99, 80, 95, true, true, false);
-
+            PC.newgame();
             try
             {
-                PC.newgame();
+                
                     
                         for (int i = 0; i < n; i++)
                         {
@@ -560,7 +568,7 @@ namespace Mahjong.Forms
                         socketStream = new NetworkStream(players[i].connection);
 
                         writer = new BinaryWriter(socketStream);
-                        //reader = new BinaryReader(socketStream);
+                        reader = new BinaryReader(socketStream);
                         writer.Write(AllPlayers_Head + getByteArrayWithObject(all).Length.ToString());
                         writer.Write(getByteArrayWithObject(all));
                     }
