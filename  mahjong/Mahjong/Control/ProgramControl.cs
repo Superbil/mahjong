@@ -63,7 +63,7 @@ namespace Mahjong.Control
         internal bool showMessageBox;
         /// <summary>
         /// 遊戲控制建構子
-        /// </summary>
+        /// </summary>        
         public ProgramControl(Form f)
         {      
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
@@ -110,7 +110,7 @@ namespace Mahjong.Control
         /// 現在的玩家是不是真實的玩家
         /// </summary>
         /// <returns>布林</returns>
-        internal bool NowPlayer_isPlayer
+        internal virtual bool NowPlayer_isPlayer
         {
             get
             {
@@ -248,7 +248,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 設定顯示資訊
         /// </summary>
-        internal void setInforamtion()
+        internal virtual void setInforamtion()
         {
             information.setup(table,all);
             information.updateInformation();            
@@ -296,11 +296,9 @@ namespace Mahjong.Control
         /// 連線設定
         /// </summary>
         internal void onlineGame()
-        {            
-            chat = new ChatServerForm();            
-            //table.pc.all = new AllPlayers(4,16);
-            //table.pc = new PC_Network(this);
-            chat.PC = new PC_Network(table,this);
+        {
+            chat = new ChatServerForm();
+            chat.PC = new PC_Network(table, this);
             chat.Show();
         }
 

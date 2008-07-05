@@ -27,7 +27,7 @@ namespace Mahjong.Control
                 //關閉檔案
                 input.Close();
                 //更新設定畫面
-                table.cleanAll();
+                table.clearAll();
                 table.Setup(all);
                 table.addImage();
                 setInforamtion();

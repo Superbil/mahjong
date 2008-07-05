@@ -1,6 +1,3 @@
-// Fig. 23.1: ChatServer.cs
-// Set up a server that will receive a connection from a client, send a
-// string to the client, chat with the client and close the connection.
 using System;
 using System.Windows.Forms;
 using System.Threading;
@@ -9,8 +6,6 @@ using System.Net.Sockets;
 using System.IO;
 using Mahjong.Control;
 using System.Runtime.Serialization.Formatters.Binary;
-
-
 
 namespace Mahjong.Forms
 {
@@ -63,6 +58,20 @@ namespace Mahjong.Forms
                 return myMarkname;
             }
         }
+        public int HowMuchPlayer
+        {
+            get
+            {
+                return n;
+            }
+        }
+        public string Mark
+        {
+            get
+            {
+                return myMark;
+            }
+        }
 
         public byte[] getByteArrayWithObject(AllPlayers all)
         {
@@ -87,8 +96,6 @@ namespace Mahjong.Forms
 
             return bf1.Deserialize(ms);
         }
-
-
 
         public static byte[] ReadFully(Stream stream)
         {
@@ -121,6 +128,7 @@ namespace Mahjong.Forms
                getPlayers.Start();
             */
         } // end method CharServerForm_Load
+
         public void ChatServer()
         {
             players = new NetPlayer[3];
@@ -129,10 +137,6 @@ namespace Mahjong.Forms
             // accept connections on a different thread         
             getPlayers = new Thread(new ThreadStart(SetUp));
             getPlayers.Start();
-
-
-
-
         }
         public void ChatClient()
         {
@@ -182,21 +186,12 @@ namespace Mahjong.Forms
                 Invoke(new DisplayDelegate(DisplayMessage), new object[] { message });
 
             }// end if
-            /*
-                        else if(tempp.Remove(AllPlayers_Head.Length)==AllPlayers_Head)
-                        {
-                            message = message.Remove(0, AllPlayers_Head.Length);
-                            size = int.Parse(message);
-               
-                        }
-             */
             else if (temp != message)// OK to modify displayTextBox in current thread
             {
                 displayTextBox.AppendText("\r\n" + message);
                 temp = message;
 
-            }
-
+            }// end if
 
         } // end method DisplayMessage
 
@@ -221,8 +216,6 @@ namespace Mahjong.Forms
         } // end method DisableInput
         internal void servermessage(string reply)
         {
-
-
             for (int i = 0; i < n; i++)
             {
                 socketStream = new NetworkStream(players[i].connection);
@@ -231,14 +224,10 @@ namespace Mahjong.Forms
                 writer = new BinaryWriter(socketStream);
                 reader = new BinaryReader(socketStream);
                 writer.Write(reply);
-
-
             }
         }
         internal void serverobject(byte[] date)
         {
-
-
             for (int i = 0; i < n; i++)
             {
                 socketStream = new NetworkStream(players[i].connection);
@@ -247,8 +236,6 @@ namespace Mahjong.Forms
                 writer = new BinaryWriter(socketStream);
                 reader = new BinaryReader(socketStream);
                 writer.Write(date);
-
-
             }
         }
         // send the text typed at the server to the client
@@ -299,8 +286,7 @@ namespace Mahjong.Forms
             DisplayMessage("Waiting for players...");
 
             // set up Socket                                           
-            listener =
-                 new TcpListener(serverIP, Port);
+            listener = new TcpListener(serverIP, Port);
             listener.Start();
             // accept first player and start a player thread
 
@@ -367,11 +353,15 @@ namespace Mahjong.Forms
             myMark = "Server";
             nametextBox.ReadOnly = true;
             IPtextBox.ReadOnly = true;
+            name[0] = nametextBox.Text;
+            connectbutton.Enabled = false;
             ChatServer();
         }
 
         private void connectbutton_Click(object sender, EventArgs e)
         {
+            createbutton.Enabled = false;
+            startbutton.Enabled = false;
             if (myMark == "Server")
             {
                 DisableInput(false);
@@ -419,27 +409,21 @@ namespace Mahjong.Forms
             reader = new BinaryReader(output);
 
 
-            DisableInput(false); // enable inputTextBox
-            
+            DisableInput(false); // enable inputTextBox            
 
             // loop until server signals termination
             do
-            {
-               
+            {               
                 // Step 3: processing phase
                 try
                 {
-                    // read message from server   
-
-                    
-                    stringcheck(reader.ReadString());
-
-                    
+                    // read message from server                       
+                    stringcheck(reader.ReadString());                    
 
                     DisplayMessage(/*"\r\n" +*/ message);
 
                 } // end try
-                catch (Exception)
+                catch (EndOfStreamException)
                 {
                     break;
                     // handle exception if error in reading server data
@@ -454,8 +438,6 @@ namespace Mahjong.Forms
             connection.Close();
             outputThread.Abort();
             getPlayers.Abort();
-
-
         }
         /// <summary>
         /// Client 端的接收
@@ -470,6 +452,7 @@ namespace Mahjong.Forms
                 {
                     //MessageBox.Show("Call "+myMark+"Run");
                     //PC.newgame_round();
+                    
                 }
             }
             else if (s.Contains(AllPlayers_Head))
@@ -477,15 +460,15 @@ namespace Mahjong.Forms
                 allplayer = reader.ReadBytes(int.Parse(s.Remove(0, AllPlayers_Head.Length)));
                 //g2 = (General)getObjectWithByteArray(allplayer);
                 // clinet 接收到allplayer的設定
-                PC.all = (AllPlayers)getObjectWithByteArray(allplayer);
+                
+                //PC.all = (AllPlayers)getObjectWithByteArray(allplayer);
+                PC.newgame_network((AllPlayers)getObjectWithByteArray(allplayer));
 
                 //MessageBox.Show(g2.Name,myMark);
-                MessageBox.Show(PC.all.Name[PC.all.state],myMark);
+                //MessageBox.Show(PC.all.Name[PC.all.state],myMark);
             }
             else
                 message = s;
-
-
         }
 
         private void cancelbutton_Click(object sender, EventArgs e)
@@ -516,22 +499,20 @@ namespace Mahjong.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            General g1 = new General("劉志俊", "c:\\liu.bmp", 60, 99, 80, 95, true, true, false);
+            //General g1 = new General("劉志俊", "c:\\liu.bmp", 60, 99, 80, 95, true, true, false);
             PC.newgame();
             try
             {
-                
-                    
-                        for (int i = 0; i < n; i++)
-                        {
-                            socketStream = new NetworkStream(players[i].connection);
+                for (int i = 0; i < n; i++)
+                {
+                    socketStream = new NetworkStream(players[i].connection);
 
-                            // create objects for transferring data across stream
-                            writer = new BinaryWriter(socketStream);
-                            reader = new BinaryReader(socketStream);
-                            writer.Write(newgameround);
+                    // create objects for transferring data across stream
+                    writer = new BinaryWriter(socketStream);
+                    reader = new BinaryReader(socketStream);
+                    writer.Write(newgameround);
 
-                        }
+                }
                 //if (myMark == "Server")
                 //{
                 //    for (int i = 0; i < n; i++)

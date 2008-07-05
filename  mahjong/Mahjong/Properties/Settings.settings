@@ -9,10 +9,10 @@
       <Value Profile="(Default)">40</Value>
     </Setting>
     <Setting Name="East" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">顯示提示ToolStripMenuItem</Value>
+      <Value Profile="(Default)">東</Value>
     </Setting>
     <Setting Name="Nouth" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">顯示提示ToolStripMenuItem</Value>
+      <Value Profile="(Default)">北</Value>
     </Setting>
     <Setting Name="West" Type="System.String" Scope="Application">
       <Value Profile="(Default)">西</Value>
@@ -123,7 +123,7 @@
       <Value Profile="(Default)">網路遊戲</Value>
     </Setting>
     <Setting Name="About" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">關於這個麻將遊戲ToolStripMenuItem</Value>
+      <Value Profile="(Default)">關於</Value>
     </Setting>
     <Setting Name="Config" Type="System.String" Scope="Application">
       <Value Profile="(Default)">設定</Value>
@@ -165,7 +165,7 @@
       <Value Profile="(Default)">相公</Value>
     </Setting>
     <Setting Name="ShowMessageBox" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">顯示提示ToolStripMenuItem</Value>
+      <Value Profile="(Default)">顯示提示</Value>
     </Setting>
     <Setting Name="Debug_IsCanSee" Type="System.String" Scope="Application">
       <Value Profile="(Default)">可視</Value>
@@ -183,13 +183,13 @@
       <Value Profile="(Default)">超快速</Value>
     </Setting>
     <Setting Name="RunRoundTime_Slow_Text" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">速ToolStripMenuItem</Value>
+      <Value Profile="(Default)">慢速</Value>
     </Setting>
     <Setting Name="Money" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5000</Value>
     </Setting>
     <Setting Name="ChowBrandCheck" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">速ToolStripMenuItem</Value>
+      <Value Profile="(Default)">是否吃牌</Value>
     </Setting>
     <Setting Name="One_Tai" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">20</Value>

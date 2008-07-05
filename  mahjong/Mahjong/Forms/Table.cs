@@ -39,17 +39,22 @@ namespace Mahjong.Forms
         /// 牌桌位置所對應到的玩家
         /// </summary>
         internal Place place = new Place();
+        /// <summary>
+        /// 設定非同步執行序呼叫點
+        /// </summary>
+        /// <param name="flp">FlowLayoutPanel []</param>
+        delegate void SetControlCallback(FlowLayoutPanel[] flp);
 
         public Table()
         {
             InitializeComponent();
-            this.flowLayoutBrands = new FlowLayoutPanel[5];
-            this.ShowAll = false;
-            this.ShowBrandInfo = false;
-            this.lockuser = false;
-            this.cheat = false;
-            this.KeyUp += new KeyEventHandler(Table_KeyUp);
-            this.ShowMessageBox_Menu.CheckedChanged += new EventHandler(ShowMessageBox_Menu_CheckedChanged);
+            flowLayoutBrands = new FlowLayoutPanel[5];
+            ShowAll = false;
+            ShowBrandInfo = false;
+            lockuser = false;
+            cheat = false;
+            KeyUp += new KeyEventHandler(Table_KeyUp);
+            ShowMessageBox_Menu.CheckedChanged += new EventHandler(ShowMessageBox_Menu_CheckedChanged);
         }
 
         void ShowMessageBox_Menu_CheckedChanged(object sender, EventArgs e)
@@ -135,7 +140,7 @@ namespace Mahjong.Forms
         {
             this.all = all;
             this.place = all.place;
-            ShowMessageBox_Menu.Checked = this.pc.ShowMessageBox = this.all.showMessageBox;
+            ShowMessageBox_Menu.Checked = pc.ShowMessageBox = all.showMessageBox;
             setFlowLayout();
             setTitle();
         }
@@ -149,7 +154,7 @@ namespace Mahjong.Forms
                 s += " - ";
                 s += Settings.Default.Debug;
             }
-            this.Text = s;
+            Text = s;
         }
 
         private void setInforamtion()
@@ -157,63 +162,85 @@ namespace Mahjong.Forms
             pc.setInforamtion();
         }
 
+        void SetControl(FlowLayoutPanel[] flp)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new SetControlCallback(SetControl), new object[] { flp });
+                this.Invoke(new setFlowLayout_delegate(setFlowLayout_size));
+                this.Invoke(new setFlowLayout_delegate(setFlowLayout_Dock));
+                this.Invoke(new setFlowLayout_delegate(setFlowLayout_FlowDirection));
+                this.Invoke(new setFlowLayout_delegate(setFlowLayout_Anchor));
+                this.Invoke(new setFlowLayout_delegate(setFlowLayout_location));
+            }
+            else
+                this.Controls.AddRange(flp);
+        }
+        delegate void setFlowLayout_delegate();
         private void setFlowLayout()
         {
             for (int i = 0; i < flowLayoutBrands.Length; i++)
                 flowLayoutBrands[i] = new FlowLayoutPanel();
-            this.Controls.AddRange(flowLayoutBrands);
-            setFlowLayout_location(3);
+                                    
+            SetControl(flowLayoutBrands);                        
+            if (!this.InvokeRequired)
+            {
+                setFlowLayout_size();                
+                setFlowLayout_Dock();
+                setFlowLayout_FlowDirection();
+                setFlowLayout_Anchor();
+                setFlowLayout_location();
+            }            
             setFlowLayout_name();
-            setFlowLayout_size();
             setFlowLayout_Margin(10);
-            setFlowLayout_Dock();
-            //this.flowLayoutBrands[4].BackColor = Color.Blue;
-            setFlowLayout_FlowDirection();
-            this.flowLayoutBrands[4].Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
         }
 
         private void setFlowLayout_FlowDirection()
         {
-            this.flowLayoutBrands[0].FlowDirection = FlowDirection.RightToLeft;
-            this.flowLayoutBrands[1].FlowDirection = FlowDirection.BottomUp;
-            this.flowLayoutBrands[2].FlowDirection = FlowDirection.LeftToRight;
-            this.flowLayoutBrands[3].FlowDirection = FlowDirection.TopDown;
+            flowLayoutBrands[0].FlowDirection = FlowDirection.RightToLeft;
+            flowLayoutBrands[1].FlowDirection = FlowDirection.BottomUp;
+            flowLayoutBrands[2].FlowDirection = FlowDirection.LeftToRight;
+            flowLayoutBrands[3].FlowDirection = FlowDirection.TopDown;
         }
         private void setFlowLayout_name()
         {
-            this.flowLayoutBrands[0].Name = Settings.Default.Nouth;
-            this.flowLayoutBrands[1].Name = Settings.Default.East;
-            this.flowLayoutBrands[2].Name = Settings.Default.South;
-            this.flowLayoutBrands[3].Name = Settings.Default.West;
+            flowLayoutBrands[0].Name = Settings.Default.Nouth;
+            flowLayoutBrands[1].Name = Settings.Default.East;
+            flowLayoutBrands[2].Name = Settings.Default.South;
+            flowLayoutBrands[3].Name = Settings.Default.West;
         }
         private void setFlowLayout_size()
         {
-            this.flowLayoutBrands[0].Size = new Size((width + padding * 2) * all.Dealnumber, height * 2 + padding * 2);
-            this.flowLayoutBrands[1].Size = new Size(height * 2 + padding * 2, (width + padding * 2) * all.Dealnumber);
-            this.flowLayoutBrands[2].Size = new Size((width + padding * 2) * all.Dealnumber, height * 2 + padding * 2);
-            this.flowLayoutBrands[3].Size = new Size(height * 2 + padding * 2, (width * 2 + padding * 2) * all.Dealnumber);
-            this.flowLayoutBrands[4].Size = new Size(width * all.Dealnumber + padding * 2, height * (all.sumBrands / all.Dealnumber) + padding * 2);
+            flowLayoutBrands[0].Size = new Size((width + padding * 2) * all.Dealnumber, height * 2 + padding * 2);
+            flowLayoutBrands[1].Size = new Size(height * 2 + padding * 2, (width + padding * 2) * all.Dealnumber);
+            flowLayoutBrands[2].Size = new Size((width + padding * 2) * all.Dealnumber, height * 2 + padding * 2);
+            flowLayoutBrands[3].Size = new Size(height * 2 + padding * 2, (width * 2 + padding * 2) * all.Dealnumber);
+            flowLayoutBrands[4].Size = new Size(width * all.Dealnumber + padding * 2, height * (all.sumBrands / all.Dealnumber) + padding * 2);
         }
-        private void setFlowLayout_location(int keepsize)
+        private void setFlowLayout_location()
         {
-            this.flowLayoutBrands[0].Location = new Point(keepsize * 2 + (height + padding * 2), keepsize);
-            this.flowLayoutBrands[1].Location = new Point(
+            int keepsize = 3;
+            flowLayoutBrands[0].Location = new Point(keepsize * 2 + (height + padding * 2), keepsize);
+            flowLayoutBrands[1].Location = new Point(
                 keepsize * 3 + height + padding * 2 + (width + padding * 2) * all.Dealnumber, keepsize * 2 + height + padding * 2);
-            this.flowLayoutBrands[2].Location = new Point(
+            flowLayoutBrands[2].Location = new Point(
                 keepsize * 2 + height + padding * 2, keepsize * 3 + width * (all.Dealnumber + 1) + padding * 2 + height);
-            this.flowLayoutBrands[3].Location = new Point(keepsize, keepsize * 2 + height + padding * 2);
-            this.flowLayoutBrands[4].Location = new Point(keepsize * 2 + (height * 2 + padding * 2), keepsize * 2 + (height * 2 + padding * 2));
+            flowLayoutBrands[3].Location = new Point(keepsize, keepsize * 2 + height + padding * 2);
+            flowLayoutBrands[4].Location = new Point(keepsize * 2 + (height * 2 + padding * 2), keepsize * 2 + (height * 2 + padding * 2));
         }
         void setFlowLayout_Dock()
         {
-            this.flowLayoutBrands[0].Dock = DockStyle.Top;
-            this.flowLayoutBrands[1].Dock = DockStyle.Right;
-            this.flowLayoutBrands[2].Dock = DockStyle.Bottom;
-            this.flowLayoutBrands[3].Dock = DockStyle.Left;
-            this.flowLayoutBrands[4].Dock = DockStyle.Fill;
+            flowLayoutBrands[0].Dock = DockStyle.Top;
+            flowLayoutBrands[1].Dock = DockStyle.Right;
+            flowLayoutBrands[2].Dock = DockStyle.Bottom;
+            flowLayoutBrands[3].Dock = DockStyle.Left;
+            flowLayoutBrands[4].Dock = DockStyle.Fill;
         }
+        void setFlowLayout_Anchor()
+        {
+            flowLayoutBrands[4].Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+        }
+
         private void setFlowLayout_Margin(int size)
         {
             foreach (FlowLayoutPanel f in flowLayoutBrands)
@@ -250,8 +277,13 @@ namespace Mahjong.Forms
         {
             Iterator temp = player.creatIterator();
             addimage_iterator(temp, state, rotate);
-            this.Update();
+            if (InvokeRequired)
+                Invoke(new Update_delegate(Update));
+            else
+                Update();
         }
+        delegate void Update_delegate();
+
         protected virtual void addimage_iterator(Iterator iterator, location state, RotateFlipType rotate)
         {
             while (iterator.hasNext())
@@ -322,8 +354,18 @@ namespace Mahjong.Forms
             tempBrandbox.Image = bitmap;
 
             // 新增至控制項
-            this.flowLayoutBrands[(int)state].Controls.Add(tempBrandbox);
-            this.Update();
+            add_flowLayoutBrands((int)state,tempBrandbox);
+        }
+        delegate void add_flowLayoutBrands_delegate(int state, BrandBox brandbox);
+
+        void add_flowLayoutBrands(int state,BrandBox brandbox)
+        {
+            if (flowLayoutBrands[state].InvokeRequired)
+            {
+                flowLayoutBrands[state].Invoke(new add_flowLayoutBrands_delegate(add_flowLayoutBrands), new object[] { state,brandbox });
+            }
+            else
+                flowLayoutBrands[state].Controls.Add(brandbox);
         }
 
         void tempBrandbox_MouseMove(object sender, MouseEventArgs e)
@@ -336,7 +378,7 @@ namespace Mahjong.Forms
         void brandBox_MouseLeave(object sender, EventArgs e)
         {
             BrandBox b = (BrandBox)sender;
-            b.BackColor = this.BackColor;
+            b.BackColor = BackColor;
         }
 
         /// <summary>
@@ -368,8 +410,8 @@ namespace Mahjong.Forms
 
             all.NowPlayer.remove(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
             all.NowPlayer.add(b.brand);
-            this.cleanImage();
-            this.addImage();            
+            cleanImage();
+            addImage();            
         }
 
         void debug_Click(object sender, EventArgs e)
@@ -450,16 +492,26 @@ namespace Mahjong.Forms
         /// <summary>
         /// 清除所有控制項
         /// </summary>
-        public virtual void cleanAll()
+        public virtual void clearAll()
         {
-            this.Controls.Clear();
+            Controls.Clear();
         }
+        delegate void flowLayoutBrands_Clear();
+
+        void clearNowPlayer()
+        {
+            flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
+        }
+
         /// <summary>
         /// 更新現在玩家
         /// </summary>
         public virtual void updateNowPlayer()
         {
-            flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
+            if (InvokeRequired)
+                Invoke(new flowLayoutBrands_Clear(clearNowPlayer));
+            else
+                clearNowPlayer();
             switch (place.getRealPlace(all.State))
             {
                 case location.East:

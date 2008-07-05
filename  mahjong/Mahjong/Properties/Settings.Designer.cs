@@ -43,7 +43,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("顯示提示ToolStripMenuItem")]
+        [global::System.Configuration.DefaultSettingValueAttribute("東")]
         public string East {
             get {
                 return ((string)(this["East"]));
@@ -52,7 +52,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("顯示提示ToolStripMenuItem")]
+        [global::System.Configuration.DefaultSettingValueAttribute("北")]
         public string Nouth {
             get {
                 return ((string)(this["Nouth"]));
@@ -400,7 +400,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("關於這個麻將遊戲ToolStripMenuItem")]
+        [global::System.Configuration.DefaultSettingValueAttribute("關於")]
         public string About {
             get {
                 return ((string)(this["About"]));
@@ -529,7 +529,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("顯示提示ToolStripMenuItem")]
+        [global::System.Configuration.DefaultSettingValueAttribute("顯示提示")]
         public string ShowMessageBox {
             get {
                 return ((string)(this["ShowMessageBox"]));
@@ -589,7 +589,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("速ToolStripMenuItem")]
+        [global::System.Configuration.DefaultSettingValueAttribute("慢速")]
         public string RunRoundTime_Slow_Text {
             get {
                 return ((string)(this["RunRoundTime_Slow_Text"]));
@@ -610,7 +610,7 @@ namespace Mahjong.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("速ToolStripMenuItem")]
+        [global::System.Configuration.DefaultSettingValueAttribute("是否吃牌")]
         public string ChowBrandCheck {
             get {
                 return ((string)(this["ChowBrandCheck"]));
