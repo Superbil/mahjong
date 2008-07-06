@@ -28,7 +28,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 換到下一家的計時器
         /// </summary>
-        internal Timer roundTimer = new Timer();
+        Timer roundTimer = new Timer();
         /// <summary>
         /// 全部玩家和桌面
         /// </summary>
@@ -110,7 +110,7 @@ namespace Mahjong.Control
         /// 現在的玩家是不是真實的玩家
         /// </summary>
         /// <returns>布林</returns>
-        internal virtual bool NowPlayer_isPlayer
+        internal virtual bool NowPlayer_is_Real_Player
         {
             get
             {
@@ -250,9 +250,8 @@ namespace Mahjong.Control
         /// </summary>
         internal virtual void setInforamtion()
         {
-            information.setup(table,all);
-            information.updateInformation();            
-            information.DebugMode = table.ShowAll;
+            information.setup(table, all);
+            information.updateInformation();
             information.Show();
         }
         /// <summary>

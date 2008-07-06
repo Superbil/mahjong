@@ -61,6 +61,19 @@ namespace Mahjong.Forms
         {
             pc.ShowMessageBox = ShowMessageBox_Menu.Checked;
         }
+
+        internal AllPlayers Allplayers
+        {
+            set
+            {
+                all = value;
+            }
+            get
+            {
+                return all;
+            }
+        }
+
         /// <summary>
         /// 鎖定使用者
         /// </summary>
@@ -371,7 +384,7 @@ namespace Mahjong.Forms
         void tempBrandbox_MouseMove(object sender, MouseEventArgs e)
         {
             BrandBox b = (BrandBox)sender;
-            if (pc.NowPlayer_isPlayer)
+            if (pc.NowPlayer_is_Real_Player && all.State == place.Down)
                 b.BackColor = Color.Blue;           
         }
 
@@ -464,7 +477,7 @@ namespace Mahjong.Forms
         {
             BrandBox b = (BrandBox)sender;
             // 確定為玩家才發送事件
-            if (pc.NowPlayer_isPlayer)
+            if (pc.NowPlayer_is_Real_Player && all.State == place.Down)
                 pc.makeBrand(b.brand);
             b.Click -= new EventHandler(debug_Click);
         }
@@ -481,27 +494,44 @@ namespace Mahjong.Forms
             if (ShowAll)
                 addTable();
         }
+
+        delegate void flowLayoutBrands_Clear(FlowLayoutPanel f);
+
         /// <summary>
         /// 清除所有顯示的圖片
         /// </summary>
         public virtual void cleanImage()
         {
             foreach (FlowLayoutPanel f in flowLayoutBrands)
-                f.Controls.Clear();
+            {
+                if (f.InvokeRequired)
+                    f.Invoke(new flowLayoutBrands_Clear(clearFlowLayout_Control), new object[] { f });
+                else
+                    clearFlowLayout_Control(f);
+            }
+        }
+
+        void clearFlowLayout_Control(FlowLayoutPanel f)
+        {
+            f.Controls.Clear();
         }
         /// <summary>
         /// 清除所有控制項
         /// </summary>
         public virtual void clearAll()
         {
+            if (InvokeRequired)
+                Invoke(new flowLayoutBrands_Nowplayer_Clear(clearControl));
+            else
+                clearControl();
+        }
+
+        void clearControl()
+        {
             Controls.Clear();
         }
-        delegate void flowLayoutBrands_Clear();
 
-        void clearNowPlayer()
-        {
-            flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
-        }
+        delegate void flowLayoutBrands_Nowplayer_Clear();
 
         /// <summary>
         /// 更新現在玩家
@@ -509,7 +539,7 @@ namespace Mahjong.Forms
         public virtual void updateNowPlayer()
         {
             if (InvokeRequired)
-                Invoke(new flowLayoutBrands_Clear(clearNowPlayer));
+                Invoke(new flowLayoutBrands_Nowplayer_Clear(clearNowPlayer));
             else
                 clearNowPlayer();
             switch (place.getRealPlace(all.State))
@@ -528,6 +558,12 @@ namespace Mahjong.Forms
                     break;
             }
         }
+
+        void clearNowPlayer()
+        {
+            flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
+        }
+
         /// <summary>
         /// 更新桌面
         /// </summary>

@@ -174,6 +174,7 @@ namespace Mahjong.Forms
             {
                 myMarkname = nametextBox.Text;
                 myMark = message;
+                // setup Mark and Name
                 writer.Write(myMark+"."+ myMarkname);
                 ckeckplayer = false;
 
@@ -355,40 +356,17 @@ namespace Mahjong.Forms
             IPtextBox.ReadOnly = true;
             name[0] = nametextBox.Text;
             connectbutton.Enabled = false;
+            Text = Text + " - ¦øªA¾¹ºÝ";
+            DisableInput(false);
             ChatServer();
         }
 
         private void connectbutton_Click(object sender, EventArgs e)
         {
+            Text = Text + " - ³s½uºÝ";
             createbutton.Enabled = false;
             startbutton.Enabled = false;
-            if (myMark == "Server")
-            {
-                DisableInput(false);
-                //PC.newgame();
-                //try
-                //{
-                    
-                //        for (int i = 0; i < n; i++)
-                //        {
-                //            socketStream = new NetworkStream(players[i].connection);
-
-                //            // create objects for transferring data across stream
-                //            writer = new BinaryWriter(socketStream);
-                //            reader = new BinaryReader(socketStream);
-                //            writer.Write(newgameround);
-
-                //        }
-                //        // if the user at the server signaled termination
-                //        // sever the connection to the client
-
-                //     // clear the userŠö input
-                 
-                //}
-                //catch
-                //{ }
-            }
-            else
+            if (myMark != "Server")
             {
                 nametextBox.ReadOnly = true;
                 IPtextBox.ReadOnly = true;
@@ -407,7 +385,6 @@ namespace Mahjong.Forms
             // create objects for writing and reading across stream
             writer = new BinaryWriter(output);
             reader = new BinaryReader(output);
-
 
             DisableInput(false); // enable inputTextBox            
 
@@ -497,9 +474,10 @@ namespace Mahjong.Forms
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void playgame_Click(object sender, EventArgs e)
         {
             //General g1 = new General("¼B§Ó«T", "c:\\liu.bmp", 60, 99, 80, 95, true, true, false);
+            createbutton.Enabled = false;
             PC.newgame();
             try
             {
@@ -511,27 +489,7 @@ namespace Mahjong.Forms
                     writer = new BinaryWriter(socketStream);
                     reader = new BinaryReader(socketStream);
                     writer.Write(newgameround);
-
                 }
-                //if (myMark == "Server")
-                //{
-                //    for (int i = 0; i < n; i++)
-                //    {
-                //        socketStream = new NetworkStream(players[i].connection);
-
-                //        writer = new BinaryWriter(socketStream);
-                //        reader = new BinaryReader(socketStream);
-                //        writer.Write(AllPlayers_Head + getByteArrayWithObject(g1).Length.ToString());
-                //        writer.Write(getByteArrayWithObject(g1));
-
-                //    }
-
-                //}
-                //else
-                //{
-                //    writer.Write(AllPlayers_Head + getByteArrayWithObject(g1).Length.ToString());
-                //    writer.Write(getByteArrayWithObject(g1));
-            //}
             }
             catch (SocketException)
             {

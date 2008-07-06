@@ -25,7 +25,7 @@ namespace Mahjong.Control
             else
                 touchBrand();
             // 目前狀態不等於玩家時
-            if (!NowPlayer_isPlayer)
+            if (!NowPlayer_is_Real_Player)
                 makeBrand(getfromAI());
             else
                 setInforamtion();
@@ -87,7 +87,7 @@ namespace Mahjong.Control
                 else if (darkkong.DarkKong() || kong.Kong())
                 {
                     // 如果是玩家
-                    if (NowPlayer_isPlayer)
+                    if (NowPlayer_is_Real_Player)
                     {
                         Brand br = null;
                         if (darkkong.DarkKong())
@@ -125,7 +125,7 @@ namespace Mahjong.Control
                 // 明碰之後再槓 
                 else if (teamKong.Kong())
                 {
-                    if (NowPlayer_isPlayer)
+                    if (NowPlayer_is_Real_Player)
                     {
                         toUser(nextbrand, false, false, teamKong.Kong(), false, false);
                         if (Player_Pass_Brand)
@@ -176,41 +176,68 @@ namespace Mahjong.Control
         /// 是否有人要 胡 槓 碰 吃
         /// </summary>
         /// <param name="brand">打出到桌面的牌</param>
-        /// <returns>是否被拿走了</returns>
+        /// <returns>是否能打到桌面上</returns>
         internal bool check_chow_pong_kong_win(Brand brand)
         {
-            // 有沒有人要胡
+            // 是否有人要 胡
+            if (check_win(brand))
+                return false;
+            // 是否有人要 碰 槓
+            if (check_pong_kong(brand))
+                return false;
+            // 是否有人要 吃
+            if (check_chow(brand))
+                return false;
+            // 成功打到桌面上
+            return true;
+        }
+
+        private bool check_chow(Brand brand)
+        {
+            // 有沒有人要吃
             for (int i = 0; i < 3; i++)
             {
                 all.next();
+                Check c = new Check(brand, NowPlayer_removeTeam);
                 Check w = new Check(brand, all.NowPlayer);
                 Ai.setPlayer(brand, all.NowPlayer);
-                if (w.Win())
+                // 只有下家能吃
+                if (c.Chow() && i == 0)
                 {
-                    // 如果是玩家
-                    if (NowPlayer_isPlayer)
+                    // 如果是真實玩家
+                    if (NowPlayer_is_Real_Player)
                     {
-                        toUser(brand, false, false, false, false, true);
-                        // 如果玩家按下過水 就跳過
-                        if (Player_Pass_Brand)
-                            Player_Pass_Brand = false;
-                        // 若不是按下過水就傳回 失敗
+                        // 是不是正在玩的玩家
+                        if (all.State == table.place.Down)
+                        {
+                            toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
+                            if (Player_Pass_Brand)
+                                Player_Pass_Brand = false;
+                            else
+                                return true;
+                        }
                         else
-                            return false;
+                            return true;
                     }
-                    else if (Ai.Win)
+                    else if (Ai.Chow)
                     {
-                        // 更新資訊盒
                         setInforamtion();
                         if (showMessageBox)
-                            MessageBox.Show(Mahjong.Properties.Settings.Default.Win, all.Name[all.state].ToString());
-                        win_game(brand);
-                        return false;
+                            MessageBox.Show(Mahjong.Properties.Settings.Default.Chow, all.Name[all.state].ToString());
+                        all.chow_pong(brand, c.SuccessPlayer);
+                        updatePlayer_Table();
+                        Chow_Pong_Brand = true;
+                        return true;
                     }
                 }
+
             }
             all.next();
+            return false;
+        }
 
+        private bool check_pong_kong(Brand brand)
+        {
             // 測試是否被 槓 碰
             for (int i = 0; i < 3; i++)
             {
@@ -219,15 +246,21 @@ namespace Mahjong.Control
                 Check w = new Check(brand, all.NowPlayer);
                 Ai.setPlayer(brand, all.NowPlayer);
                 // 如果是玩家
-                if (NowPlayer_isPlayer)
+                if (NowPlayer_is_Real_Player)
                 {
                     if (c.Pong() || c.Kong())
                     {
-                        toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
-                        if (Player_Pass_Brand)
-                            Player_Pass_Brand = false;
+                        // 是不是正在玩的玩家
+                        if (all.State == table.place.Down)
+                        {
+                            toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
+                            if (Player_Pass_Brand)
+                                Player_Pass_Brand = false;
+                            else
+                                return true;
+                        }
                         else
-                            return false;
+                            return true;
                     }
                 }
                 else
@@ -241,7 +274,7 @@ namespace Mahjong.Control
                         all.kong(brand, c.SuccessPlayer);
                         Chow_Pong_Brand = false;
                         updatePlayer_Table();
-                        return false;
+                        return true;
                     }
                     // 碰
                     else if (c.Pong() && Ai.Pong)
@@ -253,46 +286,54 @@ namespace Mahjong.Control
                         updatePlayer_Table();
                         Chow_Pong_Brand = true;
 
-                        return false;
+                        return true;
                     }
                 }
             }
             all.next();
+            return false;
+        }
 
-            // 有沒有人要吃
+        private bool check_win(Brand brand)
+        {
+            // 有沒有人要胡
             for (int i = 0; i < 3; i++)
             {
                 all.next();
-                Check c = new Check(brand, NowPlayer_removeTeam);
                 Check w = new Check(brand, all.NowPlayer);
                 Ai.setPlayer(brand, all.NowPlayer);
-                if (c.Chow() && i == 0)
+                if (w.Win())
                 {
                     // 如果是玩家
-                    if (NowPlayer_isPlayer)
+                    if (NowPlayer_is_Real_Player)
                     {
-                        toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
-                        if (Player_Pass_Brand)
-                            Player_Pass_Brand = false;
+                        // 是不是正在玩的玩家
+                        if (all.State == table.place.Down)
+                        {
+                            toUser(brand, false, false, false, false, true);
+                            // 如果玩家按下過水 就跳過
+                            if (Player_Pass_Brand)
+                                Player_Pass_Brand = false;
+                            // 若不是按下過水就傳回 失敗
+                            else
+                                return true;
+                        }
                         else
-                            return false;
+                            return true;
                     }
-                    else if (Ai.Chow)
+                    else if (Ai.Win)
                     {
+                        // 更新資訊盒
                         setInforamtion();
                         if (showMessageBox)
-                            MessageBox.Show(Mahjong.Properties.Settings.Default.Chow, all.Name[all.state].ToString());
-                        all.chow_pong(brand, c.SuccessPlayer);
-                        updatePlayer_Table();
-                        Chow_Pong_Brand = true;
-                        return false;
+                            MessageBox.Show(Mahjong.Properties.Settings.Default.Win, all.Name[all.state].ToString());
+                        win_game(brand);
+                        return true;
                     }
                 }
-
             }
             all.next();
-
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -322,7 +363,7 @@ namespace Mahjong.Control
             table.ShowAll = false;
             //開新的遊戲
             newgame_round();
-            this.factory = new BrandFactory();
+            factory = new BrandFactory();
         }
     }
 }

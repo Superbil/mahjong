@@ -158,7 +158,7 @@ namespace Mahjong.Forms
             this.startbutton.TabIndex = 11;
             this.startbutton.Text = "¶}©l";
             this.startbutton.UseVisualStyleBackColor = true;
-            this.startbutton.Click += new System.EventHandler(this.button1_Click);
+            this.startbutton.Click += new System.EventHandler(this.playgame_Click);
             // 
             // ChatServerForm
             // 

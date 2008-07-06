@@ -121,7 +121,7 @@ namespace Mahjong.Forms
 
         private void updateName()
         {
-            if (Debug)
+            if (table.ShowAll)
             {
                 Up_label.Text = all.Name[table.place.getRealPlace_Up].ToString() + "\n~" + all.Players[table.place.getRealPlace_Up].getCount().ToString();
                 Right_label.Text = all.Name[table.place.getRealPlace_Right].ToString() + "\n~" + all.Players[table.place.getRealPlace_Right].getCount().ToString();
