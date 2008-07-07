@@ -577,6 +577,35 @@ namespace Mahjong.Forms
                 MessageBox.Show("接口設定錯誤！");
             }
         }
+
+        internal void SendObject(CheckUser cu)
+        {
+            try
+            {
+                if (myMark == "Server")
+                {
+                    for (int i = 0; i < n; i++)
+                    {
+                        socketStream = new NetworkStream(players[i].connection);
+
+                        writer = new BinaryWriter(socketStream);
+                        reader = new BinaryReader(socketStream);
+                        writer.Write(Check_Head + getByteArrayWithObject(cu).Length.ToString());
+                        writer.Write(getByteArrayWithObject(cu));
+                    }
+
+                }
+                else
+                {
+                    writer.Write(Check_Head + getByteArrayWithObject(cu).Length.ToString());
+                    writer.Write(getByteArrayWithObject(cu));
+                }
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("接口設定錯誤！");
+            }
+        }
         protected void Server_Closing(object sender, FormClosedEventArgs e)
         {
             disconnected = true;
