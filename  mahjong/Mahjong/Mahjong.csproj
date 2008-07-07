@@ -68,7 +68,7 @@
     <Compile Include="AIs\Level 1.cs" />
     <Compile Include="AIs\MahjongAI.cs" />
     <Compile Include="AIs\SimpleAI.cs" />
-    <Compile Include="Control\BTest.cs" />
+    <Compile Include="Control\Test\BTest.cs" />
     <Compile Include="Control\CheckUser.cs" />
     <Compile Include="Control\General.cs" />
     <Compile Include="Control\Mahjon_Exception.cs" />

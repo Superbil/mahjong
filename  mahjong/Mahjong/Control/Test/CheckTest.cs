@@ -68,9 +68,9 @@ namespace Mahjong.Control
             //Brand b = new TubeBrand(2);
             //CheckUser c = new Check(b,a);
             printplayer(a);
-            CheckUser c = new Check(new TubeBrand(2), a);
+            CheckBrands c = new CheckBrands(new TubeBrand(2), a);
             a.add(new TubeBrand(2));
-            CheckUser d = new Check(a);
+            CheckBrands d = new CheckBrands(a);
             //if (c.Win())
             //{
             //    Console.WriteLine("¦³­J¡I¡I");
