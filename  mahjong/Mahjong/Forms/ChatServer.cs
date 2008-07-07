@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using Mahjong.Control;
+using Mahjong.Brands;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Mahjong.Forms
@@ -40,6 +41,9 @@ namespace Mahjong.Forms
         public int Port = 50000;
         public const string AllPlayers_Head = "/allplaysize:";
         public const string newgameround = "/newgame";
+        public const string Brand_Head = "/brand:";
+        public const string Check_Head = "/check:";
+
         // initialize thread for reading
         General g2;
         internal PC_Network PC;
@@ -80,11 +84,18 @@ namespace Mahjong.Forms
             bf1.Serialize(ms, all);
             return ms.ToArray();
         }
-        public byte[] getByteArrayWithObject(General all)
+        public byte[] getByteArrayWithObject(Brand brand)
         {
             MemoryStream ms = new MemoryStream();
             BinaryFormatter bf1 = new BinaryFormatter();
-            bf1.Serialize(ms, all);
+            bf1.Serialize(ms, brand);
+            return ms.ToArray();
+        }
+        public byte[] getByteArrayWithObject(CheckUser check)
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf1 = new BinaryFormatter();
+            bf1.Serialize(ms, check);
             return ms.ToArray();
         }
 
@@ -175,7 +186,7 @@ namespace Mahjong.Forms
                 myMarkname = nametextBox.Text;
                 myMark = message;
                 // setup Mark and Name
-                writer.Write(myMark+"."+ myMarkname);
+                writer.Write(myMark + "." + myMarkname);
                 ckeckplayer = false;
 
             }
@@ -390,7 +401,7 @@ namespace Mahjong.Forms
 
             // loop until server signals termination
             do
-            {               
+            {
                 // Step 3: processing phase
                 try
                 {
@@ -400,17 +411,12 @@ namespace Mahjong.Forms
                     DisplayMessage(/*"\r\n" +*/ message);
 
                 } // end try
-                catch (IOException)
+                catch (EndOfStreamException)
                 {
-                    MessageBox.Show("Server 連線中斷");
                     break;
-                }
-                // handle exception if error in reading server data
-                //System.Environment.Exit(System.Environment.ExitCode);
-                //catch (EndOfStreamException)
-                //{
-                //    break;                
-                //} // end catch
+                    // handle exception if error in reading server data
+                    //System.Environment.Exit(System.Environment.ExitCode);
+                } // end catch
             } while (connection.Connected);
 
             // Step 4: close connection
@@ -428,21 +434,33 @@ namespace Mahjong.Forms
         private void stringcheck(string s)
         {
             byte[] allplayer;
+
             if (s.Contains(newgameround))
             {
                 if (myMark != "Server")
                 {
                     //MessageBox.Show("Call "+myMark+"Run");
                     //PC.newgame_round();
-                    
+
                 }
+            }
+            else if (s.Contains(Check_Head))
+            {
+                allplayer = reader.ReadBytes(int.Parse(s.Remove(0, Check_Head.Length)));
+                PC.getCheckUser((CheckUser)getObjectWithByteArray(allplayer));
+            }
+            else if (s.Contains(Brand_Head))
+            {
+                allplayer = reader.ReadBytes(int.Parse(s.Remove(0, Brand_Head.Length)));
+                PC.getBrand((Brand)getObjectWithByteArray(allplayer));
+
             }
             else if (s.Contains(AllPlayers_Head))
             {
                 allplayer = reader.ReadBytes(int.Parse(s.Remove(0, AllPlayers_Head.Length)));
                 //g2 = (General)getObjectWithByteArray(allplayer);
                 // clinet 接收到allplayer的設定
-                
+
                 //PC.all = (AllPlayers)getObjectWithByteArray(allplayer);
                 PC.newgame_network((AllPlayers)getObjectWithByteArray(allplayer));
 
@@ -501,7 +519,9 @@ namespace Mahjong.Forms
                 MessageBox.Show("!");
             }
         } // end method RunClient
-        private void sentallplayer(AllPlayers all)
+
+
+        internal void SendObject(AllPlayers all)
         {
             try
             {
@@ -529,16 +549,39 @@ namespace Mahjong.Forms
                 MessageBox.Show("接口設定錯誤！");
             }
         }
-
-        internal void SendAllPlayer(AllPlayers all)
+        internal void SendObject(Brand bd)
         {
-            sentallplayer(all);
+            try
+            {
+                if (myMark == "Server")
+                {
+                    for (int i = 0; i < n; i++)
+                    {
+                        socketStream = new NetworkStream(players[i].connection);
+
+                        writer = new BinaryWriter(socketStream);
+                        reader = new BinaryReader(socketStream);
+                        writer.Write(Brand_Head + getByteArrayWithObject(bd).Length.ToString());
+                        writer.Write(getByteArrayWithObject(bd));
+                    }
+
+                }
+                else
+                {
+                    writer.Write(Brand_Head + getByteArrayWithObject(bd).Length.ToString());
+                    writer.Write(getByteArrayWithObject(bd));
+                }
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("接口設定錯誤！");
+            }
         }
-       protected void Server_Closing(object sender,FormClosedEventArgs e)
-       {
-           disconnected=true;
-           System.Environment.Exit(System.Environment.ExitCode);
-       }
+        protected void Server_Closing(object sender, FormClosedEventArgs e)
+        {
+            disconnected = true;
+            System.Environment.Exit(System.Environment.ExitCode);
+        }
         public bool GameOver()
         {
             return false;
@@ -548,7 +591,7 @@ namespace Mahjong.Forms
             return PC.all;
         }
     } // end class ChatServerForm
-    
+
 
 
 }

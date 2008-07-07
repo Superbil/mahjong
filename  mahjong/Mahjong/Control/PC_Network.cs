@@ -47,7 +47,7 @@ namespace Mahjong.Control
             // 建立牌
             creatBrands();
             // 同步玩家資料
-            chat.SendAllPlayer(all);
+            chat.SendObject(all);
             check_newgame = true;
             newgame_round();
         }
@@ -110,7 +110,7 @@ namespace Mahjong.Control
             }
 
             // 同步玩家資料
-            chat.SendAllPlayer(all);
+            chat.SendObject(all);
 
             //if (all.State == table.place.Down)
             round();
@@ -136,7 +136,7 @@ namespace Mahjong.Control
                     setInforamtion();
 
                 // 同步玩家資料
-                chat.SendAllPlayer(all);
+                chat.SendObject(all);
             }
             catch (FlowOverException)
             {
@@ -180,7 +180,7 @@ namespace Mahjong.Control
                 // 更新資訊盒
                 setInforamtion();
                 // 同步化Allplayer
-                chat.SendAllPlayer(all);
+                chat.SendObject(all);
             }
             // 計時器重新啟動
             //roundTimer.Start();
@@ -198,7 +198,7 @@ namespace Mahjong.Control
             // 放到桌面上
             all.PushToTable(brand);
             // 同步玩家
-            chat.SendAllPlayer(all);
+            chat.SendObject(all);
             
             // 排序現在的玩家
             all.sortNowPlayer();
