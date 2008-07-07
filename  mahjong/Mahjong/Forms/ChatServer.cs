@@ -395,17 +395,22 @@ namespace Mahjong.Forms
                 try
                 {
                     // read message from server                       
-                    stringcheck(reader.ReadString());                    
+                    stringcheck(reader.ReadString());
 
                     DisplayMessage(/*"\r\n" +*/ message);
 
                 } // end try
-                catch (EndOfStreamException)
+                catch (IOException)
                 {
+                    MessageBox.Show("Server ³s½u¤¤Â_");
                     break;
-                    // handle exception if error in reading server data
-                    //System.Environment.Exit(System.Environment.ExitCode);
-                } // end catch
+                }
+                // handle exception if error in reading server data
+                //System.Environment.Exit(System.Environment.ExitCode);
+                //catch (EndOfStreamException)
+                //{
+                //    break;                
+                //} // end catch
             } while (connection.Connected);
 
             // Step 4: close connection
