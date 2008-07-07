@@ -84,6 +84,11 @@ namespace Mahjong.Control
 
         }
 
+        internal void getCheckUser(CheckUser check)
+        {
+
+        }
+
         internal override void newgame_round()
         {
             //MessageBox.Show(all.Name[all.state] + " Get Run!", chat.ChatName);

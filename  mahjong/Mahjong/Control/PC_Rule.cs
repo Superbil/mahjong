@@ -68,13 +68,13 @@ namespace Mahjong.Control
             else
             {
                 // 是否胡牌或槓牌(手牌加摸到的牌)
-                Check win = new Check(nextbrand, all.NowPlayer);
+                CheckBrands win = new CheckBrands(nextbrand, all.NowPlayer);
                 // 除去顯示牌看是否有暗槓(移除牌組的牌加摸到的牌)
-                Check kong = new Check(nextbrand, NowPlayer_removeTeam);
+                CheckBrands kong = new CheckBrands(nextbrand, NowPlayer_removeTeam);
                 // 除去顯示或打出的牌看是否有暗槓
-                Check darkkong = new Check(NowPlayer_removeTeam);
+                CheckBrands darkkong = new CheckBrands(NowPlayer_removeTeam);
                 // 只有牌組和摸進來的牌做比較
-                Check teamKong = new Check(nextbrand, NowPlayer_OnlyTeam);
+                CheckBrands teamKong = new CheckBrands(nextbrand, NowPlayer_OnlyTeam);
                 if (win.Win())
                 {
                     // 更新資訊盒
@@ -198,8 +198,8 @@ namespace Mahjong.Control
             for (int i = 0; i < 3; i++)
             {
                 all.next();
-                Check c = new Check(brand, NowPlayer_removeTeam);
-                Check w = new Check(brand, all.NowPlayer);
+                CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
+                CheckBrands w = new CheckBrands(brand, all.NowPlayer);
                 Ai.setPlayer(brand, all.NowPlayer);
                 // 只有下家能吃
                 if (c.Chow() && i == 0)
@@ -242,8 +242,8 @@ namespace Mahjong.Control
             for (int i = 0; i < 3; i++)
             {
                 all.next();
-                Check c = new Check(brand, NowPlayer_removeTeam);
-                Check w = new Check(brand, all.NowPlayer);
+                CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
+                CheckBrands w = new CheckBrands(brand, all.NowPlayer);
                 Ai.setPlayer(brand, all.NowPlayer);
                 // 如果是玩家
                 if (NowPlayer_is_Real_Player)
@@ -300,7 +300,7 @@ namespace Mahjong.Control
             for (int i = 0; i < 3; i++)
             {
                 all.next();
-                Check w = new Check(brand, all.NowPlayer);
+                CheckBrands w = new CheckBrands(brand, all.NowPlayer);
                 Ai.setPlayer(brand, all.NowPlayer);
                 if (w.Win())
                 {

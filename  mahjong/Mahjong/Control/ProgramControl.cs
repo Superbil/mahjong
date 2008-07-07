@@ -152,7 +152,7 @@ namespace Mahjong.Control
         /// </summary>
         internal void chow(Brand brand)
         {
-            Check c = new Check(brand, NowPlayer_removeTeam);
+            CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
             if (c.Chow())
                 if (c.ChowLength == 1)
                 {
@@ -174,7 +174,7 @@ namespace Mahjong.Control
         /// </summary>
         internal void pong(Brand brand)
         {
-            Check c = new Check(brand, NowPlayer_removeTeam);
+            CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
             if (c.Pong())
                 all.chow_pong(brand, c.SuccessPlayer);
             Chow_Pong_Brand = true;
@@ -185,8 +185,8 @@ namespace Mahjong.Control
         /// </summary>
         internal void kong(Brand brand)
         {
-            Check c = new Check(brand, NowPlayer_removeTeam);
-            Check d = new Check(brand, all.NowPlayer);
+            CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
+            CheckBrands d = new CheckBrands(brand, all.NowPlayer);
             if (c.Kong())
                 all.kong(brand, c.SuccessPlayer);
             else if (d.Kong())
@@ -199,8 +199,8 @@ namespace Mahjong.Control
         /// </summary>
         internal void dark_kong(Brand brand)
         {
-            Check c = new Check(brand, NowPlayer_removeTeam);
-            Check d = new Check(NowPlayer_removeTeam);
+            CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
+            CheckBrands d = new CheckBrands(NowPlayer_removeTeam);
             if (c.Kong())
                 all.DarkKong(brand, c.SuccessPlayer);
             else if (d.DarkKong())
@@ -317,8 +317,8 @@ namespace Mahjong.Control
         internal void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
         {
             CPK cpk = new CPK(this, brand);
-            Check c = new Check(brand, NowPlayer_removeTeam);
-            Check w = new Check(brand, all.NowPlayer);
+            CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
+            CheckBrands w = new CheckBrands(brand, all.NowPlayer);
             cpk.Enabled_Button(chow, pong, kong, darkkong, win);
             if (chow || pong || kong || win || darkkong)
                 cpk.ShowDialog();

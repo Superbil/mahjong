@@ -9,7 +9,7 @@ namespace Mahjong.Control
     /// <summary>
     /// 牌的狀態檢查
     /// </summary>
-    class Check
+    class CheckBrands
     {
         BrandPlayer x = new BrandPlayer();
         BrandPlayer a = new BrandPlayer();
@@ -24,7 +24,7 @@ namespace Mahjong.Control
         /// 牌的狀態檢查 暗槓
         /// </summary>
         /// <param name="player">牌玩家</param>
-        public Check(BrandPlayer player)
+        public CheckBrands(BrandPlayer player)
         {
             for (int i = 0; i < player.getCount(); i++)
                 if (player.getBrand(i).getClass() != Mahjong.Properties.Settings.Default.Flower)
@@ -37,7 +37,7 @@ namespace Mahjong.Control
         /// </summary>
         /// <param name="otherbrand">進來的牌</param>
         /// <param name="player">成立的玩家組合</param>
-        public Check(Brand otherbrand, BrandPlayer player)
+        public CheckBrands(Brand otherbrand, BrandPlayer player)
         {
             for (int i = 0; i < player.getCount(); i++)
                 if (player.getBrand(i).getClass() != Mahjong.Properties.Settings.Default.Flower)
