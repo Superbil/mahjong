@@ -34,5 +34,15 @@ namespace Mahjong.Control
         /// ¹L¤ô
         /// </summary>
         public bool Pass;
+
+        public CheckUser(bool chow,bool pong,bool kong,bool darkkong,bool win,bool pass)
+        {
+            Chow = chow;
+            Pong = pong;
+            Kong = kong;
+            DarkKong = darkkong;
+            Win = win;
+            Pass = pass;
+        }
     }
 }

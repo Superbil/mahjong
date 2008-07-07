@@ -440,8 +440,7 @@ namespace Mahjong.Forms
                 if (myMark != "Server")
                 {
                     //MessageBox.Show("Call "+myMark+"Run");
-                    //PC.newgame_round();
-
+                    PC.newgame_round();
                 }
             }
             else if (s.Contains(Check_Head))

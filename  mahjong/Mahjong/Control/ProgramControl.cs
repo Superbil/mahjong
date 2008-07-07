@@ -314,7 +314,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 把牌丟給玩家，看是否要吃 碰 槓 過水 胡
         /// </summary>
-        internal void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
+        internal virtual void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
         {
             CPK cpk = new CPK(this, brand);
             CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
