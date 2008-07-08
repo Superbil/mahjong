@@ -257,7 +257,7 @@ namespace Mahjong.Control
         /// <summary>
         /// 移除掉已經打出去的牌組，以牌組編號來區分
         /// </summary>
-        BrandPlayer NowPlayer_removeTeam
+        protected BrandPlayer NowPlayer_removeTeam
         {
             get
             {

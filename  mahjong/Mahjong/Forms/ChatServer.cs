@@ -166,8 +166,7 @@ namespace Mahjong.Forms
 
         }
         // close all threads associated with this application
-        private void ChatServerForm_FormClosing(object sender,
-           FormClosingEventArgs e)
+        private void ChatServerForm_FormClosing(object sender,FormClosingEventArgs e)
         {
             System.Environment.Exit(System.Environment.ExitCode);
         } // end method CharServerForm_FormClosing
@@ -367,6 +366,7 @@ namespace Mahjong.Forms
             IPtextBox.ReadOnly = true;
             name[0] = nametextBox.Text;
             connectbutton.Enabled = false;
+            createbutton.Enabled = false;
             Text = Text + " - ¦øªA¾¹ºÝ";
             DisableInput(false);
             ChatServer();
@@ -411,7 +411,7 @@ namespace Mahjong.Forms
                     DisplayMessage(/*"\r\n" +*/ message);
 
                 } // end try
-                catch (EndOfStreamException)
+                catch (Exception)
                 {
                     break;
                     // handle exception if error in reading server data

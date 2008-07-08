@@ -13,6 +13,7 @@ namespace Mahjong.Control
     {
         internal bool check_newgame = false;
         CheckUser checkuser;
+        bool get_CheckUser = false;
         public PC_Network(Form f,ProgramControl pc) : base(f)
         {
             table = (Table)f;
@@ -72,16 +73,30 @@ namespace Mahjong.Control
 
         internal void getBrand(Brand brand)
         {
-            
+            if (myTurn)
+            {
+                CPK cpk = new CPK(this, brand);
+                cpk.Network = true;
+                cpk.Checkuser = checkuser;
+                CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
+                CheckBrands w = new CheckBrands(brand, all.NowPlayer);
+                cpk.Enabled_Button(checkuser.Chow, checkuser.Pong, checkuser.Kong, checkuser.DarkKong, checkuser.Win);
+                if (checkuser.Chow || checkuser.Pong || checkuser.Kong || checkuser.Win || checkuser.DarkKong)
+                    cpk.ShowDialog();
+
+                chat.SendObject(cpk.Checkuser);
+            }
+            else if (iAmServer)
+            {
+                makeBrand(brand);
+            }
         }
 
         internal void getCheckUser(CheckUser check)
-        {
-            if (myTurn)
-            {
-
-            }
-            
+        {            
+            checkuser = check;
+            if (iAmServer)
+                get_CheckUser = true;
         }
 
         internal override void newgame_round()
@@ -105,11 +120,11 @@ namespace Mahjong.Control
             }
 
             // 同步玩家資料
-            if (chat.Mark == "Server")
+            if (iAmServer)
                 chat.SendObject(all);
 
             //if (all.State == table.place.Down)
-            if (chat.Mark == "Server")
+            if (iAmServer)
                 round();
             //roundTimer.Start();
         }
@@ -156,12 +171,15 @@ namespace Mahjong.Control
 
         internal override void makeBrand(Brand brand)
         {
-            all.Players[(int)all.place.getRealPlace(all.State)].remove(brand);
+            if (myTurn)
+                all.Players[(int)table.place.getRealPlace(all.State)].remove(brand);
+            
             if (myTurn)
                 chat.SendObject(brand);
             // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
             // 若成立就表示沒有人要，不成立就表示被人拿走
-            if (chat.Mark == "Server")
+            
+            
                 if (pushToTable(brand))
                 {
                     // 換下一個人
@@ -169,16 +187,16 @@ namespace Mahjong.Control
                     // 更新資訊盒
                     setInforamtion();
                     // 同步化Allplayer
-                    if (chat.Mark == "Server")
-                        chat.SendObject(all);
+                    chat.SendObject(all);
                 }
-            // 計時器重新啟動
-            //roundTimer.Start();
-            //chat.SendAllPlayer(all);
-            // 是不是現在的玩家
-            //if (all.State == table.place.Down)
-            if (chat.Mark == "Server")
-                round();
+                // 計時器重新啟動
+                //roundTimer.Start();
+                //chat.SendAllPlayer(all);
+                // 是不是現在的玩家
+                //if (all.State == table.place.Down)
+                if (iAmServer)
+                    round();
+            
         }
 
         internal override bool pushToTable(Brand brand)
@@ -198,20 +216,48 @@ namespace Mahjong.Control
             table.cleanImage();
             table.addImage();
             setInforamtion();
-
-            // 看是否有人要 胡 槓 碰 吃
-            return check_chow_pong_kong_win(brand);
+            //// 如果不是server
+            //if (!iAmServer)
+            //    chat.SendObject(brand);
+            if (iAmServer)
+                // 看是否有人要 胡 槓 碰 吃
+                return check_chow_pong_kong_win(brand);
+            else
+                return false;
         }
 
         internal override void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
         {
-            //base.toUser(brand, chow, pong, kong, darkkong, win);
-            
-            chat.SendObject(new CheckUser(chow,pong,kong,darkkong,win,true));
-            lock (this)
+            if (iAmServer)
             {
-                Monitor.Wait(this);
+                chat.SendObject(all);
+                chat.SendObject(new CheckUser(chow, pong, kong, darkkong, win, false));
+                chat.SendObject(brand);
+                while (true)
+                {
+                    if (get_CheckUser)
+                        break;
+                }
+                runCheckUser(brand);
             }
+            else
+                base.toUser(brand, chow, pong, kong, darkkong, win);
+        }
+
+        void runCheckUser(Brand brand)
+        {
+            if (checkuser.Chow)
+                chow(brand);
+            else if (checkuser.Pong)
+                pong(brand);
+            else if (checkuser.Kong)
+                kong(brand);
+            else if (checkuser.DarkKong)
+                dark_kong(brand);
+            else if (checkuser.Win)
+                win(brand);
+            else if (checkuser.Pass)
+                pass(brand);
         }
 
         internal override void IamPlayer()
@@ -288,6 +334,13 @@ namespace Mahjong.Control
             get
             {
                 return all.State == table.place.Down;
+            }
+        }
+        bool iAmServer
+        {
+            get
+            {
+                return chat.Mark == "Server";
             }
         }
     }
