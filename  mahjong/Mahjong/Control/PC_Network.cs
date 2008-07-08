@@ -99,7 +99,10 @@ namespace Mahjong.Control
         {            
             checkuser = check;
             if (iAmServer)
+            {
                 get_CheckUser = true;
+                //Monitor.Pulse(this);
+            }
         }
 
         internal override void newgame_round()
@@ -246,6 +249,11 @@ namespace Mahjong.Control
                     if (get_CheckUser)
                         break;
                 }
+                //lock (this)
+                //{
+                //    MessageBox.Show("Lock!");
+                //    //Monitor.Wait(this);
+                //}
                 runCheckUser(brand);
 
 

@@ -590,12 +590,20 @@ namespace Mahjong.Forms
             flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
         }
 
+        void clearFlowLayoutBrands_Table()
+        {
+            flowLayoutBrands[(int)location.Table].Controls.Clear();
+        }
+
         /// <summary>
         /// §ó·s®à­±
         /// </summary>
         public virtual void updateTable()
         {
-            flowLayoutBrands[(int)location.Table].Controls.Clear();
+            if (InvokeRequired)
+                Invoke(new flowLayoutBrands_Nowplayer_Clear(clearFlowLayoutBrands_Table));
+            else
+                clearFlowLayoutBrands_Table();
             addShowTable();            
         }
         /// <summary>

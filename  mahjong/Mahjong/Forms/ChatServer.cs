@@ -413,7 +413,7 @@ namespace Mahjong.Forms
                     DisplayMessage(/*"\r\n" +*/ message);
 
                 } // end try
-                catch (Exception)
+                catch (IOException)
                 {
                     break;
                     // handle exception if error in reading server data
