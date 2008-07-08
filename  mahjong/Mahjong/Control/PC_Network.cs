@@ -59,8 +59,7 @@ namespace Mahjong.Control
                 table.Setup(all);                
                 check_newgame = true;
                 clientPlace();                
-                setInforamtion();
-                //newgame_round();                
+                setInforamtion();             
             }
             else
             {
@@ -137,8 +136,6 @@ namespace Mahjong.Control
 
         internal override void round()
         {            
-            //clientPlace();
-            //base.round();
             try
             {
                 // 如果是吃或碰不摸牌
@@ -163,6 +160,8 @@ namespace Mahjong.Control
                 table.cleanImage();
                 factory = new BrandFactory();
                 all.nextWiner(true);
+                // 建立牌
+                creatBrands();
                 // 新局
                 newgame_round();
             }
