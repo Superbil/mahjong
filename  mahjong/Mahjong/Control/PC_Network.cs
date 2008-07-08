@@ -234,7 +234,9 @@ namespace Mahjong.Control
 
         internal override void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
         {
-            if (iAmServer)
+            if (myTurn)
+                base.toUser(brand, chow, pong, kong, darkkong, win);
+            else
             {
                 chat.SendObject(all);
                 chat.SendObject(new CheckUser(chow, pong, kong, darkkong, win, false));
@@ -245,11 +247,11 @@ namespace Mahjong.Control
                         break;
                 }
                 runCheckUser(brand);
+
+
+                get_CheckUser = false;
+                chat.SendObject(all);
             }
-            else
-                base.toUser(brand, chow, pong, kong, darkkong, win);
-            get_CheckUser = false;
-            chat.SendObject(all);
         }
 
         void runCheckUser(Brand brand)
