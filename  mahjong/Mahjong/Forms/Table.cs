@@ -449,9 +449,35 @@ namespace Mahjong.Forms
             s.Append(Settings.Default.Debug_Picture_Width);
             s.Append(": " + b.Size.Width + "\n");
             s.Append(Settings.Default.Debug_Picture_Height);
-            s.Append(": " + b.Size.Height + "\n");            
+            s.Append(": " + b.Size.Height + "\n");
             MessageBox.Show(s.ToString(), Settings.Default.Debug);
         }
+
+        public void showBrand(Brand brand)
+        {            
+            StringBuilder s = new StringBuilder();
+            s.Append(brand.getNumber() + "," + brand.getClass() + "\n");
+            s.Append(Settings.Default.Debug_Number);
+            s.Append(": " + brand.getNumber() + "\n");
+            s.Append(Settings.Default.Debug_Class);
+            s.Append(": " + brand.getClass() + "\n");
+            s.Append(Settings.Default.Debug_Source);
+            s.Append(": " + brand.Source + "\n");
+            s.Append(Settings.Default.Debug_Team);
+            s.Append(": " + brand.Team + "\n");
+            s.Append(Settings.Default.Debug_IsCanSee);
+            s.Append(": " + brand.IsCanSee + "\n");
+            s.Append(Settings.Default.WhoPush);
+            s.Append(": " + all.getLocation.location_to_string(brand.WhoPush) + "\n");
+            //s.Append(Settings.Default.Debug_Picture);
+            //s.Append(":\nX:" + Location.X + " Y: " + Location.Y + "\n");
+            //s.Append(Settings.Default.Debug_Picture_Width);
+            //s.Append(": " + Size.Width + "\n");
+            //s.Append(Settings.Default.Debug_Picture_Height);
+            //s.Append(": " + Size.Height + "\n");
+            MessageBox.Show(s.ToString(), Settings.Default.Debug);
+        }
+
         /// <summary>
         /// ­«Ã¸Bitmap(ÁY©ñ)
         /// </summary>

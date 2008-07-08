@@ -70,7 +70,10 @@ namespace Mahjong.Control
                 setInforamtion();
             }
         }
-
+        internal void getInt(int i)
+        {
+            MessageBox.Show(i.ToString());
+        }
         internal void getBrand(Brand brand)
         {
             if (myTurn)
@@ -88,7 +91,8 @@ namespace Mahjong.Control
             }
             else if (iAmServer)
             {
-                makeBrand(brand);
+                makeBrand(brand);                
+                //MessageBox.Show(bt.Equals(brand).ToString()+"\n"+bt.GetHashCode().ToString()+"\n"+brand.GetHashCode().ToString());
             }
         }
 
@@ -168,18 +172,22 @@ namespace Mahjong.Control
             table.cleanImage();
             table.addImage();
         }
-
+        
         internal override void makeBrand(Brand brand)
-        {
-            if (myTurn)
-                all.Players[(int)table.place.getRealPlace(all.State)].remove(brand);
-            
+        {            
+            //if (!iAmServer)
+            //chat.SendObject(123);
+            if (iAmServer)
+            {
+                //all.Players[(int)all.place.getRealPlace(all.State)].remove(brand);
+            }
+
             if (myTurn)
                 chat.SendObject(brand);
             // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
             // 若成立就表示沒有人要，不成立就表示被人拿走
-            
-            
+
+            if (iAmServer)
                 if (pushToTable(brand))
                 {
                     // 換下一個人
@@ -189,13 +197,13 @@ namespace Mahjong.Control
                     // 同步化Allplayer
                     chat.SendObject(all);
                 }
-                // 計時器重新啟動
-                //roundTimer.Start();
-                //chat.SendAllPlayer(all);
-                // 是不是現在的玩家
-                //if (all.State == table.place.Down)
-                if (iAmServer)
-                    round();
+            // 計時器重新啟動
+            //roundTimer.Start();
+            //chat.SendAllPlayer(all);
+            // 是不是現在的玩家
+            //if (all.State == table.place.Down)
+            if (iAmServer)
+                round();
             
         }
 
@@ -203,7 +211,11 @@ namespace Mahjong.Control
         {
 
             // 把牌從現在的玩家手上移除
-            all.NowPlayer.remove(brand);
+            //all.NowPlayer.remove(brand);
+            //MessageBox.Show(all.NowPlayer.removeBrand(brand).ToString());
+            all.NowPlayer.removeBrand(brand);
+            //table.showBrand(brand);
+            //MessageBox.Show(all.NowPlayer.remove(brand).ToString());
             // 放到桌面上
             all.PushToTable(brand);
             // 同步玩家
@@ -219,11 +231,9 @@ namespace Mahjong.Control
             //// 如果不是server
             //if (!iAmServer)
             //    chat.SendObject(brand);
-            if (iAmServer)
-                // 看是否有人要 胡 槓 碰 吃
-                return check_chow_pong_kong_win(brand);
-            else
-                return false;
+
+            // 看是否有人要 胡 槓 碰 吃
+            return check_chow_pong_kong_win(brand);
         }
 
         internal override void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
@@ -242,6 +252,7 @@ namespace Mahjong.Control
             }
             else
                 base.toUser(brand, chow, pong, kong, darkkong, win);
+            get_CheckUser = false;
         }
 
         void runCheckUser(Brand brand)
@@ -258,8 +269,14 @@ namespace Mahjong.Control
                 win(brand);
             else if (checkuser.Pass)
                 pass(brand);
+
         }
 
+        internal override void pass(Brand brand)
+        {
+            base.pass(brand);
+            get_CheckUser = false;
+        }
         internal override void IamPlayer()
         {
             if (chat.HowMuchPlayer >= 3)

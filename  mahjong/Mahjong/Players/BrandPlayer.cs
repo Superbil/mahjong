@@ -44,7 +44,25 @@ namespace Mahjong.Players
             }
             else
                 return false;
-        }        
+        }
+
+        public bool removeBrand(Brand brand)
+        {
+            Brand b;
+            for (int i = 0; i < brandarray.Count; i++)
+            {
+                b = (Brand)brandarray[i];
+                if (b.getClass() == brand.getClass())
+                    if (b.getNumber() == brand.getNumber())
+                    {
+                        brandarray.RemoveAt(i);
+                        return true;
+                    }
+            }
+            return false;            
+        }
+
+
         /// <summary>
         /// 把牌加入牌面區
         /// </summary>

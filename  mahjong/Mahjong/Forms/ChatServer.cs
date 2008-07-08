@@ -43,6 +43,7 @@ namespace Mahjong.Forms
         public const string newgameround = "/newgame";
         public const string Brand_Head = "/brand:";
         public const string Check_Head = "/check:";
+        public const string BrandIndex_Head = "/brandindex:";
 
         // initialize thread for reading
         General g2;
@@ -107,7 +108,7 @@ namespace Mahjong.Forms
 
             return bf1.Deserialize(ms);
         }
-
+/*
         public static byte[] ReadFully(Stream stream)
         {
             byte[] buffer = new byte[32768];
@@ -122,7 +123,7 @@ namespace Mahjong.Forms
                 }
             }
         }
-
+        */
         private void ChatServerForm_Load(object sender, EventArgs e)
         {
             if (Dns.GetHostEntry(Dns.GetHostName()).AddressList.Length < 2)
@@ -377,6 +378,7 @@ namespace Mahjong.Forms
             Text = Text + " - 連線端";
             createbutton.Enabled = false;
             startbutton.Enabled = false;
+            connectbutton.Enabled = false;
             if (myMark != "Server")
             {
                 nametextBox.ReadOnly = true;
@@ -466,6 +468,12 @@ namespace Mahjong.Forms
                 //MessageBox.Show(g2.Name,myMark);
                 //MessageBox.Show(PC.all.Name[PC.all.state],myMark);
             }
+            else if (s.Contains(BrandIndex_Head))
+            {
+              
+                PC.getInt(reader.ReadInt16());
+
+            }
             else
                 message = s;
         }
@@ -500,6 +508,7 @@ namespace Mahjong.Forms
         {
             //General g1 = new General("劉志俊", "c:\\liu.bmp", 60, 99, 80, 95, true, true, false);
             createbutton.Enabled = false;
+            startbutton.Enabled = false;
             PC.newgame();
             try
             {
@@ -598,6 +607,36 @@ namespace Mahjong.Forms
                 {
                     writer.Write(Check_Head + getByteArrayWithObject(cu).Length.ToString());
                     writer.Write(getByteArrayWithObject(cu));
+                }
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("接口設定錯誤！");
+            }
+        }
+        internal void SendObject(int bi)
+        {
+            try
+            {
+                if (myMark == "Server")
+                {
+                    for (int i = 0; i < n; i++)
+                    {
+                        socketStream = new NetworkStream(players[i].connection);
+
+                        writer = new BinaryWriter(socketStream);
+                        reader = new BinaryReader(socketStream);
+                        writer.Write(BrandIndex_Head);
+                        writer.Write(bi);
+                        
+                    }
+
+                }
+                else
+                {
+                    writer.Write(BrandIndex_Head);
+                    writer.Write(bi);
+               
                 }
             }
             catch (SocketException)

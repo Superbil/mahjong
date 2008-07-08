@@ -217,7 +217,7 @@ namespace Mahjong.Control
         /// 玩家按下過水事件呼叫
         /// </summary>
         /// <param name="brand">牌</param>
-        internal void pass(Brand brand)
+        internal virtual void pass(Brand brand)
         {
             Player_Pass_Brand = true;
         }
