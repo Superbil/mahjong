@@ -84,15 +84,14 @@ namespace Mahjong.Control
                 CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
                 CheckBrands w = new CheckBrands(brand, all.NowPlayer);
                 cpk.Enabled_Button(checkuser.Chow, checkuser.Pong, checkuser.Kong, checkuser.DarkKong, checkuser.Win);
-                if (checkuser.Chow || checkuser.Pong || checkuser.Kong || checkuser.Win || checkuser.DarkKong)
+                //if (checkuser.Chow || checkuser.Pong || checkuser.Kong || checkuser.Win || checkuser.DarkKong)
                     cpk.ShowDialog();
 
                 chat.SendObject(cpk.Checkuser);
             }
             else if (iAmServer)
             {
-                makeBrand(brand);                
-                //MessageBox.Show(bt.Equals(brand).ToString()+"\n"+bt.GetHashCode().ToString()+"\n"+brand.GetHashCode().ToString());
+                makeBrand(brand);
             }
         }
 
@@ -177,12 +176,12 @@ namespace Mahjong.Control
         {            
             //if (!iAmServer)
             //chat.SendObject(123);
-            if (iAmServer)
-            {
-                //all.Players[(int)all.place.getRealPlace(all.State)].remove(brand);
-            }
+            //if (iAmServer)
+            //{
+            //    all.Players[(int)all.place.getRealPlace(all.State)].remove(brand);
+            //}
 
-            if (myTurn)
+            if (myTurn && !iAmServer)
                 chat.SendObject(brand);
             // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
             // 若成立就表示沒有人要，不成立就表示被人拿走
@@ -195,13 +194,10 @@ namespace Mahjong.Control
                     // 更新資訊盒
                     setInforamtion();
                     // 同步化Allplayer
-                    chat.SendObject(all);
+                    //chat.SendObject(all);
                 }
-            // 計時器重新啟動
-            //roundTimer.Start();
             //chat.SendAllPlayer(all);
-            // 是不是現在的玩家
-            //if (all.State == table.place.Down)
+            // 是不是Server
             if (iAmServer)
                 round();
             
@@ -253,6 +249,7 @@ namespace Mahjong.Control
             else
                 base.toUser(brand, chow, pong, kong, darkkong, win);
             get_CheckUser = false;
+            chat.SendObject(all);
         }
 
         void runCheckUser(Brand brand)
@@ -269,7 +266,6 @@ namespace Mahjong.Control
                 win(brand);
             else if (checkuser.Pass)
                 pass(brand);
-
         }
 
         internal override void pass(Brand brand)

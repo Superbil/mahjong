@@ -6,6 +6,7 @@ using Mahjong.Brands;
 using Mahjong.Forms;
 using Mahjong.Players;
 using System.Threading;
+using Mahjong.Properties;
 
 namespace Mahjong.Control
 {
@@ -37,8 +38,6 @@ namespace Mahjong.Control
         /// <param name="brand">牌</param>
         internal virtual void makeBrand(Brand brand)
         {
-            // 把牌從現在的桌面上移除
-            all.Players[(int)all.place.getRealPlace(all.State)].remove(brand);
             // 把牌打到桌面上看是否有人要 胡 槓 碰 吃
             // 若成立就表示沒有人要，不成立就表示被人拿走
             if (pushToTable(brand))
@@ -80,7 +79,7 @@ namespace Mahjong.Control
                     // 更新資訊盒
                     setInforamtion();
                     if (showMessageBox)
-                        MessageBox.Show(Mahjong.Properties.Settings.Default.TouchWin, all.Name[all.state].ToString());
+                        MessageBox.Show(Settings.Default.TouchWin, all.Name[all.state].ToString());
                     win_game(nextbrand);
                 }
                 // 手牌暗槓(摸到有暗槓和手牌中就有暗槓)
