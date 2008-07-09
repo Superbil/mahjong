@@ -90,6 +90,7 @@ namespace Mahjong.Control
             }
             else if (iAmServer)
             {
+                chat.SendObject(all);
                 makeBrand(brand);
             }
         }
@@ -198,7 +199,7 @@ namespace Mahjong.Control
                     // 同步化Allplayer
                     //chat.SendObject(all);
                 }
-            //chat.SendAllPlayer(all);
+            
             // 是不是Server
             if (iAmServer)
                 round();
