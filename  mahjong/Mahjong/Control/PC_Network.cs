@@ -244,8 +244,9 @@ namespace Mahjong.Control
                 chat.SendObject(all);
                 chat.SendObject(new CheckUser(chow, pong, kong, darkkong, win, false));
                 chat.SendObject(brand);
-                while (true)
+                while (!get_CheckUser)
                 {
+
                     if (get_CheckUser)
                         break;
                 }
