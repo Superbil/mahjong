@@ -516,7 +516,7 @@ namespace Mahjong.Forms
             // 確定為玩家才發送事件
             if (pc.NowPlayer_is_Real_Player && all.State == place.Down)
             {
-                if (PlaySound_Menu.Checked)
+                if (pc.PlayerSound)
                     PlaySound(b.brand);
                 pc.makeBrand(b.brand);
             }

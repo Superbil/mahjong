@@ -27,6 +27,7 @@ namespace Mahjong.Forms
             this.place = all.place;
             ShowMessageBox_Menu.Checked = pc.ShowMessageBox = all.showMessageBox;
             setTitle();
+
             inputname.allplayers = all;
             inputname.ShowDialog();
             this.all = inputname.allplayers;

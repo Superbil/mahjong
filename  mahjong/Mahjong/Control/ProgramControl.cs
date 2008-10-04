@@ -60,18 +60,17 @@ namespace Mahjong.Control
         /// <summary>
         /// 是否要顯示提示訊息
         /// </summary>
-        internal bool showMessageBox;
+        internal bool showMessageBox = true;
         /// <summary>
         /// 是否要播放音效
         /// </summary>
-        internal bool PlayerSound;
+        internal bool PlayerSound = true;
         /// <summary>
         /// 遊戲控制建構子
         /// </summary>        
         public ProgramControl(Form f)
         {      
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
-            showMessageBox = true;
             roundTimer.Interval = Settings.Default.RunRoundTime_Normal;
             table = (Table)f;
             table.pc = this;
