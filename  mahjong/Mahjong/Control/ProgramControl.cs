@@ -62,6 +62,10 @@ namespace Mahjong.Control
         /// </summary>
         internal bool showMessageBox;
         /// <summary>
+        /// 是否要播放音效
+        /// </summary>
+        internal bool PlayerSound;
+        /// <summary>
         /// 遊戲控制建構子
         /// </summary>        
         public ProgramControl(Form f)

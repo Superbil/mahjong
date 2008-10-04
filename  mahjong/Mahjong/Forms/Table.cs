@@ -56,6 +56,12 @@ namespace Mahjong.Forms
             cheat = false;
             KeyUp += new KeyEventHandler(Table_KeyUp);
             ShowMessageBox_Menu.CheckedChanged += new EventHandler(ShowMessageBox_Menu_CheckedChanged);
+            PlaySound_Menu.CheckedChanged += new EventHandler(PlaySound_Menu_CheckedChanged);
+        }
+
+        void PlaySound_Menu_CheckedChanged(object sender, EventArgs e)
+        {
+            pc.PlayerSound = PlaySound_Menu.Checked;
         }
 
         void ShowMessageBox_Menu_CheckedChanged(object sender, EventArgs e)
@@ -510,7 +516,8 @@ namespace Mahjong.Forms
             // 確定為玩家才發送事件
             if (pc.NowPlayer_is_Real_Player && all.State == place.Down)
             {
-                PlaySound(b.brand);
+                if (PlaySound_Menu.Checked)
+                    PlaySound(b.brand);
                 pc.makeBrand(b.brand);
             }
             b.Click -= new EventHandler(debug_Click);
@@ -824,6 +831,14 @@ namespace Mahjong.Forms
         private void 讀取牌局ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pc.loadgame();       
+        }
+
+        private void PlaySound_Menu_Click(object sender, EventArgs e)
+        {
+            if (PlaySound_Menu.Checked)
+                PlaySound_Menu.Checked = false;
+            else
+                PlaySound_Menu.Checked = true;
         }
     }
 }

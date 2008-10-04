@@ -88,8 +88,11 @@ namespace Mahjong.Forms
 
         private void Chow_Click(object sender, EventArgs e)
         {
-            soundplayer.Stream = Resources.chow;
-            soundplayer.Play();
+            if (pc.PlayerSound)
+            {
+                soundplayer.Stream = Resources.chow;
+                soundplayer.Play();
+            }
             if (network)
                 checkuser.Chow = true;
             else
@@ -99,8 +102,11 @@ namespace Mahjong.Forms
 
         private void Pong_Click(object sender, EventArgs e)
         {
-            soundplayer.Stream = Resources.pon;
-            soundplayer.Play();
+            if (pc.PlayerSound)
+            {
+                soundplayer.Stream = Resources.pon;
+                soundplayer.Play();
+            }
             if (network)
                 checkuser.Pong = true;
             else
@@ -110,8 +116,11 @@ namespace Mahjong.Forms
 
         private void Kong_Click(object sender, EventArgs e)
         {
-            soundplayer.Stream = Resources.kong;
-            soundplayer.Play();
+            if (pc.PlayerSound)
+            {
+                soundplayer.Stream = Resources.kong;
+                soundplayer.Play();
+            }
             if (network)
                 checkuser.Kong = true;
             else
@@ -121,8 +130,11 @@ namespace Mahjong.Forms
 
         private void Win_Click(object sender, EventArgs e)
         {
-            soundplayer.Stream = Resources.win;
-            soundplayer.Play();
+            if (pc.PlayerSound)
+            {
+                soundplayer.Stream = Resources.win;
+                soundplayer.Play();
+            }
             if (network)
                 checkuser.Win = true;
             else
@@ -141,8 +153,11 @@ namespace Mahjong.Forms
 
         private void DarkKong_Click(object sender, EventArgs e)
         {
-            soundplayer.Stream = Resources.kong;
-            soundplayer.Play();
+            if (pc.PlayerSound)
+            {
+                soundplayer.Stream = Resources.kong;
+                soundplayer.Play();
+            }
             if (network)
                 checkuser.DarkKong = true;
             else
