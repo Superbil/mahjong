@@ -122,9 +122,37 @@ namespace Mahjong.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap g1 {
+            get {
+                object obj = ResourceManager.GetObject("g1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap g2 {
+            get {
+                object obj = ResourceManager.GetObject("g2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.IO.UnmanagedMemoryStream kong {
             get {
                 return ResourceManager.GetStream("kong", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap m1 {
+            get {
+                object obj = ResourceManager.GetObject("m1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap m2 {
+            get {
+                object obj = ResourceManager.GetObject("m2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -586,35 +614,6 @@ namespace Mahjong.Properties {
         internal static System.IO.UnmanagedMemoryStream word7s {
             get {
                 return ResourceManager.GetStream("word7s", resourceCulture);
-            }
-        }
-
-        
-        internal static System.Drawing.Bitmap 冏 {
-            get {
-                object obj = ResourceManager.GetObject("冏", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap 冷 {
-            get {
-                object obj = ResourceManager.GetObject("冷", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap 宅 {
-            get {
-                object obj = ResourceManager.GetObject("宅", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap 拼 {
-            get {
-                object obj = ResourceManager.GetObject("拼", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

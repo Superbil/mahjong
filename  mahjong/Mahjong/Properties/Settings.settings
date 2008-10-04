@@ -72,13 +72,13 @@
       <Value Profile="(Default)">十六張麻將遊戲</Value>
     </Setting>
     <Setting Name="Player_North" Type="System.String" Scope="User">
-      <Value Profile="(Default)">王廷亨</Value>
+      <Value Profile="(Default)">陳怡欣</Value>
     </Setting>
     <Setting Name="Player_East" Type="System.String" Scope="User">
-      <Value Profile="(Default)">林宗水</Value>
+      <Value Profile="(Default)">張惠娟</Value>
     </Setting>
     <Setting Name="Player_South" Type="System.String" Scope="User">
-      <Value Profile="(Default)">張惠娟</Value>
+      <Value Profile="(Default)">林宗水</Value>
     </Setting>
     <Setting Name="Player_West" Type="System.String" Scope="User">
       <Value Profile="(Default)">吳昆賢</Value>

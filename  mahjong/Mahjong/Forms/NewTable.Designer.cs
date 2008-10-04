@@ -315,7 +315,7 @@
             // pic_Left
             // 
             this.pic_Left.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pic_Left.Image = global::Mahjong.Properties.Resources.宅;
+            this.pic_Left.Image = global::Mahjong.Properties.Resources.m1;
             this.pic_Left.Location = new System.Drawing.Point(21, 20);
             this.pic_Left.Name = "pic_Left";
             this.pic_Left.Size = new System.Drawing.Size(80, 75);
@@ -363,7 +363,7 @@
             // pic_Up
             // 
             this.pic_Up.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pic_Up.Image = global::Mahjong.Properties.Resources.冷;
+            this.pic_Up.Image = global::Mahjong.Properties.Resources.g1;
             this.pic_Up.Location = new System.Drawing.Point(21, 20);
             this.pic_Up.Name = "pic_Up";
             this.pic_Up.Size = new System.Drawing.Size(80, 75);
@@ -411,7 +411,7 @@
             // pic_Right
             // 
             this.pic_Right.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pic_Right.Image = global::Mahjong.Properties.Resources.拼;
+            this.pic_Right.Image = global::Mahjong.Properties.Resources.g2;
             this.pic_Right.Location = new System.Drawing.Point(21, 20);
             this.pic_Right.Name = "pic_Right";
             this.pic_Right.Size = new System.Drawing.Size(80, 77);
@@ -439,7 +439,7 @@
             // pic_Down
             // 
             this.pic_Down.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pic_Down.Image = global::Mahjong.Properties.Resources.冏;
+            this.pic_Down.Image = global::Mahjong.Properties.Resources.m2;
             this.pic_Down.Location = new System.Drawing.Point(21, 20);
             this.pic_Down.Name = "pic_Down";
             this.pic_Down.Size = new System.Drawing.Size(80, 77);

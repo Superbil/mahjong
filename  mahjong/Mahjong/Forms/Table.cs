@@ -510,139 +510,147 @@ namespace Mahjong.Forms
             // 確定為玩家才發送事件
             if (pc.NowPlayer_is_Real_Player && all.State == place.Down)
             {
-                SoundPlayer soundplayer = new SoundPlayer();
-                switch (b.brand.getClass())
-                {
-                    case "萬":
-                    switch(b.brand.getNumber())
-                    {
-                            case 1:
-                                soundplayer.Stream = Resources.ten1s;
-                            break;
-                            case 2:
-                                soundplayer.Stream = Resources.ten2s;
-                            break;
-                            case 3:
-                                soundplayer.Stream = Resources.ten3s;
-                            break;
-                            case 4:
-                                soundplayer.Stream = Resources.ten4s;
-                            break;
-                            case 5:
-                                soundplayer.Stream = Resources.ten5s;
-                            break;
-                            case 6:
-                                soundplayer.Stream = Resources.ten6s;
-                            break;
-                            case 7:
-                                soundplayer.Stream = Resources.ten7s;
-                            break;
-                            case 8:
-                                soundplayer.Stream = Resources.ten8s;
-                            break;
-                            case 9:
-                                soundplayer.Stream = Resources.ten9s;
-                            break;
-                    }
-                        break;
-                    case "索":
-                        switch (b.brand.getNumber())
-                        {
-                            case 1:
-                                soundplayer.Stream = Resources.rope1s;
-                                break;
-                            case 2:
-                                soundplayer.Stream = Resources.rope2s;
-                                break;
-                            case 3:
-                                soundplayer.Stream = Resources.rope3s;
-                                break;
-                            case 4:
-                                soundplayer.Stream = Resources.rope4s;
-                                break;
-                            case 5:
-                                soundplayer.Stream = Resources.rope5s;
-                                break;
-                            case 6:
-                                soundplayer.Stream = Resources.rope6s;
-                                break;
-                            case 7:
-                                soundplayer.Stream = Resources.rope7s;
-                                break;
-                            case 8:
-                                soundplayer.Stream = Resources.rope8s;
-                                break;
-                            case 9:
-                                soundplayer.Stream = Resources.rope9s;
-                                break;
-                        }
-                        break;
-                    case "筒":
-                        switch (b.brand.getNumber())
-                        {
-                            case 1:
-                                soundplayer.Stream = Resources.tobe1s;
-                                break;
-                            case 2:
-                                soundplayer.Stream = Resources.tobe2s;
-                                break;
-                            case 3:
-                                soundplayer.Stream = Resources.tobe3s;
-                                break;
-                            case 4:
-                                soundplayer.Stream = Resources.tobe4s;
-                                break;
-                            case 5:
-                                soundplayer.Stream = Resources.tobe5s;
-                                break;
-                            case 6:
-                                soundplayer.Stream = Resources.tobe6s;
-                                break;
-                            case 7:
-                                soundplayer.Stream = Resources.tobe7s;
-                                break;
-                            case 8:
-                                soundplayer.Stream = Resources.tobe8s;
-                                break;
-                            case 9:
-                                soundplayer.Stream = Resources.tobe9s;
-                                break;
-                        }
-                        break;
-                    case "字":
-                        switch (b.brand.getNumber())
-                        {
-                            case 1:
-                                soundplayer.Stream = Resources.word1s;
-                                break;
-                            case 2:
-                                soundplayer.Stream = Resources.word2s;
-                                break;
-                            case 3:
-                                soundplayer.Stream = Resources.word3s;
-                                break;
-                            case 4:
-                                soundplayer.Stream = Resources.word4s;
-                                break;
-                            case 5:
-                                soundplayer.Stream = Resources.word5s;
-                                break;
-                            case 6:
-                                soundplayer.Stream = Resources.word6s;
-                                break;
-                            case 7:
-                                soundplayer.Stream = Resources.word7s;
-                                break;                            
-                        }
-                        break;
-                }              
-                
-                soundplayer.Play();
-             
+                PlaySound(b.brand);
                 pc.makeBrand(b.brand);
             }
             b.Click -= new EventHandler(debug_Click);
         }
+
+        /// <summary>
+        /// 播放打牌聲音
+        /// </summary>
+        void PlaySound(Brand brand)
+        {
+            SoundPlayer soundplayer = new SoundPlayer();
+            switch (brand.getClass())
+            {
+                case "萬":
+                    switch (brand.getNumber())
+                    {
+                        case 1:
+                            soundplayer.Stream = Resources.ten1s;
+                            break;
+                        case 2:
+                            soundplayer.Stream = Resources.ten2s;
+                            break;
+                        case 3:
+                            soundplayer.Stream = Resources.ten3s;
+                            break;
+                        case 4:
+                            soundplayer.Stream = Resources.ten4s;
+                            break;
+                        case 5:
+                            soundplayer.Stream = Resources.ten5s;
+                            break;
+                        case 6:
+                            soundplayer.Stream = Resources.ten6s;
+                            break;
+                        case 7:
+                            soundplayer.Stream = Resources.ten7s;
+                            break;
+                        case 8:
+                            soundplayer.Stream = Resources.ten8s;
+                            break;
+                        case 9:
+                            soundplayer.Stream = Resources.ten9s;
+                            break;
+                    }
+                    break;
+                case "索":
+                    switch (brand.getNumber())
+                    {
+                        case 1:
+                            soundplayer.Stream = Resources.rope1s;
+                            break;
+                        case 2:
+                            soundplayer.Stream = Resources.rope2s;
+                            break;
+                        case 3:
+                            soundplayer.Stream = Resources.rope3s;
+                            break;
+                        case 4:
+                            soundplayer.Stream = Resources.rope4s;
+                            break;
+                        case 5:
+                            soundplayer.Stream = Resources.rope5s;
+                            break;
+                        case 6:
+                            soundplayer.Stream = Resources.rope6s;
+                            break;
+                        case 7:
+                            soundplayer.Stream = Resources.rope7s;
+                            break;
+                        case 8:
+                            soundplayer.Stream = Resources.rope8s;
+                            break;
+                        case 9:
+                            soundplayer.Stream = Resources.rope9s;
+                            break;
+                    }
+                    break;
+                case "筒":
+                    switch (brand.getNumber())
+                    {
+                        case 1:
+                            soundplayer.Stream = Resources.tobe1s;
+                            break;
+                        case 2:
+                            soundplayer.Stream = Resources.tobe2s;
+                            break;
+                        case 3:
+                            soundplayer.Stream = Resources.tobe3s;
+                            break;
+                        case 4:
+                            soundplayer.Stream = Resources.tobe4s;
+                            break;
+                        case 5:
+                            soundplayer.Stream = Resources.tobe5s;
+                            break;
+                        case 6:
+                            soundplayer.Stream = Resources.tobe6s;
+                            break;
+                        case 7:
+                            soundplayer.Stream = Resources.tobe7s;
+                            break;
+                        case 8:
+                            soundplayer.Stream = Resources.tobe8s;
+                            break;
+                        case 9:
+                            soundplayer.Stream = Resources.tobe9s;
+                            break;
+                    }
+                    break;
+                case "字":
+                    switch (brand.getNumber())
+                    {
+                        case 1:
+                            soundplayer.Stream = Resources.word1s;
+                            break;
+                        case 2:
+                            soundplayer.Stream = Resources.word2s;
+                            break;
+                        case 3:
+                            soundplayer.Stream = Resources.word3s;
+                            break;
+                        case 4:
+                            soundplayer.Stream = Resources.word4s;
+                            break;
+                        case 5:
+                            soundplayer.Stream = Resources.word5s;
+                            break;
+                        case 6:
+                            soundplayer.Stream = Resources.word6s;
+                            break;
+                        case 7:
+                            soundplayer.Stream = Resources.word7s;
+                            break;
+                    }
+                    break;
+            }
+
+            soundplayer.Play();
+        }
+
         /// <summary>
         /// 新增玩家、桌面圖片
         /// </summary> 
