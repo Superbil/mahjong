@@ -32,7 +32,7 @@ namespace Mahjong.Forms
             this.all = inputname.allplayers;
         }
 
-        FlowLayoutPanel fl_from_location(location state)
+        FlowLayoutPanel fl_Hand_from_location(location state)
         {
             if (state == location.North)
                 return fl_Up_Hand;
@@ -44,6 +44,20 @@ namespace Mahjong.Forms
                 return fl_Right_Hand;
             else
                 return fl_ShowTable;
+        }
+
+        FlowLayoutPanel fl_Show_from_location(location state)
+        {
+            if (state == location.North)
+                return fl_Up_Show;
+            else if (state == location.West)
+                return fl_Left_Show;
+            else if (state == location.South)
+                return fl_Down_Show;
+            else if (state == location.East)
+                return fl_Right_Show;
+            else
+                return fl_Table;
         }
 
         protected override void addimage(location state, Brand brand, RotateFlipType rotate)
@@ -88,10 +102,10 @@ namespace Mahjong.Forms
                 //else
                 //    tempBrandbox.MouseHover -= new EventHandler(debug_Click);
             }
-            else if (brand.Team >= 1)
-            {
-                tempBrandbox.BackColor = Color.DarkGreen;
-            }
+            //else if (brand.Team >= 1)
+            //{
+            //    tempBrandbox.BackColor = Color.DarkGreen;
+            //}
             else if (cheat && state != location.South)
             {
                 tempBrandbox.MouseClick += new MouseEventHandler(cheat_MouseClick);
@@ -115,27 +129,36 @@ namespace Mahjong.Forms
         {
             if (state == location.Table && brandbox.brand.IsCanSee == false)
                 fl_Table.Controls.Add(brandbox);
+            else if (brandbox.brand.IsCanSee == true && brandbox.brand.Team >= 1)
+                fl_Show_from_location(state).Controls.Add(brandbox);
             else
-                fl_from_location(state).Controls.Add(brandbox);            
+                fl_Hand_from_location(state).Controls.Add(brandbox);            
         }
 
         protected override void clearNowPlayer()
         {
-            fl_from_location(place.getRealPlace(all.State)).Controls.Clear();
+            fl_Hand_from_location(place.getRealPlace(all.State)).Controls.Clear();
+            fl_Show_from_location(place.getRealPlace(all.State)).Controls.Clear();
         }
 
         protected override void clearFlowLayoutBrands_Table()
         {
-            fl_from_location(location.Table).Controls.Clear();
+            fl_Hand_from_location(location.Table).Controls.Clear();
         }
 
         public override void clearAll()
         {
-            fl_from_location(location.North).Controls.Clear();
-            fl_from_location(location.East).Controls.Clear();
-            fl_from_location(location.South).Controls.Clear();
-            fl_from_location(location.West).Controls.Clear();
-            fl_from_location(location.Table).Controls.Clear();
+            fl_Hand_from_location(location.North).Controls.Clear();
+            fl_Hand_from_location(location.East).Controls.Clear();
+            fl_Hand_from_location(location.South).Controls.Clear();
+            fl_Hand_from_location(location.West).Controls.Clear();
+            fl_Hand_from_location(location.Table).Controls.Clear();
+
+            fl_Show_from_location(location.North).Controls.Clear();
+            fl_Show_from_location(location.East).Controls.Clear();
+            fl_Show_from_location(location.South).Controls.Clear();
+            fl_Show_from_location(location.West).Controls.Clear();
+            
             fl_Table.Controls.Clear();
         }
         public override void cleanImage()
