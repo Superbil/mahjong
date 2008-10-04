@@ -102,10 +102,6 @@ namespace Mahjong.Forms
                 //else
                 //    tempBrandbox.MouseHover -= new EventHandler(debug_Click);
             }
-            //else if (brand.Team >= 1)
-            //{
-            //    tempBrandbox.BackColor = Color.DarkGreen;
-            //}
             else if (cheat && state != location.South)
             {
                 tempBrandbox.MouseClick += new MouseEventHandler(cheat_MouseClick);
