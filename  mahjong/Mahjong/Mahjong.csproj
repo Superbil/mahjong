@@ -32,7 +32,7 @@
     <ProductName>網路麻將</ProductName>
     <PublisherName>CWS</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
+    <ApplicationVersion>0.0.2.%2a</ApplicationVersion>
     <BootstrapperEnabled>false</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -363,7 +363,6 @@
     <None Include="Mahjong.config" />
     <None Include="Mahjong_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
-    <None Include="Resources\a.gif" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\ChowBrandCheck.resx">
@@ -403,9 +402,7 @@
   <ItemGroup>
     <None Include="Resources\冏.jpg" />
   </ItemGroup>
-
   <ItemGroup>
-    <None Include="Resources\ten1s.bmp" />
     <None Include="Resources\chow.wav" />
     <None Include="Resources\pon.wav" />
     <None Include="Resources\kong.wav" />
@@ -418,7 +415,7 @@
     <None Include="Resources\rope7.wav" />
     <None Include="Resources\rope8.wav" />
     <None Include="Resources\rope9.wav" />
-    <Content Include="Resources\ten1s.wav" />
+    <None Include="Resources\ten1s.wav" />
     <None Include="Resources\word5.wav" />
     <None Include="Resources\word6.wav" />
     <None Include="Resources\word7.wav" />
