@@ -15,6 +15,7 @@ namespace Mahjong.Forms
 {
     public partial class NewTable : Table
     {
+        InputName inputname = new InputName();
         public NewTable()
         {
             InitializeComponent();
@@ -22,11 +23,13 @@ namespace Mahjong.Forms
 
         public override void Setup(AllPlayers all)
         {
-            this.all = all;
+            //this.all = all;
             this.place = all.place;
             ShowMessageBox_Menu.Checked = pc.ShowMessageBox = all.showMessageBox;
-            //setFlowLayout();
             setTitle();
+            inputname.allplayers = all;
+            inputname.ShowDialog();
+            this.all = inputname.allplayers;
         }
 
         FlowLayoutPanel fl_from_location(location state)
@@ -118,7 +121,6 @@ namespace Mahjong.Forms
 
         protected override void clearNowPlayer()
         {
-            //flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
             fl_from_location(place.getRealPlace(all.State)).Controls.Clear();
         }
 

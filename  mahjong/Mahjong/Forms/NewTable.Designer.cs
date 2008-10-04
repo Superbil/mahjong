@@ -475,7 +475,6 @@
             this.ClientSize = new System.Drawing.Size(859, 705);
             this.Controls.Add(this.tableLayoutPanel_Table);
             this.Name = "NewTable";
-            this.Text = "麻將遊戲";
             this.tableLayoutPanel_Table.ResumeLayout(false);
             this.tableLayoutPanel_Down.ResumeLayout(false);
             this.tableLayoutPanel_Right.ResumeLayout(false);
