@@ -4,6 +4,7 @@ using System.Collections;
 using System.Drawing;
 using Mahjong.Players;
 using Mahjong.Properties;
+using System.IO;
 
 namespace Mahjong.Brands
 {
@@ -218,7 +219,7 @@ namespace Mahjong.Brands
             RopebrandArray = new ArrayList();
             creatImageArray_Rope();
             TenthousandbrandArray = new ArrayList();
-            creatImageArray_TenThousand();
+            creatImageArray_TenThousand();            
             TobebrandArray = new ArrayList();
             creatImageArray_Tobe();
             WordbrandArray = new ArrayList();
@@ -294,6 +295,6 @@ namespace Mahjong.Brands
         void creatImage(ArrayList array, Image image)
         {
             array.Add(image);
-        }
+        }       
     }
 }

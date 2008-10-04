@@ -7,6 +7,7 @@ using Mahjong.Forms;
 using Mahjong.Players;
 using System.Threading;
 using Mahjong.Properties;
+using System.Media;
 
 namespace Mahjong.Control
 {
@@ -160,6 +161,7 @@ namespace Mahjong.Control
         /// <param name="brand">準備要打的牌</param>
         internal virtual bool pushToTable(Brand brand)
         {
+            
             // 把牌從現在的玩家手上移除
             all.NowPlayer.remove(brand);
             // 放到桌面上

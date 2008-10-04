@@ -381,6 +381,47 @@
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ten1s.bmp" />
+    <None Include="Resources\chow.wav" />
+    <None Include="Resources\pon.wav" />
+    <None Include="Resources\kong.wav" />
+    <None Include="Resources\rope1.wav" />
+    <None Include="Resources\rope2.wav" />
+    <None Include="Resources\rope3.wav" />
+    <None Include="Resources\rope4.wav" />
+    <None Include="Resources\rope5.wav" />
+    <None Include="Resources\rope6.wav" />
+    <None Include="Resources\rope7.wav" />
+    <None Include="Resources\rope8.wav" />
+    <None Include="Resources\rope9.wav" />
+    <Content Include="Resources\ten1s.wav" />
+    <None Include="Resources\word5.wav" />
+    <None Include="Resources\word6.wav" />
+    <None Include="Resources\word7.wav" />
+    <None Include="Resources\word4.wav" />
+    <None Include="Resources\word2.wav" />
+    <None Include="Resources\word3.wav" />
+    <None Include="Resources\word1.wav" />
+    <None Include="Resources\tobe9.wav" />
+    <None Include="Resources\tobe8.wav" />
+    <None Include="Resources\tobe7.wav" />
+    <None Include="Resources\tobe6.wav" />
+    <None Include="Resources\tobe5.wav" />
+    <None Include="Resources\tobe4.wav" />
+    <None Include="Resources\tobe3.wav" />
+    <None Include="Resources\tobe2.wav" />
+    <None Include="Resources\tobe1.wav" />
+    <None Include="Resources\ten8s.wav" />
+    <None Include="Resources\ten7s.wav" />
+    <None Include="Resources\ten6s.wav" />
+    <None Include="Resources\ten5s.wav" />
+    <None Include="Resources\ten4s.wav" />
+    <None Include="Resources\ten3s.wav" />
+    <None Include="Resources\ten2s.wav" />
+    <None Include="Resources\ten9s.wav" />
+    <None Include="Resources\win.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.IO;
 
 namespace Mahjong.Brands
 {
@@ -76,6 +77,22 @@ namespace Mahjong.Brands
              {
                  photo = value;
              }
+        }
+
+        private UnmanagedMemoryStream wave;
+        /// <summary>
+        /// 牌的聲音位置
+        /// </summary>
+        public UnmanagedMemoryStream sound
+        {
+            get
+            {
+                return wave;
+            }
+            set
+            {
+                wave = value;
+            }
         }
         
         private int teamNumber;

@@ -4,7 +4,7 @@
     <security>
       <applicationRequestMinimum>
         <PermissionSet class="System.Security.PermissionSet" version="1" ID="Custom" SameSite="site">
-          <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="Assertion, Execution, SerializationFormatter, BindingRedirects" />
+          <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="Assertion, UnmanagedCode, Execution, SerializationFormatter, BindingRedirects" />
           <IPermission class="System.Net.SocketPermission, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
         </PermissionSet>
         <defaultAssemblyRequest permissionSetReference="Custom" />
