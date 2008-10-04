@@ -250,9 +250,11 @@ namespace Mahjong.Control
         /// </summary>
         internal virtual void setInforamtion()
         {
-            information.setup(table, all);
-            information.updateInformation();
-            information.Show();
+            // Old setInformation
+            //information.setup(table, all);
+            //information.updateInformation();
+            //information.Show();
+            table.setInforamtion();
         }
         /// <summary>
         /// 移除掉已經打出去的牌組，以牌組編號來區分

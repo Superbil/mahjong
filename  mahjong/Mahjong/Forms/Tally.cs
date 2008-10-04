@@ -370,7 +370,7 @@ namespace Mahjong.Forms
         void samecolor(BrandPlayer q)
         {
             int num = 0;
-            bool index = false;
+            //bool index = false;
             for (int i = 0; i < q.getCount(); i++)
             {
                 if (q.getBrand(i).getClass() == "¦r")

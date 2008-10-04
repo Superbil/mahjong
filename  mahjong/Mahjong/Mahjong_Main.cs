@@ -15,8 +15,8 @@ namespace Mahjong.Control
         static void Main()
         {
             // 程式控制
-            ProgramControl p = new ProgramControl(new Table());
-            //ProgramControl p = new ProgramControl(new NewTable());
+            //ProgramControl p = new ProgramControl(new Table());
+            ProgramControl p = new ProgramControl(new NewTable());
             p.showTable();
             // 測試牌和產生牌
             //new BrandsTest();

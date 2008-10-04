@@ -95,6 +95,12 @@
     <Compile Include="Forms\Information.Designer.cs">
       <DependentUpon>Information.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InputName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InputName.Designer.cs">
+      <DependentUpon>InputName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NewTable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,6 +370,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>ChowBrandCheck.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InputName.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InputName.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewTable.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewTable.cs</DependentUpon>
@@ -381,6 +391,19 @@
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\拼.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\宅.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\冷.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\冏.jpg" />
+  </ItemGroup>
+
   <ItemGroup>
     <None Include="Resources\ten1s.bmp" />
     <None Include="Resources\chow.wav" />

@@ -18,13 +18,13 @@ namespace Mahjong.Forms
     {
         internal ProgramControl pc;
         private FlowLayoutPanel[] flowLayoutBrands;
-        AllPlayers all;
+        protected AllPlayers all;
         int width = (int)((double)Settings.Default.image_w * Settings.Default.ResizePercentage);
         int height = (int)((double)Settings.Default.image_h * Settings.Default.ResizePercentage);
         /// <summary>
         /// 圖片盒的內距
         /// </summary>
-        int padding = 1;
+        protected int padding = 1;
         /// <summary>
         /// 是否顯示所有的牌
         /// </summary>
@@ -159,7 +159,7 @@ namespace Mahjong.Forms
             setTitle();
         }
 
-        private void setTitle()
+        protected void setTitle()
         {
             string s;
             s = Settings.Default.Title;
@@ -171,7 +171,7 @@ namespace Mahjong.Forms
             Text = s;
         }
 
-        private void setInforamtion()
+        public virtual void setInforamtion()
         {
             pc.setInforamtion();
         }
@@ -372,7 +372,7 @@ namespace Mahjong.Forms
         }
         delegate void add_flowLayoutBrands_delegate(int state, BrandBox brandbox);
 
-        void add_flowLayoutBrands(int state,BrandBox brandbox)
+        void add_flowLayoutBrands(int state, BrandBox brandbox)
         {
             if (flowLayoutBrands[state].InvokeRequired)
             {
@@ -382,14 +382,14 @@ namespace Mahjong.Forms
                 flowLayoutBrands[state].Controls.Add(brandbox);
         }
 
-        void tempBrandbox_MouseMove(object sender, MouseEventArgs e)
+        protected void tempBrandbox_MouseMove(object sender, MouseEventArgs e)
         {
             BrandBox b = (BrandBox)sender;
             if (pc.NowPlayer_is_Real_Player && all.State == place.Down)
                 b.BackColor = Color.Blue;           
         }
 
-        void brandBox_MouseLeave(object sender, EventArgs e)
+        protected void brandBox_MouseLeave(object sender, EventArgs e)
         {
             BrandBox b = (BrandBox)sender;
             b.BackColor = BackColor;
@@ -400,7 +400,7 @@ namespace Mahjong.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void cheat_MouseClick(object sender, MouseEventArgs e)
+        protected void cheat_MouseClick(object sender, MouseEventArgs e)
         {
             
             BrandBox b = (BrandBox)sender;
@@ -431,7 +431,7 @@ namespace Mahjong.Forms
                       
         }
 
-        void debug_Click(object sender, EventArgs e)
+        protected void debug_Click(object sender, EventArgs e)
         {
             BrandBox b = (BrandBox)sender;
             StringBuilder s = new StringBuilder();
@@ -488,7 +488,7 @@ namespace Mahjong.Forms
         /// <param name="b">圖型</param>
         /// <param name="resize">比率</param>
         /// <returns>圖型</returns>
-        private Bitmap ResizeBitmap(Bitmap b, double resize)
+        protected Bitmap ResizeBitmap(Bitmap b, double resize)
         {
             int nWidth = Convert.ToInt16(b.Width * resize);
             int nHeight = Convert.ToInt16(b.Height * resize);
@@ -503,7 +503,7 @@ namespace Mahjong.Forms
         /// </summary>
         /// <param name="sender">BrandBox</param>
         /// <param name="e"></param>
-        void brandBox_MouseClick(object sender, EventArgs e)
+        protected void brandBox_MouseClick(object sender, EventArgs e)
         {
            
             BrandBox b = (BrandBox)sender;
@@ -721,12 +721,12 @@ namespace Mahjong.Forms
             }
         }
 
-        void clearNowPlayer()
+        protected virtual void clearNowPlayer()
         {
             flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
         }
 
-        void clearFlowLayoutBrands_Table()
+        protected virtual void clearFlowLayoutBrands_Table()
         {
             flowLayoutBrands[(int)location.Table].Controls.Clear();
         }

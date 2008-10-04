@@ -9,7 +9,7 @@ namespace Mahjong.Forms
     /// <summary>
     /// 提供存放牌的PictureBox
     /// </summary>
-    class BrandBox : PictureBox
+    public class BrandBox : PictureBox
     {
         Brand savebrand;
         public BrandBox(Brand val)

@@ -206,7 +206,7 @@
         private System.Windows.Forms.ToolStripMenuItem 關於ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 結束ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem ShowMessageBox_Menu;
+        protected System.Windows.Forms.ToolStripMenuItem ShowMessageBox_Menu;
         private System.Windows.Forms.ToolStripMenuItem 速度ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Slow;
         private System.Windows.Forms.ToolStripMenuItem Normal;

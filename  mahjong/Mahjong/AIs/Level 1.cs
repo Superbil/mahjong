@@ -22,7 +22,7 @@ namespace Mahjong.AIs
         //WordBrand w = new WordBrand(0);
         //牌的群組
         BrandPlayer[] brands = new BrandPlayer[5];
-        bool firsttime = true;
+        //bool firsttime = true;
         /// <summary>
         /// 設定牌組
         /// </summary>

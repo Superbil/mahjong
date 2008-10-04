@@ -588,5 +588,34 @@ namespace Mahjong.Properties {
                 return ResourceManager.GetStream("word7s", resourceCulture);
             }
         }
+
+        
+        internal static System.Drawing.Bitmap 冏 {
+            get {
+                object obj = ResourceManager.GetObject("冏", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap 冷 {
+            get {
+                object obj = ResourceManager.GetObject("冷", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap 宅 {
+            get {
+                object obj = ResourceManager.GetObject("宅", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap 拼 {
+            get {
+                object obj = ResourceManager.GetObject("拼", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

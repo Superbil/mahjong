@@ -46,7 +46,7 @@ namespace Mahjong.Forms
         public const string BrandIndex_Head = "/brandindex:";
 
         // initialize thread for reading
-        General g2;
+        //General g2;
         internal PC_Network PC;
         internal String[] name = new string[4];
         internal bool disconnected = false;
