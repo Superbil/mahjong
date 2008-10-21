@@ -526,7 +526,7 @@ namespace Mahjong.Forms
         /// <summary>
         /// 播放打牌聲音
         /// </summary>
-        public void PlaySound(Brand brand)
+        internal void PlaySound(Brand brand)
         {
             SoundPlayer soundplayer = new SoundPlayer();
             switch (brand.getClass())

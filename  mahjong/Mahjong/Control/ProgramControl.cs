@@ -12,6 +12,7 @@ using Mahjong.AIs;
 using Mahjong.Brands;
 using Mahjong.Players;
 using Mahjong.Properties;
+using System.Media;
 
 namespace Mahjong.Control
 {
@@ -66,8 +67,12 @@ namespace Mahjong.Control
         /// </summary>
         internal bool PlayerSound = true;
         /// <summary>
+        /// 聲音播放器
+        /// </summary>
+        SoundPlayer soundplayer = new SoundPlayer();
+        /// <summary>
         /// 遊戲控制建構子
-        /// </summary>        
+        /// </summary>    
         public ProgramControl(Form f)
         {      
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);

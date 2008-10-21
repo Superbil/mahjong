@@ -12,13 +12,12 @@ using System.Media;
 namespace Mahjong.Control
 {
     public partial class ProgramControl
-    { 
-        SoundPlayer soundplayer=new SoundPlayer();
+    {         
         /// <summary>
         /// 打一圈要做的事
         /// </summary>
         internal virtual void round()
-        {
+        {            
             // 計時器停止
             roundTimer.Stop();
 
@@ -31,7 +30,7 @@ namespace Mahjong.Control
             if (!NowPlayer_is_Real_Player)
             {
                 if(PlayerSound)
-                table.PlaySound(getfromAI());
+                    table.PlaySound(getfromAI());
                 makeBrand(getfromAI());                
             }
             else
