@@ -12,7 +12,8 @@ using System.Media;
 namespace Mahjong.Control
 {
     public partial class ProgramControl
-    {        
+    { 
+        SoundPlayer soundplayer=new SoundPlayer();
         /// <summary>
         /// 打一圈要做的事
         /// </summary>
@@ -28,7 +29,11 @@ namespace Mahjong.Control
                 touchBrand();
             // 目前狀態不等於玩家時
             if (!NowPlayer_is_Real_Player)
-                makeBrand(getfromAI());
+            {
+                if(PlayerSound)
+                table.PlaySound(getfromAI());
+                makeBrand(getfromAI());                
+            }
             else
                 setInforamtion();
         }
@@ -115,9 +120,23 @@ namespace Mahjong.Control
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.DarkKong, all.Name[all.state].ToString());
                         if (kong.Kong())
+                        {
+                            if (PlayerSound)
+                            {
+                                soundplayer.Stream = Resources.kong;
+                                soundplayer.Play();
+                            }
                             all.DarkKong(nextbrand, kong.SuccessPlayer);
+                        }
                         else if (darkkong.DarkKong())
+                        {
+                            if (PlayerSound)
+                            {
+                                soundplayer.Stream = Resources.kong;
+                                soundplayer.Play();
+                            }
                             all.DarkKong(nextbrand, darkkong.SuccessPlayer);
+                        }
                         table.updateNowPlayer();
                         touchBrand();
                     }
@@ -138,6 +157,11 @@ namespace Mahjong.Control
                     }
                     else
                     {
+                        if (PlayerSound)
+                        {
+                            soundplayer.Stream = Resources.kong;
+                            soundplayer.Play();
+                        }
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.Kong, all.Name[all.state].ToString());
                         all.kong(nextbrand, darkkong.SuccessPlayer);
@@ -223,9 +247,14 @@ namespace Mahjong.Control
                     else if (Ai.Chow)
                     {
                         setInforamtion();
+                        if (PlayerSound)
+                        {
+                            soundplayer.Stream = Resources.chow;
+                            soundplayer.Play();
+                        }
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.Chow, all.Name[all.state].ToString());
-                        all.chow_pong(brand, c.SuccessPlayer);
+                        all.chow_pong(brand, c.SuccessPlayer);                        
                         updatePlayer_Table();
                         Chow_Pong_Brand = true;
                         return true;
@@ -270,6 +299,11 @@ namespace Mahjong.Control
                     if (c.Kong() && Ai.Kong)
                     {
                         setInforamtion();
+                        if (PlayerSound)
+                        {
+                            soundplayer.Stream = Resources.kong;
+                            soundplayer.Play();
+                        }
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.Kong, all.Name[all.state].ToString());
                         all.kong(brand, c.SuccessPlayer);
@@ -281,6 +315,11 @@ namespace Mahjong.Control
                     else if (c.Pong() && Ai.Pong)
                     {
                         setInforamtion();
+                        if (PlayerSound)
+                        {
+                            soundplayer.Stream = Resources.pon;
+                            soundplayer.Play();
+                        }
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.Pong, all.Name[all.state].ToString());
                         all.chow_pong(brand, c.SuccessPlayer);
@@ -326,6 +365,11 @@ namespace Mahjong.Control
                     {
                         // 更新資訊盒
                         setInforamtion();
+                        if (PlayerSound)
+                        {
+                            soundplayer.Stream = Resources.win;
+                            soundplayer.Play();
+                        }
                         if (showMessageBox)
                             MessageBox.Show(Mahjong.Properties.Settings.Default.Win, all.Name[all.state].ToString());
                         win_game(brand);

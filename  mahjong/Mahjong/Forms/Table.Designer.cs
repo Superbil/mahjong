@@ -43,11 +43,13 @@
             this.Slow = new System.Windows.Forms.ToolStripMenuItem();
             this.Normal = new System.Windows.Forms.ToolStripMenuItem();
             this.Quick = new System.Windows.Forms.ToolStripMenuItem();
+            this.PlaySound_Menu = new System.Windows.Forms.ToolStripMenuItem();
             this.關於ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.結束ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.PlaySound_Menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.contextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenu
@@ -75,21 +77,21 @@
             // 新遊戲ToolStripMenuItem1
             // 
             this.新遊戲ToolStripMenuItem1.Name = "新遊戲ToolStripMenuItem1";
-            this.新遊戲ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.新遊戲ToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
             this.新遊戲ToolStripMenuItem1.Text = "新遊戲";
             this.新遊戲ToolStripMenuItem1.Click += new System.EventHandler(this.新遊戲ToolStripMenuItem_Click);
             // 
             // 儲存牌局ToolStripMenuItem
             // 
             this.儲存牌局ToolStripMenuItem.Name = "儲存牌局ToolStripMenuItem";
-            this.儲存牌局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.儲存牌局ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.儲存牌局ToolStripMenuItem.Text = "儲存牌局";
             this.儲存牌局ToolStripMenuItem.Click += new System.EventHandler(this.儲存牌局ToolStripMenuItem_Click);
             // 
             // 讀取牌局ToolStripMenuItem
             // 
             this.讀取牌局ToolStripMenuItem.Name = "讀取牌局ToolStripMenuItem";
-            this.讀取牌局ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.讀取牌局ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.讀取牌局ToolStripMenuItem.Text = "讀取牌局";
             this.讀取牌局ToolStripMenuItem.Click += new System.EventHandler(this.讀取牌局ToolStripMenuItem_Click);
             // 
@@ -104,7 +106,7 @@
             // 開新遊戲ToolStripMenuItem
             // 
             this.開新遊戲ToolStripMenuItem.Name = "開新遊戲ToolStripMenuItem";
-            this.開新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.開新遊戲ToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.開新遊戲ToolStripMenuItem.Text = "新增/加入網路遊戲";
             this.開新遊戲ToolStripMenuItem.Click += new System.EventHandler(this.開新遊戲ToolStripMenuItem_Click);
             // 
@@ -141,7 +143,7 @@
             // Slow
             // 
             this.Slow.Name = "Slow";
-            this.Slow.Size = new System.Drawing.Size(152, 22);
+            this.Slow.Size = new System.Drawing.Size(106, 22);
             this.Slow.Text = "慢速";
             this.Slow.Click += new System.EventHandler(this.非常慢ToolStripMenuItem_Click);
             // 
@@ -150,16 +152,25 @@
             this.Normal.Checked = true;
             this.Normal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.Normal.Name = "Normal";
-            this.Normal.Size = new System.Drawing.Size(152, 22);
+            this.Normal.Size = new System.Drawing.Size(106, 22);
             this.Normal.Text = "正常速";
             this.Normal.Click += new System.EventHandler(this.正常ToolStripMenuItem_Click);
             // 
             // Quick
             // 
             this.Quick.Name = "Quick";
-            this.Quick.Size = new System.Drawing.Size(152, 22);
+            this.Quick.Size = new System.Drawing.Size(106, 22);
             this.Quick.Text = "超快速";
             this.Quick.Click += new System.EventHandler(this.非常快ToolStripMenuItem_Click);
+            // 
+            // PlaySound_Menu
+            // 
+            this.PlaySound_Menu.Checked = true;
+            this.PlaySound_Menu.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.PlaySound_Menu.Name = "PlaySound_Menu";
+            this.PlaySound_Menu.Size = new System.Drawing.Size(152, 22);
+            this.PlaySound_Menu.Text = "音效";
+            this.PlaySound_Menu.Click += new System.EventHandler(this.PlaySound_Menu_Click);
             // 
             // 關於ToolStripMenuItem1
             // 
@@ -180,14 +191,15 @@
             this.結束ToolStripMenuItem1.Text = "結束";
             this.結束ToolStripMenuItem1.Click += new System.EventHandler(this.結束ToolStripMenuItem1_Click);
             // 
-            // PlaySound_Menu
+            // axWindowsMediaPlayer1
             // 
-            this.PlaySound_Menu.Checked = true;
-            this.PlaySound_Menu.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.PlaySound_Menu.Name = "PlaySound_Menu";
-            this.PlaySound_Menu.Size = new System.Drawing.Size(152, 22);
-            this.PlaySound_Menu.Text = "音效";
-            this.PlaySound_Menu.Click += new System.EventHandler(this.PlaySound_Menu_Click);
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(204, 140);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(75, 23);
+            this.axWindowsMediaPlayer1.TabIndex = 1;
+            this.axWindowsMediaPlayer1.Visible = false;
             // 
             // Table
             // 
@@ -197,12 +209,14 @@
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(662, 640);
             this.ContextMenuStrip = this.contextMenu;
+            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Table";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "十六張麻將遊戲";
             this.contextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -226,6 +240,7 @@
         private System.Windows.Forms.ToolStripMenuItem 讀取牌局ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 新遊戲ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem PlaySound_Menu;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
 
         
     }
