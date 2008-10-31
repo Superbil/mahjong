@@ -60,36 +60,36 @@ namespace Mahjong.Forms
             sume = all.Money[(int)location.East];
             sums = all.Money[(int)location.South];
             sumw = all.Money[(int)location.West];
-            sumn = all.Money[(int)location.North];            
-            removeflower();
+            sumn = all.Money[(int)location.North];
+            allplayer();//置入姓名
+            removeflower(); //移除花排
             //winagain();
             //four();
             //three();
             //two();
-            flower();
-            white();
-            green();
-            red();
-            bigthree();
-            east();
-            south();
-            west();
-            nouth();
-            bighappy();
-            gangzi();
-            samecolor(y);
-            oldman();
-            //samecarve();
-            ponpon();
-            //lose();
-            //winmyself();
-            //sky();
-            allplayer();
-            //scoree();
-            //scores();
-            //scorew();
-            //scoren();
-            sum(scoree(),scores(),scorew(),scoren());
+            flower();//花台
+            white();//白板台
+            green();//青發台
+            red();//紅中台
+            bigthree();//大小三元
+            east();//東風台
+            south();//西風台
+            west();//南風台
+            nouth();//北風台
+            bighappy();//大四喜
+            //gangzi();//三四槓子
+            samecolor(y);//字清一色
+            //oldman();//清老頭
+            //samecarve();//三色同刻//
+            ponpon();//碰碰胡
+            //lose();//莊家輸台
+            //winmyself();//自摸
+            sky();//天胡//          
+            sum(scoree(),scores(),scorew(),scoren());//計分
+            if (l.Winer == all.State || l.Winer == all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush)
+            tally = tally + 2 * win_count - 1;
+            if(all.NowPlayer.getBrand(all.NowPlayer.getCount()-1).WhoPush==location.Table)
+            tally = tally + 1;
             labeltally.Text = tally.ToString();
             //test();
         }
@@ -106,11 +106,11 @@ namespace Mahjong.Forms
             {
                 if (y.getBrand(i).getClass() == y.getBrand(i + 1).getClass() && y.getBrand(i).getNumber() == y.getBrand(i + 1).getNumber() && y.getBrand(i).getClass() == y.getBrand(i + 2).getClass() && y.getBrand(i).getNumber() == y.getBrand(i + 2).getNumber())
                 {
-                    if (i < y.getCount()-3 && y.getBrand(i + 3).getClass() == y.getBrand(i).getClass() && y.getBrand(i + 3).getNumber() == y.getBrand(i).getNumber())
+                    if (/*i < y.getCount()-3 &&*/ y.getBrand(i + 3).getClass() == y.getBrand(i).getClass() && y.getBrand(i + 3).getNumber() == y.getBrand(i).getNumber())
                         i++;
                     count++;
                 }
-                if (count == 4 && y.getBrand(i).getClass() == y.getBrand(i+1).getClass() && y.getBrand(i).getNumber() == y.getBrand(i+1).getNumber())
+                if (count == 5 && y.getBrand(i).getClass() == y.getBrand(i+1).getClass() && y.getBrand(i).getNumber() == y.getBrand(i+1).getNumber())
                 {
                     textBox1.Text += "碰碰胡\r\n";
                     tally += 4;
@@ -152,7 +152,7 @@ namespace Mahjong.Forms
                 if (y.getBrand(i).getClass() == w.getClass() && y.getBrand(i).getNumber() == 6 && y.getBrand(i + 1).getClass() == w.getClass() && y.getBrand(i + 1).getNumber() == 6 && y.getBrand(i + 2).getClass() == w.getClass() && y.getBrand(i + 2).getNumber() == 6)
                 {
                     if (i < y.getCount()-3 && y.getBrand(i + 3).getClass() == w.getClass() && y.getBrand(i + 3).getNumber() == 6)
-                        i++;
+                        i+=3;
                     //i += 2;
                     tally += 1;
                     temp += 1;
@@ -179,7 +179,7 @@ namespace Mahjong.Forms
                 //if (brands[i].getClass() == w.getClass() && brands[i].getNumber() == 7 && brands[i + 1].getClass() == w.getClass() && brands[i + 1].getNumber() == 7 && brands[i + 2].getClass() == w.getClass() && brands[i + 2].getNumber() == 7)
                 {
                     if (i < y.getCount() - 3 && y.getBrand(i + 3).getClass() == w.getClass() && y.getBrand(i + 3).getNumber() == 7)
-                        i++;
+                        i+=3;
                     //i += 2;
                     tally += 1;
                     temp += 1;
@@ -205,7 +205,7 @@ namespace Mahjong.Forms
                 //if (brands[i].getClass() == w.getClass() && brands[i].getNumber() == 5 && brands[i + 1].getClass() == w.getClass() && brands[i + 1].getNumber() == 5 && brands[i + 2].getClass() == w.getClass() && brands[i + 2].getNumber() == 5)
                 {
                     if (i < y.getCount() - 3 && y.getBrand(i + 3).getClass() == w.getClass() && y.getBrand(i + 3).getNumber() == 5)
-                        i++;
+                        i+=3;
 
                     //i += 2;
                     tally += 1;
@@ -231,13 +231,13 @@ namespace Mahjong.Forms
                 textBox1.Text = "大三元\r\n";
                 tally += 5;
             }
-            /*else if (temp == 2 && index==true)
+            else if (temp == 2 && index==true)
             {
                 textBox1.Text = "小三元\r\n";
                 tally += 2;
             }
             temp = 0;
-            index = false;*/
+            index = false;
         }
 
         void east()
@@ -247,7 +247,7 @@ namespace Mahjong.Forms
                 if (y.getBrand(i).getClass() == w.getClass() && y.getBrand(i).getNumber() == 1 && y.getBrand(i + 1).getClass() == w.getClass() && y.getBrand(i + 1).getNumber() == 1 && y.getBrand(i + 2).getClass() == w.getClass() && y.getBrand(i + 2).getNumber() == 1)
                 {
                     if (i < y.getCount() - 3 && y.getBrand(i + 3).getClass() == w.getClass() && y.getBrand(i + 3).getNumber() == 1)
-                        i++;
+                        i+=3;
                         temp += 1;
                         if (all.State == location.East)
                         {
@@ -277,7 +277,7 @@ namespace Mahjong.Forms
                 if (y.getBrand(i).getClass() == w.getClass() && y.getBrand(i).getNumber() == 2 && y.getBrand(i + 1).getClass() == w.getClass() && y.getBrand(i + 1).getNumber() == 2 && y.getBrand(i + 2).getClass() == w.getClass() && y.getBrand(i + 2).getNumber() == 2)
                 {
                     if (i < y.getCount() - 3 && y.getBrand(i + 3).getClass() == w.getClass() && y.getBrand(i + 3).getNumber() == 2)
-                        i++;
+                        i+=3;
                     temp += 1;
                     if (all.State == location.South)
                     {
@@ -304,7 +304,7 @@ namespace Mahjong.Forms
                 if (y.getBrand(i).getClass() == w.getClass() && y.getBrand(i).getNumber() == 3 && y.getBrand(i + 1).getClass() == w.getClass() && y.getBrand(i + 1).getNumber() == 3 && y.getBrand(i + 2).getClass() == w.getClass() && y.getBrand(i + 2).getNumber() == 3)
                 {
                     if (i < y.getCount() - 3 && y.getBrand(i + 3).getClass() == w.getClass() && y.getBrand(i + 3).getNumber() == 3)
-                        i++;
+                        i+=3;
                     temp += 1;
                     if (all.State == location.West)
                     {
@@ -331,7 +331,7 @@ namespace Mahjong.Forms
                 if (y.getBrand(i).getClass() == w.getClass() && y.getBrand(i).getNumber() == 4 && y.getBrand(i + 1).getClass() == w.getClass() && y.getBrand(i + 1).getNumber() == 4 && y.getBrand(i + 2).getClass() == w.getClass() && y.getBrand(i + 2).getNumber() == 4)
                 {
                     if (i < y.getCount() - 3 && y.getBrand(i + 3).getClass() == w.getClass() && y.getBrand(i + 3).getNumber() == 4)
-                        i++;
+                        i+=3;
                     temp += 1;
                     if (all.State == location.North)
                     {
@@ -393,7 +393,7 @@ namespace Mahjong.Forms
             }
             num = 0;
 
-              /*for (int i = 0; i < q.getCount(); i++)
+              for (int i = 0; i < q.getCount(); i++)
               {
                   if (q.getBrand(i).getClass() == "字")
                   {   
@@ -412,10 +412,11 @@ namespace Mahjong.Forms
                       if (num == q.getCount() - 1)
                       {
                           textBox1.Text += "混一色\r\n";
-                          tally += 8;
+                          tally += 4;
                       }
                           num = 0;
-              }*/
+              }
+              index = false;
         }
 
         void oldman()
@@ -434,7 +435,7 @@ namespace Mahjong.Forms
             num = 0;
 
             for (int i = 0; i < y.getCount(); i++)
-                if (y.getBrand(i).getNumber() == 1 || y.getBrand(i).getNumber() == 9)
+                if (y.getBrand(i).getClass() != "字" && (y.getBrand(i).getNumber() == 1 || y.getBrand(i).getNumber() == 9))
                     num++;
             if (num == y.getCount())
             {
@@ -443,7 +444,7 @@ namespace Mahjong.Forms
             }
             num = 0;
 
-            /*for (int i = 0; i < y.getCount(); i++)
+            for (int i = 0; i < y.getCount(); i++)
             {
                 if (y.getBrand(i).getClass() == "字" || y.getBrand(i).getNumber() == 1 || y.getBrand(i).getNumber() == 9)
                     num++;
@@ -453,7 +454,7 @@ namespace Mahjong.Forms
                 textBox1.Text += "混老頭\r\n";
                 tally += 4;
             }
-            num = 0;*/
+            num = 0;
         }
 
         void samecarve()
@@ -472,7 +473,11 @@ namespace Mahjong.Forms
         void sky()
         {
 
-            labeltally.Text = "16";
+            if (all.Show_Table == null && all.State == l.Winer)
+            {
+                textBox1.Text += "天胡\r\n";
+                tally += 16;
+            }
         }
 
         private void Tally_Load(object sender, EventArgs e)
@@ -533,7 +538,7 @@ namespace Mahjong.Forms
                 {
                     if (r.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower && r.getBrand(i).getNumber() == 3)
                     {
-                        textBox1.Text += "竹\r\n";
+                        textBox1.Text += "菊\r\n";
                         tally += 1;
                     }
                     if (r.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower && r.getBrand(i).getNumber() == 7)
@@ -548,7 +553,7 @@ namespace Mahjong.Forms
                 {
                     if (r.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower && r.getBrand(i).getNumber() == 4)
                     {
-                        textBox1.Text += "菊\r\n";
+                        textBox1.Text += "竹\r\n";
                         tally += 1;
                     }
                     if (r.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower && r.getBrand(i).getNumber() == 8)
@@ -644,21 +649,23 @@ namespace Mahjong.Forms
             if (all.State == location.East && all.NowPlayer.getBrand(all.NowPlayer.getCount()-1).WhoPush==location.Table)
             {
                 textBox1.Text += "自摸\r\n";
+               
                 if (l.Winer == location.East)
                 {
-                    es = (all.basic_tai + tally + win_count) * 30;
+                    es = (all.basic_tai + tally + 2 * win_count) * 30;
                     textBox1.Text += "莊家";
                     int ww = win_count - 1;
                     if(win_count>1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
+                 
                 }
                 else
-                    es = (all.basic_tai + tally) * 30 + win_count * 10;
+                    es = (all.basic_tai + tally + 1) * 30 + (2 * win_count - 1) * 10;
             }
             else if (all.NowPlayer.getBrand(all.NowPlayer.getCount()-1).WhoPush==location.East)
             {
                 if (l.Winer == location.East || l.Winer == all.State)
-                    es = (all.basic_tai + tally + win_count) * -10;
+                    es = (all.basic_tai + tally + 2 * win_count - 1) * -10;
                 else 
                     es = (all.basic_tai + tally) * -10;
                // score1.Text = ns.ToString();
@@ -667,11 +674,12 @@ namespace Mahjong.Forms
             {
                 if (l.Winer == location.East || l.Winer == all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush)
                 {
-                    es = (all.basic_tai + tally + win_count) * 10;
+                    es = (all.basic_tai + tally + 2 * win_count - 1) * 10;
                     textBox1.Text += "莊家";
                     int ww = win_count - 1;
                     if (win_count > 1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
+                   
                 }
                 else
                     es = (all.basic_tai + tally) * 10;
@@ -680,9 +688,9 @@ namespace Mahjong.Forms
             else if (all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
                 if (l.Winer == location.East || l.Winer == all.State)
-                    es = (all.basic_tai + tally+win_count) * -10;
+                    es = (all.basic_tai + tally + 2 * win_count) * -10;
                 else
-                    es = (all.basic_tai + tally) * -10;
+                    es = (all.basic_tai + tally + 1) * -10;
             }
             score1.Text = es.ToString();
             return es;
@@ -694,22 +702,24 @@ namespace Mahjong.Forms
             if (all.State == location.South && all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
                 textBox1.Text += "自摸\r\n";
+            
                 if (l.Winer == location.South)
                 {
-                    ss = (all.basic_tai + tally + win_count) * 30;
+                    ss = (all.basic_tai + tally + 2 * win_count) * 30;
                     textBox1.Text += "莊家";
                     int ww = win_count - 1;
                     if (win_count > 1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
+                  
                 }
                 else
-                    ss = (all.basic_tai + tally) * 30 + win_count * 10;
+                    ss = (all.basic_tai + tally + 1) * 30 + (2 * win_count - 1) * 10;
                 //score2.Text = ss.ToString();
             }
             else if (all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.South)
             {
                 if (l.Winer == location.South || l.Winer == all.State)
-                    ss = (all.basic_tai + tally + win_count) * -10;
+                    ss = (all.basic_tai + tally + 2 * win_count - 1) * -10;
                 else
                     ss = (all.basic_tai + tally) * -10;
                 //score2.Text = ns.ToString();
@@ -718,11 +728,12 @@ namespace Mahjong.Forms
             {
                 if (l.Winer==location.South|| l.Winer == all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush)
                 {
-                    ss = (all.basic_tai + tally + win_count) * 10;
+                    ss = (all.basic_tai + tally + 2 * win_count - 1) * 10;
                     textBox1.Text += "莊家";
                     int ww = win_count - 1;
                     if (win_count > 1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
+                  
                 }
                 else
                     ss = (all.basic_tai + tally) * 10;
@@ -731,9 +742,9 @@ namespace Mahjong.Forms
             else if (all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
                 if (l.Winer == location.South || l.Winer == all.State)
-                    ss = (all.basic_tai + tally + win_count) * -10;
+                    ss = (all.basic_tai + tally + 2 * win_count) * -10;
                 else
-                    ss = (all.basic_tai + tally) * -10;
+                    ss = (all.basic_tai + tally + 1) * -10;
             }
             score2.Text = ss.ToString();
 
@@ -746,22 +757,24 @@ namespace Mahjong.Forms
             if (all.State == location.West && all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
                 textBox1.Text += "自摸\r\n";
+              
                   if (l.Winer == location.West)
                   {
-                      ws = (all.basic_tai + tally + win_count) * 30;
+                      ws = (all.basic_tai + tally + 2 * win_count) * 30;
                       textBox1.Text += "莊家";
                       int ww = win_count - 1;
                       if (win_count > 1)
                           textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
+              
                   }
                   else
-                      ws = (all.basic_tai + tally) * 30 + win_count * 10;
+                      ws = (all.basic_tai + tally + 1) * 30 + (2 * win_count - 1) * 10;
                 //score3.Text = ws.ToString();
             }
             else if (all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.West)
             {
                 if (l.Winer == location.West || l.Winer == all.State)
-                    ws = (all.basic_tai + tally + win_count) * -10;
+                    ws = (all.basic_tai + tally + 2 * win_count - 1) * -10;
                 else
                     ws = (all.basic_tai + tally) * -10;
                 //score3.Text = ns.ToString();
@@ -770,11 +783,12 @@ namespace Mahjong.Forms
             {
                 if (l.Winer == location.West || l.Winer == all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush)
                 {
-                    ws = (all.basic_tai + tally + win_count) * 10;
+                    ws = (all.basic_tai + tally + 2 * win_count - 1) * 10;
                     textBox1.Text += "莊家";
                     int ww = win_count - 1;
                     if (win_count > 1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
+                    
                 }
                 else
                     ws = (all.basic_tai + tally) * 10;
@@ -783,9 +797,9 @@ namespace Mahjong.Forms
             else if (all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
                 if (l.Winer == location.West || l.Winer == all.State)
-                    ws = (all.basic_tai + tally + win_count) * -10;
+                    ws = (all.basic_tai + tally + 2 * win_count) * -10;
                 else
-                    ws = (all.basic_tai + tally) * -10;
+                    ws = (all.basic_tai + tally + 1) * -10;
             }
             score3.Text = ws.ToString();
             return ws;
@@ -797,22 +811,24 @@ namespace Mahjong.Forms
             if (all.State == location.North && all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
                 textBox1.Text += "自摸\r\n";
+             
                 if (l.Winer == location.North)
                 {
-                    ns = (all.basic_tai + tally + win_count) * 30;
+                    ns = (all.basic_tai + tally + 2 * win_count) * 30;
                     textBox1.Text += "莊家";
                     int ww = win_count - 1;
                     if (win_count > 1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
+                 
                 }
                 else
-                    ns = (all.basic_tai + tally) * 30 + win_count * 10;
+                    ns = (all.basic_tai + tally + 1) * 30 + (2 * win_count - 1) * 10;
                 //score4.Text = ns.ToString();
             }
             else if (all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.North)
             {
                 if (l.Winer == location.North || l.Winer == all.State)
-                    ns = (all.basic_tai + tally + win_count) * -10;
+                    ns = (all.basic_tai + tally + 2 * win_count - 1) * -10;
                 else
                     ns = (all.basic_tai + tally) * -10;
                 //score4.Text = ns.ToString();
@@ -821,11 +837,12 @@ namespace Mahjong.Forms
             {
                 if (l.Winer == location.North || l.Winer == all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush)
                 {
-                    ns = (all.basic_tai + tally + win_count) * 10;
+                    ns = (all.basic_tai + tally + 2 * win_count - 1) * 10;
                     textBox1.Text += "莊家";
                     int ww = win_count - 1;
                     if (win_count > 1)
                         textBox1.Text += "連" + ww.ToString() + "拉" + ww.ToString() + "\r\n";
+                   
                 }
                 else
                 ns = (all.basic_tai + tally) * 10;
@@ -834,9 +851,9 @@ namespace Mahjong.Forms
             else if (all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1).WhoPush == location.Table)
             {
                 if (l.Winer == location.North||l.Winer==all.State)
-                    ns = (all.basic_tai + tally + win_count) * -10;
+                    ns = (all.basic_tai + tally + 2 * win_count) * -10;
                 else
-                    ns = (all.basic_tai + tally) * -10;
+                    ns = (all.basic_tai + tally + 1) * -10;
             }
             score4.Text = ns.ToString();
             return ns;
@@ -852,7 +869,7 @@ namespace Mahjong.Forms
         {
             if (all.State == l.Winer)
             {
-                textBox1.Text += "莊家\r\n";
+             //   textBox1.Text += "自摸\r\n";
                 tally += 1;
                 return true;
             }
