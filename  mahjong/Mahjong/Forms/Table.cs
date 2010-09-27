@@ -304,6 +304,12 @@ namespace Mahjong.Forms
         }
         delegate void Update_delegate();
 
+        /// <summary>
+        /// 新增圖片反覆器
+        /// </summary>
+        /// <param name="iterator">玩家反覆器</param>
+        /// <param name="state">目前方位</param>
+        /// <param name="rotate">圖片方向</param>
         protected virtual void addimage_iterator(Iterator iterator, location state, RotateFlipType rotate)
         {
             while (iterator.hasNext())

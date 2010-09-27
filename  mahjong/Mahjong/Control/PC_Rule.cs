@@ -84,7 +84,7 @@ namespace Mahjong.Control
                     // 更新資訊盒
                     setInforamtion();
                     if (showMessageBox)
-                        MessageBox.Show(Settings.Default.TouchWin, all.Name[all.state].ToString());
+                        ShowMessage(Settings.Default.TouchWin);
                     win_game(nextbrand);
                 }
                 // 手牌暗槓(摸到有暗槓和手牌中就有暗槓)
@@ -117,7 +117,7 @@ namespace Mahjong.Control
                     else
                     {
                         if (showMessageBox)
-                            MessageBox.Show(Mahjong.Properties.Settings.Default.DarkKong, all.Name[all.state].ToString());
+                            ShowMessage(Mahjong.Properties.Settings.Default.DarkKong);
                         if (kong.Kong())
                         {
                             if (PlayerSound)
@@ -162,7 +162,7 @@ namespace Mahjong.Control
                             soundplayer.Play();
                         }
                         if (showMessageBox)
-                            MessageBox.Show(Mahjong.Properties.Settings.Default.Kong, all.Name[all.state].ToString());
+                            ShowMessage(Mahjong.Properties.Settings.Default.Kong);
                         all.kong(nextbrand, darkkong.SuccessPlayer);
                         table.updateNowPlayer();
                         touchBrand();
@@ -252,7 +252,7 @@ namespace Mahjong.Control
                             soundplayer.Play();
                         }
                         if (showMessageBox)
-                            MessageBox.Show(Mahjong.Properties.Settings.Default.Chow, all.Name[all.state].ToString());
+                            ShowMessage(Mahjong.Properties.Settings.Default.Chow);
                         all.chow_pong(brand, c.SuccessPlayer);                        
                         updatePlayer_Table();
                         Chow_Pong_Brand = true;
@@ -304,7 +304,7 @@ namespace Mahjong.Control
                             soundplayer.Play();
                         }
                         if (showMessageBox)
-                            MessageBox.Show(Mahjong.Properties.Settings.Default.Kong, all.Name[all.state].ToString());
+                            ShowMessage(Mahjong.Properties.Settings.Default.Kong);
                         all.kong(brand, c.SuccessPlayer);
                         Chow_Pong_Brand = false;
                         updatePlayer_Table();
@@ -320,7 +320,7 @@ namespace Mahjong.Control
                             soundplayer.Play();
                         }
                         if (showMessageBox)
-                            MessageBox.Show(Mahjong.Properties.Settings.Default.Pong, all.Name[all.state].ToString());
+                            ShowMessage(Mahjong.Properties.Settings.Default.Pong);
                         all.chow_pong(brand, c.SuccessPlayer);
                         updatePlayer_Table();
                         Chow_Pong_Brand = true;
@@ -370,7 +370,7 @@ namespace Mahjong.Control
                             soundplayer.Play();
                         }
                         if (showMessageBox)
-                            MessageBox.Show(Mahjong.Properties.Settings.Default.Win, all.Name[all.state].ToString());
+                            ShowMessage(Mahjong.Properties.Settings.Default.Win);
                         win_game(brand);
                         return true;
                     }
@@ -378,6 +378,11 @@ namespace Mahjong.Control
             }
             all.next();
             return false;
+        }
+
+        private void ShowMessage(string print_word)
+        {
+            MessageBox.Show(print_word, all.Name[all.state].ToString());
         }
 
         /// <summary>

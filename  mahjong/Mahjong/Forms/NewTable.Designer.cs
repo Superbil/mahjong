@@ -41,7 +41,7 @@
             this.tableLayoutPanel_Left = new System.Windows.Forms.TableLayoutPanel();
             this.fl_Left_Show = new System.Windows.Forms.FlowLayoutPanel();
             this.fl_Left_Hand = new System.Windows.Forms.FlowLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel_Center = new System.Windows.Forms.TableLayoutPanel();
             this.fl_ShowTable = new System.Windows.Forms.FlowLayoutPanel();
             this.fl_Table = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel_Down_Personal = new System.Windows.Forms.TableLayoutPanel();
@@ -65,7 +65,7 @@
             this.tableLayoutPanel_Right.SuspendLayout();
             this.tableLayoutPanel_Up.SuspendLayout();
             this.tableLayoutPanel_Left.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel_Center.SuspendLayout();
             this.tableLayoutPanel_Down_Personal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Down)).BeginInit();
             this.tableLayoutPanel_Right_Personal.SuspendLayout();
@@ -86,7 +86,7 @@
             this.tableLayoutPanel_Table.Controls.Add(this.tableLayoutPanel_Right, 2, 1);
             this.tableLayoutPanel_Table.Controls.Add(this.tableLayoutPanel_Up, 1, 0);
             this.tableLayoutPanel_Table.Controls.Add(this.tableLayoutPanel_Left, 0, 1);
-            this.tableLayoutPanel_Table.Controls.Add(this.tableLayoutPanel1, 1, 1);
+            this.tableLayoutPanel_Table.Controls.Add(this.tableLayoutPanel_Center, 1, 1);
             this.tableLayoutPanel_Table.Controls.Add(this.tableLayoutPanel_Down_Personal, 0, 2);
             this.tableLayoutPanel_Table.Controls.Add(this.tableLayoutPanel_Right_Personal, 2, 2);
             this.tableLayoutPanel_Table.Controls.Add(this.tableLayoutPanel_Up_Personal, 2, 0);
@@ -182,6 +182,7 @@
             this.tableLayoutPanel_Up.RowCount = 2;
             this.tableLayoutPanel_Up.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel_Up.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel_Up.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel_Up.Size = new System.Drawing.Size(568, 111);
             this.tableLayoutPanel_Up.TabIndex = 2;
             // 
@@ -242,22 +243,22 @@
             this.fl_Left_Hand.Size = new System.Drawing.Size(92, 463);
             this.fl_Left_Hand.TabIndex = 0;
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanel_Center
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.fl_ShowTable, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.fl_Table, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(153, 127);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(10);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(554, 449);
-            this.tableLayoutPanel1.TabIndex = 4;
+            this.tableLayoutPanel_Center.ColumnCount = 1;
+            this.tableLayoutPanel_Center.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel_Center.Controls.Add(this.fl_ShowTable, 0, 0);
+            this.tableLayoutPanel_Center.Controls.Add(this.fl_Table, 0, 1);
+            this.tableLayoutPanel_Center.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel_Center.Location = new System.Drawing.Point(153, 127);
+            this.tableLayoutPanel_Center.Margin = new System.Windows.Forms.Padding(10);
+            this.tableLayoutPanel_Center.Name = "tableLayoutPanel_Center";
+            this.tableLayoutPanel_Center.RowCount = 3;
+            this.tableLayoutPanel_Center.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel_Center.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel_Center.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel_Center.Size = new System.Drawing.Size(554, 449);
+            this.tableLayoutPanel_Center.TabIndex = 4;
             // 
             // fl_ShowTable
             // 
@@ -475,15 +476,17 @@
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(862, 705);
             this.Controls.Add(this.tableLayoutPanel_Table);
+            this.Location = new System.Drawing.Point(0, 0);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(870, 735);
             this.Name = "NewTable";
+            this.Controls.SetChildIndex(this.tableLayoutPanel_Table, 0);
             this.tableLayoutPanel_Table.ResumeLayout(false);
             this.tableLayoutPanel_Down.ResumeLayout(false);
             this.tableLayoutPanel_Right.ResumeLayout(false);
             this.tableLayoutPanel_Up.ResumeLayout(false);
             this.tableLayoutPanel_Left.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel_Center.ResumeLayout(false);
             this.tableLayoutPanel_Down_Personal.ResumeLayout(false);
             this.tableLayoutPanel_Down_Personal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Down)).EndInit();
@@ -515,7 +518,7 @@
         private System.Windows.Forms.FlowLayoutPanel fl_Up_Show;
         private System.Windows.Forms.FlowLayoutPanel fl_Left_Show;
         private System.Windows.Forms.FlowLayoutPanel fl_Left_Hand;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Center;
         private System.Windows.Forms.FlowLayoutPanel fl_ShowTable;
         private System.Windows.Forms.FlowLayoutPanel fl_Table;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel_Down_Personal;

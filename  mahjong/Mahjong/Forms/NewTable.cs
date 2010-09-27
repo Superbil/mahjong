@@ -23,7 +23,6 @@ namespace Mahjong.Forms
 
         public override void Setup(AllPlayers all)
         {
-            //this.all = all;
             this.place = all.place;
             ShowMessageBox_Menu.Checked = pc.ShowMessageBox = all.showMessageBox;
             setTitle();
@@ -115,7 +114,7 @@ namespace Mahjong.Forms
             }
             bitmap = ResizeBitmap(bitmap, Settings.Default.ResizePercentage);
 
-            // 設定圖片      
+            // 設定圖片
             tempBrandbox.Image = bitmap;
 
             // 新增至控制項
