@@ -18,7 +18,7 @@
     <ApplicationIcon>mahjong.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>DA6649F4DAE102FA669937F1B2F8F67AAB53A9C6</ManifestCertificateThumbprint>
     <ManifestKeyFile>Mahjong_TemporaryKey.pfx</ManifestKeyFile>
-    <PublishUrl>D:\Files\專題\Release\</PublishUrl>
+    <PublishUrl>Z:\Data\Files\專題\Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -30,7 +30,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <TargetCulture>zh-TW</TargetCulture>
     <ProductName>網路麻將</ProductName>
-    <PublisherName>CWS</PublisherName>
+    <PublisherName>Fantasy Studio</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationVersion>0.0.2.%2a</ApplicationVersion>
     <BootstrapperEnabled>false</BootstrapperEnabled>
@@ -380,6 +380,24 @@
     <EmbeddedResource Include="mahjong.ico" />
   </ItemGroup>
   <ItemGroup>
+    <PublishFile Include="AxInterop.WMPLib">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Interop.WMPLib">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="Microsoft.VisualStudio.DebuggerVisualizers">
       <Visible>False</Visible>
       <Group>
