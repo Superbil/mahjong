@@ -361,7 +361,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Mahjong.config" />
-    <None Include="Mahjong_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
@@ -407,18 +406,6 @@
       <PublishState>Exclude</PublishState>
       <FileType>Assembly</FileType>
     </PublishFile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\拼.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\宅.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\冷.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\冏.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\chow.wav" />
