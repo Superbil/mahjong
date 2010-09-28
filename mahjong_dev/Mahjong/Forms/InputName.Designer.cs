@@ -28,54 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label_E = new System.Windows.Forms.Label();
+            this.label_N = new System.Windows.Forms.Label();
+            this.label_W = new System.Windows.Forms.Label();
+            this.label_S = new System.Windows.Forms.Label();
             this.textBox_E = new System.Windows.Forms.TextBox();
             this.textBox_N = new System.Windows.Forms.TextBox();
             this.textBox_W = new System.Windows.Forms.TextBox();
             this.textBox_S = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button_Ok = new System.Windows.Forms.Button();
+            this.button_Cancel = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // label_E
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "東";
+            this.label_E.AutoSize = true;
+            this.label_E.Location = new System.Drawing.Point(12, 9);
+            this.label_E.Name = "label_E";
+            this.label_E.Size = new System.Drawing.Size(17, 12);
+            this.label_E.TabIndex = 0;
+            this.label_E.Text = global::Mahjong.Properties.Settings.Default.East;
             // 
-            // label2
+            // label_N
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "北";
+            this.label_N.AutoSize = true;
+            this.label_N.Location = new System.Drawing.Point(12, 38);
+            this.label_N.Name = "label_N";
+            this.label_N.Size = new System.Drawing.Size(17, 12);
+            this.label_N.TabIndex = 1;
+            this.label_N.Text = global::Mahjong.Properties.Settings.Default.Nouth;
             // 
-            // label3
+            // label_W
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 67);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "西";
+            this.label_W.AutoSize = true;
+            this.label_W.Location = new System.Drawing.Point(12, 67);
+            this.label_W.Name = "label_W";
+            this.label_W.Size = new System.Drawing.Size(17, 12);
+            this.label_W.TabIndex = 2;
+            this.label_W.Text = global::Mahjong.Properties.Settings.Default.West;
             // 
-            // label4
+            // label_S
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 98);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 12);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "南";
+            this.label_S.AutoSize = true;
+            this.label_S.Location = new System.Drawing.Point(12, 98);
+            this.label_S.Name = "label_S";
+            this.label_S.Size = new System.Drawing.Size(17, 12);
+            this.label_S.TabIndex = 3;
+            this.label_S.Text = global::Mahjong.Properties.Settings.Default.South;
             // 
             // textBox_E
             // 
@@ -105,25 +105,26 @@
             this.textBox_S.Size = new System.Drawing.Size(100, 22);
             this.textBox_S.TabIndex = 7;
             // 
-            // button1
+            // button_Ok
             // 
-            this.button1.Location = new System.Drawing.Point(141, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "確定";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button_Ok.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Mahjong.Properties.Settings.Default, "Button_Ok", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.button_Ok.Location = new System.Drawing.Point(141, 6);
+            this.button_Ok.Name = "button_Ok";
+            this.button_Ok.Size = new System.Drawing.Size(75, 23);
+            this.button_Ok.TabIndex = 8;
+            this.button_Ok.Text = global::Mahjong.Properties.Settings.Default.Button_Ok;
+            this.button_Ok.UseVisualStyleBackColor = true;
+            this.button_Ok.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // button_Cancel
             // 
-            this.button2.Location = new System.Drawing.Point(141, 32);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "取消";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button_Cancel.Location = new System.Drawing.Point(141, 32);
+            this.button_Cancel.Name = "button_Cancel";
+            this.button_Cancel.Size = new System.Drawing.Size(75, 23);
+            this.button_Cancel.TabIndex = 9;
+            this.button_Cancel.Text = global::Mahjong.Properties.Settings.Default.Button_Cancel;
+            this.button_Cancel.UseVisualStyleBackColor = true;
+            this.button_Cancel.Click += new System.EventHandler(this.button2_Click);
             // 
             // label5
             // 
@@ -132,7 +133,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 10;
-            this.label5.Text = "玩家";
+            this.label5.Text = global::Mahjong.Properties.Settings.Default.ThisisPlayer;
             // 
             // InputName
             // 
@@ -140,21 +141,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(228, 124);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_Cancel);
+            this.Controls.Add(this.button_Ok);
             this.Controls.Add(this.textBox_S);
             this.Controls.Add(this.textBox_W);
             this.Controls.Add(this.textBox_N);
             this.Controls.Add(this.textBox_E);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label_S);
+            this.Controls.Add(this.label_W);
+            this.Controls.Add(this.label_N);
+            this.Controls.Add(this.label_E);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Mahjong.Properties.Settings.Default, "PlayerNameConfigTitle", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InputName";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "姓名設定";
+            this.Text = global::Mahjong.Properties.Settings.Default.PlayerNameConfigTitle;
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,16 +164,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label_E;
+        private System.Windows.Forms.Label label_N;
+        private System.Windows.Forms.Label label_W;
+        private System.Windows.Forms.Label label_S;
         private System.Windows.Forms.TextBox textBox_E;
         private System.Windows.Forms.TextBox textBox_N;
         private System.Windows.Forms.TextBox textBox_W;
         private System.Windows.Forms.TextBox textBox_S;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_Ok;
+        private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.Label label5;
     }
 }

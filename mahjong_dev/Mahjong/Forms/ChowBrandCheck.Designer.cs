@@ -35,21 +35,21 @@
             // 
             // flowLayout1
             // 
-            this.flowLayout1.Location = new System.Drawing.Point(12, 12);
+            this.flowLayout1.Location = new System.Drawing.Point(10, 10);
             this.flowLayout1.Name = "flowLayout1";
             this.flowLayout1.Size = new System.Drawing.Size(132, 60);
             this.flowLayout1.TabIndex = 0;
             // 
             // flowLayout2
             // 
-            this.flowLayout2.Location = new System.Drawing.Point(12, 78);
+            this.flowLayout2.Location = new System.Drawing.Point(12, 76);
             this.flowLayout2.Name = "flowLayout2";
             this.flowLayout2.Size = new System.Drawing.Size(132, 60);
             this.flowLayout2.TabIndex = 0;
             // 
             // flowLayout3
             // 
-            this.flowLayout3.Location = new System.Drawing.Point(12, 144);
+            this.flowLayout3.Location = new System.Drawing.Point(12, 142);
             this.flowLayout3.Name = "flowLayout3";
             this.flowLayout3.Size = new System.Drawing.Size(132, 60);
             this.flowLayout3.TabIndex = 0;
@@ -58,7 +58,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(154, 206);
+            this.ClientSize = new System.Drawing.Size(154, 213);
             this.ControlBox = false;
             this.Controls.Add(this.flowLayout3);
             this.Controls.Add(this.flowLayout2);

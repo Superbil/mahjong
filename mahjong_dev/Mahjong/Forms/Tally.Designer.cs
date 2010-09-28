@@ -35,7 +35,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_Ok = new System.Windows.Forms.Button();
             this.labeltally = new System.Windows.Forms.Label();
             this.player1 = new System.Windows.Forms.Label();
             this.player2 = new System.Windows.Forms.Label();
@@ -121,16 +121,16 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "台";
             // 
-            // button1
+            // button_Ok
             // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(390, 155);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 39);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "確定";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button_Ok.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button_Ok.Location = new System.Drawing.Point(390, 155);
+            this.button_Ok.Name = "button_Ok";
+            this.button_Ok.Size = new System.Drawing.Size(103, 39);
+            this.button_Ok.TabIndex = 7;
+            this.button_Ok.Text = global::Mahjong.Properties.Settings.Default.Button_Ok;
+            this.button_Ok.UseVisualStyleBackColor = true;
+            this.button_Ok.Click += new System.EventHandler(this.button1_Click);
             // 
             // labeltally
             // 
@@ -254,7 +254,7 @@
             this.Controls.Add(this.player2);
             this.Controls.Add(this.player1);
             this.Controls.Add(this.labeltally);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_Ok);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox1);
@@ -282,7 +282,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_Ok;
         private System.Windows.Forms.Label labeltally;
         private System.Windows.Forms.Label player1;
         private System.Windows.Forms.Label player2;
