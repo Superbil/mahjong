@@ -30,7 +30,10 @@ namespace Mahjong.Forms
         /// </summary>
         internal bool ShowAll;
         internal bool ShowBrandInfo;
-        
+        /// <summary>
+        /// 資訊盒
+        /// </summary>
+        private Information information = new Information();
         bool lockuser;
         /// <summary>
         /// 作弊功能
@@ -179,7 +182,9 @@ namespace Mahjong.Forms
 
         public virtual void setInforamtion()
         {
-            pc.setInforamtion();
+            information.setup(this, all);
+            information.updateInformation();
+            information.Show();
         }
 
         void SetControl(FlowLayoutPanel[] flp)

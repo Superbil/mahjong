@@ -333,26 +333,10 @@ namespace Mahjong.Control
             } 
             all.place = table.place;
         }
-
-        //delegate void setInformation_delegate();
-
         internal override void setInforamtion()
         {
-            this.information.setup(table,all);            
-            this.information.updateInformation();
-            //if (this.information.InvokeRequired)
-            //    this.information.Invoke(new setInformation_delegate(showInformation));
-            //else
-            //    showInformation();
-            //this.information.Show();
-            
+            base.setInforamtion();
         }
-
-        void showInformation()
-        {
-            this.information.Show();
-        }
-
         bool myTurn
         {
             get

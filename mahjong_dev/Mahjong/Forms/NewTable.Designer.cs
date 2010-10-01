@@ -477,10 +477,9 @@
             this.ClientSize = new System.Drawing.Size(862, 705);
             this.Controls.Add(this.tableLayoutPanel_Table);
             this.Location = new System.Drawing.Point(0, 0);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(870, 735);
             this.Name = "NewTable";
-            this.Text = Mahjong.Properties.Settings.Default.Title;
+            this.Text = global::Mahjong.Properties.Settings.Default.Title;
             this.Controls.SetChildIndex(this.tableLayoutPanel_Table, 0);
             this.tableLayoutPanel_Table.ResumeLayout(false);
             this.tableLayoutPanel_Down.ResumeLayout(false);

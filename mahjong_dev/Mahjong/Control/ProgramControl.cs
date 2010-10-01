@@ -39,10 +39,6 @@ namespace Mahjong.Control
         /// </summary>
         MahjongAI Ai = new Level_1();
         /// <summary>
-        /// 資訊盒
-        /// </summary>
-        internal Information information = new Information();
-        /// <summary>
         /// 設定盒
         /// </summary>
         internal Config con;
@@ -258,10 +254,6 @@ namespace Mahjong.Control
         /// </summary>
         internal virtual void setInforamtion()
         {
-            // Old setInformation
-            //information.setup(table, all);
-            //information.updateInformation();
-            //information.Show();
             table.setInforamtion();
         }
         /// <summary>
