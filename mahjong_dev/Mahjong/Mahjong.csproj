@@ -69,7 +69,6 @@
     <Compile Include="AIs\SimpleAI.cs" />
     <Compile Include="Control\Test\BTest.cs" />
     <Compile Include="Control\CheckUser.cs" />
-    <Compile Include="Control\General.cs" />
     <Compile Include="Control\Mahjon_Exception.cs" />
     <Compile Include="Control\PC_FileStream.cs" />
     <Compile Include="Control\PC_Network.cs" />
