@@ -428,8 +428,8 @@ namespace Mahjong.Control
         /// </summary>
         public void sortNowPlayer()
         {
-            PlayerSort bs = new PlayerSort(players[state]);
-            players[state] = bs.getPlayer;
+            PlayerSort ps = new PlayerSort(players[state]);
+            players[state] = ps.getPlayer;
         }
         /// <summary>
         /// 把牌打到桌面上

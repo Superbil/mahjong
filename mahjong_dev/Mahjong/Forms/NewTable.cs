@@ -159,7 +159,7 @@ namespace Mahjong.Forms
         }
         public override void cleanImage()
         {
-            clearAll();   
+            clearAll();
         }
 
         public override void setInforamtion()
@@ -180,7 +180,9 @@ namespace Mahjong.Forms
             s += ")";
             this.Text = s;
         }
-
+        /// <summary>
+        /// 更新玩家名稱
+        /// </summary>
         private void updateName()
         {
             lab_Up_Name.Text = all.Name[place.getRealPlace_Up].ToString();
@@ -188,7 +190,9 @@ namespace Mahjong.Forms
             lab_Down_Name.Text = all.Name[place.getRealPlace_Down].ToString();
             lab_Left_Name.Text = all.Name[place.getRealPlace_Left].ToString();
         }
-
+        /// <summary>
+        /// 更新玩家金錢資訊
+        /// </summary>
         private void updateMoney()
         {
             lab_Up_Money.Text = all.Money[place.getRealPlace_Up].ToString();
@@ -196,7 +200,9 @@ namespace Mahjong.Forms
             lab_Down_money.Text = all.Money[place.getRealPlace_Down].ToString();
             lab_Left_Money.Text = all.Money[place.getRealPlace_Left].ToString();
         }
-
+        /// <summary>
+        /// 更新現在玩家資訊加上第幾莊和顏色
+        /// </summary>
         private void updateNowPlayer_Information()
         {
             Color c = Color.Yellow;
@@ -216,29 +222,36 @@ namespace Mahjong.Forms
 
             if (all.getLocation.Winer == place.Up)
             {
-                lab_Up_Name.Text += "(";
-                lab_Up_Name.Text += all.Win_Times;
-                lab_Up_Name.Text += ")";
+                lab_Up_Name.Text += wind_Times_to_string(all.win_Times);
             }
             else if (all.getLocation.Winer == place.Right)
             {
-                lab_Right_Name.Text += "(";
-                lab_Right_Name.Text += all.Win_Times;
-                lab_Right_Name.Text += ")";
+                lab_Right_Name.Text += wind_Times_to_string(all.win_Times);
             }
             else if (all.getLocation.Winer == place.Down)
             {
-                lab_Down_Name.Text += "(";
-                lab_Down_Name.Text += all.Win_Times;
-                lab_Down_Name.Text += ")";
+                lab_Down_Name.Text += wind_Times_to_string(all.win_Times);
             }
             else if (all.getLocation.Winer == place.Left)
             {
-                lab_Left_Name.Text += "(";
-                lab_Left_Name.Text += all.Win_Times;
-                lab_Left_Name.Text += ")";
+                lab_Left_Name.Text += wind_Times_to_string(all.win_Times);
             }
-
+        }
+        /// <summary>
+        /// 加上連幾拉幾
+        /// </summary>
+        /// <param name="win">次數</param>
+        /// <returns>連幾拉幾，若為1次就顯示為莊家</returns>
+        private string wind_Times_to_string(int win)
+        {
+            if (win == 1)
+            {
+                return " 莊家";
+            }
+            else
+            {
+                return " 連" + win.ToString() + "拉" + win.ToString();
+            }
         }
     }
 }

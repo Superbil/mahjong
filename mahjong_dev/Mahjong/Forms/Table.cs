@@ -271,21 +271,26 @@ namespace Mahjong.Forms
             foreach (FlowLayoutPanel f in flowLayoutBrands)
                 f.Margin = new Padding(size);
         }
-        protected virtual void addNouth()
+        protected void addNouth()
         {
             //圖片旋轉180度
             addimage_player(all.Players[(int)place.Up], location.North, RotateFlipType.Rotate180FlipNone);
         }
-        protected virtual void addEast()
+        protected void addEast()
         {
             //圖片旋轉270度
             addimage_player(all.Players[(int)place.Right], location.East, RotateFlipType.Rotate270FlipNone);
         }
-        protected virtual void addSouth()
+        protected void addSouth()
         {
+            //圖片不旋轉
             addimage_player(all.Players[(int)place.Down], location.South, RotateFlipType.RotateNoneFlipNone);
         }
-        protected virtual void addWest()
+        protected void updateSouth()
+        {
+
+        }
+        protected void addWest()
         {
             //圖片旋轉90度
             addimage_player(all.Players[(int)place.Left], location.West, RotateFlipType.Rotate90FlipNone);
@@ -298,7 +303,7 @@ namespace Mahjong.Forms
         {
             addimage_player(all.Table, location.Table, RotateFlipType.RotateNoneFlipNone);
         }
-        void addimage_player(BrandPlayer player, location state, RotateFlipType rotate)
+        private void addimage_player(BrandPlayer player, location state, RotateFlipType rotate)
         {
             Iterator temp = player.creatIterator();
             addimage_iterator(temp, state, rotate);
@@ -522,7 +527,7 @@ namespace Mahjong.Forms
         /// <param name="e"></param>
         protected void brandBox_MouseClick(object sender, EventArgs e)
         {
-           
+            
             BrandBox b = (BrandBox)sender;
             // 確定為玩家才發送事件
             if (pc.NowPlayer_is_Real_Player && all.State == place.Down)
@@ -724,7 +729,29 @@ namespace Mahjong.Forms
         /// <summary>
         /// 更新現在玩家
         /// </summary>
-        public virtual void updateNowPlayer()
+        public void updateNowPlayer()
+        {
+            if (InvokeRequired)
+                Invoke(new flowLayoutBrands_Nowplayer_Clear(clearNowPlayer));
+            else
+                clearNowPlayer();
+            switch (place.getRealPlace(all.State))
+            {
+                case location.East:
+                    addEast();
+                    break;
+                case location.North:
+                    addNouth();
+                    break;
+                case location.West:
+                    addWest();
+                    break;
+                case location.South:
+                    updateSouth();
+                    break;
+            }
+        }
+        public void addNowPlayer()
         {
             if (InvokeRequired)
                 Invoke(new flowLayoutBrands_Nowplayer_Clear(clearNowPlayer));
@@ -760,13 +787,13 @@ namespace Mahjong.Forms
         /// <summary>
         /// 更新桌面
         /// </summary>
-        public virtual void updateTable()
+        public void updateTable()
         {
             if (InvokeRequired)
                 Invoke(new flowLayoutBrands_Nowplayer_Clear(clearFlowLayoutBrands_Table));
             else
                 clearFlowLayoutBrands_Table();
-            addShowTable();            
+            addShowTable();
         }
         /// <summary>
         /// 更新Title和資訊盒

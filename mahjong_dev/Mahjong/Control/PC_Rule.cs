@@ -109,7 +109,7 @@ namespace Mahjong.Control
                             Player_Pass_Brand = false;
                         else
                         {
-                            table.updateNowPlayer();
+                            //table.updateNowPlayer();
                             touchBrand();
                         }
                     }
@@ -136,7 +136,7 @@ namespace Mahjong.Control
                             }
                             all.DarkKong(nextbrand, darkkong.SuccessPlayer);
                         }
-                        table.updateNowPlayer();
+                        //table.updateNowPlayer();
                         touchBrand();
                     }
                 }
@@ -150,7 +150,7 @@ namespace Mahjong.Control
                             Player_Pass_Brand = false;
                         else
                         {
-                            table.updateNowPlayer();
+                            //table.updateNowPlayer();
                             touchBrand();
                         }
                     }
@@ -164,7 +164,7 @@ namespace Mahjong.Control
                         if (showMessageBox)
                             ShowMessage(Mahjong.Properties.Settings.Default.Kong);
                         all.kong(nextbrand, darkkong.SuccessPlayer);
-                        table.updateNowPlayer();
+                        //table.updateNowPlayer();
                         touchBrand();
                     }
                 }
@@ -172,7 +172,7 @@ namespace Mahjong.Control
                 {
                     // 把牌加入玩家
                     all.NowPlayer.add(nextbrand);
-                    table.updateNowPlayer();
+                    //table.updateNowPlayer();
                 }
             }
 
@@ -231,17 +231,11 @@ namespace Mahjong.Control
                     // 如果是真實玩家
                     if (NowPlayer_is_Real_Player)
                     {
-                        // 是不是正在玩的玩家
-                        //if (all.State == table.place.Down)
-                        //{
-                            toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
-                            if (Player_Pass_Brand)
-                                Player_Pass_Brand = false;
-                            else
-                                return true;
-                        //}
-                        //else
-                        //    return true;
+                        toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
+                        if (Player_Pass_Brand)
+                            Player_Pass_Brand = false;
+                        else
+                            return true;
                     }
                     else if (Ai.Chow)
                     {
@@ -279,17 +273,11 @@ namespace Mahjong.Control
                 {
                     if (c.Pong() || c.Kong())
                     {
-                        // 是不是正在玩的玩家
-                        //if (all.State == table.place.Down)
-                        //{
-                            toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
-                            if (Player_Pass_Brand)
-                                Player_Pass_Brand = false;
-                            else
-                                return true;
-                        //}
-                        //else
-                        //    return true;
+                        toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
+                        if (Player_Pass_Brand)
+                            Player_Pass_Brand = false;
+                        else
+                            return true;
                     }
                 }
                 else
@@ -346,19 +334,13 @@ namespace Mahjong.Control
                     // 如果是玩家
                     if (NowPlayer_is_Real_Player)
                     {
-                        // 是不是正在玩的玩家
-                        //if (all.State == table.place.Down)
-                        //{
-                            toUser(brand, false, false, false, false, true);
-                            // 如果玩家按下過水 就跳過
-                            if (Player_Pass_Brand)
-                                Player_Pass_Brand = false;
-                            // 若不是按下過水就傳回 失敗
-                            else
-                                return true;
-                        //}
-                        //else
-                        //    return true;
+                        toUser(brand, false, false, false, false, true);
+                        // 如果玩家按下過水 就跳過
+                        if (Player_Pass_Brand)
+                            Player_Pass_Brand = false;
+                        // 若不是按下過水就傳回 失敗
+                        else
+                            return true;
                     }
                     else if (Ai.Win)
                     {

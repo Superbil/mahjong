@@ -63,7 +63,8 @@ namespace Mahjong.Control
                 // 排序
                 all.sortNowPlayer();
                 // 更新
-                table.updateNowPlayer();
+                //table.updateNowPlayer();
+                table.addNowPlayer();
                 // 下一家
                 all.next();
             }
