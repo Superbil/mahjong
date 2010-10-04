@@ -163,7 +163,7 @@ namespace Mahjong.Forms
         {
             this.all = all;
             this.place = all.place;
-            ShowMessageBox_Menu.Checked = pc.ShowMessageBox = all.showMessageBox;
+            pc.ShowMessageBox = all.showMessageBox = ShowMessageBox_Menu.Checked;
             setFlowLayout();
             setTitle();
         }
@@ -747,7 +747,7 @@ namespace Mahjong.Forms
                     addWest();
                     break;
                 case location.South:
-                    updateSouth();
+                    addSouth();
                     break;
             }
         }

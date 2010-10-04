@@ -24,7 +24,7 @@ namespace Mahjong.Forms
         public override void Setup(AllPlayers all)
         {
             this.place = all.place;
-            ShowMessageBox_Menu.Checked = pc.ShowMessageBox = all.showMessageBox;
+            pc.ShowMessageBox = all.showMessageBox = ShowMessageBox_Menu.Checked;
             setTitle();
 
             inputname.allplayers = all;

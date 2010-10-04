@@ -109,7 +109,6 @@ namespace Mahjong.Control
                             Player_Pass_Brand = false;
                         else
                         {
-                            //table.updateNowPlayer();
                             touchBrand();
                         }
                     }
@@ -136,7 +135,6 @@ namespace Mahjong.Control
                             }
                             all.DarkKong(nextbrand, darkkong.SuccessPlayer);
                         }
-                        //table.updateNowPlayer();
                         touchBrand();
                     }
                 }
@@ -150,7 +148,6 @@ namespace Mahjong.Control
                             Player_Pass_Brand = false;
                         else
                         {
-                            //table.updateNowPlayer();
                             touchBrand();
                         }
                     }
@@ -164,7 +161,6 @@ namespace Mahjong.Control
                         if (showMessageBox)
                             ShowMessage(Mahjong.Properties.Settings.Default.Kong);
                         all.kong(nextbrand, darkkong.SuccessPlayer);
-                        //table.updateNowPlayer();
                         touchBrand();
                     }
                 }
@@ -172,7 +168,7 @@ namespace Mahjong.Control
                 {
                     // 把牌加入玩家
                     all.NowPlayer.add(nextbrand);
-                    //table.updateNowPlayer();
+                    table.updateNowPlayer();
                 }
             }
 
