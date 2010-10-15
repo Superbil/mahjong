@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mahjong", "Mahjong.csproj", "{6CC05815-FA24-4F5F-BA6B-B4CBE0878D63}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CC05815-FA24-4F5F-BA6B-B4CBE0878D63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CC05815-FA24-4F5F-BA6B-B4CBE0878D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CC05815-FA24-4F5F-BA6B-B4CBE0878D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CC05815-FA24-4F5F-BA6B-B4CBE0878D63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
