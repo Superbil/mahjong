@@ -13,7 +13,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <GenerateManifests>true</GenerateManifests>
     <TargetZone>LocalIntranet</TargetZone>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <ApplicationIcon>mahjong.ico</ApplicationIcon>
     <ManifestCertificateThumbprint>DA6649F4DAE102FA669937F1B2F8F67AAB53A9C6</ManifestCertificateThumbprint>
     <ManifestKeyFile>Mahjong_TemporaryKey.pfx</ManifestKeyFile>
@@ -55,329 +55,329 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Incldue="Microsoft.VisualStudio.DebuggerVisualizers, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Incldue="System" />
-    <Reference Incldue="System.Data" />
-    <Reference Incldue="System.Deployment" />
-    <Reference Incldue="System.Drawing" />
-    <Reference Incldue="System.Windows.Forms" />
-    <Reference Incldue="System.Xml" />
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Incldue="AIs\Level 1.cs" />
-    <Compile Incldue="AIs\MahjongAI.cs" />
-    <Compile Incldue="AIs\SimpleAI.cs" />
-    <Compile Incldue="Control\Test\BTest.cs" />
-    <Compile Incldue="Control\CheckUser.cs" />
-    <Compile Incldue="Control\Mahjon_Exception.cs" />
-    <Compile Incldue="Control\PC_FileStream.cs" />
-    <Compile Incldue="Control\PC_Network.cs" />
-    <Compile Incldue="Control\PC_NewGame.cs" />
-    <Compile Incldue="Control\PC_Rule.cs" />
-    <Compile Incldue="Control\Place.cs" />
-    <Compile Incldue="Control\Player.cs" />
-    <Compile Incldue="Control\Test\AiTest.cs" />
-    <Compile Incldue="Control\CheckBrands.cs" />
-    <Compile Incldue="Control\Test\CheckTest.cs" />
-    <Compile Incldue="Control\Deal.cs" />
-    <Compile Incldue="Control\Test\DealTest.cs" />
-    <Compile Incldue="Forms\ChowBrandCheck.cs">
+    <Compile Include="AIs\Level 1.cs" />
+    <Compile Include="AIs\MahjongAI.cs" />
+    <Compile Include="AIs\SimpleAI.cs" />
+    <Compile Include="Control\Test\BTest.cs" />
+    <Compile Include="Control\CheckUser.cs" />
+    <Compile Include="Control\Mahjon_Exception.cs" />
+    <Compile Include="Control\PC_FileStream.cs" />
+    <Compile Include="Control\PC_Network.cs" />
+    <Compile Include="Control\PC_NewGame.cs" />
+    <Compile Include="Control\PC_Rule.cs" />
+    <Compile Include="Control\Place.cs" />
+    <Compile Include="Control\Player.cs" />
+    <Compile Include="Control\Test\AiTest.cs" />
+    <Compile Include="Control\CheckBrands.cs" />
+    <Compile Include="Control\Test\CheckTest.cs" />
+    <Compile Include="Control\Deal.cs" />
+    <Compile Include="Control\Test\DealTest.cs" />
+    <Compile Include="Forms\ChowBrandCheck.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\ChowBrandCheck.Designer.cs">
+    <Compile Include="Forms\ChowBrandCheck.Designer.cs">
       <DependentUpon>ChowBrandCheck.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Forms\Information.cs">
+    <Compile Include="Forms\Information.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\Information.Designer.cs">
+    <Compile Include="Forms\Information.Designer.cs">
       <DependentUpon>Information.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Forms\InputName.cs">
+    <Compile Include="Forms\InputName.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\InputName.Designer.cs">
+    <Compile Include="Forms\InputName.Designer.cs">
       <DependentUpon>InputName.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Forms\NewTable.cs">
+    <Compile Include="Forms\NewTable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\NewTable.Designer.cs">
+    <Compile Include="Forms\NewTable.Designer.cs">
       <DependentUpon>NewTable.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Mahjong_Main.cs" />
-    <Compile Incldue="Control\Test\TallyTest.cs">
+    <Compile Include="Mahjong_Main.cs" />
+    <Compile Include="Control\Test\TallyTest.cs">
     </Compile>
-    <Compile Incldue="Forms\AboutBox.cs">
+    <Compile Include="Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\AboutBox.Designer.cs">
+    <Compile Include="Forms\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Brands\Brand.cs" />
-    <Compile Incldue="Control\Test\BrandsTest.cs" />
-    <Compile Incldue="Brands\BrandFactory.cs" />
-    <Compile Incldue="Brands\FlowerBrand.cs" />
-    <Compile Incldue="Brands\RopeBrand.cs" />
-    <Compile Incldue="Brands\TenThousandBrand.cs" />
-    <Compile Incldue="Brands\TubeBrand.cs" />
-    <Compile Incldue="Brands\WordBrand.cs" />
-    <Compile Incldue="Forms\BrandBox.cs">
+    <Compile Include="Brands\Brand.cs" />
+    <Compile Include="Control\Test\BrandsTest.cs" />
+    <Compile Include="Brands\BrandFactory.cs" />
+    <Compile Include="Brands\FlowerBrand.cs" />
+    <Compile Include="Brands\RopeBrand.cs" />
+    <Compile Include="Brands\TenThousandBrand.cs" />
+    <Compile Include="Brands\TubeBrand.cs" />
+    <Compile Include="Brands\WordBrand.cs" />
+    <Compile Include="Forms\BrandBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Incldue="Forms\ChatServer.cs">
+    <Compile Include="Forms\ChatServer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\ChatServer.designer.cs">
+    <Compile Include="Forms\ChatServer.designer.cs">
       <DependentUpon>ChatServer.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Forms\Config.cs">
+    <Compile Include="Forms\Config.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\Config.Designer.cs">
+    <Compile Include="Forms\Config.Designer.cs">
       <DependentUpon>Config.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Forms\CPK.cs">
+    <Compile Include="Forms\CPK.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\CPK.Designer.cs">
+    <Compile Include="Forms\CPK.Designer.cs">
       <DependentUpon>CPK.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Forms\Tally.cs">
+    <Compile Include="Forms\Tally.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\Tally.Designer.cs">
+    <Compile Include="Forms\Tally.Designer.cs">
       <DependentUpon>Tally.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Forms\Table.cs">
+    <Compile Include="Forms\Table.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Incldue="Forms\Table.Designer.cs">
+    <Compile Include="Forms\Table.Designer.cs">
       <DependentUpon>Table.cs</DependentUpon>
     </Compile>
-    <Compile Incldue="Control\AllPlayers.cs" />
-    <Compile Incldue="Control\Location.cs" />
-    <Compile Incldue="Players\PlayerSort.cs" />
-    <Compile Incldue="Players\PlayerInterator.cs" />
-    <Compile Incldue="Players\Iterator.cs" />
-    <Compile Incldue="Players\BrandPlayer.cs" />
-    <Compile Incldue="Players\PlayerInteratorLimit.cs" />
-    <Compile Incldue="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Incldue="Forms\AboutBox.resx">
+    <Compile Include="Control\AllPlayers.cs" />
+    <Compile Include="Control\Location.cs" />
+    <Compile Include="Players\PlayerSort.cs" />
+    <Compile Include="Players\PlayerInterator.cs" />
+    <Compile Include="Players\Iterator.cs" />
+    <Compile Include="Players\BrandPlayer.cs" />
+    <Compile Include="Players\PlayerInteratorLimit.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\AboutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="Forms\ChatServer.resx">
+    <EmbeddedResource Include="Forms\ChatServer.resx">
       <DependentUpon>ChatServer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="Forms\Config.resx">
+    <EmbeddedResource Include="Forms\Config.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Config.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="Forms\CPK.resx">
+    <EmbeddedResource Include="Forms\CPK.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CPK.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="Forms\Information.resx">
+    <EmbeddedResource Include="Forms\Information.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Information.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="Forms\Tally.resx">
+    <EmbeddedResource Include="Forms\Tally.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Tally.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="Forms\Table.resx">
+    <EmbeddedResource Include="Forms\Table.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="Properties\Resources.resx">
+    <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Incldue="Properties\Resources.Designer.cs">
+    <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Incldue="Properties\Settings.settings">
+    <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Incldue="Properties\Settings.Designer.cs">
+    <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Incldue="Control\ProgramControl.cs">
+    <Compile Include="Control\ProgramControl.cs">
     </Compile>
-    <Compile Incldue="Control\Settings.cs" />
+    <Compile Include="Control\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\ten1.gif" />
+    <None Include="Resources\ten1.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\ten2.gif" />
+    <None Include="Resources\ten2.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\ten3.gif" />
+    <None Include="Resources\ten3.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\ten4.gif" />
+    <None Include="Resources\ten4.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\ten5.gif" />
+    <None Include="Resources\ten5.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\ten6.gif" />
+    <None Include="Resources\ten6.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\ten7.gif" />
+    <None Include="Resources\ten7.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\ten8.gif" />
+    <None Include="Resources\ten8.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\ten9.gif" />
+    <None Include="Resources\ten9.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\tobe1.gif" />
+    <None Include="Resources\tobe1.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\tobe2.gif" />
+    <None Include="Resources\tobe2.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\tobe3.gif" />
+    <None Include="Resources\tobe3.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\tobe4.gif" />
+    <None Include="Resources\tobe4.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\tobe5.gif" />
+    <None Include="Resources\tobe5.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\tobe6.gif" />
+    <None Include="Resources\tobe6.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\tobe7.gif" />
+    <None Include="Resources\tobe7.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\tobe8.gif" />
+    <None Include="Resources\tobe8.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\tobe9.gif" />
+    <None Include="Resources\tobe9.gif" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Incldue="Microsoft.Net.Framework.2.0">
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Incldue="Microsoft.Visual.C++.8.0.x86">
+    <BootstrapperPackage Include="Microsoft.Visual.C++.8.0.x86">
       <Visible>False</Visible>
       <ProductName>Visual C++ 執行階段程式庫 %28x86%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\flower1.gif">
+    <None Include="Resources\flower1.gif">
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\flower2.gif" />
+    <None Include="Resources\flower2.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\flower3.gif" />
+    <None Include="Resources\flower3.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\flower4.gif" />
+    <None Include="Resources\flower4.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\flower5.gif" />
+    <None Include="Resources\flower5.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\flower6.gif" />
+    <None Include="Resources\flower6.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\flower7.gif" />
+    <None Include="Resources\flower7.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\flower8.gif" />
+    <None Include="Resources\flower8.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\rope1.gif" />
+    <None Include="Resources\rope1.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\rope2.gif" />
+    <None Include="Resources\rope2.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\rope3.gif" />
+    <None Include="Resources\rope3.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\rope4.gif" />
+    <None Include="Resources\rope4.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\rope5.gif" />
+    <None Include="Resources\rope5.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\rope6.gif" />
+    <None Include="Resources\rope6.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\rope7.gif" />
+    <None Include="Resources\rope7.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\rope8.gif" />
+    <None Include="Resources\rope8.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\rope9.gif" />
+    <None Include="Resources\rope9.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\word1.gif" />
+    <None Include="Resources\word1.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\word2.gif" />
+    <None Include="Resources\word2.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\word3.gif" />
+    <None Include="Resources\word3.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\word4.gif" />
+    <None Include="Resources\word4.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\word5.gif" />
+    <None Include="Resources\word5.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\word6.gif" />
+    <None Include="Resources\word6.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\word7.gif" />
+    <None Include="Resources\word7.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\upbarnd.gif" />
+    <None Include="Resources\upbarnd.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="app.config" />
-    <None Incldue="Mahjong.config" />
-    <BaseApplicationManifest Incldue="Properties\app.manifest" />
+    <None Include="app.config" />
+    <None Include="Mahjong.config" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Incldue="Forms\ChowBrandCheck.resx">
+    <EmbeddedResource Include="Forms\ChowBrandCheck.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ChowBrandCheck.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="Forms\InputName.resx">
+    <EmbeddedResource Include="Forms\InputName.resx">
       <SubType>Designer</SubType>
       <DependentUpon>InputName.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="Forms\NewTable.resx">
+    <EmbeddedResource Include="Forms\NewTable.resx">
       <SubType>Designer</SubType>
       <DependentUpon>NewTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Incldue="mahjong.ico" />
+    <EmbeddedResource Include="mahjong.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Incldue="AxInterop.WMPLib">
+    <PublishFile Include="AxInterop.WMPLib">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -386,7 +386,7 @@
       <PublishState>Exclude</PublishState>
       <FileType>Assembly</FileType>
     </PublishFile>
-    <PublishFile Incldue="Interop.WMPLib">
+    <PublishFile Include="Interop.WMPLib">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -395,7 +395,7 @@
       <PublishState>Exclude</PublishState>
       <FileType>Assembly</FileType>
     </PublishFile>
-    <PublishFile Incldue="Microsoft.VisualStudio.DebuggerVisualizers">
+    <PublishFile Include="Microsoft.VisualStudio.DebuggerVisualizers">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -406,59 +406,59 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\chow.wav" />
-    <None Incldue="Resources\pon.wav" />
-    <None Incldue="Resources\kong.wav" />
-    <None Incldue="Resources\rope1.wav" />
-    <None Incldue="Resources\rope2.wav" />
-    <None Incldue="Resources\rope3.wav" />
-    <None Incldue="Resources\rope4.wav" />
-    <None Incldue="Resources\rope5.wav" />
-    <None Incldue="Resources\rope6.wav" />
-    <None Incldue="Resources\rope7.wav" />
-    <None Incldue="Resources\rope8.wav" />
-    <None Incldue="Resources\rope9.wav" />
-    <None Incldue="Resources\ten1s.wav" />
-    <None Incldue="Resources\word5.wav" />
-    <None Incldue="Resources\word6.wav" />
-    <None Incldue="Resources\word7.wav" />
-    <None Incldue="Resources\word4.wav" />
-    <None Incldue="Resources\word2.wav" />
-    <None Incldue="Resources\word3.wav" />
-    <None Incldue="Resources\word1.wav" />
-    <None Incldue="Resources\tobe9.wav" />
-    <None Incldue="Resources\tobe8.wav" />
-    <None Incldue="Resources\tobe7.wav" />
-    <None Incldue="Resources\tobe6.wav" />
-    <None Incldue="Resources\tobe5.wav" />
-    <None Incldue="Resources\tobe4.wav" />
-    <None Incldue="Resources\tobe3.wav" />
-    <None Incldue="Resources\tobe2.wav" />
-    <None Incldue="Resources\tobe1.wav" />
-    <None Incldue="Resources\ten8s.wav" />
-    <None Incldue="Resources\ten7s.wav" />
-    <None Incldue="Resources\ten6s.wav" />
-    <None Incldue="Resources\ten5s.wav" />
-    <None Incldue="Resources\ten4s.wav" />
-    <None Incldue="Resources\ten3s.wav" />
-    <None Incldue="Resources\ten2s.wav" />
-    <None Incldue="Resources\ten9s.wav" />
-    <None Incldue="Resources\win.wav" />
+    <None Include="Resources\chow.wav" />
+    <None Include="Resources\pon.wav" />
+    <None Include="Resources\kong.wav" />
+    <None Include="Resources\rope1.wav" />
+    <None Include="Resources\rope2.wav" />
+    <None Include="Resources\rope3.wav" />
+    <None Include="Resources\rope4.wav" />
+    <None Include="Resources\rope5.wav" />
+    <None Include="Resources\rope6.wav" />
+    <None Include="Resources\rope7.wav" />
+    <None Include="Resources\rope8.wav" />
+    <None Include="Resources\rope9.wav" />
+    <None Include="Resources\ten1s.wav" />
+    <None Include="Resources\word5.wav" />
+    <None Include="Resources\word6.wav" />
+    <None Include="Resources\word7.wav" />
+    <None Include="Resources\word4.wav" />
+    <None Include="Resources\word2.wav" />
+    <None Include="Resources\word3.wav" />
+    <None Include="Resources\word1.wav" />
+    <None Include="Resources\tobe9.wav" />
+    <None Include="Resources\tobe8.wav" />
+    <None Include="Resources\tobe7.wav" />
+    <None Include="Resources\tobe6.wav" />
+    <None Include="Resources\tobe5.wav" />
+    <None Include="Resources\tobe4.wav" />
+    <None Include="Resources\tobe3.wav" />
+    <None Include="Resources\tobe2.wav" />
+    <None Include="Resources\tobe1.wav" />
+    <None Include="Resources\ten8s.wav" />
+    <None Include="Resources\ten7s.wav" />
+    <None Include="Resources\ten6s.wav" />
+    <None Include="Resources\ten5s.wav" />
+    <None Include="Resources\ten4s.wav" />
+    <None Include="Resources\ten3s.wav" />
+    <None Include="Resources\ten2s.wav" />
+    <None Include="Resources\ten9s.wav" />
+    <None Include="Resources\win.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\m2.png" />
+    <None Include="Resources\m2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\g1.png" />
+    <None Include="Resources\g1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\g2.png" />
+    <None Include="Resources\g2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Incldue="Resources\m1.png" />
+    <None Include="Resources\m1.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Incldue="AxWMPLib">
+    <COMReference Include="AxWMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>0</VersionMinor>
@@ -466,7 +466,7 @@
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
-    <COMReference Incldue="WMPLib">
+    <COMReference Include="WMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>0</VersionMinor>
