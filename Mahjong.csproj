@@ -75,7 +75,7 @@
     <Compile Include="Control\PC_NewGame.cs" />
     <Compile Include="Control\PC_Rule.cs" />
     <Compile Include="Control\Place.cs" />
-    <Compile Include="Control\Player.cs" />
+    <Compile Include="Control\NetPlayer.cs" />
     <Compile Include="Control\Test\AiTest.cs" />
     <Compile Include="Control\CheckBrands.cs" />
     <Compile Include="Control\Test\CheckTest.cs" />
