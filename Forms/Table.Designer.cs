@@ -33,7 +33,6 @@
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.Exit_ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.GameMenu_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Newgame_ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Savegame_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +48,6 @@
             this.Quick = new System.Windows.Forms.ToolStripMenuItem();
             this.PlaySound_Menu = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenu
@@ -75,16 +73,6 @@
             this.Exit_ToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
             this.Exit_ToolStripMenuItem1.Text = global::Mahjong.Properties.Settings.Default.Exit;
             this.Exit_ToolStripMenuItem1.Click += new System.EventHandler(this.結束ToolStripMenuItem1_Click);
-            // 
-            // axWindowsMediaPlayer1
-            // 
-            this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(204, 140);
-            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(75, 23);
-            this.axWindowsMediaPlayer1.TabIndex = 1;
-            this.axWindowsMediaPlayer1.Visible = false;
             // 
             // GameMenu_ToolStripMenuItem
             // 
@@ -211,14 +199,12 @@
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(662, 640);
             this.ContextMenuStrip = this.contextMenu;
-            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Table";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = global::Mahjong.Properties.Settings.Default.Title;
             this.contextMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -242,9 +228,7 @@
         private System.Windows.Forms.ToolStripMenuItem Loadgame_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Newgame_ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem PlaySound_Menu;
-        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
-
-        
+       
     }
 }
 
