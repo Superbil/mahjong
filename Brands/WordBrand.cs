@@ -104,7 +104,7 @@ namespace Mahjong.Brands
                 photo = value;
             }
         }
-
+        [NonSerialized]
         private UnmanagedMemoryStream wave;
         /// <summary>
         /// 牌的聲音位置
