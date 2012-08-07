@@ -14,7 +14,7 @@ namespace Mahjong.Brands
     {
         private int Number;
         private bool See;
-        private Image photo;
+       
         /// <summary>
         /// 花牌
         /// </summary>
@@ -24,17 +24,7 @@ namespace Mahjong.Brands
             this.Number = number;
             See = false;
         }
-        /// <summary>
-        /// 花牌
-        /// </summary>
-        /// <param name="number">牌面大小</param>
-        /// <param name="image">圖片</param>
-        public FlowerBrand(int number,Image image)
-        {
-            this.Number = number;
-            this.photo = image;
-            See = false;
-        }
+        
         /// <summary>
         /// 花牌的值的大小
         /// </summary>   
@@ -61,37 +51,6 @@ namespace Mahjong.Brands
             set
             {
                 See = value;
-            }
-        }
-        
-        /// <summary>
-        /// 牌的圖片位置
-        /// </summary>
-        public Image image
-         {
-             get
-             {
-                 return photo;
-             }
-             set
-             {
-                 photo = value;
-             }
-        }
-        [NonSerialized]
-        private UnmanagedMemoryStream wave;
-        /// <summary>
-        /// 牌的聲音位置
-        /// </summary>
-        public UnmanagedMemoryStream sound
-        {
-            get
-            {
-                return wave;
-            }
-            set
-            {
-                wave = value;
             }
         }
         
@@ -142,6 +101,12 @@ namespace Mahjong.Brands
                 from = value;
             }
         }
-
+        public Brand copyBrand(Brand brand)
+        {
+            Brand newBrand = new FlowerBrand(brand.getNumber());
+            newBrand.WhoPush = brand.WhoPush;
+            newBrand.IsCanSee = brand.IsCanSee;
+            return newBrand;
+        }
     }
 }

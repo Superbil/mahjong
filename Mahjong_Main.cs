@@ -16,7 +16,7 @@ namespace Mahjong.Control
         {
             // 程式控制
             //ProgramControl p = new ProgramControl(new Table());
-            ProgramControl p = new ProgramControl(new NewTable());
+            PC_Network p = new PC_Network(new NewTable());
             p.showTable();
             // 測試牌和產生牌
             //new BrandsTest();

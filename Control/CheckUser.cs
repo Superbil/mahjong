@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Mahjong.Brands;
 
 namespace Mahjong.Control
 {
@@ -35,7 +36,9 @@ namespace Mahjong.Control
         /// </summary>
         public bool Pass;
 
-        public CheckUser(bool chow,bool pong,bool kong,bool darkkong,bool win,bool pass)
+        public Brand Brand;
+
+        public CheckUser(bool chow,bool pong,bool kong,bool darkkong,bool win,bool pass,Brand brand)
         {
             Chow = chow;
             Pong = pong;
@@ -43,6 +46,7 @@ namespace Mahjong.Control
             DarkKong = darkkong;
             Win = win;
             Pass = pass;
+            Brand = brand;
         }
     }
 }

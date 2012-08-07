@@ -199,7 +199,7 @@ namespace Mahjong.Forms
         private System.Windows.Forms.Label namelabel;
         private System.Windows.Forms.RadioButton lanButton;
         private System.Windows.Forms.RadioButton IPButton;
-        private System.Windows.Forms.Button startbutton;
+        public System.Windows.Forms.Button startbutton;
     }
 
 }

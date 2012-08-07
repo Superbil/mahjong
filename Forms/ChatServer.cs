@@ -7,9 +7,17 @@ using System.IO;
 using Mahjong.Control;
 using Mahjong.Brands;
 using System.Runtime.Serialization.Formatters.Binary;
+using Mahjong.Players;
 
 namespace Mahjong.Forms
 {
+    public delegate void newGameHandler(object sender, EventArgs e);
+    public delegate void allPlayerHandler(object sender, EventArgs e);
+    public delegate void brandHandler(object sender, EventArgs e);
+    public delegate void CheckHandler(object sender, EventArgs e);
+    public delegate void CheckResultHandler(object sender, EventArgs e);
+    public delegate void BrandplayersHandler(object sender, EventArgs e);
+    public delegate void BrandplayerHandler(object sender, EventArgs e);
     public partial class ChatServerForm : Form
     {
         public ChatServerForm()
@@ -43,15 +51,21 @@ namespace Mahjong.Forms
         public const string newgameround = "/newgame";
         public const string Brand_Head = "/brand:";
         public const string Check_Head = "/check:";
-        public const string BrandIndex_Head = "/brandindex:";
-
+        public const string BrandplayerArray_Head = "/brandplayerarray:";
+        public const string Brandplayer_Head = "/brandplayer:";
         // initialize thread for reading
         //General g2;
         internal PC_Network PC;
         internal String[] name = new string[4];
         internal bool disconnected = false;
-
-
+        
+        public event newGameHandler getNewGame;
+        public event allPlayerHandler getAllPlayer;
+        public event brandHandler getBrand;
+        public event CheckHandler getCheck;
+        public event BrandplayersHandler getBrandplayers;
+        public event BrandplayerHandler getBrandplayer;
+        
         public ChatServerForm(int port)
         {
             this.Port = port;
@@ -83,6 +97,20 @@ namespace Mahjong.Forms
             MemoryStream ms = new MemoryStream();
             BinaryFormatter bf1 = new BinaryFormatter();
             bf1.Serialize(ms, all);
+            return ms.ToArray();
+        }
+        public byte[] getByteArrayWithObject(BrandPlayer[] players)
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf1 = new BinaryFormatter();
+            bf1.Serialize(ms, players);
+            return ms.ToArray();
+        }
+        public byte[] getByteArrayWithObject(BrandPlayer players)
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryFormatter bf1 = new BinaryFormatter();
+            bf1.Serialize(ms, players);
             return ms.ToArray();
         }
         public byte[] getByteArrayWithObject(Brand brand)
@@ -145,7 +173,7 @@ namespace Mahjong.Forms
         {
             players = new NetPlayer[3];
             playerThreads = new Thread[3];
-
+            
             // accept connections on a different thread         
             getPlayers = new Thread(new ThreadStart(SetUp));
             getPlayers.Start();
@@ -442,18 +470,18 @@ namespace Mahjong.Forms
                 if (myMark != "Server")
                 {
                     //MessageBox.Show("Call "+myMark+"Run");
-                    PC.newgame_round();
+                    getNewGame(this, null);
                 }
             }
             else if (s.Contains(Check_Head))
             {
                 allplayer = reader.ReadBytes(int.Parse(s.Remove(0, Check_Head.Length)));
-                PC.getCheckUser((CheckUser)getObjectWithByteArray(allplayer));
+                getCheck(getObjectWithByteArray(allplayer), null);
             }
             else if (s.Contains(Brand_Head))
             {
                 allplayer = reader.ReadBytes(int.Parse(s.Remove(0, Brand_Head.Length)));
-                PC.getBrand((Brand)getObjectWithByteArray(allplayer));
+                getBrand(getObjectWithByteArray(allplayer), null);
 
             }
             else if (s.Contains(AllPlayers_Head))
@@ -463,16 +491,21 @@ namespace Mahjong.Forms
                 // clinet 接收到allplayer的設定
 
                 //PC.all = (AllPlayers)getObjectWithByteArray(allplayer);
-                PC.newgame_network((AllPlayers)getObjectWithByteArray(allplayer));
+
+                getAllPlayer(getObjectWithByteArray(allplayer), null);
 
                 //MessageBox.Show(g2.Name,myMark);
                 //MessageBox.Show(PC.all.Name[PC.all.state],myMark);
             }
-            else if (s.Contains(BrandIndex_Head))
+            else if (s.Contains(BrandplayerArray_Head))
             {
-              
-                PC.getInt(reader.ReadInt16());
-
+                allplayer = reader.ReadBytes(int.Parse(s.Remove(0, BrandplayerArray_Head.Length)));
+                getBrandplayers(getObjectWithByteArray(allplayer), null);
+            }
+            else if (s.Contains(Brandplayer_Head))
+            {
+                allplayer = reader.ReadBytes(int.Parse(s.Remove(0, Brandplayer_Head.Length)));
+                getBrandplayer(getObjectWithByteArray(allplayer), null);
             }
             else
                 message = s;
@@ -506,10 +539,9 @@ namespace Mahjong.Forms
 
         private void playgame_Click(object sender, EventArgs e)
         {
-            //General g1 = new General("劉志俊", "c:\\liu.bmp", 60, 99, 80, 95, true, true, false);
             createbutton.Enabled = false;
             startbutton.Enabled = false;
-            PC.newgame();
+            
             try
             {
                 for (int i = 0; i < n; i++)
@@ -526,6 +558,7 @@ namespace Mahjong.Forms
             {
                 MessageBox.Show("!");
             }
+            
         } // end method RunClient
 
 
@@ -614,6 +647,62 @@ namespace Mahjong.Forms
                 MessageBox.Show("接口設定錯誤！");
             }
         }
+        internal void SendObject(BrandPlayer[] brandplayers)
+        {
+            try
+            {
+                if (myMark == "Server")
+                {
+                    for (int i = 0; i < n; i++)
+                    {
+                        socketStream = new NetworkStream(players[i].connection);
+
+                        writer = new BinaryWriter(socketStream);
+                        reader = new BinaryReader(socketStream);
+                        writer.Write(BrandplayerArray_Head + getByteArrayWithObject(brandplayers).Length.ToString());
+                        writer.Write(getByteArrayWithObject(brandplayers));
+                    }
+
+                }
+                else
+                {
+                    writer.Write(BrandplayerArray_Head + getByteArrayWithObject(brandplayers).Length.ToString());
+                    writer.Write(getByteArrayWithObject(brandplayers));
+                }
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("接口設定錯誤！");
+            }
+        }
+        internal void SendObject(BrandPlayer brandplayer)
+        {
+            try
+            {
+                if (myMark == "Server")
+                {
+                    for (int i = 0; i < n; i++)
+                    {
+                        socketStream = new NetworkStream(players[i].connection);
+
+                        writer = new BinaryWriter(socketStream);
+                        reader = new BinaryReader(socketStream);
+                        writer.Write(Brandplayer_Head + getByteArrayWithObject(brandplayer).Length.ToString());
+                        writer.Write(getByteArrayWithObject(brandplayer));
+                    }
+
+                }
+                else
+                {
+                    writer.Write(Brandplayer_Head + getByteArrayWithObject(brandplayer).Length.ToString());
+                    writer.Write(getByteArrayWithObject(brandplayer));
+                }
+            }
+            catch (SocketException)
+            {
+                MessageBox.Show("接口設定錯誤！");
+            }
+        }
         internal void SendObject(int bi)
         {
             try
@@ -626,7 +715,7 @@ namespace Mahjong.Forms
 
                         writer = new BinaryWriter(socketStream);
                         reader = new BinaryReader(socketStream);
-                        writer.Write(BrandIndex_Head);
+                        writer.Write(BrandplayerArray_Head);
                         writer.Write(bi);
                         
                     }
@@ -634,7 +723,7 @@ namespace Mahjong.Forms
                 }
                 else
                 {
-                    writer.Write(BrandIndex_Head);
+                    writer.Write(BrandplayerArray_Head);
                     writer.Write(bi);
                
                 }
@@ -653,10 +742,7 @@ namespace Mahjong.Forms
         {
             return false;
         }
-        public AllPlayers returnallplayer()
-        {
-            return PC.all;
-        }
+       
     } // end class ChatServerForm
 
 

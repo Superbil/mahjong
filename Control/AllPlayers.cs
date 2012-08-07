@@ -92,7 +92,7 @@ namespace Mahjong.Control
         /// </summary>
         /// <param name="playernumber">設定有多少個玩家</param>
         /// <param name="deal">一個玩家有多少張</param>
-        public AllPlayers(int playernumber,int deal)
+        public AllPlayers(int playernumber, int deal)
         {
             this.players = new BrandPlayer[playernumber];
             this.isPlayer = new bool[playernumber];
@@ -331,7 +331,7 @@ namespace Mahjong.Control
             //打牌次數
             this.brand_count = 0;
             //清除打出去的牌
-            Show_Table.clear();            
+            Show_Table.clear();
 
         }
         /// <summary>
@@ -346,17 +346,17 @@ namespace Mahjong.Control
         /// <summary>
         /// 吃、碰
         /// </summary>
-        public void chow_pong(Brand brand,BrandPlayer player)
+        public void chow_pong(Brand brand, BrandPlayer player)
         {
             Show_Table.remove(brand);
-            set_Team(player,true);        
+            set_Team(player, true);
         }
         /// <summary>
         /// 槓
         /// </summary>
         /// <param name="brand">要槓的牌</param>
         /// <param name="player">可以槓的牌組</param>
-        public void kong(Brand brand,BrandPlayer player)
+        public void kong(Brand brand, BrandPlayer player)
         {
             Show_Table.remove(brand);
             set_Team(player, true);
@@ -366,7 +366,7 @@ namespace Mahjong.Control
         /// </summary>
         /// <param name="brand">要槓的牌</param>
         /// <param name="player">可以槓的牌組</param>
-        public void DarkKong(Brand brand,BrandPlayer player)
+        public void DarkKong(Brand brand, BrandPlayer player)
         {
             set_Team(player, false);
         }
@@ -374,7 +374,7 @@ namespace Mahjong.Control
         /// 設定群組號碼
         /// </summary>
         /// <param name="player">玩家</param>
-        private void set_Team(BrandPlayer player,bool isCanSee)
+        private void set_Team(BrandPlayer player, bool isCanSee)
         {
             teamCount[state]++;
             // 把牌從現在玩家手上移出
@@ -395,7 +395,7 @@ namespace Mahjong.Control
         {
             int f_count = 0;
             for (int i = 0; i < NowPlayer.getCount(); i++)
-                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower 
+                if (NowPlayer.getBrand(i).getClass() == Mahjong.Properties.Settings.Default.Flower
                     && !NowPlayer.getBrand(i).IsCanSee) // 花牌而且不可見
                 {
                     NowPlayer.getBrand(i).IsCanSee = true;
@@ -404,7 +404,7 @@ namespace Mahjong.Control
                 }
             // 補上少的牌數
             for (int i = 0; i < f_count; i++)
-                NowPlayer.add( nextTableBrand() );
+                NowPlayer.add(nextTableBrand());
         }
         /// <summary>
         /// 現在的玩家補花
@@ -441,5 +441,6 @@ namespace Mahjong.Control
             brand.WhoPush = State;
             show_table.add(brand);
         }
+        
     }
 }

@@ -23,17 +23,7 @@ namespace Mahjong.Brands
             this.Number = number;
             See = false;
         }
-        /// <summary>
-        /// 萬牌
-        /// </summary>
-        /// <param name="number">牌面大小</param>
-        /// <param name="image">圖片</param>
-        public TenThousandBrand(int number,Image image)
-        {
-            this.Number = number;
-            See = false;
-            photo = image;           
-        }
+        
         /// <summary>
         /// 萬字牌的值的大小
         /// </summary>   
@@ -62,38 +52,7 @@ namespace Mahjong.Brands
                 See = value;
             }
         }
-        private Image photo;
-        /// <summary>
-        /// 牌的圖片位置
-        /// </summary>
-        public Image image
-        {
-            get
-            {
-                return photo;
-            }
-            set
-            {
-                photo = value;
-            }
-        }
-        [NonSerialized]
-        private UnmanagedMemoryStream wave;
-        /// <summary>
-        /// 牌的聲音位置
-        /// </summary>
-        public UnmanagedMemoryStream sound
-        {
-            get
-            {
-                return wave;
-            }
-            set
-            {
-                wave = value;
-            }
-        }
-
+       
         private int teamNumber;
         /// <summary>
         /// 牌的組別
@@ -140,6 +99,20 @@ namespace Mahjong.Brands
             {
                 from = value;
             }
+        }
+        void setBrand(Brand brand)
+        {
+            from = brand.WhoPush;
+            Number = brand.getNumber();
+            IsCanSee = brand.IsCanSee;
+
+        }
+        public Brand copyBrand(Brand brand)
+        {
+            Brand newBrand = new TenThousandBrand(brand.getNumber());
+            newBrand.WhoPush = brand.WhoPush;
+            newBrand.IsCanSee = brand.IsCanSee;
+            return newBrand;
         }
     }
 }

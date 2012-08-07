@@ -48,7 +48,8 @@ namespace Mahjong.Control
             if (pushToTable(brand))
             {
                 // 換下一個人
-                all.next();
+                if(chat.Mark == "Server")
+                    all.next();
                 // 更新資訊盒
                 setInforamtion();
             }
@@ -102,8 +103,8 @@ namespace Mahjong.Control
                         {
                             br = kong.SuccessPlayer.getBrand(0);
                         }
-
-                        toUser(br, false, false, false, kong.Kong() || darkkong.DarkKong(), false);
+                        CheckUser check = new Control.CheckUser(false, false, false, kong.Kong() || darkkong.DarkKong(), false, true, br);
+                        toUser(check);
                         // 如果玩家按下過水 就跳過
                         if (Player_Pass_Brand)
                             Player_Pass_Brand = false;
@@ -143,7 +144,8 @@ namespace Mahjong.Control
                 {
                     if (NowPlayer_is_Real_Player)
                     {
-                        toUser(nextbrand, false, false, teamKong.Kong(), false, false);
+                        CheckUser check = new Control.CheckUser(false, false, teamKong.Kong(), false, false, true, nextbrand);
+                        toUser(check);
                         if (Player_Pass_Brand)
                             Player_Pass_Brand = false;
                         else
@@ -227,7 +229,8 @@ namespace Mahjong.Control
                     // 如果是真實玩家
                     if (NowPlayer_is_Real_Player)
                     {
-                        toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
+                        CheckUser check = new Control.CheckUser((c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win(), true, brand); 
+                        toUser(check);
                         if (Player_Pass_Brand)
                             Player_Pass_Brand = false;
                         else
@@ -269,7 +272,8 @@ namespace Mahjong.Control
                 {
                     if (c.Pong() || c.Kong())
                     {
-                        toUser(brand, (c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win());
+                        CheckUser check = new Control.CheckUser((c.Chow() && i == 0), c.Pong(), c.Kong(), false, w.Win(), true, brand);
+                        toUser(check);
                         if (Player_Pass_Brand)
                             Player_Pass_Brand = false;
                         else
@@ -330,7 +334,8 @@ namespace Mahjong.Control
                     // 如果是玩家
                     if (NowPlayer_is_Real_Player)
                     {
-                        toUser(brand, false, false, false, false, true);
+                        CheckUser check = new Control.CheckUser(false, false, false, false, true, true, brand);
+                        toUser(check);
                         // 如果玩家按下過水 就跳過
                         if (Player_Pass_Brand)
                             Player_Pass_Brand = false;

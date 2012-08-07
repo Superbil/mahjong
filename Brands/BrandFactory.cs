@@ -125,7 +125,7 @@ namespace Mahjong.Brands
         {
             for (int j = 0; j < pieceFlowerBrand; j++)
                 for (int i = 0; i < countFlowerBrand; i++)
-                    this.player.add(new FlowerBrand(i + 1,(Image)FlowerbrandArray[i]));
+                    this.player.add(new FlowerBrand(i + 1));
         }
         /// <summary>
         /// 建立索牌
@@ -134,7 +134,7 @@ namespace Mahjong.Brands
         {
             for (int j = 0; j < pieceRopeBrand; j++)
                 for (int i = 0; i < countRopeBrand; i++)
-                    this.player.add(new RopeBrand(i + 1,(Image)RopebrandArray[i]));
+                    this.player.add(new RopeBrand(i + 1));
         }
         /// <summary>
         /// 建立筒牌
@@ -143,7 +143,7 @@ namespace Mahjong.Brands
         {
             for (int j = 0; j < pieceTubeBrand; j++)
                 for (int i = 0; i < countTubeBrand; i++)
-                    this.player.add(new TubeBrand(i + 1, (Image)TobebrandArray[i]));
+                    this.player.add(new TubeBrand(i + 1));
         }
         /// <summary>
         /// 建立萬字牌
@@ -152,7 +152,7 @@ namespace Mahjong.Brands
         {
             for (int j = 0; j < pieceTenThousandBrand; j++)
                 for (int i = 0; i < countTenThousandBrand; i++)
-                    this.player.add(new TenThousandBrand(i + 1, (Image)TenthousandbrandArray[i]));
+                    this.player.add(new TenThousandBrand(i + 1));
         }
         /// <summary>
         /// 建立字牌
@@ -161,7 +161,7 @@ namespace Mahjong.Brands
         {
             for (int j = 0; j < pieceWordBrand; j++)
                 for (int i = 0; i < countWordBrand; i++)
-                    this.player.add(new WordBrand(i + 1,(Image)WordbrandArray[i]));
+                    this.player.add(new WordBrand(i + 1));
         }
         /// <summary>
         /// 測試亂數表
