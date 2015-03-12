@@ -22,19 +22,13 @@ namespace Mahjong.Brands
         /// <summary>
         /// 牌是否可視
         /// </summary> 
+        Brand copyBrand(Brand brand);
         bool IsCanSee
         {
             get;
             set;
         }
-        /// <summary>
-        /// 牌的圖片位置
-        /// </summary>  
-        Image image
-        {
-            get;
-            set;
-        }
+        
         /// <summary>
         /// 牌的組別
         /// </summary>

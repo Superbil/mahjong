@@ -15,15 +15,15 @@ namespace Mahjong.Forms
     public partial class CPK : Form
     {
         ProgramControl pc;
-        Brand brand;
+        //Brand brand;
         bool network = false;
         CheckUser checkuser;
         SoundPlayer soundplayer=new SoundPlayer();
-        public CPK(ProgramControl pc,Brand brand)
+        public CPK(ProgramControl pc,CheckUser check)
         {
             InitializeComponent();
             this.pc = pc;
-            this.brand = brand;
+            this.checkuser = check;
         }
 
         private void CPK_Load(object sender, EventArgs e)
@@ -35,13 +35,13 @@ namespace Mahjong.Forms
             Pass.Text = Mahjong.Properties.Settings.Default.Pass;
             DarkKong.Text = Mahjong.Properties.Settings.Default.DarkKong;
 
-            if (brand.getClass() == Mahjong.Properties.Settings.Default.Wordtiles)
+            if (checkuser.Brand.getClass() == Mahjong.Properties.Settings.Default.Wordtiles)
             {
-                WordBrand w = (WordBrand)brand;
+                WordBrand w = (WordBrand)checkuser.Brand;
                 this.Text = pc.all.Name[pc.all.state] + " - " + w.getWordClass();
             }
             else
-                this.Text = pc.all.Name[pc.all.state] + " - " + brand.getNumber() + brand.getClass();
+                this.Text = pc.all.Name[pc.all.state] + " - " + checkuser.Brand.getNumber() + checkuser.Brand.getClass();
         }
         /// <summary>
         /// 取得或設定是否是網路
@@ -85,7 +85,15 @@ namespace Mahjong.Forms
             this.Win.Enabled = win;
             this.DarkKong.Enabled = darkong;
         }
-
+        public void Enabled_Button(CheckUser check)
+        {
+            this.Chow.Enabled = check.Chow;
+            this.Pong.Enabled = check.Pong;
+            this.Kong.Enabled = check.Kong;
+            this.Win.Enabled = check.Win;
+            this.DarkKong.Enabled = check.DarkKong;
+            this.Pass.Enabled = check.Pass;
+        }
         private void Chow_Click(object sender, EventArgs e)
         {
             if (pc.PlayerSound)
@@ -94,9 +102,18 @@ namespace Mahjong.Forms
                 soundplayer.Play();
             }
             if (network)
+            {
                 checkuser.Chow = true;
+                checkuser.Pong = false;
+                checkuser.Kong = false;
+                checkuser.DarkKong = false;
+                checkuser.Win = false;
+                checkuser.Pass = false;
+                
+                pc.chat.SendObject(checkuser);
+            }
             else
-                pc.chow(brand);
+                pc.chow(checkuser.Brand);
             this.Close();
         }
 
@@ -108,9 +125,18 @@ namespace Mahjong.Forms
                 soundplayer.Play();
             }
             if (network)
+            {
+                checkuser.Chow = false;
                 checkuser.Pong = true;
+                checkuser.Kong = false;
+                checkuser.DarkKong = false;
+                checkuser.Win = false;
+                checkuser.Pass = false;
+
+                pc.chat.SendObject(checkuser);
+            }
             else
-                pc.pong(brand);
+                pc.pong(checkuser.Brand);
             this.Close();
         }
 
@@ -122,9 +148,18 @@ namespace Mahjong.Forms
                 soundplayer.Play();
             }
             if (network)
+            {
+                checkuser.Chow = false;
+                checkuser.Pong = false;
                 checkuser.Kong = true;
+                checkuser.DarkKong = false;
+                checkuser.Win = false;
+                checkuser.Pass = false;
+
+                pc.chat.SendObject(checkuser);
+            }
             else
-                pc.kong(brand);
+                pc.kong(checkuser.Brand);
             this.Close();
         }
 
@@ -136,18 +171,36 @@ namespace Mahjong.Forms
                 soundplayer.Play();
             }
             if (network)
+            {
+                checkuser.Chow = false;
+                checkuser.Pong = false;
+                checkuser.Kong = false;
+                checkuser.DarkKong = false;
                 checkuser.Win = true;
+                checkuser.Pass = false;
+
+                pc.chat.SendObject(checkuser);
+            }
             else
-                pc.win(brand);
+                pc.win(checkuser.Brand);
             this.Close();
         }
 
         private void Pass_Click(object sender, EventArgs e)
         {
             if (network)
+            {
+                checkuser.Chow = false;
+                checkuser.Pong = false;
+                checkuser.Kong = false;
+                checkuser.DarkKong = false;
+                checkuser.Win = false;
                 checkuser.Pass = true;
+
+                pc.chat.SendObject(checkuser);
+            }
             else
-                pc.pass(brand);
+                pc.pass(checkuser.Brand);
             this.Close();
         }
 
@@ -159,9 +212,18 @@ namespace Mahjong.Forms
                 soundplayer.Play();
             }
             if (network)
+            {
+                checkuser.Chow = false;
+                checkuser.Pong = false;
+                checkuser.Kong = false;
                 checkuser.DarkKong = true;
+                checkuser.Win = false;
+                checkuser.Pass = false;
+
+                pc.chat.SendObject(checkuser);
+            }
             else
-                pc.dark_kong(brand);
+                pc.dark_kong(checkuser.Brand);
             this.Close();
         }        
     }

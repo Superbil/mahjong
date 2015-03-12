@@ -68,7 +68,8 @@ namespace Mahjong.Control
         SoundPlayer soundplayer = new SoundPlayer();
         /// <summary>
         /// 遊戲控制建構子
-        /// </summary>    
+        /// </summary>
+        public Brand sendoutbrand; 
         public ProgramControl(Form f)
         {      
             roundTimer.Tick += new EventHandler(rotateTimer_Tick);
@@ -165,13 +166,21 @@ namespace Mahjong.Control
                 }
                 else
                 {
-                    ChowBrandCheck cbc = new ChowBrandCheck(c.ChowPlayer);
-                    cbc.ShowDialog();
-                    PlayerSort p = new PlayerSort(cbc.SelectBrandPlayer);
-                    all.chow_pong(brand, p.getPlayer);
+                    if (all.State == table.place.Down)
+                    {
+                        ChowBrandCheck cbc = new ChowBrandCheck(c.ChowPlayer);
+                        cbc.ShowDialog();
+                        PlayerSort p = new PlayerSort(cbc.SelectBrandPlayer);
+                        all.chow_pong(brand, p.getPlayer);
+                    }
+                    else
+                    {
+                        chat.SendObject(c.ChowPlayer);
+                    }
                 }
             Chow_Pong_Brand = true;
             updatePlayer_Table();
+            
         }
         /// <summary>
         /// 玩家按下碰事件呼叫
@@ -299,10 +308,77 @@ namespace Mahjong.Control
         internal void onlineGame()
         {
             chat = new ChatServerForm();
-            chat.PC = new PC_Network(table, this);
+            chat.PC = (PC_Network)this;
+            chat.getNewGame += new newGameHandler(this.newClientGame);
+            chat.getCheck += new CheckHandler(this.CheckUser);
+            chat.getBrandplayers += new BrandplayersHandler(this.CheckChow);
+            
+            chat.startbutton.Click += new System.EventHandler(this.newServerGame);
+            chat.getAllPlayer += new allPlayerHandler(this.updateAllPlayer);
             chat.Show();
         }
+        private void newClientGame(object sender, EventArgs e)
+        {
+            //MessageBox.Show("Game start");
+            //newgame();
+        }
+        public void getClientBrand(object sender, EventArgs e)
+        {
+            makeBrand((Brand)sender);
+        }
+        private void newServerGame(object sender, EventArgs e)
+        {
+            newgame();
+        }
+        private void CheckUser(object sender, EventArgs e)
+        {
+            CPK cpk = new CPK(this,(CheckUser)sender);
+            cpk.Enabled_Button((CheckUser)sender);
+            cpk.Network = true;
+            cpk.ShowDialog();
+        }
+        public void CheckChow(object sender, EventArgs e)
+        {
+            ChowBrandCheck cbc = new ChowBrandCheck((BrandPlayer[])sender);
+                       
+            cbc.ShowDialog();
+            chat.SendObject(cbc.SelectBrandPlayer);
+        }
+        public void CheckUserResult(object sender, EventArgs e)
+        {
+            if (((CheckUser)sender).Chow == true)
+                chow(sendoutbrand);
+            else if (((CheckUser)sender).Pong == true)
+                pong(sendoutbrand);
+            else if (((CheckUser)sender).Kong == true)
+                kong(sendoutbrand);
+            else if (((CheckUser)sender).Win == true)
+                win(sendoutbrand);
+            else if (((CheckUser)sender).DarkKong == true)
+                dark_kong(sendoutbrand);
+            else
+                pass(sendoutbrand);
+            chat.SendObject(all);
+        }
+        public void CheckChowResult(object sender, EventArgs e)
+        {
+            PlayerSort p = new PlayerSort((BrandPlayer)sender);
+            all.chow_pong(sendoutbrand, p.getPlayer);
+            chat.SendObject(all);
+        }
+        private void updateAllPlayer(object sender, EventArgs e)
+        {
+            this.all = (AllPlayers)sender;
+            this.table.Allplayers = this.all;
 
+            table.Setup(all);
+            clientPlace();
+            this.table.updateAllPlayer();
+            this.table.updateTable();
+            this.table.updateInforamation();
+            
+            //this.table.updateInforamation();
+        }
         /// <summary>
         /// 從AI得到一張牌
         /// </summary>
@@ -316,15 +392,18 @@ namespace Mahjong.Control
         /// <summary>
         /// 把牌丟給玩家，看是否要吃 碰 槓 過水 胡
         /// </summary>
-        internal virtual void toUser(Brand brand, bool chow, bool pong, bool kong, bool darkkong, bool win)
+        internal virtual void toUser(CheckUser check)
         {
-            CPK cpk = new CPK(this, brand);
-            CheckBrands c = new CheckBrands(brand, NowPlayer_removeTeam);
-            CheckBrands w = new CheckBrands(brand, all.NowPlayer);
-            cpk.Enabled_Button(chow, pong, kong, darkkong, win);
-            if (chow || pong || kong || win || darkkong)
+            CPK cpk = new CPK(this, check);
+
+            CheckBrands c = new CheckBrands(check.Brand, NowPlayer_removeTeam);
+            CheckBrands w = new CheckBrands(check.Brand, all.NowPlayer);
+            cpk.Enabled_Button(check.Chow, check.Pong, check.Kong, check.DarkKong, check.Win);
+            if (check.Chow || check.Pong || check.Kong || check.Win || check.DarkKong)
                 cpk.ShowDialog();
         }
-
+        internal virtual void clientPlace()
+        { 
+        }
     }
 }

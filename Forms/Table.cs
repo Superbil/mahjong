@@ -206,16 +206,16 @@ namespace Mahjong.Forms
         {
             for (int i = 0; i < flowLayoutBrands.Length; i++)
                 flowLayoutBrands[i] = new FlowLayoutPanel();
-                                    
-            SetControl(flowLayoutBrands);                        
+
+            SetControl(flowLayoutBrands);
             if (!this.InvokeRequired)
             {
-                setFlowLayout_size();                
+                setFlowLayout_size();
                 setFlowLayout_Dock();
                 setFlowLayout_FlowDirection();
                 setFlowLayout_Anchor();
                 setFlowLayout_location();
-            }            
+            }
             setFlowLayout_name();
             setFlowLayout_Margin(10);
         }
@@ -333,7 +333,7 @@ namespace Mahjong.Forms
             Bitmap bitmap;
             // 如果是可視的牌就設定顯示牌的圖型，否則就顯示直立的牌 Resources.upbarnd
             if (brand.IsCanSee || state == location.South || ShowAll)
-                bitmap = new Bitmap(brand.image);
+                bitmap = new Bitmap(ResourcesTool.getImage(brand));
             else
                 bitmap = new Bitmap(Resources.upbarnd);
             // 設定牌
@@ -390,25 +390,25 @@ namespace Mahjong.Forms
             tempBrandbox.Image = bitmap;
 
             // 新增至控制項
-            add_flowLayoutBrands((int)state,tempBrandbox);
+            add_flowLayoutBrands(state, tempBrandbox);
         }
-        delegate void add_flowLayoutBrands_delegate(int state, BrandBox brandbox);
+        public delegate void add_flowLayoutBrands_delegate(location state, BrandBox brandbox);
 
-        void add_flowLayoutBrands(int state, BrandBox brandbox)
+        public virtual void add_flowLayoutBrands(location state, BrandBox brandbox)
         {
-            if (flowLayoutBrands[state].InvokeRequired)
+            if (flowLayoutBrands[(int)state].InvokeRequired)
             {
-                flowLayoutBrands[state].Invoke(new add_flowLayoutBrands_delegate(add_flowLayoutBrands), new object[] { state,brandbox });
+                flowLayoutBrands[(int)state].Invoke(new add_flowLayoutBrands_delegate(add_flowLayoutBrands), new object[] { state, brandbox });
             }
             else
-                flowLayoutBrands[state].Controls.Add(brandbox);
+                flowLayoutBrands[(int)state].Controls.Add(brandbox);
         }
 
         protected void tempBrandbox_MouseMove(object sender, MouseEventArgs e)
         {
             BrandBox b = (BrandBox)sender;
             if (pc.NowPlayer_is_Real_Player && all.State == place.Down)
-                b.BackColor = Color.Blue;           
+                b.BackColor = Color.Blue;
         }
 
         protected void brandBox_MouseLeave(object sender, EventArgs e)
@@ -424,9 +424,9 @@ namespace Mahjong.Forms
         /// <param name="e"></param>
         protected void cheat_MouseClick(object sender, MouseEventArgs e)
         {
-            
+
             BrandBox b = (BrandBox)sender;
-            
+
             if (all.Show_Table.remove(b.brand))
             {
                 all.Show_Table.add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
@@ -438,7 +438,7 @@ namespace Mahjong.Forms
                 all.Table.getBrand(all.Show_Table.getCount() - 1).IsCanSee = false;
             }
             else if (all.Players[0].remove(b.brand))
-                all.Players[0].add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));                
+                all.Players[0].add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
             else if (all.Players[1].remove(b.brand))
                 all.Players[1].add(all.NowPlayer.getBrand(all.NowPlayer.getCount() - 1));
             else if (all.Players[2].remove(b.brand))
@@ -450,7 +450,7 @@ namespace Mahjong.Forms
             all.NowPlayer.add(b.brand);
             cleanImage();
             addImage();
-                      
+
         }
 
         protected void debug_Click(object sender, EventArgs e)
@@ -480,7 +480,7 @@ namespace Mahjong.Forms
         }
 
         public void showBrand(Brand brand)
-        {            
+        {
             StringBuilder s = new StringBuilder();
             s.Append(brand.getNumber() + "," + brand.getClass() + "\n");
             s.Append(Settings.Default.Debug_Number);
@@ -527,14 +527,18 @@ namespace Mahjong.Forms
         /// <param name="e"></param>
         protected void brandBox_MouseClick(object sender, EventArgs e)
         {
-            
+
             BrandBox b = (BrandBox)sender;
             // 確定為玩家才發送事件
             if (pc.NowPlayer_is_Real_Player && all.State == place.Down)
             {
                 if (pc.PlayerSound)
                     PlaySound(b.brand);
-                pc.makeBrand(b.brand);
+                if (pc.chat.Mark == "Server")
+                    pc.makeBrand(b.brand);
+                else
+                    pc.chat.SendObject(b.brand);
+
             }
             b.Click -= new EventHandler(debug_Click);
         }
@@ -545,131 +549,7 @@ namespace Mahjong.Forms
         internal void PlaySound(Brand brand)
         {
             SoundPlayer soundplayer = new SoundPlayer();
-            switch (brand.getClass())
-            {
-                case "萬":
-                    switch (brand.getNumber())
-                    {
-                        case 1:
-                            soundplayer.Stream = Resources.ten1s;
-                            break;
-                        case 2:
-                            soundplayer.Stream = Resources.ten2s;
-                            break;
-                        case 3:
-                            soundplayer.Stream = Resources.ten3s;
-                            break;
-                        case 4:
-                            soundplayer.Stream = Resources.ten4s;
-                            break;
-                        case 5:
-                            soundplayer.Stream = Resources.ten5s;
-                            break;
-                        case 6:
-                            soundplayer.Stream = Resources.ten6s;
-                            break;
-                        case 7:
-                            soundplayer.Stream = Resources.ten7s;
-                            break;
-                        case 8:
-                            soundplayer.Stream = Resources.ten8s;
-                            break;
-                        case 9:
-                            soundplayer.Stream = Resources.ten9s;
-                            break;
-                    }
-                    break;
-                case "索":
-                    switch (brand.getNumber())
-                    {
-                        case 1:
-                            soundplayer.Stream = Resources.rope1s;
-                            break;
-                        case 2:
-                            soundplayer.Stream = Resources.rope2s;
-                            break;
-                        case 3:
-                            soundplayer.Stream = Resources.rope3s;
-                            break;
-                        case 4:
-                            soundplayer.Stream = Resources.rope4s;
-                            break;
-                        case 5:
-                            soundplayer.Stream = Resources.rope5s;
-                            break;
-                        case 6:
-                            soundplayer.Stream = Resources.rope6s;
-                            break;
-                        case 7:
-                            soundplayer.Stream = Resources.rope7s;
-                            break;
-                        case 8:
-                            soundplayer.Stream = Resources.rope8s;
-                            break;
-                        case 9:
-                            soundplayer.Stream = Resources.rope9s;
-                            break;
-                    }
-                    break;
-                case "筒":
-                    switch (brand.getNumber())
-                    {
-                        case 1:
-                            soundplayer.Stream = Resources.tobe1s;
-                            break;
-                        case 2:
-                            soundplayer.Stream = Resources.tobe2s;
-                            break;
-                        case 3:
-                            soundplayer.Stream = Resources.tobe3s;
-                            break;
-                        case 4:
-                            soundplayer.Stream = Resources.tobe4s;
-                            break;
-                        case 5:
-                            soundplayer.Stream = Resources.tobe5s;
-                            break;
-                        case 6:
-                            soundplayer.Stream = Resources.tobe6s;
-                            break;
-                        case 7:
-                            soundplayer.Stream = Resources.tobe7s;
-                            break;
-                        case 8:
-                            soundplayer.Stream = Resources.tobe8s;
-                            break;
-                        case 9:
-                            soundplayer.Stream = Resources.tobe9s;
-                            break;
-                    }
-                    break;
-                case "字":
-                    switch (brand.getNumber())
-                    {
-                        case 1:
-                            soundplayer.Stream = Resources.word1s;
-                            break;
-                        case 2:
-                            soundplayer.Stream = Resources.word2s;
-                            break;
-                        case 3:
-                            soundplayer.Stream = Resources.word3s;
-                            break;
-                        case 4:
-                            soundplayer.Stream = Resources.word4s;
-                            break;
-                        case 5:
-                            soundplayer.Stream = Resources.word5s;
-                            break;
-                        case 6:
-                            soundplayer.Stream = Resources.word6s;
-                            break;
-                        case 7:
-                            soundplayer.Stream = Resources.word7s;
-                            break;
-                    }
-                    break;
-            }
+            soundplayer.Stream = ResourcesTool.getSound(brand);
 
             soundplayer.Play();
         }
@@ -751,6 +631,28 @@ namespace Mahjong.Forms
                     break;
             }
         }
+        protected virtual void clearAllPlayer()
+        {
+ 
+        }
+        delegate void flowLayoutBrands_Allplayer_Clear();
+        public void updateAllPlayer()
+        {
+            if (InvokeRequired)
+                Invoke(new flowLayoutBrands_Allplayer_Clear(clearAllPlayer));
+            else
+                clearAllPlayer();
+
+            addEast();
+
+            addNouth();
+
+            addWest();
+
+            addSouth();
+
+
+        }
         public void addNowPlayer()
         {
             if (InvokeRequired)
@@ -776,7 +678,7 @@ namespace Mahjong.Forms
 
         protected virtual void clearNowPlayer()
         {
-            flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
+            //flowLayoutBrands[(int)place.getRealPlace(all.State)].Controls.Clear();
         }
 
         protected virtual void clearFlowLayoutBrands_Table()
@@ -868,7 +770,7 @@ namespace Mahjong.Forms
 
         private void 讀取牌局ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            pc.loadgame();       
+            pc.loadgame();
         }
 
         private void PlaySound_Menu_Click(object sender, EventArgs e)

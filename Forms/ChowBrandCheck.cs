@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Mahjong.Players;
+using Mahjong.Control;
+
 
 namespace Mahjong.Forms
 {
@@ -28,7 +30,7 @@ namespace Mahjong.Forms
         }
 
         /// <summary>
-        /// 取得按下的玩家
+        /// 取得按下的牌組
         /// </summary>
         public BrandPlayer SelectBrandPlayer
         {
@@ -42,7 +44,7 @@ namespace Mahjong.Forms
         {
             for (int i = 0; i < player.getCount(); i++)
             {
-                Bitmap bitmap = new Bitmap(player.getBrand(i).image);
+                Bitmap bitmap = new Bitmap(ResourcesTool.getImage(player.getBrand(i)));
                 BrandBox b = new BrandBox(player.getBrand(i));
 
                 b.SizeMode = PictureBoxSizeMode.AutoSize;
